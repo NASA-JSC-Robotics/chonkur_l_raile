@@ -66,7 +66,9 @@
     <disable_collisions link1="vention_rail_base_link" link2="vention_rail_carriage" reason="Adjacent" />
     <disable_collisions link1="vention_rail_carriage" link2="ewellix_lift_base_link" reason="Adjacent" />
     <disable_collisions link1="vention_rail_carriage" link2="ewellix_lift_lower_link" reason="Adjacent" />
+    <disable_collisions link1="vention_rail_carriage" link2="ewellix_lift_middle_link" reason="Adjacent" />
     <disable_collisions link1="ewellix_lift_base_link" link2="ewellix_lift_lower_link" reason="Adjacent" />
+    <disable_collisions link1="ewellix_lift_base_link" link2="ewellix_lift_middle_link" reason="Adjacent" />
     <disable_collisions link1="ewellix_lift_lower_link" link2="ewellix_lift_higher_link" reason="Adjacent" />
     <disable_collisions link1="ewellix_lift_lower_link" link2="ewellix_lift_middle_link" reason="Adjacent" />
     <disable_collisions link1="ewellix_lift_higher_link" link2="ewellix_lift_middle_link" reason="Adjacent" />
