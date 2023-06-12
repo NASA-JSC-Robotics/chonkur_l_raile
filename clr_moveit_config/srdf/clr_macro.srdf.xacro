@@ -53,7 +53,7 @@
       <joint name="wrist_2_joint" value="-1.6" />
       <joint name="wrist_3_joint" value="-0.11" />
     </group_state>
-    <group_state name="clr_home" group="chonkur_l_raile">
+    <group_state name="clr_home" group="clr">
       <joint name="ewellix_lift_lower_to_higher" value="0.004344256" />
       <joint name="vention_rail_base_to_carriage" value="0.0"/>
       <joint name="elbow_joint" value="-2.3058078289031982" />
