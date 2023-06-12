@@ -49,6 +49,17 @@
       <joint name="wrist_2_joint" value="-1.6" />
       <joint name="wrist_3_joint" value="-0.11" />
     </group_state>
+    <group_state name="clr_home" group="chonkur_l_raile">
+      <joint name="ewellix_lift_lower_to_higher" value="0.004344256" />
+      <joint name="vention_rail_base_to_carriage" value="0.0"/>
+      <joint name="elbow_joint" value="-2.3058078289031982" />
+      <joint name="shoulder_lift_joint" value="-0.7107666295817872" />
+      <joint name="shoulder_pan_joint" value="3.052349805831909" />
+      <joint name="wrist_1_joint" value="-3.2056271038451136" />
+      <joint name="wrist_2_joint" value="-1.468212906514303" />
+      <joint name="wrist_3_joint" value="0.03171319141983986" />
+    </group_state>
+
     <!--END EFFECTOR - Purpose - Represent information about an end effector.-->
     <!--VIRTUAL JOINT - Purpose - this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
     <!--DISABLE COLLISIONS - By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
