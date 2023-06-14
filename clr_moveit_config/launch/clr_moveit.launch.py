@@ -154,6 +154,11 @@ def generate_launch_description():
         "warehouse_host": os.path.expanduser("~/.ros/warehouse_ros.sqlite"),
     }
 
+
+    # joint limits
+    joint_limits_yaml = load_yaml(moveit_config_package, "config/joint_limits.yaml")
+    joint_limits = {'robot_description_planning': joint_limits_yaml}
+
     # Start the actual move_group node/action server
     move_group_node = Node(
         package="moveit_ros_move_group",
@@ -163,7 +168,7 @@ def generate_launch_description():
             robot_description,
             robot_description_semantic,
             robot_description_kinematics,
-            # robot_description_planning,
+            joint_limits,
             ompl_planning_pipeline_config,
             trajectory_execution,
             moveit_controllers,
