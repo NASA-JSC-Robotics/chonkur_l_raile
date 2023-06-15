@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="$(arg name)">
+  <xacro:arg name="name" default="chonkur"/>
+  <xacro:arg name="ros2_control_name" default="chonkur"/>
+  <xacro:arg name="tf_prefix" default="" />
+  <xacro:arg name="headless_mode" default="false" />
+  <xacro:arg name="use_fake_hardware" default="false" />  
+  <xacro:include filename="$(find chonkur_manip_description)/urdf/chonkur_macro.xacro"/>
