@@ -11,8 +11,7 @@
     use_fake_hardware:=false
     headless_mode:=false
     ros2_control_name:=chonkur
-    parent:=world
-  ">
+    parent:=world">
 
     <!-- parameters -->
     <xacro:arg name="joint_limit_params" default="$(find chonkur_manip_description)/config/joint_limits.yaml"/>
@@ -118,4 +117,5 @@
       </gazebo>
     </xacro:if>
 
+  </xacro:macro>
 </robot>

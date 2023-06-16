@@ -1,8 +1,18 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://wiki.ros.org/xacro" name="$(arg name)">
-  <xacro:arg name="name" default="chonkur"/>
-  <xacro:arg name="ros2_control_name" default="chonkur"/>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="chonkur">
   <xacro:arg name="tf_prefix" default="" />
-  <xacro:arg name="headless_mode" default="false" />
   <xacro:arg name="use_fake_hardware" default="false" />  
+  <xacro:arg name="headless_mode" default="false" />
+  <xacro:arg name="ros2_control_name" default="chonkur"/>
+  
   <xacro:include filename="$(find chonkur_manip_description)/urdf/chonkur_macro.xacro"/>
+
+  <link name="world" />
+  <xacro:chonkur
+    tf_prefix="$(arg tf_prefix)"
+    use_fake_hardware="$(arg use_fake_hardware)"
+    headless_mode="$(arg headless_mode)"
+    ros2_control_name="$(arg ros2_control_name)"
+    parent="world"/>
+
+</robot>
