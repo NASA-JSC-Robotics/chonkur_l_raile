@@ -119,7 +119,7 @@
 
     <xacro:include filename="$(find robotiq_hande_description)/urdf/robotiq_hande.xacro"/>
 
-    <xacro:robotiq_hande name="chonkur_hande" prefix="$(arg tf_prefix)" parent="$(arg tf_prefix)tool0" use_fake_hardware="$(arg use_fake_hardware)" com_port="/dev/ttyUSB0">
+    <xacro:robotiq_hande name="chonkur_hande" prefix="$(arg tf_prefix)" parent="$(arg tf_prefix)tool0" use_fake_hardware="$(arg use_fake_hardware)" com_port="/dev/ttyUSB1">
       <origin xyz="0 0 0" rpy="0 0 0"/>
     </xacro:robotiq_hande>
 

@@ -21,6 +21,8 @@
   <exec_depend>urdf</exec_depend>
   <exec_depend>xacro</exec_depend>
   <exec_depend>ur_description</exec_depend>
+  <exec_depend>robotiq_hande_description</exec_depend>
+  <exec_depend>dextivr_hande_description</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>
