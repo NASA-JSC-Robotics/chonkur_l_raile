@@ -37,7 +37,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "velocity_limit",
-            default_value="0.5",
+            default_value="0.15",
             description="Maximium velocity in meters/s for the rail",
         )
     )
