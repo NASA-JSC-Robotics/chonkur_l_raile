@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>chonkur_manip_description</name>
+  <name>chonkur_manip_deploy</name>
   <version>0.0.1</version>
   <description>
-    URDF description for ChonkUR
+    Deploy package for chonkur
   </description>
 
   <maintainer email="emma.zemler@nasa.gov">Emma Zemler</maintainer>
@@ -13,16 +13,13 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <exec_depend>joint_state_publisher_gui</exec_depend>
   <exec_depend>launch</exec_depend>
   <exec_depend>launch_ros</exec_depend>
-  <exec_depend>robot_state_publisher</exec_depend>
-  <exec_depend>rviz2</exec_depend>
-  <exec_depend>urdf</exec_depend>
-  <exec_depend>xacro</exec_depend>
-  <exec_depend>ur_description</exec_depend>
-  <exec_depend>robotiq_hande_description</exec_depend>
-  <exec_depend>dextivr_hande_description</exec_depend>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>chonkur_manip_description</exec_depend>
+  <exec_depend>ur_robot_driver</exec_depend>
+  <exec_depend>robotiq_driver</exec_depend>
+  <exec_depend>robotiq_controllers</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>
