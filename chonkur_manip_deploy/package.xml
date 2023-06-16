@@ -16,6 +16,7 @@
   <exec_depend>launch</exec_depend>
   <exec_depend>launch_ros</exec_depend>
   <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>controller_manager</exec_depend>
   <exec_depend>chonkur_manip_description</exec_depend>
   <exec_depend>ur_robot_driver</exec_depend>
   <exec_depend>robotiq_driver</exec_depend>

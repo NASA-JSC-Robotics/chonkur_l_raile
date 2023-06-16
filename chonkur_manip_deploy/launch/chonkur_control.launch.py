@@ -100,7 +100,7 @@ def generate_launch_description():
                    "-t", "robotiq_controllers/RobotiqActivationController",
                    "-p", gripper_controller_yaml
                   ]
-    )    
+    )
 
     nodes = [gripper_controller_spawner, gripper_activation_controller_spawner]
 
