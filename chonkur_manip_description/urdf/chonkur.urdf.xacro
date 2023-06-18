@@ -13,6 +13,8 @@
     use_fake_hardware="$(arg use_fake_hardware)"
     headless_mode="$(arg headless_mode)"
     ros2_control_name="$(arg ros2_control_name)"
-    parent="world"/>
+    parent="world"
+    sim_gazebo="false"
+    sim_ignition="false"/>
 
 </robot>
