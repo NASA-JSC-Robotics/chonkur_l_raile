@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="clr">
+  <xacro:arg name="tf_prefix" default="" />
+  <xacro:arg name="use_fake_hardware" default="false" />  
+  <xacro:arg name="headless_mode" default="false" />
+  
+  <xacro:include filename="$(find clr_description)/urdf/clr_macro.xacro"/>
+
+  <link name="clr_base" />
+
+  <xacro:clr
+    tf_prefix="$(arg tf_prefix)"
+    use_fake_hardware="$(arg use_fake_hardware)"
+    headless_mode="$(arg headless_mode)"
+    ros2_control_name="clr"
+    parent="clr_base"
+    sim_gazebo="false"
+    sim_ignition="false"
+    chonkur_ip="192.168.1.102"
+    com_port_hande="/dev/ttyUSB1"
+    rail_ip="192.168.1.104"
+    rail_port="8000"
+    rail_position_limit="2.0"
+    rail_velocity_limit="0.5"
+    ewellix_com_port="/dev/ttyUSB1"
+    ewellix_height_limit="0.53"
+  />
+
+</robot>
