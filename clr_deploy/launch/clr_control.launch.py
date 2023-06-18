@@ -77,7 +77,7 @@ def generate_launch_description():
             "rviz": rviz,
         }.items(),
     )
-    
+
     vention_controllers_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("vention_rail_deploy"), 'launch','spawn_controllers.launch.py')),
         launch_arguments={
@@ -92,6 +92,28 @@ def generate_launch_description():
         }.items(),
     )
 
-    controller_nodes = [vention_controllers_launch, ewellix_controllers_launch]
+    clr_controllers_yaml = os.path.join(get_package_share_directory("clr_deploy"), 'config','clr_controllers.yaml')
+    lift_rail_controller = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["lift_rail_joint_trajectory_controller", 
+                   "-c", "controller_manager",
+                   "-t", "joint_trajectory_controller/JointTrajectoryController ",
+                   "-p", clr_controllers_yaml, 
+                   "--stopped"
+                  ]
+    )
+    clr_controller = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["clr_joint_trajectory_controller", 
+                   "-c", "controller_manager",
+                   "-t", "joint_trajectory_controller/JointTrajectoryController ",
+                   "-p", clr_controllers_yaml, 
+                   "--stopped"
+                  ]
+    )
 
-    return LaunchDescription(declared_arguments + [chonkur_launch] + controller_nodes)
+    controller_nodes = [chonkur_launch, vention_controllers_launch, ewellix_controllers_launch, lift_rail_controller, clr_controller]
+
+    return LaunchDescription(declared_arguments + controller_nodes)

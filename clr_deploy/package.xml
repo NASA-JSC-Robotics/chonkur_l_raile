@@ -18,7 +18,7 @@
   <exec_depend>ament_index_python</exec_depend>
   <exec_depend>controller_manager</exec_depend>
   <exec_depend>clr_description</exec_depend>
-  <exec_depend>chonkur_deploy</exec_depend>
+  <exec_depend>chonkur_manip_deploy</exec_depend>
   <exec_depend>vention_rail_deploy</exec_depend>
   <exec_depend>ewellix_liftkit_deploy</exec_depend>
 
