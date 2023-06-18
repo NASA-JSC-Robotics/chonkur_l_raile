@@ -66,7 +66,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "description_package",
-            default_value="chonkur_manip_description"
+            default_value="chonkur_description"
         )
     )    
     declared_arguments.append(

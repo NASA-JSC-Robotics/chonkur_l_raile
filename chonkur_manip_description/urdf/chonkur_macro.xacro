@@ -18,15 +18,15 @@
     com_port_hande:=/dev/ttyUSB1">
 
     <!-- convert to property to use substitution in function -->
-    <xacro:property name="initial_positions_file" default="$(find chonkur_manip_description)/config/initial_positions.yaml"/>
+    <xacro:property name="initial_positions_file" default="$(find chonkur_description)/config/initial_positions.yaml"/>
 
     <!-- arm -->
     <xacro:ur_robot
       name="${ros2_control_name}"
       tf_prefix="${tf_prefix}"
       parent="${parent}"
-      joint_limits_parameters_file="$(find chonkur_manip_description)/config/joint_limits.yaml"
-      kinematics_parameters_file="$(find chonkur_manip_description)/config/calibrated_kinematics.yaml"
+      joint_limits_parameters_file="$(find chonkur_description)/config/joint_limits.yaml"
+      kinematics_parameters_file="$(find chonkur_description)/config/calibrated_kinematics.yaml"
       physical_parameters_file="$(find ur_description)/config/ur10e/physical_parameters.yaml"
       visual_parameters_file="$(find ur_description)/config/ur10e/visual_parameters.yaml"
       transmission_hw_interface="hardware_interface/PositionJointInterface"

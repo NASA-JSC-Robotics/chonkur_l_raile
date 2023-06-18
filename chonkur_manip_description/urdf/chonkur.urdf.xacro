@@ -5,7 +5,7 @@
   <xacro:arg name="headless_mode" default="false" />
   <xacro:arg name="ros2_control_name" default="chonkur"/>
   
-  <xacro:include filename="$(find chonkur_manip_description)/urdf/chonkur_macro.xacro"/>
+  <xacro:include filename="$(find chonkur_description)/urdf/chonkur_macro.xacro"/>
 
   <link name="world" />
   <xacro:chonkur

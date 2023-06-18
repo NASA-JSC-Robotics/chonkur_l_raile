@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(chonkur_manip_deploy)
+project(chonkur_deploy)
 
 find_package(ament_cmake REQUIRED)
 

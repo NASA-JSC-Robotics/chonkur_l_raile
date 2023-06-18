@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>chonkur_manip_deploy</name>
+  <name>chonkur_deploy</name>
   <version>0.0.1</version>
   <description>
     Deploy package for chonkur
@@ -17,7 +17,7 @@
   <exec_depend>launch_ros</exec_depend>
   <exec_depend>ament_index_python</exec_depend>
   <exec_depend>controller_manager</exec_depend>
-  <exec_depend>chonkur_manip_description</exec_depend>
+  <exec_depend>chonkur_description</exec_depend>
   <exec_depend>ur_robot_driver</exec_depend>
   <exec_depend>robotiq_driver</exec_depend>
   <exec_depend>robotiq_controllers</exec_depend>

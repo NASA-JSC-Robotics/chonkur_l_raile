@@ -53,7 +53,7 @@ def generate_launch_description():
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
-            PathJoinSubstitution([FindPackageShare("chonkur_manip_description"), "urdf", "chonkur.urdf.xacro"]),
+            PathJoinSubstitution([FindPackageShare("chonkur_description"), "urdf", "chonkur.urdf.xacro"]),
             " ",
             "ur_type:=",
             ur_type,
@@ -71,7 +71,7 @@ def generate_launch_description():
     robot_description = {"robot_description": robot_description_content}
 
     rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare("chonkur_manip_description"), "rviz", "view_robot.rviz"]
+        [FindPackageShare("chonkur_description"), "rviz", "view_robot.rviz"]
     )
 
     joint_state_publisher_node = Node(
