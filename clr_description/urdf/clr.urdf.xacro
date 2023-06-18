@@ -25,5 +25,13 @@
     ewellix_com_port="/dev/ttyUSB1"
     ewellix_height_limit="0.53"
   />
+  
+  <!-- creating world frame for moveit -->
+  <link name="world" /> 
+  <joint name="world_to_clr" type="fixed">
+    <parent link="world"/>
+    <child link="clr_base" />
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
 
 </robot>

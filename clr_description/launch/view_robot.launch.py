@@ -7,15 +7,6 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
     declared_arguments = []
-    
-    # required arguments of UR
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "ur_type",
-            description="Type/series of used UR robot.",
-            choices=["ur3", "ur3e", "ur5", "ur5e", "ur10", "ur10e", "ur16e"],
-        )
-    )
 
     declared_arguments.append(
         DeclareLaunchArgument(
@@ -41,10 +32,7 @@ def generate_launch_description():
         )
     )
 
-
-
     # Initialize Arguments
-    ur_type = LaunchConfiguration("ur_type")
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")    
     headless_mode = LaunchConfiguration("headless_mode")
@@ -54,9 +42,6 @@ def generate_launch_description():
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution([FindPackageShare("clr_description"), "urdf", "clr.urdf.xacro"]),
-            " ",
-            "ur_type:=",
-            ur_type,
             " ",
             "tf_prefix:=",
             tf_prefix,
