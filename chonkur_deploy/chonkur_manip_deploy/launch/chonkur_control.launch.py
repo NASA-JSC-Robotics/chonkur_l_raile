@@ -112,6 +112,7 @@ def generate_launch_description():
         arguments=["robotiq_gripper_hande_controller", 
                    "-c", "controller_manager",
                    "-t", "position_controllers/GripperActionController",
+                   "--controller-manager-timeout","100",
                    "-p", gripper_controller_yaml
                   ]
     )
@@ -122,6 +123,7 @@ def generate_launch_description():
         arguments=["robotiq_activation_controller", 
                    "-c", "controller_manager",
                    "-t", "robotiq_controllers/RobotiqActivationController",
+                   "--controller-manager-timeout","100",
                    "-p", gripper_controller_yaml
                   ]
     )
