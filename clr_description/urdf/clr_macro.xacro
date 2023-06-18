@@ -79,7 +79,7 @@
     </joint>
 
     <!-- chonkur -->
-    <xacro:include filename="$(find chonkur_manip_description)/urdf/chonkur_macro.xacro"/>
+    <xacro:include filename="$(find chonkur_description)/urdf/chonkur_macro.xacro"/>
     <xacro:chonkur
       tf_prefix="${tf_prefix}"
       use_fake_hardware="${use_fake_hardware}"

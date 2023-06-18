@@ -65,7 +65,7 @@ def generate_launch_description():
 
 
     chonkur_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_manip_deploy"), 'launch','chonkur_control.launch.py')),
+        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch','chonkur_control.launch.py')),
         launch_arguments={
             "description_package": "clr_description",
             "description_file": "clr.urdf.xacro",
