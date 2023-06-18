@@ -56,13 +56,36 @@ def generate_launch_description():
             description="Activate loaded joint controller.",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "rviz",
+            default_value="false",
+            description="start rviz?",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "description_package",
+            default_value="chonkur_manip_description"
+        )
+    )    
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "description_file",
+            default_value="chonkur.urdf.xacro"
+        )
+    )    
 
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     headless_mode = LaunchConfiguration("headless_mode")
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
     initial_joint_controller = LaunchConfiguration("initial_joint_controller")
-    activate_joint_controller = LaunchConfiguration("activate_joint_controller")    
+    activate_joint_controller = LaunchConfiguration("activate_joint_controller")
+    rviz = LaunchConfiguration("rviz")
+    description_package = LaunchConfiguration("description_package")
+    description_file = LaunchConfiguration("description_file")
+
 
 
     base_launch = IncludeLaunchDescription(
@@ -70,14 +93,15 @@ def generate_launch_description():
         launch_arguments={
             "ur_type": "ur10e",
             "robot_ip": "192.168.1.102",
-            "description_package": "chonkur_manip_description",
-            "description_file": "chonkur.urdf.xacro",
+            "description_package": description_package,
+            "description_file": description_file,
             "tf_prefix": tf_prefix,
             "use_fake_hardware": use_fake_hardware,
             "headless_mode": headless_mode,
             "fake_sensor_commands": fake_sensor_commands,
             "initial_joint_controller": initial_joint_controller,
             "activate_joint_controller": activate_joint_controller,
+            "launch_rviz": rviz,
         }.items(),
     )
 
