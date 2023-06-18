@@ -13,7 +13,9 @@
     ros2_control_name:=chonkur
     parent:=world
     sim_gazebo:=false
-    sim_ignition:=false">
+    sim_ignition:=false
+    chonkur_ip:=192.168.1.102
+    com_port_hande:=/dev/ttyUSB1">
 
     <!-- convert to property to use substitution in function -->
     <xacro:property name="initial_positions_file" default="$(find chonkur_manip_description)/config/initial_positions.yaml"/>
@@ -46,7 +48,7 @@
       tool_tx_idle_chars="3.5"
       tool_device_name="/tmp/ttyUR"
       tool_tcp_port="54321"
-      robot_ip="192.168.1.102"
+      robot_ip="${chonkur_ip}"
       script_filename="$(find ur_client_library)/resources/external_control.urscript"
       output_recipe_filename="$(find ur_robot_driver)/resources/rtde_output_recipe.txt"
       input_recipe_filename="$(find ur_robot_driver)/resources/rtde_input_recipe.txt"
@@ -83,7 +85,7 @@
 
     <xacro:include filename="$(find robotiq_hande_description)/urdf/robotiq_hande.xacro"/>
 
-    <xacro:robotiq_hande name="chonkur_hande" prefix="${tf_prefix}" parent="${tf_prefix}tool0" use_fake_hardware="${use_fake_hardware}" com_port="/dev/ttyUSB1">
+    <xacro:robotiq_hande name="chonkur_hande" prefix="${tf_prefix}" parent="${tf_prefix}tool0" use_fake_hardware="${use_fake_hardware}" com_port="${com_port_hande}">
       <origin xyz="0 0 0" rpy="0 0 0"/>
     </xacro:robotiq_hande>
 

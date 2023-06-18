@@ -15,6 +15,8 @@
     ros2_control_name="$(arg ros2_control_name)"
     parent="world"
     sim_gazebo="false"
-    sim_ignition="false"/>
+    sim_ignition="false"
+    chonkur_ip="192.168.1.102"
+    com_port_hande="/dev/ttyUSB1/">
 
 </robot>
