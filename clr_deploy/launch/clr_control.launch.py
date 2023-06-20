@@ -100,7 +100,7 @@ def generate_launch_description():
                    "-c", "controller_manager",
                    "-t", "joint_trajectory_controller/JointTrajectoryController ",
                    "-p", clr_controllers_yaml, 
-                   "--stopped"
+                   "--inactive"
                   ]
     )
     clr_controller = Node(
@@ -110,7 +110,7 @@ def generate_launch_description():
                    "-c", "controller_manager",
                    "-t", "joint_trajectory_controller/JointTrajectoryController ",
                    "-p", clr_controllers_yaml, 
-                   "--stopped"
+                   "--inactive"
                   ]
     )
 
