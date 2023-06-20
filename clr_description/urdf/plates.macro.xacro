@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+
+<!-- plates.macro.xacro contains link descriptions for adapter plates used by the clr_description package -->
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- lower_lift_plate -->
+    <xacro:macro name="lower_lift_plate" params="
+    tf_prefix:=''
+    parent:=world
+    *origin
+    ">
+
+        <joint name="${tf_prefix}lower_lift_plate_base_joint" type="fixed">
+            <parent link="${parent}"/>
+            <child link="${tf_prefix}lower_lift_plate"/>
+            <xacro:insert_block name="origin"/>
+        </joint>
+
+        <link name="${tf_prefix}lower_lift_plate">
+            <visual>
+                <geometry>
+                    <box size="0.310 0.310 0.01905"/>
+                </geometry>
+            </visual>
+        </link>
+
+    </xacro:macro>
+
+    <!-- upper_lift_plate -->
+    <xacro:macro name="upper_lift_plate" params="
+    tf_prefix:=''
+    parent:=world
+    *origin
+    ">
+
+        <joint name="${tf_prefix}upper_lift_plate_base_joint" type="fixed">
+            <parent link="${parent}"/>
+            <child link="${tf_prefix}upper_lift_plate"/>
+            <xacro:insert_block name="origin"/>
+        </joint>
+
+        <link name="${tf_prefix}upper_lift_plate">
+            <visual>
+                <geometry>
+                    <box size="0.225 0.225 0.01905"/>
+                </geometry>
+            </visual>
+        </link>
+
+    </xacro:macro>
+
+    <!-- ur10e_mount_plate -->
+    <xacro:macro name="ur10e_mount_plate" params="
+    tf_prefix:=''
+    parent:=world
+    *origin
+    ">
+
+        <joint name="${tf_prefix}ur10e_mount_plate_base_joint" type="fixed">
+            <parent link="${parent}"/>
+            <child link="${tf_prefix}ur10e_mount_plate"/>
+            <xacro:insert_block name="origin"/>
+        </joint>
+
+        <link name="${tf_prefix}ur10e_mount_plate">
+            <visual>
+                <geometry>
+                    <mesh filename= "file://$(find clr_description)/meshes/visual/ur10e_plate.dae"/>
+                </geometry>
+            </visual>
+        </link>
+
+    </xacro:macro>
+
+</robot>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<!-- clr_carriage.macro.xacro forms the robot description for the rail coupling carriage used by clr_description -->
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="clr_carriage" params="
+    tf_prefix:=''
+    parent:=world
+    *origin
+    ">
+
+        <joint name="${tf_prefix}clr_carriage_base_joint" type="fixed">
+            <parent link="${parent}"/>
+            <child link="${tf_prefix}clr_carriage"/>
+            <xacro:insert_block name="origin"/>
+        </joint>
+
+        <link name="${tf_prefix}clr_carriage">
+            <visual>
+                <geometry>
+                    <mesh filename= "file://$(find clr_description)/meshes/visual/clr_carriage.dae"/>
+                </geometry>
+            </visual>
+        </link>
+        
+    </xacro:macro>
+
+</robot>

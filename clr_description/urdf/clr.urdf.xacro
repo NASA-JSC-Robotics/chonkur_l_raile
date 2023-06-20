@@ -1,19 +1,20 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro" name="clr">
+
   <xacro:arg name="tf_prefix" default="" />
   <xacro:arg name="use_fake_hardware" default="false" />  
   <xacro:arg name="headless_mode" default="false" />
   
   <xacro:include filename="$(find clr_description)/urdf/clr_macro.xacro"/>
-
-  <link name="clr_base" />
+  
+  <link name="world" /> 
 
   <xacro:clr
     tf_prefix="$(arg tf_prefix)"
     use_fake_hardware="$(arg use_fake_hardware)"
     headless_mode="$(arg headless_mode)"
     ros2_control_name="clr"
-    parent="clr_base"
+    parent="world"
     sim_gazebo="false"
     sim_ignition="false"
     chonkur_ip="192.168.1.102"
@@ -25,13 +26,5 @@
     ewellix_com_port="/dev/ttyUSB0"
     ewellix_height_limit="0.53"
   />
-  
-  <!-- creating world frame for moveit -->
-  <link name="world" /> 
-  <joint name="world_to_clr" type="fixed">
-    <parent link="world"/>
-    <child link="clr_base" />
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-  </joint>
 
 </robot>
