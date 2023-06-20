@@ -12,70 +12,110 @@
     chonkur_ip:=192.168.1.102
     com_port_hande:=/dev/ttyUSB1
     rail_ip:=192.168.1.104
-    rail_port:=9999
+    rail_port:=8000
     rail_position_limit:=2.0
     rail_velocity_limit:=0.5
     ewellix_com_port:=/dev/ttyUSB0
-    ewellix_height_limit:=0.7
+    ewellix_height_limit:=0.53
+    ewellix_omit_plates:=true
   ">
+
+    <!-- CLR BASE JOINT -->
+    <joint name="${tf_prefix}clr_base_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child link="${tf_prefix}clr_base"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <!-- CLR BASE -->
+    <link name="${tf_prefix}clr_base">
+      <visual>
+        <geometry>
+          <mesh filename="file://$(find clr_description)/meshes/visual/clr_base.dae"/>
+        </geometry>
+      </visual>
+    </link>
 
     <!-- RAIL -->
     <xacro:include filename="$(find vention_rail_description)/urdf/vention_macro.urdf.xacro"/>
     <xacro:vention_rail
       name="${ros2_control_name}_rail"
       tf_prefix="${tf_prefix}"
+      parent="${tf_prefix}clr_base"
       use_fake_hardware="${use_fake_hardware}"
       ip_addr="${rail_ip}"
       port="${rail_port}"
       position_limit="${rail_position_limit}"
-      velocity_limit="${rail_velocity_limit}"/>
+      velocity_limit="${rail_velocity_limit}"
+    >
+      <origin xyz="0.0874537 0.114017 0.300000"/>
+    </xacro:vention_rail>
 
-    <!-- BASE JOINT OF CLR-->
-    <joint name="${tf_prefix}clr_base_joint" type="fixed">
-      <parent link="${tf_prefix}${parent}"/>
-      <child link="${tf_prefix}vention_rail_base_link" />
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-    </joint>
+    <!-- CLR_CARRIAGE -->
+    <xacro:include filename="$(find clr_description)/urdf/clr_carriage.macro.xacro"/>
+    <xacro:clr_carriage 
+      tf_prefix="${tf_prefix}"
+      parent="${tf_prefix}vention_rail_carriage"
+    >
+      <origin xyz="-0.003624 -0.0900 0.0185"/>
+    </xacro:clr_carriage>
 
-    <!-- EWELLIX 700 MM LIFT -->
+    <!-- LOWER_LIFT_PLATE -->
+    <xacro:include filename="$(find clr_description)/urdf/plates.macro.xacro"/>
+    <xacro:lower_lift_plate
+      tf_prefix="${tf_prefix}"
+      parent="${tf_prefix}clr_carriage"
+    >
+      <origin xyz="0 0 0.054525" rpy="0 0 0"/>
+    </xacro:lower_lift_plate>
+
+    <!-- LIFT -->
     <xacro:include filename="$(find ewellix_liftkit_description)/urdf/ewellix_lift.xacro"/>
     <xacro:ewellix_lift
       name="${ros2_control_name}_liftkit"
       tf_prefix="${tf_prefix}"
-      parent="${tf_prefix}vention_rail_carriage"
+      parent="${tf_prefix}lower_lift_plate"
       height_limit="${ewellix_height_limit}"
-      omit_plates="false"
+      omit_plates="${ewellix_omit_plates}}"
       use_fake_hardware="${use_fake_hardware}"
       com_port="${ewellix_com_port}"
-      />
+    >
+      <origin xyz="0 0 0.249525" rpy="0 0 0"/>
+    </xacro:ewellix_lift>
 
-    <!-- parent joint does not exist for the lift so doing it here-->
-    <joint name="${tf_prefix}carriage_to_ewellix_lift_base_link" type="fixed">
-      <parent link="${tf_prefix}vention_rail_carriage"/>
-      <child link="${tf_prefix}ewellix_lift_base_link" />
-      <origin xyz="-0.1115 0.0 0.39" rpy="0 0 3.14159"/>
+    <!-- UPPER_LIFT_PLATE -->
+    <xacro:upper_lift_plate 
+      tf_prefix="$(arg tf_prefix)"
+      parent="$(arg tf_prefix)ewellix_lift_higher_link"
+    >
+      <origin xyz="0 0 0.253525" rpy="0 0 0"/>
+    </xacro:upper_lift_plate>
+
+    <!-- RIGHT_ANGLE_MOUNT -->
+    <xacro:include filename="$(find clr_description)/urdf/right_angle_mount.macro.xacro"/>
+    <xacro:right_angle_mount tf_prefix="$(arg tf_prefix)"/>
+
+    <!-- UPPER_LIFT_PLATE_TO_RIGHT_ANGLE_MOUNT -->
+    <joint name="upper_lift_plate_to_right_angle_mount" type="fixed">
+      <parent link="$(arg tf_prefix)upper_lift_plate"/>
+      <child link="$(arg tf_prefix)right_angle_mount"/>
+      <origin xyz="0 0 0.009525" rpy="0 0 0"/>
     </joint>
 
-    <!-- 90 degree mount-->
-    <link name="${tf_prefix}link_90deg">
-      <visual>
-        <geometry>
-          <mesh filename="file://$(find clr_description)/meshes/visual/clr_link_90deg_visual.dae"/>
-        </geometry>
-      </visual>
-    </link>
+    <!-- UR10E_MOUNT_PLATE -->
+    <xacro:ur10e_mount_plate 
+      tf_prefix="${tf_prefix}"
+      parent="${tf_prefix}right_angle_mount"
+    >
+      <origin xyz="0 0.112509 0.112509" rpy="0 0 0"/>
+    </xacro:ur10e_mount_plate>
 
-    <joint name="${tf_prefix}base_to_90deg" type="fixed">
-      <parent link="${tf_prefix}ewellix_lift_top_link"/>
-      <child link="${tf_prefix}link_90deg" />
-      <origin xyz="0.0 0.0 0.0145" rpy="0 0 0"/>
-    </joint>
+    <link name="${tf_prefix}ur10e_mount_link"/>
 
-    <link name="chonkur_mount_plate"/>
-    <joint name="${tf_prefix}chonkur_mount" type="fixed">
-      <parent link="${tf_prefix}link_90deg"/>
-      <child link="${tf_prefix}chonkur_mount_plate" />
-      <origin xyz="0 -0.136 0.1315"  rpy="-1.570796 3.14159 3.14159" />
+    <joint name="chonkur_mount_joint" type="fixed">
+      <parent link="${tf_prefix}ur10e_mount_plate"/>
+      <child link="${tf_prefix}ur10e_mount_link"/>
+      <origin xyz="0 0.0225 0" rpy="${radians(-90)} 0 0"/>
     </joint>
 
     <!-- chonkur -->
@@ -85,7 +125,7 @@
       use_fake_hardware="${use_fake_hardware}"
       headless_mode="${headless_mode}"
       ros2_control_name="${ros2_control_name}_ur"
-      parent="chonkur_mount_plate"
+      parent="${tf_prefix}ur10e_mount_link"
       sim_gazebo="false"
       sim_ignition="false"
       chonkur_ip="${chonkur_ip}"

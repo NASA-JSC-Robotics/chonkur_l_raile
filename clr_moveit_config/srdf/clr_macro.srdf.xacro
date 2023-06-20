@@ -17,7 +17,7 @@
       <chain base_link="vention_rail_base_link" tip_link="vention_rail_carriage" />
     </group>
     <group name="lift">
-      <chain base_link="ewellix_lift_base_link" tip_link="ewellix_lift_top_link" />
+      <chain base_link="ewellix_lift_lower_link" tip_link="ewellix_lift_higher_link" />
     </group>
     <group name="clr">
       <group name="ur_manipulator" />

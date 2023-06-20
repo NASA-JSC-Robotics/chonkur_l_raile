@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<!-- right_angle_mount.macro.xacro forms the robot description for the 90 degree robot arm adapter mount -->
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="right_angle_mount" params="tf_prefix">
+        <link name="${tf_prefix}right_angle_mount">
+            <visual>
+                <geometry>
+                    <mesh filename= "file://$(find clr_description)/meshes/visual/right_angle_mount.dae"/>
+                </geometry>
+            </visual>
+        </link>
+    </xacro:macro>
+</robot>
