@@ -93,6 +93,7 @@ def generate_launch_description():
         launch_arguments={
             "ur_type": "ur10e",
             "robot_ip": "192.168.1.102",
+            "controller_spawner_timeout": "100",
             "description_package": description_package,
             "description_file": description_file,
             "tf_prefix": tf_prefix,
