@@ -114,6 +114,17 @@ def generate_launch_description():
                   ]
     )
 
-    controller_nodes = [chonkur_launch, vention_controllers_launch, ewellix_controllers_launch, lift_rail_controller, clr_controller]
+    streaming_controller = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["streaming_controller", 
+                   "-c", "controller_manager",
+                   "-t", "position_controllers/JointGroupPositionController ",
+                   "-p", clr_controllers_yaml, 
+                   "--inactive"
+                  ]
+    )    
+
+    controller_nodes = [chonkur_launch, vention_controllers_launch, ewellix_controllers_launch, lift_rail_controller, clr_controller, streaming_controller]
 
     return LaunchDescription(declared_arguments + controller_nodes)

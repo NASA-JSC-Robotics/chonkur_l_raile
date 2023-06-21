@@ -8,6 +8,9 @@ controller_manager:
     lift_rail_joint_trajectory_controller:
       type: joint_trajectory_controller/JointTrajectoryController      
 
+    streaming_controller:
+      type: position_controllers/JointGroupPositionController
+
 clr_joint_trajectory_controller:
   ros__parameters:
     joints:
@@ -57,3 +60,17 @@ lift_rail_joint_trajectory_controller:
       goal_time: 0.0
       ewellix_lift_lower_to_higher: { trajectory: 0.2, goal: 0.1 }
       vention_rail_base_to_carriage: { trajectory: 0.2, goal: 0.1 }
+
+streaming_controller:
+  ros__parameters:
+    joints:
+      - shoulder_pan_joint
+      - shoulder_lift_joint
+      - elbow_joint
+      - wrist_1_joint
+      - wrist_2_joint
+      - wrist_3_joint
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
