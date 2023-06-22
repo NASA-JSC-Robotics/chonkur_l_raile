@@ -19,7 +19,7 @@
         <link name="${tf_prefix}clr_carriage">
             <visual>
                 <geometry>
-                    <mesh filename= "file://$(find clr_description)/meshes/visual/clr_carriage.dae"/>
+                    <mesh filename= "package://clr_description/meshes/visual/clr_carriage.dae"/>
                 </geometry>
             </visual>
         </link>

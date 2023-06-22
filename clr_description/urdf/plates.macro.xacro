@@ -66,7 +66,7 @@
         <link name="${tf_prefix}ur10e_mount_plate">
             <visual>
                 <geometry>
-                    <mesh filename= "file://$(find clr_description)/meshes/visual/ur10e_plate.dae"/>
+                    <mesh filename= "package://clr_description/meshes/visual/ur10e_plate.dae"/>
                 </geometry>
             </visual>
         </link>

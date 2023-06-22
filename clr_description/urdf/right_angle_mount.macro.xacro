@@ -7,7 +7,7 @@
         <link name="${tf_prefix}right_angle_mount">
             <visual>
                 <geometry>
-                    <mesh filename= "file://$(find clr_description)/meshes/visual/right_angle_mount.dae"/>
+                    <mesh filename= "package://clr_description/meshes/visual/right_angle_mount.dae"/>
                 </geometry>
             </visual>
         </link>
