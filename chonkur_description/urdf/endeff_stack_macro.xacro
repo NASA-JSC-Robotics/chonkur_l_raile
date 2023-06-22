@@ -52,7 +52,7 @@
     <joint name="${tf_prefix}realsense_mount_to_hand-e_adapter" type="fixed">
         <parent link="${tf_prefix}ur_realsense_mount"/>
         <child link="${tf_prefix}robotiq_hand-e_adapter_old"/>
-        <origin xyz="0 0 0.006" rpy="0 0 0"/>
+        <origin xyz="0 0 0.003" rpy="0 0 0"/>
     </joint>
 
     <link name="${tf_prefix}robotiq_hand-e_adapter_old">
