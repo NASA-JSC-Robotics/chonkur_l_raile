@@ -16,7 +16,7 @@
     <link name="${tf_prefix}mtc_robot_side">
         <visual>
             <geometry>
-                <mesh filename= "file://$(find chonkur_description)/meshes/visual/mtc_robot_side.dae"/>
+                <mesh filename= "package://chonkur_description/meshes/visual/mtc_robot_side.dae"/>
             </geometry>
         </visual>
     </link>
@@ -30,7 +30,7 @@
     <link name="${tf_prefix}mtc_effector_side">
         <visual>
             <geometry>
-                <mesh filename= "file://$(find chonkur_description)/meshes/visual/mtc_effector_side.dae"/>
+                <mesh filename= "package://chonkur_description/meshes/visual/mtc_effector_side.dae"/>
             </geometry>
         </visual>
     </link>
@@ -44,7 +44,7 @@
     <link name="${tf_prefix}ur_realsense_mount">
         <visual>
             <geometry>
-                <mesh filename= "file://$(find chonkur_description)/meshes/visual/ur_realsense_mount.dae"/>
+                <mesh filename= "package://chonkur_description/meshes/visual/ur_realsense_mount.dae"/>
             </geometry>
         </visual>
     </link>
@@ -58,7 +58,7 @@
     <link name="${tf_prefix}robotiq_hand-e_adapter_old">
         <visual>
             <geometry>
-                <mesh filename= "file://$(find chonkur_description)/meshes/visual/robotiq_hand-e_adapter_old.dae"/>
+                <mesh filename= "package://chonkur_description/meshes/visual/robotiq_hand-e_adapter_old.dae"/>
             </geometry>
         </visual>
     </link>
