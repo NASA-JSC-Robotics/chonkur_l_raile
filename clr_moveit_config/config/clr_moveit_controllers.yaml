@@ -1,0 +1,72 @@
+# MoveIt uses this configuration for controller management
+trajectory_execution:
+  allowed_execution_duration_scaling: 1.2
+  allowed_goal_duration_margin: 0.5
+  allowed_start_tolerance: 0.01
+
+moveit_controller_manager: moveit_ros_control_interface/Ros2ControlManager
+moveit_manage_controllers: false
+
+moveit_simple_controller_manager:
+  controller_names:
+    - clr_joint_trajectory_controller
+    - lift_rail_joint_trajectory_controller
+    - robotiq_gripper_hande_controller
+    - joint_trajectory_controller
+    - rail_position_trajectory_controller
+    - lift_position_trajectory_controller
+
+  clr_joint_trajectory_controller:
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints:
+      - vention_rail_base_to_carriage
+      - ewellix_lift_lower_to_higher
+      - shoulder_pan_joint
+      - shoulder_lift_joint
+      - elbow_joint
+      - wrist_1_joint
+      - wrist_2_joint
+      - wrist_3_joint
+
+  lift_rail_joint_trajectory_controller:
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: false
+    joints:      
+      - ewellix_lift_lower_to_higher
+      - vention_rail_base_to_carriage
+
+  joint_trajectory_controller:
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: false
+    joints:
+      - shoulder_pan_joint
+      - shoulder_lift_joint
+      - elbow_joint
+      - wrist_1_joint
+      - wrist_2_joint
+      - wrist_3_joint
+  
+  rail_position_trajectory_controller:
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: false
+    joints:      
+      - vention_rail_base_to_carriage
+
+  lift_position_trajectory_controller:
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: false
+    joints:      
+      - ewellix_lift_lower_to_higher
+
+  robotiq_gripper_hande_controller:
+    action_ns: gripper_cmd
+    type: GripperCommand
+    default: true
+    joints:
+      - finger_1_joint

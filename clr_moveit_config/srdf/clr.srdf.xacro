@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot xmlns:xacro="http://wiki.ros.org/xacro" name="$(arg name)">
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="clr">
 
-  <!-- robot name parameter -->
-  <xacro:arg name="name" default="chonkur"/>
-  <!-- parameters -->
-  <xacro:arg name="prefix" default="" />
-
-  <xacro:include filename="$(find clr_moveit_config)/srdf/clr_macro.srdf.xacro"/>
+  <xacro:include filename="$(find clr_moveit_config)/config/clr_macro.srdf.xacro"/>
 
   <xacro:clr_srdf/>
 
