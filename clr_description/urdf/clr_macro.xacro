@@ -31,7 +31,7 @@
     <link name="${tf_prefix}clr_base">
       <visual>
         <geometry>
-          <mesh filename="file://$(find clr_description)/meshes/visual/clr_base.dae"/>
+          <mesh filename="package://clr_description/meshes/visual/clr_base.dae"/>
         </geometry>
       </visual>
     </link>
