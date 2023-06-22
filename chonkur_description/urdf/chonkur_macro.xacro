@@ -96,7 +96,7 @@
     <xacro:include filename="$(find robotiq_hande_description)/urdf/robotiq_hande.xacro"/>
 
     <xacro:robotiq_hande name="chonkur_hande" prefix="${tf_prefix}" parent="${tf_prefix}robotiq_hand-e_adapter_old" use_fake_hardware="${use_fake_hardware}" com_port="${com_port_hande}">
-      <origin xyz="0 0 0.014" rpy="0 0 ${radians(-90)}"/>
+      <origin xyz="0 0 0.011" rpy="0 0 ${radians(-90)}"/>
     </xacro:robotiq_hande>
 
     <!--If statements for the various types of gripper fingers-->
