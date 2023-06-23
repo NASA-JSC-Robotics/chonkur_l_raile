@@ -1,4 +1,4 @@
-manipulator:
+ur_manipulator:
   kinematics_solver: pick_ik/PickIkPlugin
   kinematics_solver_timeout: 0.01
   kinematics_solver_attempts: 1
