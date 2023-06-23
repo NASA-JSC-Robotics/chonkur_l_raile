@@ -106,8 +106,8 @@
     </xacro:if>
 
     <!--Run the xacros from the files included above-->
-    <!-- <xacro:hande_fingers name="chonkur_hande_fingers" prefix="${tf_prefix}"/> -->
-    <!-- <xacro:grasp_push_frames name="chonkur_grasp_push_frames" prefix="${tf_prefix}"/> -->
+    <xacro:hande_fingers name="chonkur_hande_fingers" prefix="${tf_prefix}"/>
+    <xacro:grasp_push_frames name="chonkur_grasp_push_frames" prefix="${tf_prefix}"/>
 
   </xacro:macro>
 </robot>
