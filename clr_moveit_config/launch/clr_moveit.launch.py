@@ -23,9 +23,9 @@ def generate_launch_description():
     moveit_config = (
         MoveItConfigsBuilder("clr", package_name="clr_moveit_config")
         .robot_description(file_path=description_full_path)
-        .robot_description_semantic(file_path=os.path.join(get_package_share_directory(moveit_config_package), 'srdf',moveit_config_srdf_file))
-        .robot_description_kinematics(file_path=os.path.join(get_package_share_directory(moveit_config_package), 'config',"kinematics.yaml"))
-        .joint_limits(file_path=os.path.join(get_package_share_directory(moveit_config_package), 'config',"joint_limits.yaml"))
+        .robot_description_semantic(file_path="srdf/clr.srdf")
+        .robot_description_kinematics(file_path="config/kinematics.yaml")
+        .joint_limits(file_path="config/joint_limits.yaml")
         .to_moveit_configs()
     )
 
