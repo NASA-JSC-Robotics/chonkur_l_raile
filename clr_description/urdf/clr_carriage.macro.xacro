@@ -22,6 +22,24 @@
                     <mesh filename= "file://$(find clr_description)/meshes/visual/clr_carriage.dae"/>
                 </geometry>
             </visual>
+            <collision>
+                <origin xyz="0 -0.0005 0.0225" rpy="0 0 0"/>
+                <geometry>
+                    <box size="0.403 0.404 0.045"/>
+                </geometry>
+            </collision>
+            <collision>
+                <origin xyz="-0.182 0.203 0.137" rpy="0 0 0"/>
+                <geometry>
+                    <box size="0.049 0.281 0.184"/>
+                </geometry>
+            </collision>
+            <collision>
+                <origin xyz="0.0220 0.276 0.157" rpy="0 0 0"/>
+                <geometry>
+                    <box size="0.359 0.135 0.0890"/>
+                </geometry>
+            </collision>
         </link>
         
     </xacro:macro>
