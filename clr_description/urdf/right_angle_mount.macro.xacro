@@ -10,6 +10,24 @@
                     <mesh filename= "file://$(find clr_description)/meshes/visual/right_angle_mount.dae"/>
                 </geometry>
             </visual>
+            <collision>
+                <origin xyz="0 0 0.0288544" rpy="0 0 0"/>
+                <geometry>
+                    <box size="0.237 0.225018 0.0577088"/>
+                </geometry>
+            </collision>
+            <collision>
+                <origin xyz="0 0.0836544 0.141363" rpy="0 0 0"/>
+                <geometry>
+                    <box size="0.237 0.0577088 0.167309"/>
+                </geometry>
+            </collision>
+            <collision>
+                <origin xyz="0 0.0195000 0.0930088" rpy="0 0 0"/>
+                <geometry>
+                    <box size="0.237 0.0706 0.0706"/>
+                </geometry>
+            </collision>
         </link>
     </xacro:macro>
 </robot>
