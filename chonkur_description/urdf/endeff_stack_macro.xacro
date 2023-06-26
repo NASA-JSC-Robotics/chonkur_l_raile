@@ -49,6 +49,12 @@
         </visual>
     </link>
 
+    <!-- Realsense camera -->
+    <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro"/>
+    <xacro:sensor_d435 parent="${tf_prefix}ur_realsense_mount" use_nominal_extrinsics="true" use_mesh="true">
+        <origin xyz="-0.075 -0.006 0.023" rpy="0.022 -1.386 -0.012"/>
+    </xacro:sensor_d435>
+
     <joint name="${tf_prefix}realsense_mount_to_hand-e_adapter" type="fixed">
         <parent link="${tf_prefix}ur_realsense_mount"/>
         <child link="${tf_prefix}robotiq_hand-e_adapter_old"/>
