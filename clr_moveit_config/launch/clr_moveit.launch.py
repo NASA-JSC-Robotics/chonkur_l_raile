@@ -47,9 +47,17 @@ def generate_launch_description():
         have to be updated.",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "launch_moveit",
+            default_value="true",
+            description="Launch moveit?",
+        )
+    )
 
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     tf_prefix = LaunchConfiguration("tf_prefix")
+    launch_moveit = LaunchConfiguration("launch_moveit")
 
     print(moveit_config.robot_description_kinematics)
 
@@ -57,6 +65,7 @@ def generate_launch_description():
         package="moveit_ros_move_group",
         executable="move_group",
         output="screen",
+        condition=IfCondition(launch_moveit),
         parameters=[
             moveit_config.to_dict(),         
             ]
