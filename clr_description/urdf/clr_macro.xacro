@@ -34,6 +34,54 @@
           <mesh filename="file://$(find clr_description)/meshes/visual/clr_base.dae"/>
         </geometry>
       </visual>
+      <collision>
+        <origin xyz="0 0 0.15" rpy="0 0 0"/>
+        <geometry>
+          <box size="2.43 0.81 0.30"/>
+        </geometry>
+      </collision>
+      <collision>
+        <origin xyz="0 0.315007 0.354694" rpy="0 0 0"/>
+        <geometry>
+          <box size="2.11500 0.179992 0.109387"/>
+        </geometry>
+      </collision>
+      <collision>
+        <origin xyz="0 -0.314989 0.592500" rpy="0 0 0"/>
+        <geometry>
+          <box size="1.88999 0.179978 0.585000"/>
+        </geometry>
+      </collision>
+      <collision>
+        <origin xyz="0.440106 0.495008 0.150000" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.0899922 0.180010 0.300000"/>
+        </geometry>
+      </collision>
+      <collision>
+        <origin xyz="-0.446456 0.495008 0.150000" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.0899922 0.180010 0.300000"/>
+        </geometry>
+      </collision>
+      <collision>
+        <origin xyz="0 -0.504978 0.442500" rpy="0 0 0"/>
+        <geometry>
+          <box size="1.88999 0.200000 0.885000"/>
+        </geometry>
+      </collision>
+      <collision>
+        <origin xyz="-1.17000 0 0.310844" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.0899922 0.0899922 0.0216890"/>
+        </geometry>
+      </collision>
+      <collision>
+        <origin xyz="1.17000 0 0.310844" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.0899922 0.0899922 0.0216890"/>
+        </geometry>
+      </collision>
     </link>
 
     <!-- RAIL -->
