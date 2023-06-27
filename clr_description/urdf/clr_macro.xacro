@@ -128,7 +128,7 @@
       use_fake_hardware="${use_fake_hardware}"
       com_port="${ewellix_com_port}"
     >
-      <origin xyz="0 0 0.249525" rpy="0 0 0"/>
+      <origin xyz="0 0 0.295" rpy="0 0 0"/>
     </xacro:ewellix_lift>
 
     <!-- UPPER_LIFT_PLATE -->
