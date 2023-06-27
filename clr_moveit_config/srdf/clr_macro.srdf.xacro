@@ -95,6 +95,7 @@
     <!--VIRTUAL JOINT - Purpose - this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
     <!--DISABLE COLLISIONS - By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
     <disable_collisions link1="base_link" link2="base_link_inertia" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="base_link_inertia" reason="Adjacent" />
     <disable_collisions link1="base_link_inertia" link2="shoulder_link" reason="Adjacent" />
     <disable_collisions link1="tool0" link2="wrist_1_link" reason="Never" />
     <disable_collisions link1="tool0" link2="wrist_2_link" reason="Never" />
@@ -110,14 +111,23 @@
     <disable_collisions link1="vention_rail_carriage" link2="ewellix_lift_lower_link" reason="Adjacent" />
     <disable_collisions link1="vention_rail_carriage" link2="ewellix_lift_middle_link" reason="Adjacent" />
     <disable_collisions link1="vention_rail_base_link" link2="ewellix_lift_middle_link" reason="Adjacent" />
+    <disable_collisions link1="lower_lift_plate" link2="clr_carriage" reason="Adjacent" />
+    <disable_collisions link1="vention_rail_carriage" link2="clr_base" reason="Adjacent" />
+    <disable_collisions link1="lower_lift_plate" link2="ewellix_lift_lower_link" reason="Adjacent" />
+    <disable_collisions link1="ewellix_lift_base_link" link2="ewellix_lift_lower_link" reason="Adjacent" />
     <disable_collisions link1="ewellix_lift_base_link" link2="ewellix_lift_lower_link" reason="Adjacent" />
     <disable_collisions link1="ewellix_lift_base_link" link2="ewellix_lift_middle_link" reason="Adjacent" />
     <disable_collisions link1="ewellix_lift_lower_link" link2="ewellix_lift_higher_link" reason="Adjacent" />
     <disable_collisions link1="ewellix_lift_lower_link" link2="ewellix_lift_middle_link" reason="Adjacent" />
     <disable_collisions link1="ewellix_lift_higher_link" link2="ewellix_lift_middle_link" reason="Adjacent" />
     <disable_collisions link1="ewellix_lift_higher_link" link2="ewellix_lift_top_link" reason="Adjacent" />
-    <disable_collisions link1="ewellix_lift_top_link" link2="link_90deg" reason="Adjacent" />
-    <disable_collisions link1="link_90deg" link2="base_link" reason="Adjacent" />
+    <disable_collisions link1="ewellix_lift_top_link" link2="right_angle_mount" reason="Adjacent" />
+    <disable_collisions link1="right_angle_mount" link2="base_link" reason="Adjacent" />
+    <disable_collisions link1="right_angle_mount" link2="upper_lift_plate" reason="Adjacent" />
+    <disable_collisions link1="ewellix_lift_higher_link" link2="upper_lift_plate" reason="Adjacent" />
+    <disable_collisions link1="right_angle_mount" link2="ur10e_mount_plate" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="ur10e_mount_plate" reason="Adjacent" />
+    <disable_collisions link1="base_link_inertia" link2="ur10e_mount_plate" reason="Adjacent" />
     <!-- todo abstract gripper out so swappable-->
     <disable_collisions link1="tool0" link2="gripper_base_link" reason="Adjacent" />
     <disable_collisions link1="wrist_3_link" link2="gripper_base_link" reason="Adjacent" />

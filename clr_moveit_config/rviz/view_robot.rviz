@@ -147,7 +147,7 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          link_90deg:
+          right_angle_mount:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -322,7 +322,7 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          link_90deg:
+          right_angle_mount:
             Alpha: 1
             Show Axes: false
             Show Trail: false
