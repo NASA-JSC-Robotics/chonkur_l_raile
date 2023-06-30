@@ -110,5 +110,12 @@
     <xacro:hande_fingers name="chonkur_hande_fingers" prefix="${tf_prefix}"/>
     <xacro:grasp_push_frames name="chonkur_grasp_push_frames" prefix="${tf_prefix}"/>
 
+    <link name="manual_grasp_link" />
+    <joint name="${tf_prefix}temp_studio_joint" type="fixed">
+      <parent link="${tf_prefix}grasp_frame"/>
+      <child link="${tf_prefix}manual_grasp_link"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
   </xacro:macro>
 </robot>
