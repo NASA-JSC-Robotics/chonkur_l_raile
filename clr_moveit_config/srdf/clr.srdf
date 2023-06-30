@@ -83,34 +83,41 @@
   <end_effector group="hand" name="hand" parent_group="ur_manipulator" parent_link="tool0"/>
   <!--VIRTUAL JOINT - Purpose - this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
   <!--DISABLE COLLISIONS - By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
-  <disable_collisions link1="base_link" link2="base_link_inertia" reason="Adjacent" />
-  <disable_collisions link1="base_link_inertia" link2="shoulder_link" reason="Adjacent" />
-  <disable_collisions link1="tool0" link2="wrist_1_link" reason="Never" />
-  <disable_collisions link1="tool0" link2="wrist_2_link" reason="Never" />
-  <disable_collisions link1="tool0" link2="wrist_3_link" reason="Adjacent" />
-  <disable_collisions link1="forearm_link" link2="upper_arm_link" reason="Adjacent" />
-  <disable_collisions link1="forearm_link" link2="wrist_1_link" reason="Adjacent" />
-  <disable_collisions link1="shoulder_link" link2="upper_arm_link" reason="Adjacent" />
-  <disable_collisions link1="wrist_1_link" link2="wrist_2_link" reason="Adjacent" />
-  <disable_collisions link1="wrist_1_link" link2="wrist_3_link" reason="Never" />
-  <disable_collisions link1="wrist_2_link" link2="wrist_3_link" reason="Adjacent" />
+
+  <!-- ADJACENT LINKS -->
+  <disable_collisions link1="clr_base" link2="vention_rail_base_link" reason="Adjacent" />
+  <disable_collisions link1="clr_base" link2="vention_rail_carriage" reason="Adjacent" />
+    <!-- rail gearbox and motor -->
+  <disable_collisions link1="vention_rail_base_link" link2="vention_rail_gearbox" reason="Adjacent" />
+  <disable_collisions link1="vention_rail_gearbox" link2="vention_rail_motor" reason="Adjacent" />
+  <disable_collisions link1="vention_rail_motor" link2="vention_rail_cable_collision" reason="Adjacent" />
+    <!-- primary chain -->
   <disable_collisions link1="vention_rail_base_link" link2="vention_rail_carriage" reason="Adjacent" />
-  <disable_collisions link1="vention_rail_carriage" link2="ewellix_lift_base_link" reason="Adjacent" />
-  <disable_collisions link1="vention_rail_carriage" link2="ewellix_lift_lower_link" reason="Adjacent" />
-  <disable_collisions link1="vention_rail_carriage" link2="ewellix_lift_middle_link" reason="Adjacent" />
-  <disable_collisions link1="vention_rail_base_link" link2="ewellix_lift_middle_link" reason="Adjacent" />
-  <disable_collisions link1="ewellix_lift_base_link" link2="ewellix_lift_lower_link" reason="Adjacent" />
-  <disable_collisions link1="ewellix_lift_base_link" link2="ewellix_lift_middle_link" reason="Adjacent" />
-  <disable_collisions link1="ewellix_lift_lower_link" link2="ewellix_lift_higher_link" reason="Adjacent" />
+  <disable_collisions link1="vention_rail_carriage" link2="clr_carriage" reason="Adjacent" />
+  <disable_collisions link1="clr_carriage" link2="lower_lift_plate" reason="Adjacent" />
+  <disable_collisions link1="lower_lift_plate" link2="ewellix_lift_lower_link" reason="Adjacent" />
   <disable_collisions link1="ewellix_lift_lower_link" link2="ewellix_lift_middle_link" reason="Adjacent" />
-  <disable_collisions link1="ewellix_lift_higher_link" link2="ewellix_lift_middle_link" reason="Adjacent" />
-  <disable_collisions link1="ewellix_lift_higher_link" link2="ewellix_lift_top_link" reason="Adjacent" />
-  <disable_collisions link1="ewellix_lift_top_link" link2="link_90deg" reason="Adjacent" />
-  <disable_collisions link1="link_90deg" link2="base_link" reason="Adjacent" />
-  <!-- todo abstract gripper out so swappable-->
-  <disable_collisions link1="tool0" link2="gripper_base_link" reason="Adjacent" />
-  <disable_collisions link1="wrist_3_link" link2="gripper_base_link" reason="Adjacent" />
+  <disable_collisions link1="ewellix_lift_lower_link" link2="ewellix_lift_higher_link" reason="Adjacent" />
+  <disable_collisions link1="ewellix_lift_middle_link" link2="ewellix_lift_higher_link" reason="Adjacent" />
+  <disable_collisions link1="ewellix_lift_higher_link" link2="upper_lift_plate" reason="Adjacent" />
+  <disable_collisions link1="upper_lift_plate" link2="right_angle_mount" reason="Adjacent" />
+  <disable_collisions link1="right_angle_mount" link2="ur10e_mount_plate" reason="Adjacent" />
+  <disable_collisions link1="ur10e_mount_plate" link2="base_link_inertia" reason="Adjacent" />
+  <disable_collisions link1="base_link_inertia" link2="shoulder_link" reason="Adjacent" />
+  <disable_collisions link1="shoulder_link" link2="upper_arm_link" reason="Adjacent" />
+  <disable_collisions link1="upper_arm_link" link2="forearm_link" reason="Adjacent" />
+  <disable_collisions link1="forearm_link" link2="wrist_1_link" reason="Adjacent" />
+  <disable_collisions link1="wrist_1_link" link2="wrist_2_link" reason="Adjacent" />
+  <disable_collisions link1="wrist_2_link" link2="wrist_3_link" reason="Adjacent" />
+    <!-- end effector stack-->
+  <disable_collisions link1="wrist_3_link" link2="mtc_robot_side" reason="Adjacent" />
+  <disable_collisions link1="mtc_robot_side" link2="mtc_effector_side" reason="Adjacent" />
+  <disable_collisions link1="mtc_effector_side" link2="ur_realsense_mount" reason="Adjacent" />
+  <disable_collisions link1="ur_realsense_mount" link2="robotiq_hand-e_adapter_old" reason="Adjacent" />
+  <disable_collisions link1="robotiq_hand-e_adapter_old" link2="gripper_base_link" reason="Adjacent" />
+    <!-- gripper details -->
   <disable_collisions link1="gripper_base_link" link2="finger_1_link" reason="Adjacent" />
   <disable_collisions link1="gripper_base_link" link2="finger_2_link" reason="Adjacent" />
   <disable_collisions link1="finger_1_link" link2="finger_2_link" reason="Adjacent" />
+
 </robot>
