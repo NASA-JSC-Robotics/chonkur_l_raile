@@ -113,7 +113,7 @@
     <joint name="${tf_prefix}temp_studio_joint" type="fixed">
       <parent link="${tf_prefix}grasp_frame"/>
       <child link="${tf_prefix}manual_grasp_link"/>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 ${radians(180)}"/>
     </joint>
 
   </xacro:macro>
