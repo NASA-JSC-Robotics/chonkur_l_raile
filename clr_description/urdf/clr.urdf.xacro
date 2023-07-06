@@ -4,8 +4,6 @@
   <xacro:arg name="tf_prefix" default="" />
   <xacro:arg name="use_fake_hardware" default="false" />  
   <xacro:arg name="headless_mode" default="false" />
-  <xacro:arg name="com_port_hande" default="/dev/ttyUSB0" />  
-  <xacro:arg name="ewellix_com_port" default="/dev/ttyUSB1" />
   
   <xacro:include filename="$(find clr_description)/urdf/clr_macro.xacro"/>
   
@@ -15,8 +13,8 @@
     tf_prefix="$(arg tf_prefix)"
     use_fake_hardware="$(arg use_fake_hardware)"
     headless_mode="$(arg headless_mode)"
-    ewellix_com_port="$(arg ewellix_com_port)"
-    com_port_hande="$(arg com_port_hande)"
+    ewellix_com_port="/dev/ttyUSB1"
+    com_port_hande="/dev/ttyUSB0"
     ros2_control_name="clr"
     parent="world"
     sim_gazebo="false"

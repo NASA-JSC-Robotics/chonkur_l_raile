@@ -69,8 +69,6 @@ def generate_launch_description():
         launch_arguments={
             "description_package": "clr_description",
             "description_file": "clr.urdf.xacro",
-            "com_port_hande": "/dev/ttyUSB0",
-            "ewellix_com_port": "/dev/ttyUSB1",
             "tf_prefix": tf_prefix,
             "use_fake_hardware": use_fake_hardware,
             "headless_mode": headless_mode,
