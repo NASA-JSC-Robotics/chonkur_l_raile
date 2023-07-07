@@ -25,4 +25,4 @@ octomap_resolution: 0.01
 # Specifies the coordinate frame in which the Octomap representation will be stored.
 # Note! When an OccupancyMonitor instance is initialized by the PlanningSceneMonitor,
 # this frame parameter will not be used. Instead, the frame defaults to the planning frame.
-octomap_frame: "base_link"
+octomap_frame: "clr_base"
