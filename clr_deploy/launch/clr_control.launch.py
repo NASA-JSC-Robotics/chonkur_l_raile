@@ -123,6 +123,7 @@ def generate_launch_description():
                    "-c", "controller_manager",
                    "-t", "position_controllers/JointGroupPositionController ",
                    "-p", clr_controllers_yaml, 
+                   "--controller-manager-timeout","100",
                    "--inactive"
                   ]
     )    
