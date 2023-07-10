@@ -86,6 +86,7 @@ def generate_launch_description():
     description_package = LaunchConfiguration("description_package")
     description_file = LaunchConfiguration("description_file")
 
+    controller_params_file = os.path.join(get_package_share_directory("chonkur_deploy"),'config','chonkur_controllers.yaml')
 
 
     base_launch = IncludeLaunchDescription(
@@ -97,6 +98,8 @@ def generate_launch_description():
             "description_package": description_package,
             "description_file": description_file,
             "tf_prefix": tf_prefix,
+            "runtime_config_package": "chonkur_deploy",
+            "controllers_file": "chonkur_controllers.yaml",
             "use_fake_hardware": use_fake_hardware,
             "headless_mode": headless_mode,
             "fake_sensor_commands": fake_sensor_commands,
@@ -129,6 +132,14 @@ def generate_launch_description():
                   ]
     )
 
-    nodes = [gripper_controller_spawner, gripper_activation_controller_spawner]
+    nodes = [gripper_controller_spawner, 
+             gripper_activation_controller_spawner]
 
-    return LaunchDescription(declared_arguments + [base_launch] + nodes)
+    spawn_controllers_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch','spawn_controllers.launch.py')),
+        launch_arguments={
+            "use_fake_hardware": use_fake_hardware,
+        }.items(),
+    )
+
+    return LaunchDescription(declared_arguments + [base_launch, spawn_controllers_launch] + nodes)
