@@ -92,6 +92,8 @@
     </xacro:endeff_stack>
 
     <xacro:property name="finger_type_prop" value="fngr_nail_v2" />
+    <xacro:property name="finger_type_prop" value="fngr_v2_m" />
+
 
     <xacro:include filename="$(find robotiq_hande_description)/urdf/robotiq_hande.xacro"/>
 
@@ -103,6 +105,11 @@
     <xacro:if value="${finger_type_prop == 'fngr_nail_v2'}">
       <xacro:include filename="$(find dextivr_hande_description)/urdf/hande_fingers_fngr_nail_v2.xacro"/>
       <xacro:include filename="$(find dextivr_hande_description)/urdf/fngr_nail_v2_grasp_push_frames.xacro"/>
+    </xacro:if>
+
+    <xacro:if value="${finger_type_prop == 'fngr_v2_m'}">
+      <xacro:include filename="$(find dextivr_hande_description)/urdf/hande_fingers_v2_m.xacro"/>
+      <xacro:include filename="$(find dextivr_hande_description)/urdf/fngr_v2_m_grasp_push_frames.xacro"/>
     </xacro:if>
 
     <!--Run the xacros from the files included above-->
