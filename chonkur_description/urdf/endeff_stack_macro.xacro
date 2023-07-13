@@ -51,7 +51,7 @@
 
     <!-- Realsense camera -->
     <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro"/>
-    <xacro:sensor_d435 parent="${tf_prefix}ur_realsense_mount" use_nominal_extrinsics="true" use_mesh="true">
+    <xacro:sensor_d435 parent="${tf_prefix}ur_realsense_mount" use_nominal_extrinsics="true" use_mesh="true" name="wrist_mounted_camera">
         <origin xyz="-0.065 -0.006 0.010" rpy="0.048 -1.392 -0.047"/>
     </xacro:sensor_d435>
 
