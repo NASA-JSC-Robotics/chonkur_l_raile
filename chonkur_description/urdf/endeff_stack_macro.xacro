@@ -55,19 +55,5 @@
         <origin xyz="-0.065 -0.006 0.010" rpy="0.048 -1.392 -0.047"/>
     </xacro:sensor_d435>
 
-    <joint name="${tf_prefix}realsense_mount_to_hand-e_adapter" type="fixed">
-        <parent link="${tf_prefix}ur_realsense_mount"/>
-        <child link="${tf_prefix}robotiq_hand-e_adapter_old"/>
-        <origin xyz="0 0 0.003" rpy="0 0 0"/>
-    </joint>
-
-    <link name="${tf_prefix}robotiq_hand-e_adapter_old">
-        <visual>
-            <geometry>
-                <mesh filename= "package://chonkur_description/meshes/visual/robotiq_hand-e_adapter_old.dae"/>
-            </geometry>
-        </visual>
-    </link>
-
     </xacro:macro>
 </robot>
