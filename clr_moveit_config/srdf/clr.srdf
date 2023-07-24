@@ -119,8 +119,8 @@
   <disable_collisions link1="wrist_3_link" link2="mtc_robot_side" reason="Adjacent" />
   <disable_collisions link1="mtc_robot_side" link2="mtc_effector_side" reason="Adjacent" />
   <disable_collisions link1="mtc_effector_side" link2="ur_realsense_mount" reason="Adjacent" />
-  <disable_collisions link1="ur_realsense_mount" link2="robotiq_hand-e_adapter_old" reason="Adjacent" />
-  <disable_collisions link1="robotiq_hand-e_adapter_old" link2="gripper_base_link" reason="Adjacent" />
+  <disable_collisions link1="ur_realsense_mount" link2="robotiq_hande_cb_adapter" reason="Adjacent" />
+  <disable_collisions link1="robotiq_hande_cb_adapter" link2="gripper_base_link" reason="Adjacent" />
   <!-- gripper details -->
   <disable_collisions link1="gripper_base_link" link2="finger_1_link" reason="Adjacent" />
   <disable_collisions link1="gripper_base_link" link2="finger_2_link" reason="Adjacent" />
