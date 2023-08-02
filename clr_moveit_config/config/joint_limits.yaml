@@ -94,13 +94,3 @@ joint_limits:
     max_velocity:  1.46608 # 84 degrees
     min_position: -3.14159265
     max_acceleration: 1.46608 # 84 degrees
-  finger_1_joint:
-    has_velocity_limits: true
-    max_velocity: 0.1
-    has_acceleration_limits: true
-    max_acceleration: 0.0
-  finger_2_joint:
-    has_velocity_limits: true
-    max_velocity: 0.1
-    has_acceleration_limits: true
-    max_acceleration: 0.0
