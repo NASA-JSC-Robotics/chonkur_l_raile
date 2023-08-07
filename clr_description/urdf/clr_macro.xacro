@@ -15,6 +15,7 @@
     rail_port:=8000
     rail_position_limit:=2.0
     rail_velocity_limit:=0.5
+    safety_com_port:=/dev/ttyACM0
     ewellix_com_port:=/dev/ttyUSB0
     ewellix_height_limit:=0.53
     ewellix_omit_plates:=true
@@ -95,6 +96,7 @@
       port="${rail_port}"
       position_limit="${rail_position_limit}"
       velocity_limit="${rail_velocity_limit}"
+      safety_com_port="${safety_com_port}"
     >
       <origin xyz="0.0874537 0.114017 0.300000"/>
     </xacro:vention_rail>

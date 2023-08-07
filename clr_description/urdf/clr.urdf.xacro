@@ -22,6 +22,7 @@
     chonkur_ip="192.168.1.102"
     rail_ip="192.168.1.104"
     rail_port="9999"
+    safety_com_port="/dev/safety_com_port"
     rail_position_limit="2.0"
     rail_velocity_limit="0.15"
     ewellix_height_limit="0.7"
