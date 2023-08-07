@@ -11,9 +11,10 @@ sudo touch /etc/udev/rules.d/<name_of_rule>.rules
 ```
 Then create the relevant rule in that file.
 
-### robotiq hand-e rule
+### UDEV Rules
 ```
-SUBSYSTEMS=="usb", ATTRS{idProduct}=="6015", ATTRS{idVendor}=="0403", SYMLINK+="robotiq"
-SUBSYSTEMS=="usb", ATTRS{idProduct}=="6001", ATTRS{idVendor}=="0403", SYMLINK+="ewellix"
-SUBSYSTEMS=="usb", ATTRS{idProduct}=="0043", ATTRS{idVendor}=="2341", SYMLINK+="safety_com_port"
+SUBSYSTEM=="tty", ATTRS{idProduct}=="6015", ATTRS{idVendor}=="0403", SYMLINK+="robotiq", MODE="0666"
+SUBSYSTEM=="tty", ATTRS{idProduct}=="6001", ATTRS{idVendor}=="0403", SYMLINK+="ewellix", MODE="0666"
+SUBSYSTEM=="tty", ATTRS{idProduct}=="0043", ATTRS{idVendor}=="2341", SYMLINK+="safety_com_port", MODE="0666"
+
 ```
