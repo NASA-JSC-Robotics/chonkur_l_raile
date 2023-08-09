@@ -10,12 +10,12 @@
 joint_limits:
   ewellix_lift_lower_to_higher:
     has_velocity_limits: true
-    max_velocity: 0.15
+    max_velocity: 0.015
     has_acceleration_limits: true
     max_acceleration: 1.0
   vention_rail_base_to_carriage:
     has_velocity_limits: true
-    max_velocity: 0.15
+    max_velocity: 0.015
     has_acceleration_limits: true
     max_acceleration: 1.0
   shoulder_pan_joint:
@@ -26,9 +26,9 @@ joint_limits:
     has_velocity_limits: true
     max_effort: 330.0
     max_position:  3.14159265
-    max_velocity:  0.942478 # 54 degrees
+    max_velocity:  0.0942478 # 54 degrees
     min_position: -3.14159265
-    max_acceleration: 0.942478 # 54 degrees
+    max_acceleration: 0.0942478 # 54 degrees
   shoulder_lift_joint:
     # acceleration limits are not publicly available
     has_acceleration_limits: true
@@ -37,9 +37,9 @@ joint_limits:
     has_velocity_limits: true
     max_effort: 330.0
     max_position:  3.14159265
-    max_velocity:  0.942478 # 54 degrees
+    max_velocity:  0.0942478 # 54 degrees
     min_position: -3.14159265
-    max_acceleration: 0.942478 # 54 degrees
+    max_acceleration: 0.0942478 # 54 degrees
   elbow_joint:
     # acceleration limits are not publicly available
     has_acceleration_limits: true
@@ -58,9 +58,9 @@ joint_limits:
     # Refer to https://github.com/ros-industrial/universal_robot/issues/265 for
     # more information.
     max_position:  180.0
-    max_velocity:  1.46608 # 84 degrees
+    max_velocity:  0.146608 # 84 degrees
     min_position: -180.0
-    max_acceleration: 1.46608 # 84 degrees
+    max_acceleration: 0.146608 # 84 degrees
   wrist_1_joint:
     # acceleration limits are not publicly available
     has_acceleration_limits: true
@@ -69,9 +69,9 @@ joint_limits:
     has_velocity_limits: true
     max_effort: 56.0
     max_position:  3.14159265
-    max_velocity:  1.46608 # 84 degrees
+    max_velocity:  0.146608 # 84 degrees
     min_position: -3.14159265
-    max_acceleration: 1.46608 # 84 degrees
+    max_acceleration: 0.146608 # 84 degrees
   wrist_2_joint:
     # acceleration limits are not publicly available
     has_acceleration_limits: true
@@ -80,9 +80,9 @@ joint_limits:
     has_velocity_limits: true
     max_effort: 56.0
     max_position:  3.14159265
-    max_velocity:  1.46608 # 84 degrees
+    max_velocity:  0.146608 # 84 degrees
     min_position: -3.14159265
-    max_acceleration: 1.46608 # 84 degrees
+    max_acceleration: 0.146608 # 84 degrees
   wrist_3_joint:
     # acceleration limits are not publicly available
     has_acceleration_limits: true
@@ -91,9 +91,9 @@ joint_limits:
     has_velocity_limits: true
     max_effort: 56.0
     max_position:  3.14159265
-    max_velocity:  1.46608 # 84 degrees
+    max_velocity:  0.146608 # 84 degrees
     min_position: -3.14159265
-    max_acceleration: 1.46608 # 84 degrees
+    max_acceleration: 0.146608 # 84 degrees
   finger_1_joint:
     # acceleration limits are not publicly available
     has_acceleration_limits: true
