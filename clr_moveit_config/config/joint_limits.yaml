@@ -10,12 +10,12 @@
 joint_limits:
   ewellix_lift_lower_to_higher:
     has_velocity_limits: true
-    max_velocity: 0.015
+    max_velocity: 0.05
     has_acceleration_limits: true
     max_acceleration: 1.0
   vention_rail_base_to_carriage:
     has_velocity_limits: true
-    max_velocity: 0.015
+    max_velocity: 0.05
     has_acceleration_limits: true
     max_acceleration: 1.0
   shoulder_pan_joint:
@@ -25,9 +25,11 @@ joint_limits:
     has_position_limits: true
     has_velocity_limits: true
     max_effort: 330.0
-    max_position:  3.14159265
+    max_position:  6.28319 # URDF
+    # max_position:  3.14159 # PickNik UR5e
     max_velocity:  0.0942478 # 54 degrees
-    min_position: -3.14159265
+    min_position: -6.28319
+    # min_position:  -3.14159 # PickNik UR5e
     max_acceleration: 0.0942478 # 54 degrees
   shoulder_lift_joint:
     # acceleration limits are not publicly available
@@ -36,9 +38,11 @@ joint_limits:
     has_position_limits: true
     has_velocity_limits: true
     max_effort: 330.0
-    max_position:  3.14159265
+    max_position:  6.28319
+    # max_position:  1.5708 # PickNik UR5e
     max_velocity:  0.0942478 # 54 degrees
-    min_position: -3.14159265
+    min_position: -6.28319
+    # min_position:  -4.71239 # PickNik UR5e
     max_acceleration: 0.0942478 # 54 degrees
   elbow_joint:
     # acceleration limits are not publicly available
@@ -57,9 +61,11 @@ joint_limits:
     #
     # Refer to https://github.com/ros-industrial/universal_robot/issues/265 for
     # more information.
-    max_position:  180.0
+    max_position:  3.14159265
+    # max_position:  3.14159 # PickNik UR5e
     max_velocity:  0.146608 # 84 degrees
-    min_position: -180.0
+    min_position: -3.14159265
+    # min_position:  -3.14159 # PickNik UR5e
     max_acceleration: 0.146608 # 84 degrees
   wrist_1_joint:
     # acceleration limits are not publicly available
@@ -68,9 +74,11 @@ joint_limits:
     has_position_limits: true
     has_velocity_limits: true
     max_effort: 56.0
-    max_position:  3.14159265
+    max_position:  6.28319
+    # max_position:  3.14159 # PickNik UR5e
     max_velocity:  0.146608 # 84 degrees
-    min_position: -3.14159265
+    min_position: -6.28319
+    # min_position:  -3.14159 # PickNik UR5e
     max_acceleration: 0.146608 # 84 degrees
   wrist_2_joint:
     # acceleration limits are not publicly available
@@ -79,9 +87,11 @@ joint_limits:
     has_position_limits: true
     has_velocity_limits: true
     max_effort: 56.0
-    max_position:  3.14159265
+    max_position:  6.28319
+    # max_position:  3.14159 # PickNik UR5e
     max_velocity:  0.146608 # 84 degrees
-    min_position: -3.14159265
+    min_position: -6.28319
+    # min_position:  -3.14159 # PickNik UR5e
     max_acceleration: 0.146608 # 84 degrees
   wrist_3_joint:
     # acceleration limits are not publicly available
@@ -90,9 +100,11 @@ joint_limits:
     has_position_limits: true
     has_velocity_limits: true
     max_effort: 56.0
-    max_position:  3.14159265
+    max_position:  6.28319
+    # max_position:  6.28319 # PickNik UR5e
     max_velocity:  0.146608 # 84 degrees
-    min_position: -3.14159265
+    min_position: -6.28319
+    # min_position:  -6.28319 # PickNik UR5e
     max_acceleration: 0.146608 # 84 degrees
   finger_1_joint:
     # acceleration limits are not publicly available
