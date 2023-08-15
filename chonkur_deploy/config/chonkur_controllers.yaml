@@ -230,9 +230,9 @@ admittance_controller:
 
     admittance:
       selected_axes: # starting default to off
-        - true # x
-        - true # y
-        - true # z
+        - false # x
+        - false # y
+        - false # z
         - false # rx
         - false # ry
         - false # rz
