@@ -44,7 +44,7 @@
     <link name="${tf_prefix}ur_realsense_mount">
         <visual>
             <geometry>
-                <mesh filename= "package://chonkur_description/meshes/visual/ur_realsense_mount.dae"/>
+                <mesh filename= "package://chonkur_description/meshes/visual/ur_realsense_short_mount_tube.stl"/>
             </geometry>
         </visual>
     </link>
