@@ -19,11 +19,11 @@
                 <mesh filename= "package://chonkur_description/meshes/visual/mtc_robot_side.dae"/>
             </geometry>
         </visual>
-        <collision>
+        <!-- <collision>
             <geometry>
                 <mesh filename= "package://chonkur_description/meshes/visual/mtc_robot_side.dae"/>
             </geometry>
-        </collision>
+        </collision> -->
     </link>
 
     <joint name="${tf_prefix}mtc_robot_to_effector_side_joint" type="fixed">
