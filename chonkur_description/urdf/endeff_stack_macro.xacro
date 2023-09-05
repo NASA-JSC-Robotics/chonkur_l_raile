@@ -19,6 +19,11 @@
                 <mesh filename= "package://chonkur_description/meshes/visual/mtc_robot_side.dae"/>
             </geometry>
         </visual>
+        <!-- <collision>
+            <geometry>
+                <mesh filename= "package://chonkur_description/meshes/visual/mtc_robot_side.dae"/>
+            </geometry>
+        </collision> -->
     </link>
 
     <joint name="${tf_prefix}mtc_robot_to_effector_side_joint" type="fixed">
@@ -33,6 +38,11 @@
                 <mesh filename= "package://chonkur_description/meshes/visual/mtc_effector_side.dae"/>
             </geometry>
         </visual>
+        <collision>
+            <geometry>
+                <mesh filename= "package://chonkur_description/meshes/visual/mtc_effector_side.dae"/>
+            </geometry>
+        </collision>
     </link>
 
     <joint name="${tf_prefix}mtc_effector_side_to_realsense_mount" type="fixed">
@@ -44,9 +54,14 @@
     <link name="${tf_prefix}ur_realsense_mount">
         <visual>
             <geometry>
-                <mesh filename= "package://chonkur_description/meshes/visual/ur_realsense_mount.dae"/>
+                <mesh filename= "package://chonkur_description/meshes/visual/ur_realsense_short_mount_tube.stl"/>
             </geometry>
         </visual>
+        <collision>
+            <geometry>
+                <mesh filename= "package://chonkur_description/meshes/visual/ur_realsense_short_mount_tube.stl"/>
+            </geometry>
+        </collision>
     </link>
 
     <!-- Realsense camera -->
