@@ -19,11 +19,6 @@
                 <mesh filename= "package://chonkur_description/meshes/visual/mtc_robot_side.dae"/>
             </geometry>
         </visual>
-        <!-- <collision>
-            <geometry>
-                <mesh filename= "package://chonkur_description/meshes/visual/mtc_robot_side.dae"/>
-            </geometry>
-        </collision> -->
         <collision>
             <geometry>
                 <cylinder length="0.0184" radius="0.0525" />
