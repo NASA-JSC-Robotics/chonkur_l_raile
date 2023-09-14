@@ -128,9 +128,9 @@
       </collision>      
     </link>
     <joint name="${tf_prefix}motor_side_estop_light_joint" type="fixed">
-      <parent link="${tf_prefix}clr_carriage"/>
+      <parent link="${tf_prefix}clr_base"/>
       <child link="${tf_prefix}motor_side_estop_light"/>
-      <origin xyz="-0.0395 -0.296 0.5" rpy="0 0 0"/>
+      <origin xyz="-0.925 -0.272 0.914" rpy="0 0 0"/>
     </joint>
     <link name="${tf_prefix}end_estop_light">
       <visual>
@@ -146,9 +146,9 @@
       </collision>      
     </link>
     <joint name="${tf_prefix}end_estop_light_joint" type="fixed">
-      <parent link="${tf_prefix}clr_carriage"/>
+      <parent link="${tf_prefix}clr_base"/>
       <child link="${tf_prefix}end_estop_light"/>
-      <origin xyz="1.815 -0.296 0.3" rpy="0 0 0"/>
+      <origin xyz="0.929 -0.272 0.714" rpy="0 0 0"/>
     </joint>
 
     <!-- LOWER_LIFT_PLATE -->
