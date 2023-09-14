@@ -110,6 +110,47 @@
       <origin xyz="-0.003624 -0.0900 0.0185"/>
     </xacro:clr_carriage>
 
+    <!-- SAFETY_LIGHTS -->
+    <material name="safety_light_blue">
+      <color rgba="0 0 0.5 0.8"/>
+    </material>    
+    <link name="${tf_prefix}motor_side_estop_light">
+      <visual>
+        <geometry>
+          <box size="0.05 0.05 0.381"/>
+        </geometry>
+        <!-- <material name="safety_light_blue" />         -->
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.05 0.05 0.381"/>
+        </geometry>
+      </collision>      
+    </link>
+    <joint name="${tf_prefix}motor_side_estop_light_joint" type="fixed">
+      <parent link="${tf_prefix}clr_carriage"/>
+      <child link="${tf_prefix}motor_side_estop_light"/>
+      <origin xyz="-0.0395 -0.296 0.5" rpy="0 0 0"/>
+    </joint>
+    <link name="${tf_prefix}end_estop_light">
+      <visual>
+        <geometry>
+          <box size="0.05 0.05 0.381"/>
+        </geometry>
+        <!-- <material name="safety_light_blue" />         -->
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.05 0.05 0.381"/>
+        </geometry>
+      </collision>      
+    </link>
+    <joint name="${tf_prefix}end_estop_light_joint" type="fixed">
+      <parent link="${tf_prefix}clr_carriage"/>
+      <child link="${tf_prefix}end_estop_light"/>
+      <origin xyz="1.815 -0.296 0.3" rpy="0 0 0"/>
+    </joint>
+
     <!-- LOWER_LIFT_PLATE -->
     <xacro:include filename="$(find clr_description)/urdf/plates.macro.xacro"/>
     <xacro:lower_lift_plate
