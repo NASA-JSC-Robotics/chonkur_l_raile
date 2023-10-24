@@ -43,6 +43,7 @@ is_primary_planning_scene_monitor: false  # The MoveGroup node maintains the pla
 
 ## Other frames
 ee_frame_name: grasp_frame  # The name of the end effector link, used to return the EE pose
+ee_frame: manual_grasp_link  # The name of the end effector link, used to return the EE pose
 robot_link_command_frame: base_link  # commands must be given in the frame of a robot link. Usually either the base or end effector
 
 ## Stopping behaviour
