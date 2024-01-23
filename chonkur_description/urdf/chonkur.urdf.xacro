@@ -4,6 +4,7 @@
   <xacro:arg name="use_fake_hardware" default="false" />  
   <xacro:arg name="headless_mode" default="false" />
   <xacro:arg name="ros2_control_name" default="chonkur"/>
+  <xacro:arg name="finger_xacro" default="fngr_v2_m"/>
   
   <xacro:include filename="$(find chonkur_description)/urdf/chonkur_macro.xacro"/>
 
@@ -13,6 +14,7 @@
     use_fake_hardware="$(arg use_fake_hardware)"
     headless_mode="$(arg headless_mode)"
     ros2_control_name="$(arg ros2_control_name)"
+    finger_xacro="$(arg finger_xacro)"
     parent="world"
     sim_gazebo="false"
     sim_ignition="false"
