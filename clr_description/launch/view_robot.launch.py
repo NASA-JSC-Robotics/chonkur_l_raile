@@ -31,26 +31,34 @@ def generate_launch_description():
             description="Enable headless mode for robot control",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "finger_xacro",
+            default_value="fngr_v2_m",
+            choices=["fngr_nail_v2",
+                     "fngr_v2_m",
+                     "fngr_v6"],
+            description="Chose which fingers are mounted to the gripper"
+        )
+    )
+
 
     # Initialize Arguments
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")    
     headless_mode = LaunchConfiguration("headless_mode")
+    finger_xacro = LaunchConfiguration("finger_xacro")
+
 
     robot_description_content = Command(
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution([FindPackageShare("clr_description"), "urdf", "clr.urdf.xacro"]),
-            " ",
-            "tf_prefix:=",
-            tf_prefix,
-            " ",
-            "use_fake_hardware:=",
-            use_fake_hardware,
-            " ",
-            "headless_mode:=",
-            headless_mode,
+            " ", "tf_prefix:=", tf_prefix,
+            " ", "use_fake_hardware:=", use_fake_hardware,
+            " ", "headless_mode:=", headless_mode,
+            " ", "finger_xacro:=", finger_xacro,
         ]
     )
     robot_description = {"robot_description": robot_description_content}
