@@ -12,6 +12,7 @@
     chonkur_ip:=192.168.1.102
     com_port_hande:=/dev/ttyUSB1
     finger_xacro:=fngr_v2_m
+    marker_opacity:=0.5
     rail_ip:=192.168.7.2
     rail_port:=9999
     rail_position_limit:=2.0
@@ -222,7 +223,8 @@
       sim_ignition="false"
       chonkur_ip="${chonkur_ip}"
       com_port_hande="${com_port_hande}"
-      finger_xacro="${finger_xacro}"/>
+      finger_xacro="${finger_xacro}"
+      marker_opacity="${marker_opacity}"/>
 
   </xacro:macro>
   

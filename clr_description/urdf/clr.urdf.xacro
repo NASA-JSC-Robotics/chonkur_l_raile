@@ -4,7 +4,8 @@
   <xacro:arg name="tf_prefix" default="" />
   <xacro:arg name="use_fake_hardware" default="false" />  
   <xacro:arg name="headless_mode" default="false" />
-  <xacro:arg name="finger_xacro" default="fngr_v2_m"/>
+  <xacro:arg name="finger_xacro" default="fngr_v2_m" />
+  <xacro:arg name="marker_opacity" default="0.5" />
   
   <xacro:include filename="$(find clr_description)/urdf/clr_macro.xacro"/>
   
@@ -17,6 +18,7 @@
     ewellix_com_port="/dev/ewellix"
     com_port_hande="/dev/robotiq"
     finger_xacro="$(arg finger_xacro)"
+    marker_opacity="$(arg marker_opacity)"
     ros2_control_name="clr"
     parent="world"
     sim_gazebo="false"
