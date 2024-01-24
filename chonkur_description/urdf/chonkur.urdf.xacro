@@ -4,6 +4,7 @@
   <xacro:arg name="use_fake_hardware" default="false" />  
   <xacro:arg name="headless_mode" default="false" />
   <xacro:arg name="ros2_control_name" default="chonkur"/>
+  <xacro:arg name="marker_opacity" default="0.5"/>
   <xacro:arg name="finger_xacro" default="fngr_v2_m"/>
   
   <xacro:include filename="$(find chonkur_description)/urdf/chonkur_macro.xacro"/>
@@ -19,6 +20,7 @@
     sim_gazebo="false"
     sim_ignition="false"
     chonkur_ip="192.168.1.102"
+    marker_opacity="$(arg marker_opacity)"
     com_port_hande="/dev/robotiq"/>
 
 </robot>
