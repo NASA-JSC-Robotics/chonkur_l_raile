@@ -18,7 +18,7 @@
     chonkur_ip:=192.168.1.102
     com_port_hande:=/dev/ttyUSB1
     marker_opacity:=0.5
-    finger_xacro:=fngr_v2_m">
+    finger_xacro:=fngr_v6">
 
     <!-- convert to property to use substitution in function -->
     <xacro:property name="initial_positions_file" default="$(find chonkur_description)/config/initial_positions.yaml"/>
