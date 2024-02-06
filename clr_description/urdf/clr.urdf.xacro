@@ -4,7 +4,7 @@
   <xacro:arg name="tf_prefix" default="" />
   <xacro:arg name="use_fake_hardware" default="false" />  
   <xacro:arg name="headless_mode" default="false" />
-  <xacro:arg name="finger_xacro" default="fngr_v2_m" />
+  <xacro:arg name="finger_xacro" default="fngr_v6" />
   <xacro:arg name="marker_opacity" default="0.5" />
   
   <xacro:include filename="$(find clr_description)/urdf/clr_macro.xacro"/>
