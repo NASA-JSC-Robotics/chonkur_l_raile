@@ -5,7 +5,7 @@
   <xacro:arg name="headless_mode" default="false" />
   <xacro:arg name="ros2_control_name" default="chonkur"/>
   <xacro:arg name="marker_opacity" default="0.5"/>
-  <xacro:arg name="finger_xacro" default="fngr_v2_m"/>
+  <xacro:arg name="finger_xacro" default="fngr_v6"/>
   
   <xacro:include filename="$(find chonkur_description)/urdf/chonkur_macro.xacro"/>
 

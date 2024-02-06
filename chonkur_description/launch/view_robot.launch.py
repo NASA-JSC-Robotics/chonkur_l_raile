@@ -34,7 +34,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "finger_xacro",
-            default_value="fngr_v2_m",
+            default_value="fngr_v6",
             choices=["fngr_nail_v2",
                      "fngr_v2_m",
                      "fngr_v6"],
