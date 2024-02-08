@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="lift_camera" params="
+        tf_prefix
+        parent
+        *origin
+    ">
+
+    <joint name="${tf_prefix}lift_camera_base_joint" type="fixed">
+        <parent link="${parent}"/>
+        <child link="${tf_prefix}lift_camera_mount"/>
+        <xacro:insert_block name="origin"/>
+    </joint>
+
+    <!-- TODO: Get mesh of mount, as well as mesh of the cable management block that mounts on -->
+    <link name="${tf_prefix}lift_camera_mount">
+        <visual>
+            <geometry>
+                <!-- <mesh filename= "package://chonkur_description/meshes/visual/ur_realsense_short_mount_tube.stl"/> -->
+            </geometry>
+        </visual>
+        <collision>
+            <geometry>
+                <!-- <mesh filename= "package://chonkur_description/meshes/visual/ur_realsense_short_mount_tube.stl"/> -->
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- TODO: Fix the origin -->
+    <!-- Realsense camera -->
+    <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro"/>
+    <xacro:sensor_d435 parent="${tf_prefix}lift_camera_mount" 
+                       use_nominal_extrinsics="true" 
+                       use_mesh="true" 
+                       name="lift_camera">
+        <origin xyz="-0.064 -0.003 0.016" rpy="0.136 -1.429 -0.128"/>
+    </xacro:sensor_d435>
+
+    </xacro:macro>
+</robot>
