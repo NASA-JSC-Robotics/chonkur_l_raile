@@ -2,8 +2,8 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <xacro:macro name="lift_camera" params="
-        tf_prefix
-        parent
+        tf_prefix:=''
+        parent:=world
         *origin
     ">
 
