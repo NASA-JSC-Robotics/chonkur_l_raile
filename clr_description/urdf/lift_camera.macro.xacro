@@ -7,7 +7,7 @@
         *origin
     ">
 
-    <joint name="${tf_prefix}lift_camera_base_joint" type="fixed">
+    <joint name="${tf_prefix}lift_camera_mount_base_joint" type="fixed">
         <parent link="${parent}"/>
         <child link="${tf_prefix}lift_camera_mount"/>
         <xacro:insert_block name="origin"/>
@@ -17,12 +17,12 @@
     <link name="${tf_prefix}lift_camera_mount">
         <visual>
             <geometry>
-                <!-- <mesh filename= "package://chonkur_description/meshes/visual/ur_realsense_short_mount_tube.stl"/> -->
+                <mesh filename= "package://clr_description/meshes/visual/lift_camera_mount.stl"/>
             </geometry>
         </visual>
         <collision>
             <geometry>
-                <!-- <mesh filename= "package://chonkur_description/meshes/visual/ur_realsense_short_mount_tube.stl"/> -->
+                <box size="0.145 0.15 0.01135"/> <!--meters -->
             </geometry>
         </collision>
     </link>
@@ -34,7 +34,7 @@
                        use_nominal_extrinsics="true" 
                        use_mesh="true" 
                        name="lift_camera">
-        <origin xyz="-0.064 -0.003 0.016" rpy="0.136 -1.429 -0.128"/>
+        <origin xyz="0.064 -0.006 -0.016" rpy="0 0 0"/>
     </xacro:sensor_d435>
 
     </xacro:macro>

@@ -176,7 +176,7 @@
 
     <!-- LIFT CAMERA + MOUNT -->
     <!-- TODO: FIX ORIGIN -->
-    <xacro include filename="$(find clr_description)/urdf/lift_camera.macro.xacro"/>
+    <xacro:include filename="$(find clr_description)/urdf/lift_camera.macro.xacro"/>
     <xacro:lift_camera
       tf_prefix="${tf_prefix}"
       parent="${tf_prefix}ewellix_lift_lower_link"
