@@ -271,5 +271,7 @@
   <disable_collisions link1="wrist_3_link" link2="ur_realsense_mount" reason="Never"/>
   <disable_collisions link1="clr_carriage" link2="motor_side_estop_light" reason="Adjacent"/>
   <disable_collisions link1="clr_carriage" link2="end_estop_light" reason="Adjacent"/>
+  <disable_collisions link1="clr_base" link2="motor_side_estop_light" reason="Adjacent"/>
+  <disable_collisions link1="clr_base" link2="end_estop_light" reason="Adjacent"/>  
 
 </robot>
