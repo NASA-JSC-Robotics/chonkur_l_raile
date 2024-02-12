@@ -17,7 +17,7 @@
     <link name="${tf_prefix}lift_camera_mount">
         <visual>
             <geometry>
-                <mesh filename= "package://clr_description/meshes/visual/lift_camera_mount.stl"/>
+                <mesh filename= "package://clr_description/meshes/visual/lift_camera_mount.stl" scale="0.001 0.001 0.001"/>
             </geometry>
         </visual>
         <collision>
@@ -29,13 +29,15 @@
 
     <!-- TODO Fix the origin -->
     <!-- Realsense camera -->
-    <!-- <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro"/>
-    <xacro:sensor_d435 parent="${tf_prefix}lift_camera_mount" 
-                       use_nominal_extrinsics="true" 
-                       use_mesh="true" 
-                       name="lift_camera">
+    <xacro:property name="realsense_materials_defined" default="false" />
+    <xacro:unless value="${realsense_materials_defined}">
+        <xacro:property name="realsense_materials_defined" value="true" />
+    </xacro:unless>  <!--Avoid Error   material 'aluminum' is not unique.-->
+
+    <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" ns="lift_camera_ns"/>
+    <xacro:lift_camera_ns.sensor_d435 parent="${tf_prefix}lift_camera_mount" use_nominal_extrinsics="true" use_mesh="true" name="lift_camera">
         <origin xyz="0.064 -0.006 -0.016" rpy="0 0 0"/>
-    </xacro:sensor_d435> -->
+    </xacro:lift_camera_ns.sensor_d435>
 
     </xacro:macro>
 </robot>
