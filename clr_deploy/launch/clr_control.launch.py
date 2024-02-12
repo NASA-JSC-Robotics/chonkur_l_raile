@@ -128,29 +128,29 @@ def generate_launch_description():
                   ]
     )    
 
-    # wrist_camera = IncludeLaunchDescription(
-    #     PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("realsense2_camera"), 'launch','rs_launch.py')),
-    #     launch_arguments={
-    #         "camera_name": "wrist_mounted_camera",
-    #         "serial_no" : "'938422070949'", 
-    #         "rgb_camera.profile" : "1280,720,30", 
-    #         "initial_reset" : "true", 
-    #         "pointcloud.enable" : "true",
-    #         "align_depth.enable" : "true"
-    #     }.items(),
-    # )
+    wrist_camera = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("realsense2_camera"), 'launch','rs_launch.py')),
+        launch_arguments={
+            "camera_name": "wrist_mounted_camera",
+            "serial_no" : "'938422070949'", 
+            "rgb_camera.profile" : "1280,720,30", 
+            "initial_reset" : "true", 
+            "pointcloud.enable" : "true",
+            "align_depth.enable" : "true"
+        }.items(),
+    )
 
-    # lift_camera = IncludeLaunchDescription(
-    #     PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("realsense2_camera"), 'launch','rs_launch.py')),
-    #     launch_arguments={
-    #         "camera_name": "lift_camera",
-    #         "serial_no" : "'207122078580'", 
-    #         "rgb_camera.profile" : "1280,720,30", 
-    #         "initial_reset" : "true", 
-    #         "pointcloud.enable" : "false",
-    #         "align_depth.enable" : "true"
-    #     }.items(),
-    # )
+    lift_camera = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("realsense2_camera"), 'launch','rs_launch.py')),
+        launch_arguments={
+            "camera_name": "lift_camera",
+            "serial_no" : "'207122078580'", 
+            "rgb_camera.profile" : "1280,720,30", 
+            "initial_reset" : "true", 
+            "pointcloud.enable" : "false",
+            "align_depth.enable" : "true"
+        }.items(),
+    )
 
     controller_nodes = [chonkur_launch, 
                         vention_controllers_launch, 
@@ -158,8 +158,8 @@ def generate_launch_description():
                         lift_rail_controller, 
                         clr_controller, 
                         streaming_controller,
-                        # wrist_camera, 
-                        # lift_camera,
+                        wrist_camera, 
+                        lift_camera,
                         ]
 
     return LaunchDescription(declared_arguments + controller_nodes)
