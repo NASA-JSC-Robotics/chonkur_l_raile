@@ -30,13 +30,11 @@
         </collision>
     </link>
 
-    <!-- TODO Fix the origin -->
     <!-- Realsense camera -->
-    <xacro:property name="realsense_materials_defined" default="true"/>
-     <!--Avoid Error   material 'aluminum' is not unique. (not sure why header guards in source code don't work)-->
+    <xacro:property name="realsense_materials_defined" default="true"/> <!--Avoid Error   material 'aluminum' is not unique. (not sure why header guards in source code don't work)-->
     <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" ns="lift_camera_ns"/>
     <xacro:lift_camera_ns.sensor_d435 parent="${tf_prefix}lift_camera_mount" use_nominal_extrinsics="true" use_mesh="true" name="lift_camera">
-        <origin xyz="0.076 ${mount_width_meters} -0.185" rpy="0 0 0"/>
+        <origin xyz="0.076 0.01 -0.1725" rpy="3.1415 0 1.5708"/> <!--lift_camera_bottom_screw_frame-->
     </xacro:lift_camera_ns.sensor_d435>
 
     </xacro:macro>
