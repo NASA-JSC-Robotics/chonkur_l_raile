@@ -175,13 +175,12 @@
     </xacro:ewellix_lift>
 
     <!-- LIFT CAMERA + MOUNT -->
-    <!-- TODO FIX ORIGIN -->
     <xacro:include filename="$(find clr_description)/urdf/lift_camera.macro.xacro"/>
     <xacro:lift_camera
       tf_prefix="${tf_prefix}"
       parent="${tf_prefix}ewellix_lift_lower_link"
     >
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="-0.0772 0.08785 0.2635" rpy="0 0 0"/>
     </xacro:lift_camera>
 
     <!-- UPPER_LIFT_PLATE -->

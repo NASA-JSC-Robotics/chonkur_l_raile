@@ -4,6 +4,9 @@
     <xacro:macro name="lift_camera" params="
         tf_prefix:=''
         parent:=world
+        mount_width_meters:=0.14
+        mount_height_meters:=0.2
+        mount_depth_meters:=0.01135
         *origin
     ">
 
@@ -13,16 +16,16 @@
         <xacro:insert_block name="origin"/>
     </joint>
 
-    <!-- TODO Get mesh of mount, as well as mesh of the cable management block that mounts on -->
     <link name="${tf_prefix}lift_camera_mount">
         <visual>
             <geometry>
-                <mesh filename= "package://clr_description/meshes/visual/lift_camera_mount.stl" scale="0.001 0.001 0.001"/>
+                <mesh filename= "package://clr_description/meshes/visual/lift_camera_mount.stl"/>
             </geometry>
         </visual>
         <collision>
+            <origin rpy="0 0 0" xyz="${mount_width_meters/2} ${-1*mount_depth_meters/2} ${-1*mount_height_meters/2}"/>
             <geometry>
-                <box size="0.145 0.15 0.01135"/> <!--meters -->
+                <box size="${mount_width_meters} ${mount_depth_meters} ${mount_height_meters}"/> <!--meters -->
             </geometry>
         </collision>
     </link>
@@ -33,7 +36,7 @@
      <!--Avoid Error   material 'aluminum' is not unique. (not sure why header guards in source code don't work)-->
     <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" ns="lift_camera_ns"/>
     <xacro:lift_camera_ns.sensor_d435 parent="${tf_prefix}lift_camera_mount" use_nominal_extrinsics="true" use_mesh="true" name="lift_camera">
-        <origin xyz="0.064 -0.006 -0.016" rpy="0 0 0"/>
+        <origin xyz="0.076 ${mount_width_meters} -0.185" rpy="0 0 0"/>
     </xacro:lift_camera_ns.sensor_d435>
 
     </xacro:macro>
