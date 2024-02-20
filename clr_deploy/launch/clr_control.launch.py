@@ -37,7 +37,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "initial_joint_controller",
-            default_value="joint_trajectory_controller",
+            default_value="clr_joint_trajectory_controller",
             description="Initially loaded robot controller.",
         )
     )
@@ -69,11 +69,11 @@ def generate_launch_description():
         launch_arguments={
             "description_package": "clr_description",
             "description_file": "clr.urdf.xacro",
-            "tf_prefix": tf_prefix,
-            "use_fake_hardware": use_fake_hardware,
-            "headless_mode": headless_mode,
-            "initial_joint_controller": initial_joint_controller,
-            "activate_joint_controller": activate_joint_controller,
+            "tf_prefix": tf_prefix, #
+            "use_fake_hardware": use_fake_hardware, # true
+            "headless_mode": headless_mode, # false
+            "initial_joint_controller": initial_joint_controller, # clr_joint_trajectory_controller
+            "activate_joint_controller": activate_joint_controller, # true
             "rviz": rviz,
         }.items(),
     )
@@ -92,14 +92,14 @@ def generate_launch_description():
         }.items(),
     )
 
-    clr_controllers_yaml = os.path.join(get_package_share_directory("clr_deploy"), 'config','clr_controllers.yaml')
+    # clr_controllers_yaml = os.path.join(get_package_share_directory("clr_deploy"), 'config','clr_controllers.yaml')
     lift_rail_controller = Node(
         package="controller_manager",
         executable="spawner",
         arguments=["lift_rail_joint_trajectory_controller", 
                    "-c", "controller_manager",
                    "-t", "joint_trajectory_controller/JointTrajectoryController ",
-                   "-p", clr_controllers_yaml, 
+                #    "-p", clr_controllers_yaml, 
                    "--controller-manager-timeout","100",
                    "--inactive"
                   ]
@@ -110,7 +110,7 @@ def generate_launch_description():
         arguments=["clr_joint_trajectory_controller", 
                    "-c", "controller_manager",
                    "-t", "joint_trajectory_controller/JointTrajectoryController ",
-                   "-p", clr_controllers_yaml, 
+                #    "-p", clr_controllers_yaml, 
                    "--controller-manager-timeout","100",
                    "--inactive"
                   ]
@@ -122,7 +122,7 @@ def generate_launch_description():
         arguments=["streaming_controller", 
                    "-c", "controller_manager",
                    "-t", "position_controllers/JointGroupPositionController ",
-                   "-p", clr_controllers_yaml, 
+                #    "-p", clr_controllers_yaml, 
                    "--controller-manager-timeout","100",
                    "--inactive"
                   ]
