@@ -11,7 +11,7 @@
     sim_ignition:=false
     chonkur_ip:=192.168.1.102
     com_port_hande:=/dev/ttyUSB1
-    finger_xacro:=fngr_v2_m
+    finger_xacro:=fngr_v6
     marker_opacity:=0.5
     rail_ip:=192.168.7.2
     rail_port:=9999
