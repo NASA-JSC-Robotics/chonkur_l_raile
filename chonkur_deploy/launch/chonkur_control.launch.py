@@ -86,7 +86,7 @@ def generate_launch_description():
     description_package = LaunchConfiguration("description_package")
     description_file = LaunchConfiguration("description_file")
 
-    controller_params_file = os.path.join(get_package_share_directory("chonkur_deploy"),'config','chonkur_controllers.yaml')
+    controller_params_file = os.path.join(get_package_share_directory("clr_deploy"),'config','all_controllers.yaml')
 
 
     base_launch = IncludeLaunchDescription(
@@ -95,21 +95,21 @@ def generate_launch_description():
             "ur_type": "ur10e",
             "robot_ip": "192.168.1.102",
             "controller_spawner_timeout": "100",
-            "description_package": description_package,
-            "description_file": description_file,
-            "tf_prefix": tf_prefix,
-            "runtime_config_package": "chonkur_deploy",
-            "controllers_file": "chonkur_controllers.yaml",
-            "use_fake_hardware": use_fake_hardware,
-            "headless_mode": headless_mode,
-            "fake_sensor_commands": fake_sensor_commands,
-            "initial_joint_controller": initial_joint_controller,
-            "activate_joint_controller": activate_joint_controller,
-            "launch_rviz": rviz,
+            "description_package": description_package, # clr_description
+            "description_file": description_file, # clr.urdf.xacro
+            "tf_prefix": tf_prefix, # 
+            "runtime_config_package": "clr_deploy", # changed, was chonkur_deploy
+            "controllers_file": controller_params_file, # clr_deploy/config/all_controllers.yaml
+            "use_fake_hardware": use_fake_hardware, # true
+            "headless_mode": headless_mode, # false
+            "fake_sensor_commands": fake_sensor_commands, # false
+            "initial_joint_controller": initial_joint_controller, # clr_joint_trajectory_controller
+            "activate_joint_controller": activate_joint_controller, # true
+            "launch_rviz": rviz, # false
         }.items(),
     )
 
-    gripper_controller_yaml = os.path.join(get_package_share_directory("robotiq_driver"), 'config','robotiq_hande_controllers.yaml')
+    # gripper_controller_yaml = os.path.join(get_package_share_directory("robotiq_driver"), 'config','robotiq_hande_controllers.yaml')
     gripper_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -117,7 +117,7 @@ def generate_launch_description():
                    "-c", "controller_manager",
                    "-t", "position_controllers/GripperActionController",
                    "--controller-manager-timeout","100",
-                   "-p", gripper_controller_yaml
+                #    "-p", gripper_controller_yaml
                   ]
     )
 
@@ -128,18 +128,19 @@ def generate_launch_description():
                    "-c", "controller_manager",
                    "-t", "robotiq_controllers/RobotiqActivationController",
                    "--controller-manager-timeout","100",
-                   "-p", gripper_controller_yaml
+                #    "-p", gripper_controller_yaml
                   ]
     )
 
     nodes = [gripper_controller_spawner, 
              gripper_activation_controller_spawner]
 
-    spawn_controllers_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch','spawn_controllers.launch.py')),
-        launch_arguments={
-            "use_fake_hardware": use_fake_hardware,
-        }.items(),
-    )
+    # spawn_controllers_launch = IncludeLaunchDescription(
+    #     PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch','spawn_controllers.launch.py')),
+    #     launch_arguments={
+    #         "use_fake_hardware": use_fake_hardware,
+    #     }.items(),
+    # )
 
-    return LaunchDescription(declared_arguments + [base_launch, spawn_controllers_launch] + nodes)
+    # return LaunchDescription(declared_arguments + [base_launch]) #, spawn_controllers_launch] + nodes)
+    return LaunchDescription(declared_arguments + [base_launch] + nodes)
