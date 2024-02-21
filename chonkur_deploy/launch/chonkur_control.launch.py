@@ -98,12 +98,12 @@ def generate_launch_description():
             "description_package": description_package, # clr_description
             "description_file": description_file, # clr.urdf.xacro
             "tf_prefix": tf_prefix, # 
-            "runtime_config_package": "clr_deploy", # changed, was chonkur_deploy
+            "runtime_config_package": "chonkur_deploy", 
             "controllers_file": controller_params_file, # clr_deploy/config/all_controllers.yaml
             "use_fake_hardware": use_fake_hardware, # true
             "headless_mode": headless_mode, # false
             "fake_sensor_commands": fake_sensor_commands, # false
-            "initial_joint_controller": initial_joint_controller, # clr_joint_trajectory_controller
+            "initial_joint_controller": initial_joint_controller, # chonkur_joint_trajectory_controller
             "activate_joint_controller": activate_joint_controller, # true
             "launch_rviz": rviz, # false
         }.items(),
