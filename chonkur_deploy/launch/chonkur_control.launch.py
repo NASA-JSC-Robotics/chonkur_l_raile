@@ -135,6 +135,8 @@ def generate_launch_description():
     nodes = [gripper_controller_spawner, 
              gripper_activation_controller_spawner]
 
+    return LaunchDescription(declared_arguments + [base_launch] + nodes)
+    
     # spawn_controllers_launch = IncludeLaunchDescription(
     #     PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch','spawn_controllers.launch.py')),
     #     launch_arguments={
@@ -143,4 +145,3 @@ def generate_launch_description():
     # )
 
     # return LaunchDescription(declared_arguments + [base_launch, spawn_controllers_launch] + nodes)
-    return LaunchDescription(declared_arguments + [base_launch] + nodes)
