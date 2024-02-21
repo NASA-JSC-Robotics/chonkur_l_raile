@@ -142,5 +142,5 @@ def generate_launch_description():
     #     }.items(),
     # )
 
-    # return LaunchDescription(declared_arguments + [base_launch]) #, spawn_controllers_launch] + nodes)
+    # return LaunchDescription(declared_arguments + [base_launch, spawn_controllers_launch] + nodes)
     return LaunchDescription(declared_arguments + [base_launch] + nodes)
