@@ -37,7 +37,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "initial_joint_controller",
-            default_value="clr_joint_trajectory_controller",
+            default_value="chonkur_joint_trajectory_controller",
             description="Initially loaded robot controller.",
         )
     )
@@ -104,17 +104,17 @@ def generate_launch_description():
                    "--inactive"
                   ]
     )
-    clr_controller = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["clr_joint_trajectory_controller", 
-                   "-c", "controller_manager",
-                   "-t", "joint_trajectory_controller/JointTrajectoryController ",
-                #    "-p", clr_controllers_yaml, 
-                   "--controller-manager-timeout","100",
-                   "--inactive"
-                  ]
-    )
+    # clr_controller = Node(
+    #     package="controller_manager",
+    #     executable="spawner",
+    #     arguments=["clr_joint_trajectory_controller", 
+    #                "-c", "controller_manager",
+    #                "-t", "joint_trajectory_controller/JointTrajectoryController ",
+    #             #    "-p", clr_controllers_yaml, 
+    #                "--controller-manager-timeout","100",
+    #                "--inactive"
+    #               ]
+    # )
 
     streaming_controller = Node(
         package="controller_manager",
@@ -128,6 +128,8 @@ def generate_launch_description():
                   ]
     )    
 
-    controller_nodes = [chonkur_launch, vention_controllers_launch, ewellix_controllers_launch, lift_rail_controller, clr_controller, streaming_controller]
+    # controller_nodes = [chonkur_launch, vention_controllers_launch, ewellix_controllers_launch, lift_rail_controller, clr_controller, streaming_controller]
+    controller_nodes = [chonkur_launch, vention_controllers_launch, ewellix_controllers_launch, lift_rail_controller, streaming_controller]
+
 
     return LaunchDescription(declared_arguments + controller_nodes)
