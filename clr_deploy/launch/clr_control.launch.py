@@ -7,6 +7,8 @@ from launch_ros.substitutions import FindPackageShare
 from launch.substitutions import LaunchConfiguration, ThisLaunchFileDir
 import os
 
+from clr_deploy.scripts.ctrl_config_complier import compile_controller_configurations
+
 def generate_launch_description():
 
     declared_arguments = []
@@ -63,7 +65,16 @@ def generate_launch_description():
     activate_joint_controller = LaunchConfiguration("activate_joint_controller")    
     rviz = LaunchConfiguration("rviz")
 
-
+    # Compiling controller configuration files to make controller_manager aware of all controllers at runtime
+    clr_ctrl_cfg_path = os.path.join(get_package_share_directory('clr_deploy'), 'config', 'clr_controllers.yaml')
+    chonkur_ctrl_cfg_path = os.path.join(get_package_share_directory('chonkur_deploy'), 'config', 'chonkur_controllers.yaml')
+    liftkit_ctrl_cfg_path = os.path.join(get_package_share_directory('ewellix_liftkit_deploy'), 'config', 'liftkit_controllers.yaml')
+    rail_ctrl_cfg_path = os.path.join(get_package_share_directory('vention_rail_deploy'), 'config', 'rail_controllers.yaml')
+    hande_ctrl_cfg_path = os.path.join(get_package_share_directory('robotiq_driver'), 'config', 'robotiq_hande_controllers.yaml')
+    ctrl_cfg_paths = [clr_ctrl_cfg_path, chonkur_ctrl_cfg_path, liftkit_ctrl_cfg_path, rail_ctrl_cfg_path, hande_ctrl_cfg_path]
+    compiled_ctrl_cfg_path = os.path.join(get_package_share_directory('clr_deploy'), 'config', 'compiled_controllers.yaml')
+    compile_controller_configurations(ctrl_cfg_paths, compiled_ctrl_cfg_path)
+    
     chonkur_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch','chonkur_control.launch.py')),
         launch_arguments={

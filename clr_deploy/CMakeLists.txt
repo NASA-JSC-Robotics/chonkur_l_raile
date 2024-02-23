@@ -4,9 +4,12 @@ project(clr_deploy)
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY config launch 
+  DIRECTORY config launch
   DESTINATION share/${PROJECT_NAME}
 )
+
+install(PROGRAMS scripts/ctrl_config_complier.py
+  DESTINATION lib/${PROJECT_NAME})
 
 ament_export_dependencies(${THIS_PACKAGE_INCLUDE_DEPENDS})
 
