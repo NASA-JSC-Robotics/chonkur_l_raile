@@ -4,6 +4,21 @@ import json
 import yaml
 from typing import List, Dict
 
+import launch.events
+from launch.actions import LogInfo
+import rclpy
+
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 def compile_controller_configurations(configuration_paths: List[str], output_path: str) -> Dict:
     """
     # TODO DOC STRING
@@ -11,10 +26,27 @@ def compile_controller_configurations(configuration_paths: List[str], output_pat
     # Load config yamls
     configs = {}
     for config in configuration_paths:
-        #TODO: Error if path doesn't exist or not a configuration yaml
         configpath = pathlib.Path(config)
-        with open(configpath, 'r') as file:
-            configs[configpath.stem] = yaml.safe_load(file)
+        if not configpath.is_file():
+            print(bcolors.HEADER + '(compile_controller_configurations) ' + bcolors.ENDC +
+                  bcolors.WARNING + bcolors.UNDERLINE + 'WARNING:' + bcolors.ENDC +
+                  bcolors.WARNING + f' failed to find file at {configpath}, skipping...' + bcolors.ENDC)
+            continue
+        if configpath.suffix != '.yaml':
+            print(bcolors.HEADER + '(compile_controller_configurations) ' + bcolors.ENDC +
+                  bcolors.WARNING + bcolors.UNDERLINE + 'WARNING:' + bcolors.ENDC +
+                  bcolors.WARNING + f' file at {configpath} is not a controller configuration file, skipping...' + bcolors.ENDC)
+            continue
+        else:
+            with open(configpath, 'r') as file:
+                configs[configpath.stem] = yaml.safe_load(file)
+            if 'controller_manager' not in configs[configpath.stem]:
+                print(bcolors.HEADER + '(compile_controller_configurations) ' + bcolors.ENDC +                
+                      bcolors.WARNING + bcolors.UNDERLINE + 'WARNING:' + bcolors.ENDC +
+                      bcolors.WARNING + f' file at {configpath} is not a controller configuration file, skipping...' + bcolors.ENDC)
+                del configs[configpath.stem]
+                continue
+
 
     # Get all controller names
     ctrlr_names = []
@@ -29,10 +61,14 @@ def compile_controller_configurations(configuration_paths: List[str], output_pat
     for name in ctrlr_name_count:
         if ctrlr_name_count[name] > 1:
             if name != 'joint_state_broadcaster':
-                # TODO ERROR AND EXIT LAUNCH ON DUPLICATE DETECTION BESIDES joint_state_boardcaster
-                print(f'ERROR: Duplicate controller {name} found, exiting...')
+                # TODO: ERROR AND EXIT LAUNCH ON DUPLICATE DETECTION BESIDES joint_state_boardcaster
+                print(bcolors.HEADER + '(compile_controller_configurations) ' + bcolors.ENDC +
+                      bcolors.FAIL + bcolors.BOLD + bcolors.UNDERLINE + 'ERROR:' + bcolors.ENDC +
+                      bcolors.FAIL + f' Duplicate controller {name} found, exiting...' + bcolors.ENDC)
+                return
             else:
-                print('Removing duplicated joint_state_broadcaster controllers')
+                print(bcolors.HEADER + '(compile_controller_configurations) ' + bcolors.ENDC +
+                      bcolors.OKCYAN + 'Removing duplicated joint_state_broadcaster controllers' + bcolors.ENDC)
                 while ctrlr_name_count[name] > 1:
                     ctrlr_names.remove('joint_state_broadcaster')
                     ctrlr_name_count[name] -= 1
