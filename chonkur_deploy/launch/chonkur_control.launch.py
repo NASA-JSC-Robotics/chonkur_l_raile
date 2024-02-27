@@ -86,7 +86,7 @@ def generate_launch_description():
     description_package = LaunchConfiguration("description_package")
     description_file = LaunchConfiguration("description_file")
 
-    controller_params_file = os.path.join(get_package_share_directory("clr_deploy"),'config','all_controllers.yaml')
+    controller_params_file = os.path.join(get_package_share_directory("clr_deploy"),'config','compiled_controllers.yaml')
 
 
     base_launch = IncludeLaunchDescription(
