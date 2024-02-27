@@ -1,13 +1,16 @@
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, ExecuteProcess
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from launch.substitutions import LaunchConfiguration, ThisLaunchFileDir
 import os
+import json
 
-from clr_deploy.scripts.ctrl_config_complier import compile_controller_configurations
+from clr_deploy.ctrl_config_compiler import compile_controller_configurations
+
+
 
 def generate_launch_description():
 
@@ -73,7 +76,14 @@ def generate_launch_description():
     hande_ctrl_cfg_path = os.path.join(get_package_share_directory('robotiq_driver'), 'config', 'robotiq_hande_controllers.yaml')
     ctrl_cfg_paths = [clr_ctrl_cfg_path, chonkur_ctrl_cfg_path, liftkit_ctrl_cfg_path, rail_ctrl_cfg_path, hande_ctrl_cfg_path]
     compiled_ctrl_cfg_path = os.path.join(get_package_share_directory('clr_deploy'), 'config', 'compiled_controllers.yaml')
-    compile_controller_configurations(ctrl_cfg_paths, compiled_ctrl_cfg_path)
+
+    compile_controller_configurations(ctrl_cfg_paths, compiled_ctrl_cfg_path)    
+
+    # compiler_path = os.path.join(get_package_share_directory('clr_deploy'), 'ctrl_config_complier.py')
+    # compiler_process = ExecuteProcess(
+    #     cmd=["python3", compiler_path, json.dumps(ctrl_cfg_paths), compiled_ctrl_cfg_path],
+    #     output="screen",
+    # )
     
     chonkur_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch','chonkur_control.launch.py')),

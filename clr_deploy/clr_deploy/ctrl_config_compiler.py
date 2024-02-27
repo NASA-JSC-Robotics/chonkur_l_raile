@@ -1,16 +1,8 @@
-import os
+import os, sys
 import pathlib
+import json
 import yaml
-
-
 from typing import List, Dict
-
-
-configpaths =  ["src/chonkur_l_raile/clr_deploy/config/clr_controllers.yaml", 
-                "src/chonkur/chonkur_deploy/config/chonkur_controllers.yaml", 
-                "src/ewellix_lift_kit/ewellix_liftkit_deploy/config/liftkit_controllers.yaml", 
-                "src/vention_rail/vention_rail_deploy/config/rail_controllers.yaml", 
-                "src/ros2_robotiq_gripper/robotiq_driver/config/robotiq_hande_controllers.yaml"]
 
 def compile_controller_configurations(configuration_paths: List[str], output_path: str) -> Dict:
     """
@@ -53,3 +45,12 @@ def compile_controller_configurations(configuration_paths: List[str], output_pat
         yaml.dump(compiled_cfg, file)
 
     return
+
+if __name__ == "__main__":
+    cfg_paths = json.loads(sys.argv[1])
+    print('cfg_paths: \n')
+    print(cfg_paths)
+    out_path = sys.argv[2]
+    print('out_paths: \n')
+    print(out_path)
+    compile_controller_configurations(cfg_paths, out_path)
