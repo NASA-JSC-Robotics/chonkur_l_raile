@@ -25,9 +25,18 @@ def compile_controller_configurations(configuration_paths: List[str], output_pat
         ctrlr_names += ctrlrs
 
     # Handle duplicate controllers
-    # TODO: Remove duplicate joint_state_broadcasters
-    # TODO: Error and exit on any other duplicated controller name
-    ctrlr_names = list(set(ctrlr_names))
+    ctrlr_name_count = {name:ctrlr_names.count(name) for name in list(set(ctrlr_names))} # count name occurrences
+    for name in ctrlr_name_count:
+        if ctrlr_name_count[name] > 1:
+            if name != 'joint_state_broadcaster':
+                # TODO ERROR AND EXIT LAUNCH ON DUPLICATE DETECTION BESIDES joint_state_boardcaster
+                print(f'ERROR: Duplicate controller {name} found, exiting...')
+            else:
+                print('Removing duplicated joint_state_broadcaster controllers')
+                while ctrlr_name_count[name] > 1:
+                    ctrlr_names.remove('joint_state_broadcaster')
+                    ctrlr_name_count[name] -= 1
+
 
     # Compile controller configs
     compiled_cfg = {}
