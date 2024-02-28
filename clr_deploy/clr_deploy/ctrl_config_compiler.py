@@ -19,7 +19,7 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-def compile_controller_configurations(configuration_paths: List[str], output_path: str) -> Dict:
+def compile_controller_configurations(configuration_paths: List[str], output_path: str) -> int:
     """
     # TODO DOC STRING
     """
@@ -65,7 +65,7 @@ def compile_controller_configurations(configuration_paths: List[str], output_pat
                 print(bcolors.HEADER + '(compile_controller_configurations) ' + bcolors.ENDC +
                       bcolors.FAIL + bcolors.BOLD + bcolors.UNDERLINE + 'ERROR:' + bcolors.ENDC +
                       bcolors.FAIL + f' Duplicate controller {name} found, exiting...' + bcolors.ENDC)
-                return
+                return 1
             else:
                 print(bcolors.HEADER + '(compile_controller_configurations) ' + bcolors.ENDC +
                       bcolors.OKCYAN + 'Removing duplicated joint_state_broadcaster controllers' + bcolors.ENDC)
@@ -89,7 +89,7 @@ def compile_controller_configurations(configuration_paths: List[str], output_pat
     with open(output_path, 'w') as file:
         yaml.dump(compiled_cfg, file)
 
-    return
+    return 0
 
 if __name__ == "__main__":
     cfg_paths = json.loads(sys.argv[1])
