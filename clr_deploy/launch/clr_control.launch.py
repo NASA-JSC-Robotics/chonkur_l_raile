@@ -12,6 +12,8 @@ from clr_deploy.ctrl_config_compiler import compile_controller_configurations
 
 
 def generate_launch_description():
+    print('\033[93m' + '\033[1m' + '\033[4m' + 'CLR_CONTROL.LAUNCH.PY' + '\033[0m')
+
 
     declared_arguments = []
     declared_arguments.append(
@@ -40,6 +42,13 @@ def generate_launch_description():
 
     declared_arguments.append(
         DeclareLaunchArgument(
+            "controllers_file",
+            default_value="",
+            description="Select the controller configuration yaml file",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "initial_joint_controller",
             default_value="joint_trajectory_controller",
             description="Initially loaded robot controller.",
@@ -63,40 +72,29 @@ def generate_launch_description():
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     headless_mode = LaunchConfiguration("headless_mode")
+    controllers_file = LaunchConfiguration("controllers_file")
     initial_joint_controller = LaunchConfiguration("initial_joint_controller")
-    activate_joint_controller = LaunchConfiguration("activate_joint_controller")    
+    activate_joint_controller = LaunchConfiguration("activate_joint_controller") 
     rviz = LaunchConfiguration("rviz")
 
-    # Compiling controller configuration files to make controller_manager aware of all controllers at runtime
-    clr_ctrl_cfg_path = os.path.join(get_package_share_directory('clr_deploy'), 'config', 'clr_controllers.yaml')
-    chonkur_ctrl_cfg_path = os.path.join(get_package_share_directory('chonkur_deploy'), 'config', 'chonkur_controllers.yaml')
-    liftkit_ctrl_cfg_path = os.path.join(get_package_share_directory('ewellix_liftkit_deploy'), 'config', 'liftkit_controllers.yaml')
-    rail_ctrl_cfg_path = os.path.join(get_package_share_directory('vention_rail_deploy'), 'config', 'rail_controllers.yaml')
-    hande_ctrl_cfg_path = os.path.join(get_package_share_directory('robotiq_driver'), 'config', 'robotiq_hande_controllers.yaml')
-    ctrl_cfg_paths = [clr_ctrl_cfg_path, chonkur_ctrl_cfg_path, liftkit_ctrl_cfg_path, rail_ctrl_cfg_path, hande_ctrl_cfg_path]
-    compiled_ctrl_cfg_path = os.path.join(get_package_share_directory('clr_deploy'), 'config', 'compiled_controllers.yaml')
-
-    compile_controller_configurations(ctrl_cfg_paths, compiled_ctrl_cfg_path)    
-
-    # compiler_path = os.path.join(get_package_share_directory('clr_deploy'), 'ctrl_config_complier.py')
-    # compiler_process = ExecuteProcess(
-    #     cmd=["python3", compiler_path, json.dumps(ctrl_cfg_paths), compiled_ctrl_cfg_path],
-    #     output="screen",
-    # )
+    print('\033[1m' + '\033[91m' + 'clr_control: parsed launch args' + '\033[0m')
     
     chonkur_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch','chonkur_control.launch.py')),
         launch_arguments={
             "description_package": "clr_description",
             "description_file": "clr.urdf.xacro",
-            "tf_prefix": tf_prefix, #
-            "use_fake_hardware": use_fake_hardware, # true
-            "headless_mode": headless_mode, # false
-            "initial_joint_controller": initial_joint_controller, # clr_joint_trajectory_controller
-            "activate_joint_controller": activate_joint_controller, # true
+            "tf_prefix": tf_prefix,
+            "use_fake_hardware": use_fake_hardware,
+            "fake_sensor_commands": "true",
+            "headless_mode": headless_mode,
+            "controllers_file": controllers_file,
+            "initial_joint_controller": initial_joint_controller,
+            "activate_joint_controller": activate_joint_controller,
             "rviz": rviz,
         }.items(),
     )
+    print('\033[1m' + '\033[91m' + 'clr_control: launched chonkur' + '\033[0m')
 
     vention_controllers_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("vention_rail_deploy"), 'launch','spawn_controllers.launch.py')),
@@ -104,7 +102,8 @@ def generate_launch_description():
             "use_fake_hardware": use_fake_hardware,
         }.items(),
     )
-    
+    print('\033[1m' + '\033[91m' + 'clr_control: launched chonkur' + '\033[0m')
+
     ewellix_controllers_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("ewellix_liftkit_deploy"), 'launch','spawn_controllers.launch.py')),
         launch_arguments={
@@ -150,6 +149,6 @@ def generate_launch_description():
 
     # controller_nodes = [chonkur_launch, vention_controllers_launch, ewellix_controllers_launch, lift_rail_controller, clr_controller, streaming_controller]
     controller_nodes = [chonkur_launch, vention_controllers_launch, ewellix_controllers_launch, lift_rail_controller, streaming_controller]
-
+    print('\033[1m' + '\033[91m' + 'clr_control: END OF FILE' + '\033[0m')
 
     return LaunchDescription(declared_arguments + controller_nodes)

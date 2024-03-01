@@ -21,7 +21,11 @@ class bcolors:
 
 def compile_controller_configurations(configuration_paths: List[str], output_path: str) -> int:
     """
-    # TODO DOC STRING
+    Compile ros2_control parameter configuration yamls into a single file for the controller_manager
+    
+    Positional Arguments:
+    configuration_paths -- List of string filepaths to each controller configuration file that is to be compiled
+    output_path -- Output compiled controller configuation filepath including desired filename
     """
     # Load config yamls
     configs = {}

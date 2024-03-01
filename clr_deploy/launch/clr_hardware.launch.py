@@ -14,29 +14,22 @@ from clr_deploy.ctrl_config_compiler import compile_controller_configurations
 
 def generate_launch_description():
 
-    print('\033[93m' + '\033[1m' + '\033[4m' + 'CLR_SIM.LAUNCH.PY' + '\033[0m')
+    print('\033[93m' + '\033[1m' + '\033[4m' + 'CLR_HARDWARE.LAUNCH.PY' + '\033[0m')
 
-    cfgs = os.path.join(get_package_share_directory('clr_deploy'), 'config', 'sim_controller_configs.yaml')
+    cfgs = os.path.join(get_package_share_directory('clr_deploy'), 'config', 'hardware_controller_configs.yaml')
 
     with open(cfgs, 'r') as file:
         cfg_paths = yaml.safe_load(file)
     
     cfg_list = [os.path.join(get_package_share_directory(pkg), cfg_paths[pkg]['path']) for pkg in cfg_paths]
-    print('cfg_list:')
-    print('\n'.join(cfg_list))
-    cfg_out = os.path.join(get_package_share_directory('clr_deploy'), 'config', 'sim_controllers.yaml')
-    print('cfg_out:')
-    print(cfg_out)
+    cfg_out = os.path.join(get_package_share_directory('clr_deploy'), 'config', 'hardware_controllers.yaml')
     compile_error = compile_controller_configurations(cfg_list, cfg_out)
-    print(f'compile_error: {compile_error}')
 
     if not compile_error:
         clr_launch = IncludeLaunchDescription(
             PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("clr_deploy"), 'launch','clr_control.launch.py')),
             launch_arguments={
-                "use_fake_hardware": "true",
-                "fake_sensor_commands": "true",
-                "controllers_file": cfg_out,
+                "config_file": str(cfg_out),
             }.items(),
         )
 
