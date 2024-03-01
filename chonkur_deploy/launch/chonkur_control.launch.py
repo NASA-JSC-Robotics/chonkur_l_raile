@@ -36,6 +36,13 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "controllers_file",
+            default_value="",
+            description="Select the controller configuration yaml file",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "fake_sensor_commands",
             default_value="false",
             description="Enable fake command interfaces for sensors used for simple simulations. \
@@ -79,6 +86,7 @@ def generate_launch_description():
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     headless_mode = LaunchConfiguration("headless_mode")
+    controllers_file = LaunchConfiguration("controllers_file")
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
     initial_joint_controller = LaunchConfiguration("initial_joint_controller")
     activate_joint_controller = LaunchConfiguration("activate_joint_controller")
@@ -86,28 +94,26 @@ def generate_launch_description():
     description_package = LaunchConfiguration("description_package")
     description_file = LaunchConfiguration("description_file")
 
-    controller_params_file = os.path.join(get_package_share_directory("clr_deploy"),'config','compiled_controllers.yaml')
-
-
     base_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("ur_robot_driver"), 'launch','ur_control.launch.py')),
         launch_arguments={
             "ur_type": "ur10e",
             "robot_ip": "192.168.1.102",
             "controller_spawner_timeout": "100",
-            "description_package": description_package, # clr_description
-            "description_file": description_file, # clr.urdf.xacro
-            "tf_prefix": tf_prefix, # 
-            "runtime_config_package": "chonkur_deploy", 
-            "controllers_file": controller_params_file, # clr_deploy/config/all_controllers.yaml
-            "use_fake_hardware": use_fake_hardware, # true
-            "headless_mode": headless_mode, # false
-            "fake_sensor_commands": fake_sensor_commands, # false
-            "initial_joint_controller": initial_joint_controller, # chonkur_joint_trajectory_controller
-            "activate_joint_controller": activate_joint_controller, # true
-            "launch_rviz": rviz, # false
+            "description_package": description_package,
+            "description_file": description_file,
+            "tf_prefix": tf_prefix,
+            "runtime_config_package": "clr_deploy", 
+            "controllers_file": controllers_file,
+            "use_fake_hardware": use_fake_hardware,
+            "headless_mode": headless_mode,
+            "fake_sensor_commands": fake_sensor_commands,
+            "initial_joint_controller": initial_joint_controller, 
+            "activate_joint_controller": activate_joint_controller,
+            "launch_rviz": rviz,
         }.items(),
     )
+    print('\033[1m' + '\033[91m' + 'chonkur_control: launched chonkur' + '\033[0m')
 
     # gripper_controller_yaml = os.path.join(get_package_share_directory("robotiq_driver"), 'config','robotiq_hande_controllers.yaml')
     gripper_controller_spawner = Node(
@@ -135,13 +141,13 @@ def generate_launch_description():
     nodes = [gripper_controller_spawner, 
              gripper_activation_controller_spawner]
 
-    return LaunchDescription(declared_arguments + [base_launch] + nodes)
+    # return LaunchDescription(declared_arguments + [base_launch] + nodes)
     
-    # spawn_controllers_launch = IncludeLaunchDescription(
-    #     PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch','spawn_controllers.launch.py')),
-    #     launch_arguments={
-    #         "use_fake_hardware": use_fake_hardware,
-    #     }.items(),
-    # )
+    spawn_controllers_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch','spawn_controllers.launch.py')),
+        launch_arguments={
+            "use_fake_hardware": use_fake_hardware,
+        }.items(),
+    )
 
-    # return LaunchDescription(declared_arguments + [base_launch, spawn_controllers_launch] + nodes)
+    return LaunchDescription(declared_arguments + [base_launch, spawn_controllers_launch] + nodes)
