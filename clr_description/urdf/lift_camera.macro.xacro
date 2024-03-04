@@ -33,7 +33,10 @@
 
     <!-- Realsense camera -->
     <xacro:property name="realsense_materials_defined" value="true" />
-    <!-- ^^ Avoid Error   material 'aluminum' is not unique. (not sure why header guards in source code don't work)-->
+    <!-- ^^ Avoid Error   material 'aluminum' is not unique. 
+        This doesn't work in old versions (v4.51) of the realsense2_description because there are no header guards at all
+        Version 4.54.1 has header guards but they don't work as expected.
+    -->
 
     <!-- origin is lift_camera_bottom_screw_frame-->
     <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />

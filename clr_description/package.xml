@@ -23,7 +23,7 @@
   <exec_depend>chonkur_description</exec_depend>
   <exec_depend>vention_rail_description</exec_depend>
   <exec_depend>ewellix_liftkit_description</exec_depend>
-  <exec_depend>realsense2_description</exec_depend>
+  <exec_depend version_gte="4.54.1">realsense2_description</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>
