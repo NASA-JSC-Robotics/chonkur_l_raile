@@ -24,14 +24,15 @@ def generate_launch_description():
     compile_error = compile_controller_configurations(cfg_list, cfg_out)
 
     if not compile_error:
+        print(cfg_out)
+        print(type(cfg_out))
         clr_launch = IncludeLaunchDescription(
             PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("clr_deploy"), 'launch','clr_control.launch.py')),
             launch_arguments={
-                "config_file": cfg_out,
+                "controllers_file": cfg_out,
             }.items(),
         )        
         return LaunchDescription([clr_launch])
-    
     else:
         Shutdown(
             reason='Control configuration compiled failed, exiting clr_sim.launch.py'
