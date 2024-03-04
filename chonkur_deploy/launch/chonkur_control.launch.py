@@ -139,14 +139,14 @@ def generate_launch_description():
     nodes = [gripper_controller_spawner, 
              gripper_activation_controller_spawner]
 
-    # return LaunchDescription(declared_arguments + [base_launch] + nodes)
+    return LaunchDescription(declared_arguments + [base_launch] + nodes)
 
-    # NOTE: As of ros-humble-ros2-control versions >2.36.0 admittance control chaining breaks controller switching     
-    spawn_controllers_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch','spawn_controllers.launch.py')),
-        launch_arguments={
-            "use_fake_hardware": use_fake_hardware,
-        }.items(),
-    )
+    # # NOTE: As of ros-humble-ros2-control versions >2.36.0 admittance control chaining breaks controller switching     
+    # spawn_controllers_launch = IncludeLaunchDescription(
+    #     PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch','spawn_controllers.launch.py')),
+    #     launch_arguments={
+    #         "use_fake_hardware": use_fake_hardware,
+    #     }.items(),
+    # )
 
-    return LaunchDescription(declared_arguments + [base_launch, spawn_controllers_launch] + nodes)
+    # return LaunchDescription(declared_arguments + [base_launch, spawn_controllers_launch] + nodes)
