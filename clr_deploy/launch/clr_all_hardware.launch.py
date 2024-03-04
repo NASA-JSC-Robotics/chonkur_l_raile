@@ -65,7 +65,7 @@ def generate_launch_description():
     rviz = LaunchConfiguration("rviz")
 
     launch_nodes = []
-    
+
     clr_controllers_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("clr_deploy"), 'launch','clr_control.launch.py')),
         launch_arguments={
@@ -79,7 +79,7 @@ def generate_launch_description():
     )
     launch_nodes.append(clr_controllers_launch)
 
-    if(use_fake_hardware != "false"):
+    if(use_fake_hardware == "false"):
         clr_cameras = IncludeLaunchDescription(
             PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("clr_deploy"), 'launch','realsense_cameras.launch.py')),
         )
