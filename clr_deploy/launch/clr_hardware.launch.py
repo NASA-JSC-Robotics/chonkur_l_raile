@@ -13,9 +13,6 @@ from clr_deploy.ctrl_config_compiler import compile_controller_configurations
 
 
 def generate_launch_description():
-
-    print('\033[93m' + '\033[1m' + '\033[4m' + 'CLR_HARDWARE.LAUNCH.PY' + '\033[0m')
-
     cfgs = os.path.join(get_package_share_directory('clr_deploy'), 'config', 'hardware_controller_configs.yaml')
 
     with open(cfgs, 'r') as file:
@@ -23,16 +20,16 @@ def generate_launch_description():
     
     cfg_list = [os.path.join(get_package_share_directory(pkg), cfg_paths[pkg]['path']) for pkg in cfg_paths]
     cfg_out = os.path.join(get_package_share_directory('clr_deploy'), 'config', 'hardware_controllers.yaml')
+
     compile_error = compile_controller_configurations(cfg_list, cfg_out)
 
     if not compile_error:
         clr_launch = IncludeLaunchDescription(
             PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("clr_deploy"), 'launch','clr_control.launch.py')),
             launch_arguments={
-                "config_file": str(cfg_out),
+                "config_file": cfg_out,
             }.items(),
-        )
-
+        )        
         return LaunchDescription([clr_launch])
     
     else:

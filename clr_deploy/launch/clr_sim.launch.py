@@ -13,22 +13,15 @@ from clr_deploy.ctrl_config_compiler import compile_controller_configurations
 
 
 def generate_launch_description():
-
-    print('\033[93m' + '\033[1m' + '\033[4m' + 'CLR_SIM.LAUNCH.PY' + '\033[0m')
-
     cfgs = os.path.join(get_package_share_directory('clr_deploy'), 'config', 'sim_controller_configs.yaml')
 
     with open(cfgs, 'r') as file:
         cfg_paths = yaml.safe_load(file)
     
     cfg_list = [os.path.join(get_package_share_directory(pkg), cfg_paths[pkg]['path']) for pkg in cfg_paths]
-    print('cfg_list:')
-    print('\n'.join(cfg_list))
     cfg_out = os.path.join(get_package_share_directory('clr_deploy'), 'config', 'sim_controllers.yaml')
-    print('cfg_out:')
-    print(cfg_out)
+
     compile_error = compile_controller_configurations(cfg_list, cfg_out)
-    print(f'compile_error: {compile_error}')
 
     if not compile_error:
         clr_launch = IncludeLaunchDescription(
@@ -39,11 +32,11 @@ def generate_launch_description():
                 "controllers_file": cfg_out,
             }.items(),
         )
-
+        
         return LaunchDescription([clr_launch])
-    
+
     else:
         Shutdown(
-            reason='Control configuration compiled failed, exiting clr_sim.launch.py'
-        )
+            reason='Control configuration compiler failed, exiting clr_sim.launch.py'
+        )        
         return

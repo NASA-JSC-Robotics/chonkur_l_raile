@@ -1,0 +1,10 @@
+clr_deploy:
+  path: 'config/clr_controllers.yaml'
+chonkur_deploy:
+  path: 'config/chonkur_controllers.yaml'
+ewellix_liftkit_deploy:
+  path: 'config/liftkit_controllers.yaml'
+vention_rail_deploy:
+  path: 'config/rail_controllers.yaml'
+robotiq_driver:
+  path: 'config/robotiq_hande_controllers.yaml'

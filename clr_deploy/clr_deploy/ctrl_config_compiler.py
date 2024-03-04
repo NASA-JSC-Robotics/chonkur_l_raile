@@ -19,7 +19,7 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-def compile_controller_configurations(configuration_paths: List[str], output_path: str) -> int:
+def compile_controller_configurations(configuration_paths: List[str], output_path: str, debug=False) -> int:
     """
     Compile ros2_control parameter configuration yamls into a single file for the controller_manager
     
@@ -65,14 +65,14 @@ def compile_controller_configurations(configuration_paths: List[str], output_pat
     for name in ctrlr_name_count:
         if ctrlr_name_count[name] > 1:
             if name != 'joint_state_broadcaster':
-                # TODO: ERROR AND EXIT LAUNCH ON DUPLICATE DETECTION BESIDES joint_state_boardcaster
                 print(bcolors.HEADER + '(compile_controller_configurations) ' + bcolors.ENDC +
                       bcolors.FAIL + bcolors.BOLD + bcolors.UNDERLINE + 'ERROR:' + bcolors.ENDC +
                       bcolors.FAIL + f' Duplicate controller {name} found, exiting...' + bcolors.ENDC)
                 return 1
             else:
-                print(bcolors.HEADER + '(compile_controller_configurations) ' + bcolors.ENDC +
-                      bcolors.OKCYAN + 'Removing duplicated joint_state_broadcaster controllers' + bcolors.ENDC)
+                if debug:
+                    print(bcolors.HEADER + '(compile_controller_configurations) ' + bcolors.ENDC +
+                          bcolors.OKCYAN + 'Removing duplicated joint_state_broadcaster controllers' + bcolors.ENDC)
                 while ctrlr_name_count[name] > 1:
                     ctrlr_names.remove('joint_state_broadcaster')
                     ctrlr_name_count[name] -= 1
