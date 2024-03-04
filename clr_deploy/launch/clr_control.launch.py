@@ -3,8 +3,7 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
-from launch_ros.substitutions import FindPackageShare
-from launch.substitutions import LaunchConfiguration, ThisLaunchFileDir
+from launch.substitutions import LaunchConfiguration
 import os
 
 def generate_launch_description():
@@ -126,30 +125,6 @@ def generate_launch_description():
                    "--controller-manager-timeout","100",
                    "--inactive"
                   ]
-    )    
-
-    wrist_camera = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("realsense2_camera"), 'launch','rs_launch.py')),
-        launch_arguments={
-            "camera_name": "wrist_mounted_camera",
-            "serial_no" : "'938422070949'", 
-            "rgb_camera.profile" : "1280,720,30", 
-            "initial_reset" : "true", 
-            "pointcloud.enable" : "true",
-            "align_depth.enable" : "true"
-        }.items(),
-    )
-
-    lift_camera = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("realsense2_camera"), 'launch','rs_launch.py')),
-        launch_arguments={
-            "camera_name": "lift_camera",
-            "serial_no" : "'207122078580'", 
-            "rgb_camera.profile" : "1280,720,30", 
-            "initial_reset" : "true", 
-            "pointcloud.enable" : "false",
-            "align_depth.enable" : "true"
-        }.items(),
     )
 
     controller_nodes = [chonkur_launch, 
@@ -158,8 +133,6 @@ def generate_launch_description():
                         lift_rail_controller, 
                         clr_controller, 
                         streaming_controller,
-                        wrist_camera, 
-                        lift_camera,
                         ]
 
     return LaunchDescription(declared_arguments + controller_nodes)
