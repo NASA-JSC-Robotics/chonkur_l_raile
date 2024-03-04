@@ -10,7 +10,6 @@ import os
 def generate_launch_description():
 
     declared_arguments = []
-
     declared_arguments.append(
         DeclareLaunchArgument(
             "tf_prefix",
@@ -113,7 +112,6 @@ def generate_launch_description():
             "launch_rviz": rviz,
         }.items(),
     )
-    print('\033[1m' + '\033[91m' + 'chonkur_control: launched chonkur' + '\033[0m')
 
     # gripper_controller_yaml = os.path.join(get_package_share_directory("robotiq_driver"), 'config','robotiq_hande_controllers.yaml')
     gripper_controller_spawner = Node(
@@ -142,7 +140,8 @@ def generate_launch_description():
              gripper_activation_controller_spawner]
 
     # return LaunchDescription(declared_arguments + [base_launch] + nodes)
-    
+
+    # NOTE: As of ros-humble-ros2-control versions >2.36.0 admittance control chaining breaks controller switching     
     spawn_controllers_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch','spawn_controllers.launch.py')),
         launch_arguments={

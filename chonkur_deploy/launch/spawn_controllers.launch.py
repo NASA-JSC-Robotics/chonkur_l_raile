@@ -26,7 +26,7 @@ def generate_launch_description():
                    "-c", "controller_manager",
                    "-t", "admittance_controller/AdmittanceController",
                 #    "-p", controller_params_file,
-                   "--inactive"],
+                   "--active"],
     )
     admittance_jtc_spawner = Node(
         package="controller_manager",
@@ -36,7 +36,7 @@ def generate_launch_description():
                    "-c", "controller_manager",
                    "-t", "joint_trajectory_controller/JointTrajectoryController ",
                 #    "-p", controller_params_file,
-                   "--inactive"],
+                   "--active"],
     )    
 
     nodes = [admittance_controller_spawner, 
