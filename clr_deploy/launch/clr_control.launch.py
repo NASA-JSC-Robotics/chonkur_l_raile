@@ -85,6 +85,7 @@ def generate_launch_description():
             "fake_sensor_commands": "true",
             "headless_mode": headless_mode,
             "controllers_file": controllers_file,
+            "runtime_config_package": "clr_deploy", 
             "initial_joint_controller": initial_joint_controller,
             "activate_joint_controller": activate_joint_controller,
             "rviz": rviz,
