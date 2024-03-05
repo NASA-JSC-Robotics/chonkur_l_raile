@@ -121,7 +121,6 @@ def generate_launch_description():
         }.items(),
     )
 
-    # gripper_controller_yaml = os.path.join(get_package_share_directory("robotiq_driver"), 'config','robotiq_hande_controllers.yaml')
     gripper_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -129,7 +128,6 @@ def generate_launch_description():
                    "-c", "controller_manager",
                    "-t", "position_controllers/GripperActionController",
                    "--controller-manager-timeout","100",
-                #    "-p", gripper_controller_yaml
                   ]
     )
 
@@ -140,7 +138,6 @@ def generate_launch_description():
                    "-c", "controller_manager",
                    "-t", "robotiq_controllers/RobotiqActivationController",
                    "--controller-manager-timeout","100",
-                #    "-p", gripper_controller_yaml
                   ]
     )
 
