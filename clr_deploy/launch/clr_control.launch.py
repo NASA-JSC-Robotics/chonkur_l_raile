@@ -106,14 +106,12 @@ def generate_launch_description():
         }.items(),
     )
 
-    # clr_controllers_yaml = os.path.join(get_package_share_directory("clr_deploy"), 'config','clr_controllers.yaml')
     lift_rail_controller = Node(
         package="controller_manager",
         executable="spawner",
         arguments=["lift_rail_joint_trajectory_controller", 
                    "-c", "controller_manager",
                    "-t", "joint_trajectory_controller/JointTrajectoryController ",
-                #    "-p", clr_controllers_yaml, 
                    "--controller-manager-timeout","100",
                    "--inactive"
                   ]
@@ -125,7 +123,6 @@ def generate_launch_description():
         arguments=["clr_joint_trajectory_controller", 
                    "-c", "controller_manager",
                    "-t", "joint_trajectory_controller/JointTrajectoryController ",
-                #    "-p", clr_controllers_yaml, 
                    "--controller-manager-timeout","100",
                    "--inactive"
                   ]
@@ -137,12 +134,10 @@ def generate_launch_description():
         arguments=["streaming_controller", 
                    "-c", "controller_manager",
                    "-t", "position_controllers/JointGroupPositionController ",
-                #    "-p", clr_controllers_yaml, 
                    "--controller-manager-timeout","100",
                    "--inactive"
                   ]
     )    
 
     controller_nodes = [chonkur_launch, vention_controllers_launch, ewellix_controllers_launch, lift_rail_controller, clr_controller, streaming_controller]
-    # controller_nodes = [chonkur_launch, vention_controllers_launch, ewellix_controllers_launch, lift_rail_controller, streaming_controller]
     return LaunchDescription(declared_arguments + controller_nodes)
