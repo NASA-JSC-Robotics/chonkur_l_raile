@@ -27,6 +27,9 @@ def compile_controller_configurations(configuration_paths: List[str], output_pat
     configuration_paths -- List of string filepaths to each controller configuration file that is to be compiled
     output_path -- Output compiled controller configuation filepath including desired filename
     """
+
+    error_status = False
+
     # Load config yamls
     configs = {}
     for config in configuration_paths:
@@ -68,7 +71,8 @@ def compile_controller_configurations(configuration_paths: List[str], output_pat
                 print(bcolors.HEADER + '(compile_controller_configurations) ' + bcolors.ENDC +
                       bcolors.FAIL + bcolors.BOLD + bcolors.UNDERLINE + 'ERROR:' + bcolors.ENDC +
                       bcolors.FAIL + f' Duplicate controller {name} found, exiting...' + bcolors.ENDC)
-                return 1
+                error_status = True
+                return error_status
             else:
                 if debug:
                     print(bcolors.HEADER + '(compile_controller_configurations) ' + bcolors.ENDC +
@@ -93,7 +97,7 @@ def compile_controller_configurations(configuration_paths: List[str], output_pat
     with open(output_path, 'w') as file:
         yaml.dump(compiled_cfg, file)
 
-    return 0
+    return error_status
 
 if __name__ == "__main__":
     cfg_paths = json.loads(sys.argv[1])
