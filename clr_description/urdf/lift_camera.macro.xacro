@@ -38,10 +38,16 @@
         Version 4.54.1 has header guards but they don't work as expected.
     -->
 
-    <!-- origin is lift_camera_bottom_screw_frame-->
-    <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
-    <xacro:sensor_d435 parent="${tf_prefix}lift_camera_mount" use_nominal_extrinsics="true" use_mesh="true" name="lift_camera">
+    <!-- Pose obtained from Measuring by hand. Origin is lift_camera_bottom_screw_frame-->
+    <!-- <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
+    <xacro:sensor_d435 parent="${tf_prefix}lift_camera_mount" use_nominal_extrinsics="true" use_mesh="true" name="hand_measured_lift_camera">
         <origin xyz="0.076 0.01 -0.1725" rpy="3.1415 0 1.5708"/> 
+    </xacro:sensor_d435> -->
+
+    <!-- Pose after camera calibration -->
+    <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
+    <xacro:sensor_d435 parent="${tf_prefix}lower_lift_plate" use_nominal_extrinsics="true" use_mesh="true" name="lift_camera">
+        <origin xyz="-0.007666 0.1069 0.3866" rpy="-3.0512 -0.0276 1.5884"/> 
     </xacro:sensor_d435>
 
     </xacro:macro>
