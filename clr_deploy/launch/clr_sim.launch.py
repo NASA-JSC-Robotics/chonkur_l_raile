@@ -13,15 +13,11 @@ from clr_deploy.ctrl_config_compiler import compile_controller_configurations
 
 
 def generate_launch_description():
-    cfgs = os.path.join(get_package_share_directory('clr_deploy'), 'config', 'sim_controller_configs.yaml')
-
-    with open(cfgs, 'r') as file:
-        cfg_paths = yaml.safe_load(file)
     
-    cfg_list = [os.path.join(get_package_share_directory(pkg), cfg_paths[pkg]['path']) for pkg in cfg_paths]
+    cfgs = os.path.join(get_package_share_directory('clr_deploy'), 'config', 'sim_controller_configs.yaml')
     cfg_out = os.path.join(get_package_share_directory('clr_deploy'), 'config', 'sim_controllers.yaml')
 
-    compile_error = compile_controller_configurations(cfg_list, cfg_out)
+    compile_error = compile_controller_configurations(cfgs, cfg_out)
 
     if not compile_error:
         clr_launch = IncludeLaunchDescription(

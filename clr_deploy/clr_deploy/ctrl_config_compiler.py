@@ -2,11 +2,8 @@ import os, sys
 import pathlib
 import json
 import yaml
-from typing import List, Dict
+from ament_index_python.packages import get_package_share_directory
 
-import launch.events
-from launch.actions import LogInfo
-import rclpy
 
 class bcolors:
     HEADER = '\033[95m'
@@ -19,16 +16,30 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-def compile_controller_configurations(configuration_paths: List[str], output_path: str, debug=False) -> int:
+def compile_controller_configurations(config_paths_file: str, output_path: str, debug=False) -> int:
     """
     Compile ros2_control parameter configuration yamls into a single file for the controller_manager
     
     Positional Arguments:
-    configuration_paths -- List of string filepaths to each controller configuration file that is to be compiled
+    config_paths_file -- String filepath to yaml containing packages and paths to control configuration files in the form of 
+                         {<pkg>:
+                             path: <str path to control config file>} 
     output_path -- Output compiled controller configuation filepath including desired filename
     """
 
     error_status = False
+
+    if not pathlib.Path(config_paths_file).is_file():
+        print(bcolors.HEADER + '(compile_controller_configurations) ' + bcolors.ENDC +
+              bcolors.FAIL + bcolors.BOLD + bcolors.UNDERLINE + 'ERROR:' + bcolors.ENDC +
+              bcolors.FAIL + f' file at {config_paths_file} not found, exiting...' + bcolors.ENDC)
+        error_status = True
+        return error_status
+
+    with open(config_paths_file, 'r') as file:
+        cfgs = yaml.safe_load(file)
+    
+    configuration_paths = [os.path.join(get_package_share_directory(pkg), cfgs[pkg]['path']) for pkg in cfgs]
 
     # Load config yamls
     configs = {}
