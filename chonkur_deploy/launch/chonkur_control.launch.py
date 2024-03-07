@@ -71,6 +71,13 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "enable_admittance",
+            default_value="false",
+            description="Allow the admittance controllers to spawn",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "rviz",
             default_value="false",
             description="start rviz?",
@@ -97,6 +104,7 @@ def generate_launch_description():
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
     initial_joint_controller = LaunchConfiguration("initial_joint_controller")
     activate_joint_controller = LaunchConfiguration("activate_joint_controller")
+    enable_admittance = LaunchConfiguration("enable_admittance")
     rviz = LaunchConfiguration("rviz")
     description_package = LaunchConfiguration("description_package")
     description_file = LaunchConfiguration("description_file")
@@ -144,14 +152,15 @@ def generate_launch_description():
     nodes = [gripper_controller_spawner, 
              gripper_activation_controller_spawner]
 
-    return LaunchDescription(declared_arguments + [base_launch] + nodes)
+    if not enable_admittance:
+        return LaunchDescription(declared_arguments + [base_launch] + nodes)
 
-    # # NOTE: As of ros-humble-ros2-control versions >2.36.0 admittance control chaining breaks controller switching     
-    # spawn_controllers_launch = IncludeLaunchDescription(
-    #     PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch','spawn_controllers.launch.py')),
-    #     launch_arguments={
-    #         "use_fake_hardware": use_fake_hardware,
-    #     }.items(),
-    # )
-
-    # return LaunchDescription(declared_arguments + [base_launch, spawn_controllers_launch] + nodes)
+    else:
+        # NOTE: As of ros-humble-ros2-control versions >2.36.0 admittance control chaining breaks controller switching     
+        spawn_controllers_launch = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch','spawn_controllers.launch.py')),
+            launch_arguments={
+                "use_fake_hardware": use_fake_hardware,
+            }.items(),
+        )
+        return LaunchDescription(declared_arguments + [base_launch, spawn_controllers_launch] + nodes)
