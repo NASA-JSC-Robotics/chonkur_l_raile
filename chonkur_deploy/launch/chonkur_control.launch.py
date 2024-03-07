@@ -3,6 +3,7 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
+from launch.conditions import IfCondition
 from launch_ros.substitutions import FindPackageShare
 from launch.substitutions import LaunchConfiguration, ThisLaunchFileDir
 import os
@@ -109,6 +110,8 @@ def generate_launch_description():
     description_package = LaunchConfiguration("description_package")
     description_file = LaunchConfiguration("description_file")
 
+    launches = []
+
     base_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("ur_robot_driver"), 'launch','ur_control.launch.py')),
         launch_arguments={
@@ -128,6 +131,7 @@ def generate_launch_description():
             "launch_rviz": rviz,
         }.items(),
     )
+    launches.append(base_launch)
 
     gripper_controller_spawner = Node(
         package="controller_manager",
@@ -152,15 +156,14 @@ def generate_launch_description():
     nodes = [gripper_controller_spawner, 
              gripper_activation_controller_spawner]
 
-    if not enable_admittance:
-        return LaunchDescription(declared_arguments + [base_launch] + nodes)
+    spawn_controllers_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch', 'spawn_controllers.launch.py')),
+        launch_arguments={
+            "use_fake_hardware": use_fake_hardware,
+        }.items(),
+        condition=IfCondition(enable_admittance)
+    )
+    launches.append(spawn_controllers_launch)
 
-    else:
-        # NOTE: As of ros-humble-ros2-control versions >2.36.0 admittance control chaining breaks controller switching     
-        spawn_controllers_launch = IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch','spawn_controllers.launch.py')),
-            launch_arguments={
-                "use_fake_hardware": use_fake_hardware,
-            }.items(),
-        )
-        return LaunchDescription(declared_arguments + [base_launch, spawn_controllers_launch] + nodes)
+
+    return LaunchDescription(declared_arguments + launches + nodes)
