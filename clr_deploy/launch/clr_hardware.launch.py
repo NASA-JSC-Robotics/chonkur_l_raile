@@ -24,6 +24,7 @@ def generate_launch_description():
             PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("clr_deploy"), 'launch','clr_control.launch.py')),
             launch_arguments={
                 "controllers_file": cfg_out,
+                "enable_admittance": 'true',
             }.items(),
         )        
         return LaunchDescription([clr_launch])

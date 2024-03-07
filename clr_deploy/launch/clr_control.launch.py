@@ -37,11 +37,11 @@ def generate_launch_description():
             description="Enable headless mode for robot control",
         )
     )
-
+    
+    # REQUIRED
     declared_arguments.append(
         DeclareLaunchArgument(
             "controllers_file",
-            default_value="",
             description="Select the controller configuration yaml file",
         )
     )
@@ -61,6 +61,13 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "enable_admittance",
+            default_value="false",
+            description="Allow the admittance controllers to spawn",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "rviz",
             default_value="false",
             description="start rviz?",
@@ -72,7 +79,8 @@ def generate_launch_description():
     headless_mode = LaunchConfiguration("headless_mode")
     controllers_file = LaunchConfiguration("controllers_file")
     initial_joint_controller = LaunchConfiguration("initial_joint_controller")
-    activate_joint_controller = LaunchConfiguration("activate_joint_controller") 
+    activate_joint_controller = LaunchConfiguration("activate_joint_controller")
+    enable_admittance = LaunchConfiguration("enable_admittance")
     rviz = LaunchConfiguration("rviz")
     
     chonkur_launch = IncludeLaunchDescription(
@@ -88,6 +96,7 @@ def generate_launch_description():
             "runtime_config_package": "clr_deploy", 
             "initial_joint_controller": initial_joint_controller,
             "activate_joint_controller": activate_joint_controller,
+            "enable_admittance": enable_admittance,
             "rviz": rviz,
         }.items(),
     )
