@@ -37,11 +37,11 @@ def generate_launch_description():
             description="Enable headless mode for robot control",
         )
     )
-
+    
+    # REQUIRED
     declared_arguments.append(
         DeclareLaunchArgument(
             "controllers_file",
-            default_value="",
             description="Select the controller configuration yaml file",
         )
     )
