@@ -33,4 +33,4 @@ SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="a0:ce:c8:79:19:a0", NAME="imetr
 SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="a0:ce:c8:79:81:11", NAME="rail"
 ```
 
-A diagram showing all of the components and their connections is located at '[https://bender.jsc.nasa.gov/confluence/x/wRFBDg]' 
+A diagram showing all of the components and their connections is located on the [CLR Confluence Page](https://bender.jsc.nasa.gov/confluence/x/wRFBDg) 
