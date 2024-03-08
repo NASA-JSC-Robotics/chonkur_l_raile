@@ -1,14 +1,18 @@
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, ExecuteProcess
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from launch.substitutions import LaunchConfiguration, ThisLaunchFileDir
 import os
 
-def generate_launch_description():
+from clr_deploy.ctrl_config_compiler import compile_controller_configurations
 
+
+
+def generate_launch_description():
+    
     declared_arguments = []
     declared_arguments.append(
         DeclareLaunchArgument(
@@ -33,7 +37,14 @@ def generate_launch_description():
             description="Enable headless mode for robot control",
         )
     )
-
+    
+    # REQUIRED
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "controllers_file",
+            description="Select the controller configuration yaml file",
+        )
+    )
     declared_arguments.append(
         DeclareLaunchArgument(
             "initial_joint_controller",
@@ -50,6 +61,13 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "enable_admittance",
+            default_value="false",
+            description="Allow the admittance controllers to spawn",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "rviz",
             default_value="false",
             description="start rviz?",
@@ -59,11 +77,12 @@ def generate_launch_description():
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     headless_mode = LaunchConfiguration("headless_mode")
+    controllers_file = LaunchConfiguration("controllers_file")
     initial_joint_controller = LaunchConfiguration("initial_joint_controller")
-    activate_joint_controller = LaunchConfiguration("activate_joint_controller")    
+    activate_joint_controller = LaunchConfiguration("activate_joint_controller")
+    enable_admittance = LaunchConfiguration("enable_admittance")
     rviz = LaunchConfiguration("rviz")
-
-
+    
     chonkur_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch','chonkur_control.launch.py')),
         launch_arguments={
@@ -71,9 +90,13 @@ def generate_launch_description():
             "description_file": "clr.urdf.xacro",
             "tf_prefix": tf_prefix,
             "use_fake_hardware": use_fake_hardware,
+            "fake_sensor_commands": "true",
             "headless_mode": headless_mode,
+            "controllers_file": controllers_file,
+            "runtime_config_package": "clr_deploy", 
             "initial_joint_controller": initial_joint_controller,
             "activate_joint_controller": activate_joint_controller,
+            "enable_admittance": enable_admittance,
             "rviz": rviz,
         }.items(),
     )
@@ -84,7 +107,7 @@ def generate_launch_description():
             "use_fake_hardware": use_fake_hardware,
         }.items(),
     )
-    
+
     ewellix_controllers_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("ewellix_liftkit_deploy"), 'launch','spawn_controllers.launch.py')),
         launch_arguments={
@@ -92,25 +115,23 @@ def generate_launch_description():
         }.items(),
     )
 
-    clr_controllers_yaml = os.path.join(get_package_share_directory("clr_deploy"), 'config','clr_controllers.yaml')
     lift_rail_controller = Node(
         package="controller_manager",
         executable="spawner",
         arguments=["lift_rail_joint_trajectory_controller", 
                    "-c", "controller_manager",
                    "-t", "joint_trajectory_controller/JointTrajectoryController ",
-                   "-p", clr_controllers_yaml, 
                    "--controller-manager-timeout","100",
                    "--inactive"
                   ]
     )
+
     clr_controller = Node(
         package="controller_manager",
         executable="spawner",
         arguments=["clr_joint_trajectory_controller", 
                    "-c", "controller_manager",
                    "-t", "joint_trajectory_controller/JointTrajectoryController ",
-                   "-p", clr_controllers_yaml, 
                    "--controller-manager-timeout","100",
                    "--inactive"
                   ]
@@ -122,12 +143,10 @@ def generate_launch_description():
         arguments=["streaming_controller", 
                    "-c", "controller_manager",
                    "-t", "position_controllers/JointGroupPositionController ",
-                   "-p", clr_controllers_yaml, 
                    "--controller-manager-timeout","100",
                    "--inactive"
                   ]
     )    
 
     controller_nodes = [chonkur_launch, vention_controllers_launch, ewellix_controllers_launch, lift_rail_controller, clr_controller, streaming_controller]
-
     return LaunchDescription(declared_arguments + controller_nodes)
