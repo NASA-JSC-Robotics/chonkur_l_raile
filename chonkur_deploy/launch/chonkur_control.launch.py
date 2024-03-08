@@ -3,6 +3,7 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
+from launch.conditions import IfCondition
 from launch_ros.substitutions import FindPackageShare
 from launch.substitutions import LaunchConfiguration, ThisLaunchFileDir
 import os
@@ -10,7 +11,6 @@ import os
 def generate_launch_description():
 
     declared_arguments = []
-
     declared_arguments.append(
         DeclareLaunchArgument(
             "tf_prefix",
@@ -32,6 +32,20 @@ def generate_launch_description():
             "headless_mode",
             default_value="false",
             description="Enable headless mode for robot control",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "controllers_file",
+            default_value="chonkur_controllers.yaml",
+            description="Select the controller configuration yaml file",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "runtime_config_package",
+            default_value="chonkur_deploy",
+            description="Defines the package that contains the controllers_file",
         )
     )
     declared_arguments.append(
@@ -58,6 +72,13 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "enable_admittance",
+            default_value="false",
+            description="Allow the admittance controllers to spawn",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "rviz",
             default_value="false",
             description="start rviz?",
@@ -79,15 +100,17 @@ def generate_launch_description():
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     headless_mode = LaunchConfiguration("headless_mode")
+    controllers_file = LaunchConfiguration("controllers_file")
+    runtime_config_package = LaunchConfiguration("runtime_config_package")
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
     initial_joint_controller = LaunchConfiguration("initial_joint_controller")
     activate_joint_controller = LaunchConfiguration("activate_joint_controller")
+    enable_admittance = LaunchConfiguration("enable_admittance")
     rviz = LaunchConfiguration("rviz")
     description_package = LaunchConfiguration("description_package")
     description_file = LaunchConfiguration("description_file")
 
-    controller_params_file = os.path.join(get_package_share_directory("chonkur_deploy"),'config','chonkur_controllers.yaml')
-
+    launches = []
 
     base_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("ur_robot_driver"), 'launch','ur_control.launch.py')),
@@ -98,18 +121,18 @@ def generate_launch_description():
             "description_package": description_package,
             "description_file": description_file,
             "tf_prefix": tf_prefix,
-            "runtime_config_package": "chonkur_deploy",
-            "controllers_file": "chonkur_controllers.yaml",
+            "runtime_config_package": runtime_config_package, 
+            "controllers_file": controllers_file,
             "use_fake_hardware": use_fake_hardware,
             "headless_mode": headless_mode,
             "fake_sensor_commands": fake_sensor_commands,
-            "initial_joint_controller": initial_joint_controller,
+            "initial_joint_controller": initial_joint_controller, 
             "activate_joint_controller": activate_joint_controller,
             "launch_rviz": rviz,
         }.items(),
     )
+    launches.append(base_launch)
 
-    gripper_controller_yaml = os.path.join(get_package_share_directory("robotiq_driver"), 'config','robotiq_hande_controllers.yaml')
     gripper_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -117,7 +140,6 @@ def generate_launch_description():
                    "-c", "controller_manager",
                    "-t", "position_controllers/GripperActionController",
                    "--controller-manager-timeout","100",
-                   "-p", gripper_controller_yaml
                   ]
     )
 
@@ -128,7 +150,6 @@ def generate_launch_description():
                    "-c", "controller_manager",
                    "-t", "robotiq_controllers/RobotiqActivationController",
                    "--controller-manager-timeout","100",
-                   "-p", gripper_controller_yaml
                   ]
     )
 
@@ -136,10 +157,13 @@ def generate_launch_description():
              gripper_activation_controller_spawner]
 
     spawn_controllers_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch','spawn_controllers.launch.py')),
+        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch', 'spawn_controllers.launch.py')),
         launch_arguments={
             "use_fake_hardware": use_fake_hardware,
         }.items(),
+        condition=IfCondition(enable_admittance)
     )
+    launches.append(spawn_controllers_launch)
 
-    return LaunchDescription(declared_arguments + [base_launch, spawn_controllers_launch] + nodes)
+
+    return LaunchDescription(declared_arguments + launches + nodes)

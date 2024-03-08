@@ -17,7 +17,7 @@ def generate_launch_description():
     )    
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
 
-    controller_params_file = os.path.join(get_package_share_directory("chonkur_deploy"),'config','chonkur_controllers.yaml')
+    # controller_params_file = os.path.join(get_package_share_directory("chonkur_deploy"),'config','chonkur_controllers.yaml')
     admittance_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -25,8 +25,9 @@ def generate_launch_description():
                    "--controller-manager-timeout","100",
                    "-c", "controller_manager",
                    "-t", "admittance_controller/AdmittanceController",
-                   "-p", controller_params_file,
-                   "--inactive"],
+                #    "-p", controller_params_file,
+                #    "--inactive",
+                   ],
     )
     admittance_jtc_spawner = Node(
         package="controller_manager",
@@ -35,8 +36,9 @@ def generate_launch_description():
                    "--controller-manager-timeout","100",
                    "-c", "controller_manager",
                    "-t", "joint_trajectory_controller/JointTrajectoryController ",
-                   "-p", controller_params_file,
-                   "--inactive"],
+                #    "-p", controller_params_file,
+                #    "--inactive",
+                   ],
     )    
 
     nodes = [admittance_controller_spawner, 

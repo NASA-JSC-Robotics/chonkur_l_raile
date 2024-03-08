@@ -265,3 +265,14 @@ admittance_controller:
 
     # general settings
     enable_parameter_update_without_reactivation: true
+
+faked_forces_controller:
+  ros__parameters:
+    joint: tcp_fts_sensor
+    interface_names:
+      - force.x
+      - force.y
+      - force.z
+      - torque.x
+      - torque.y
+      - torque.z
