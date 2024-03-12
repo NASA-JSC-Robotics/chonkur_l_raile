@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import os
 import yaml
 
@@ -44,27 +42,3 @@ class ControlStatusClient(Node):
         ctrlrs_spawned = set(self.all_ctrlr_names) & set(self.spawned_ctrlr_names)
         ctrlrs_not_spawned = set(self.all_ctrlr_names) - set(self.spawned_ctrlr_names)
         return ctrlrs_spawned, ctrlrs_not_spawned 
-
-
-# TODO: put main in a different file
-def main():
-    rclpy.init()
-
-    ctrl_stat_client = ControlStatusClient()
-    spawned, not_spawned = ctrl_stat_client.compare_ctrlrs()
-    print(not_spawned)
-
-if __name__ == '__main__':
-    main()
-
-
-
-
-
-
-
-
-# Call list_controllers for controller status
-# Get all controllers from compiled configuration yaml
-# Compare all controllers vs spawned controllers
-# Return compare
