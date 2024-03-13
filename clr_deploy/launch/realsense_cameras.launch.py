@@ -12,6 +12,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("realsense2_camera"), 'launch','rs_launch.py')),
         launch_arguments={
             "camera_name": "wrist_mounted_camera",
+            "camera_namespace" : "",
             "serial_no" : "'938422070949'", 
             "rgb_camera.profile" : "1280,720,30", 
             "initial_reset" : "true", 
@@ -24,6 +25,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("realsense2_camera"), 'launch','rs_launch.py')),
         launch_arguments={
             "camera_name": "lift_camera",
+            "camera_namespace" : "",
             "serial_no" : "'207122078580'", 
             "rgb_camera.profile" : "1280,720,30", 
             "initial_reset" : "true", 
