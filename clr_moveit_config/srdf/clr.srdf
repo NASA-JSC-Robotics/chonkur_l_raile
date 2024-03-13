@@ -26,6 +26,9 @@
   <group name="chonkur_push2">
     <chain base_link="base_link" tip_link="push_frame_2" />
   </group>
+  <group name="chonkur_push_center">
+    <chain base_link="base_link" tip_link="center_push_frame"/>
+  </group>
 
   <!-- end effector - todo abstract out for other grippers -->
   <group name="hand">
