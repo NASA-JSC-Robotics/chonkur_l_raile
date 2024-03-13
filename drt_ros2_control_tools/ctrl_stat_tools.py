@@ -23,22 +23,25 @@ class ControlStatusClient(Node):
             self.get_logger().info(f'{self.list_ctrlrs.srv_name} is not available, waiting again...')
         self.list_ctrlrs_req = ListControllers.Request()
 
-    def get_spawned_ctrlr_names(self):
+    def get_spawned_ctrlrs(self):
         self.future = self.list_ctrlrs.call_async(self.list_ctrlrs_req)
         rclpy.spin_until_future_complete(self, self.future)
-        self.spawned_ctrlr_names = [item.name for item in self.future.result().controller]
-        return self.spawned_ctrlr_names
+        self.spawned_ctrlrs = self.future.result().controller
+        return self.spawned_ctrlrs
     
-    def get_all_ctrlr_names(self):
+    def get_all_ctrlrs(self):
         # TODO: If ctrlr_cfg_path doesn't exist, fail return exit
         with open(self.ctrlr_cfg_path, 'r') as file:
             ctrlr_cfg = yaml.safe_load(file)
-        self.all_ctrlr_names = list(ctrlr_cfg['controller_manager']['ros__parameters'].keys())
-        return self.all_ctrlr_names
+        self.all_ctrlrs = list(ctrlr_cfg['controller_manager']['ros__parameters'].keys())
+        return self.all_ctrlrs
     
     def compare_ctrlrs(self):
-        self.get_spawned_ctrlr_names()
+        self.get_spawned_ctrlrs()
         self.get_all_ctrlr_names()
-        ctrlrs_spawned = set(self.all_ctrlr_names) & set(self.spawned_ctrlr_names)
-        ctrlrs_not_spawned = set(self.all_ctrlr_names) - set(self.spawned_ctrlr_names)
-        return ctrlrs_spawned, ctrlrs_not_spawned 
+        spawned_ctrlr_names = [ctrlr.name for ctrlr in self.spawned_ctrlrs]
+        spawned_ctrlr_states = [ctrlr.state for ctrlr in self.spawned_ctrlrs]
+        ctrlrs_spawned = {'name': self.spawned_ctrlr_names, 'state':self.spawned_ctrlr_states}
+        ctrlrs_not_spawned = {'name': (set(self.all_ctrlrs) - set(self.spawned_ctrlr_names))}
+        ctrlr_status = {'spawned': ctrlrs_spawned, 'not_spawned': ctrlrs_not_spawned}
+        return ctrlr_status

@@ -4,18 +4,18 @@ from drt_ros2_control_tools.ctrl_stat_tools import ControlStatusClient
 from drt_ros2_control_tools.ctrl_config_compiler import bcolors
 
 
-# TODO: put main in a different file
+# TODO: CURRENTLY NOT WORKING, compare_ctrlrs outputs a singular dict now, adapt this script and add error behaviors to compare_ctrlrs!!
 def main():
     rclpy.init()
 
     ctrl_stat_client = ControlStatusClient()
-    spawned, not_spawned = ctrl_stat_client.compare_ctrlrs()
+    ctrlr_status = ctrl_stat_client.compare_ctrlrs()
     
     print(bcolors.OKGREEN + bcolors.BOLD + 'Listed and spawned:' + bcolors.ENDC)
-    _ = [print('\t -' + name) for name in spawned]
+    _ = [print('\t -' + name) for name in ctrlr_status['spawned']['name']]
     
     print(bcolors.WARNING + bcolors.BOLD + 'Listed and not spawned' + bcolors.ENDC)
-    _ = [print('\t -' + name) for name in not_spawned]
+    _ = [print('\t -' + name) for name in ctrlr_status['not_spawned']['name']]
 
 if __name__ == '__main__':
     main()
