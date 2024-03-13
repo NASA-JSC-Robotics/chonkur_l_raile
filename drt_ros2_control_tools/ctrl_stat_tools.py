@@ -38,10 +38,10 @@ class ControlStatusClient(Node):
     
     def compare_ctrlrs(self):
         self.get_spawned_ctrlrs()
-        self.get_all_ctrlr_names()
+        self.get_all_ctrlrs()
         spawned_ctrlr_names = [ctrlr.name for ctrlr in self.spawned_ctrlrs]
         spawned_ctrlr_states = [ctrlr.state for ctrlr in self.spawned_ctrlrs]
-        ctrlrs_spawned = {'name': self.spawned_ctrlr_names, 'state':self.spawned_ctrlr_states}
-        ctrlrs_not_spawned = {'name': (set(self.all_ctrlrs) - set(self.spawned_ctrlr_names))}
+        ctrlrs_spawned = {'name': spawned_ctrlr_names, 'state':spawned_ctrlr_states}
+        ctrlrs_not_spawned = {'name': (set(self.all_ctrlrs) - set(spawned_ctrlr_names))}
         ctrlr_status = {'spawned': ctrlrs_spawned, 'not_spawned': ctrlrs_not_spawned}
         return ctrlr_status

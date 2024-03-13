@@ -12,7 +12,9 @@ def main():
     ctrlr_status = ctrl_stat_client.compare_ctrlrs()
     
     print(bcolors.OKGREEN + bcolors.BOLD + 'Listed and spawned:' + bcolors.ENDC)
-    _ = [print('\t -' + name) for name in ctrlr_status['spawned']['name']]
+    for i in range(len(ctrlr_status['spawned']['name'])):
+        print('\t - ' + ctrlr_status['spawned']['name'][i] + ' [' + ctrlr_status['spawned']['state'][i] + ']')
+    # _ = [print('\t -' + ctrlr['name'] + ' [' + ctrlr['status'] + ']') for ctrlr in ctrlr_status['spawned']]
     
     print(bcolors.WARNING + bcolors.BOLD + 'Listed and not spawned' + bcolors.ENDC)
     _ = [print('\t -' + name) for name in ctrlr_status['not_spawned']['name']]
