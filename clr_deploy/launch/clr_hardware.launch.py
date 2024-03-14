@@ -38,7 +38,7 @@ def generate_launch_description():
                 "enable_admittance": enable_admittance,
             }.items(),
         )        
-        return LaunchDescription([clr_launch])
+        return LaunchDescription(declared_arguments + [clr_launch])
     else:
         Shutdown(
             reason='Control configuration compiled failed, exiting clr_sim.launch.py'
