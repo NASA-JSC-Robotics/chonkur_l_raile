@@ -6,8 +6,9 @@ Panels:
       Expanded:
         - /Global Options1
         - /RobotModel1/Description Topic1
+        - /TF1
       Splitter Ratio: 0.5
-    Tree Height: 1141
+    Tree Height: 805
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
@@ -60,16 +61,264 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
+        base:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        base_link_inertia:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        center_push_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         clr_base:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+          Value: true
+        clr_carriage:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        end_estop_light:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        ewellix_lift_higher_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        ewellix_lift_lower_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        ewellix_lift_middle_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        ewellix_lift_tip_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        finger_1_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        finger_2_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        flange:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        forearm_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        ft_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        grasp_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_palm_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lower_lift_plate:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        manual_grasp_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        motor_side_estop_light:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        mtc_effector_side:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        mtc_robot_side:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        push_frame_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        push_frame_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_angle_mount:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robotiq_hande_cb_adapter:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        shoulder_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        tool0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        upper_arm_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        upper_lift_plate:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        ur10e_mount_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        ur10e_mount_plate:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        ur_realsense_mount:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         vention_rail_base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
+        vention_rail_cable_0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        vention_rail_cable_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        vention_rail_cable_collision:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         vention_rail_carriage:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        vention_rail_gearbox:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        vention_rail_motor:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        world:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wrist_1_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wrist_2_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wrist_3_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wrist_mounted_camera_bottom_screw_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wrist_mounted_camera_color_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wrist_mounted_camera_color_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wrist_mounted_camera_depth_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wrist_mounted_camera_depth_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wrist_mounted_camera_infra1_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wrist_mounted_camera_infra1_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wrist_mounted_camera_infra2_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wrist_mounted_camera_infra2_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wrist_mounted_camera_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -82,10 +331,208 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+        base:
+          Value: true
+        base_link:
+          Value: true
+        base_link_inertia:
+          Value: true
+        center_push_frame:
+          Value: true
+        clr_base:
+          Value: true
+        clr_carriage:
+          Value: true
+        end_estop_light:
+          Value: true
+        ewellix_lift_higher_link:
+          Value: true
+        ewellix_lift_lower_link:
+          Value: true
+        ewellix_lift_middle_link:
+          Value: true
+        ewellix_lift_tip_link:
+          Value: true
+        finger_1_link:
+          Value: true
+        finger_2_link:
+          Value: true
+        flange:
+          Value: true
+        forearm_link:
+          Value: true
+        ft_frame:
+          Value: true
+        grasp_frame:
+          Value: true
+        gripper_base_link:
+          Value: true
+        gripper_palm_link:
+          Value: true
+        lower_lift_plate:
+          Value: true
+        manual_grasp_link:
+          Value: true
+        motor_side_estop_light:
+          Value: true
+        mtc_effector_side:
+          Value: true
+        mtc_robot_side:
+          Value: true
+        push_frame_1:
+          Value: true
+        push_frame_2:
+          Value: true
+        right_angle_mount:
+          Value: true
+        robotiq_hande_cb_adapter:
+          Value: true
+        shoulder_link:
+          Value: true
+        tool0:
+          Value: true
+        upper_arm_link:
+          Value: true
+        upper_lift_plate:
+          Value: true
+        ur10e_mount_link:
+          Value: true
+        ur10e_mount_plate:
+          Value: true
+        ur_realsense_mount:
+          Value: true
+        vention_rail_base_link:
+          Value: true
+        vention_rail_cable_0:
+          Value: true
+        vention_rail_cable_1:
+          Value: true
+        vention_rail_cable_collision:
+          Value: true
+        vention_rail_carriage:
+          Value: true
+        vention_rail_gearbox:
+          Value: true
+        vention_rail_motor:
+          Value: true
+        world:
+          Value: true
+        wrist_1_link:
+          Value: true
+        wrist_2_link:
+          Value: true
+        wrist_3_link:
+          Value: true
+        wrist_mounted_camera_bottom_screw_frame:
+          Value: true
+        wrist_mounted_camera_color_frame:
+          Value: true
+        wrist_mounted_camera_color_optical_frame:
+          Value: true
+        wrist_mounted_camera_depth_frame:
+          Value: true
+        wrist_mounted_camera_depth_optical_frame:
+          Value: true
+        wrist_mounted_camera_infra1_frame:
+          Value: true
+        wrist_mounted_camera_infra1_optical_frame:
+          Value: true
+        wrist_mounted_camera_infra2_frame:
+          Value: true
+        wrist_mounted_camera_infra2_optical_frame:
+          Value: true
+        wrist_mounted_camera_link:
+          Value: true
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: false
+      Tree:
+        world:
+          clr_base:
+            end_estop_light:
+              {}
+            motor_side_estop_light:
+              {}
+            vention_rail_base_link:
+              vention_rail_carriage:
+                clr_carriage:
+                  lower_lift_plate:
+                    ewellix_lift_lower_link:
+                      ewellix_lift_higher_link:
+                        ewellix_lift_middle_link:
+                          {}
+                        ewellix_lift_tip_link:
+                          {}
+                        upper_lift_plate:
+                          right_angle_mount:
+                            ur10e_mount_plate:
+                              ur10e_mount_link:
+                                base_link:
+                                  base:
+                                    {}
+                                  base_link_inertia:
+                                    shoulder_link:
+                                      upper_arm_link:
+                                        forearm_link:
+                                          wrist_1_link:
+                                            wrist_2_link:
+                                              wrist_3_link:
+                                                flange:
+                                                  tool0:
+                                                    mtc_robot_side:
+                                                      mtc_effector_side:
+                                                        ur_realsense_mount:
+                                                          robotiq_hande_cb_adapter:
+                                                            gripper_base_link:
+                                                              finger_1_link:
+                                                                push_frame_1:
+                                                                  {}
+                                                              finger_2_link:
+                                                                push_frame_2:
+                                                                  {}
+                                                              grasp_frame:
+                                                                manual_grasp_link:
+                                                                  {}
+                                                              gripper_palm_link:
+                                                                center_push_frame:
+                                                                  {}
+                                                          wrist_mounted_camera_bottom_screw_frame:
+                                                            wrist_mounted_camera_link:
+                                                              wrist_mounted_camera_color_frame:
+                                                                wrist_mounted_camera_color_optical_frame:
+                                                                  {}
+                                                              wrist_mounted_camera_depth_frame:
+                                                                wrist_mounted_camera_depth_optical_frame:
+                                                                  {}
+                                                              wrist_mounted_camera_infra1_frame:
+                                                                wrist_mounted_camera_infra1_optical_frame:
+                                                                  {}
+                                                              wrist_mounted_camera_infra2_frame:
+                                                                wrist_mounted_camera_infra2_optical_frame:
+                                                                  {}
+                                                ft_frame:
+                                                  {}
+              vention_rail_gearbox:
+                vention_rail_motor:
+                  vention_rail_cable_0:
+                    {}
+                  vention_rail_cable_1:
+                    {}
+                  vention_rail_cable_collision:
+                    {}
+      Update Interval: 0
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: clr_base
+    Fixed Frame: world
     Frame Rate: 30
   Name: root
   Tools:
@@ -128,39 +575,39 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 6.1567702293396
+      Distance: 2.5520007610321045
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.0457618348300457
-        Y: -0.07058511674404144
-        Z: 0.49734944105148315
+        X: -0.6431235074996948
+        Y: -0.2712990641593933
+        Z: 0.2918112874031067
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.15039828419685364
+      Pitch: 0.49539828300476074
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.5353983640670776
+      Yaw: 1.8604044914245605
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 1379
+  Height: 1043
   Hide Left Dock: false
-  Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd00000004000000000000016a00000509fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d00000509000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000011000000509fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000003d00000509000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004420000003efc0100000002fb0000000800540069006d00650100000000000004420000000000000000fb0000000800540069006d00650100000000000004500000000000000000000002d00000050900000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Hide Right Dock: true
+  QMainWindow State: 000000ff00000000fd000000040000000000000156000003b9fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000007800000034800000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d000003b9000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c000002610000000100000110000003b9fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003d000003b9000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004420000003efc0100000002fb0000000800540069006d00650100000000000004420000000000000000fb0000000800540069006d00650100000000000004500000000000000000000003fa000003b900000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Tool Properties:
     collapsed: false
   Views:
-    collapsed: false
+    collapsed: true
   Width: 1366
   X: 74
-  Y: 30
+  Y: 840

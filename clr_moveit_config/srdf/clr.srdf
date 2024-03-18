@@ -145,6 +145,7 @@
   <disable_collisions link1="ewellix_lift_higher_link" link2="vention_rail_motor" reason="Never"/>
   <disable_collisions link1="ewellix_lift_lower_link" link2="ewellix_lift_middle_link" reason="Default"/>
   <disable_collisions link1="ewellix_lift_lower_link" link2="lower_lift_plate" reason="Adjacent"/>
+  <disable_collisions link1="ewellix_lift_lower_link" link2="lift_camera_mount" reason="Adjacent"/>
   <disable_collisions link1="ewellix_lift_lower_link" link2="right_angle_mount" reason="Never"/>
   <disable_collisions link1="ewellix_lift_lower_link" link2="shoulder_link" reason="Never"/>
   <disable_collisions link1="ewellix_lift_lower_link" link2="upper_lift_plate" reason="Never"/>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="lift_camera" params="
+        tf_prefix:=''
+        parent:=world
+        mount_width_meters:=0.14
+        mount_height_meters:=0.2
+        mount_depth_meters:=0.01135
+        *origin
+    ">
+
+    <joint name="${tf_prefix}lift_camera_mount_base_joint" type="fixed">
+        <parent link="${parent}"/>
+        <child link="${tf_prefix}lift_camera_mount"/>
+        <xacro:insert_block name="origin"/>
+    </joint>
+
+    <link name="${tf_prefix}lift_camera_mount">
+        <visual>
+            <geometry>
+                <mesh filename= "package://clr_description/meshes/visual/lift_camera_mount.stl"/>
+            </geometry>
+            <color rgba="0.1 0.1 0.1 1"/>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="${mount_width_meters/2} ${-1*mount_depth_meters/2} ${-1*mount_height_meters/2}"/>
+            <geometry>
+                <box size="${mount_width_meters} ${mount_depth_meters} ${mount_height_meters}"/> <!--meters -->
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- Realsense camera -->
+    <xacro:property name="realsense_materials_defined" value="true" />
+    <!-- ^^ Avoid Error   material 'aluminum' is not unique. 
+        This doesn't work in old versions (v4.51) of the realsense2_description because there are no header guards at all
+        Version 4.54.1 has header guards but they don't work as expected.
+    -->
+
+    <!-- Pose obtained from Measuring by hand. Origin is lift_camera_bottom_screw_frame-->
+    <!-- <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
+    <xacro:sensor_d435 parent="${tf_prefix}lift_camera_mount" use_nominal_extrinsics="true" use_mesh="true" name="hand_measured_lift_camera">
+        <origin xyz="0.076 0.01 -0.1725" rpy="3.1415 0 1.5708"/> 
+    </xacro:sensor_d435> -->
+
+    <!-- Pose after camera calibration -->
+    <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
+    <xacro:sensor_d435 parent="${tf_prefix}lower_lift_plate" use_nominal_extrinsics="true" use_mesh="true" name="lift_camera">
+        <origin xyz="-0.007666 0.1069 0.3866" rpy="-3.0512 -0.0276 1.5884"/> 
+    </xacro:sensor_d435>
+
+    </xacro:macro>
+</robot>
