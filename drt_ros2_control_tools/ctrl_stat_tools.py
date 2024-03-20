@@ -1,8 +1,13 @@
+
+import curses
 import os
 import yaml
 
+
+
 import rclpy
 from rclpy.node import Node
+from rclpy.timer import Timer
 
 
 from ament_index_python.packages import get_package_share_directory
@@ -12,6 +17,7 @@ from controller_manager_msgs.srv import ListControllers
 class ControlStatusClient(Node):
     def __init__(self, sim):
         super().__init__('ctrl_status_client')
+        #TODO: input argument for controller package (needs generalization)
         if sim:
             self.get_logger().info('SIM SELECTED')
             self.ctrlr_cfg_path = os.path.join(get_package_share_directory('clr_deploy'), 'config', 'sim_controllers.yaml')
@@ -22,6 +28,18 @@ class ControlStatusClient(Node):
         while not self.list_ctrlrs.wait_for_service(timeout_sec=1.0):
             self.get_logger().info(f'{self.list_ctrlrs.srv_name} is not available, waiting again...')
         self.list_ctrlrs_req = ListControllers.Request()
+
+        self.stdscr = curses.initscr()
+        curses.start_color()
+        curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
+        curses.init_pair(2, curses.COLOR_GREEN, curses.COLOR_WHITE)
+        curses.init_pair(3, curses.COLOR_RED, curses.COLOR_BLACK)
+        curses.init_pair(4, curses.COLOR_BLACK, curses.COLOR_RED)
+
+        # TODO: highlighted controllers list feature
+
+        self.display_rate = 1.0 #Hz
+        self.display_timer = self.create_timer(1/self.display_rate, self.show_compare)
 
     def get_spawned_ctrlrs(self):
         self.future = self.list_ctrlrs.call_async(self.list_ctrlrs_req)
@@ -52,3 +70,31 @@ class ControlStatusClient(Node):
             ctrlrs_not_spawned = {'name': list((set(self.all_ctrlrs) - set(spawned_ctrlr_names)))}
             ctrlr_status = {'spawned': ctrlrs_spawned, 'not_spawned': ctrlrs_not_spawned}
         return ctrlr_status
+
+    def show_compare(self):
+        self.stdscr.clear()
+        line = 0
+        ctrlr_status = self.compare_ctrlrs()
+        if ctrlr_status:
+            self.stdscr.addstr(line, 0, 'Listed and spawned:')
+            line += 1
+            for i in range(len(ctrlr_status['spawned']['name'])):
+                name = ctrlr_status['spawned']['name'][i]
+                state = ctrlr_status['spawned']['state'][i]
+                self.stdscr.addstr(line, 0,
+                                   '\t - ' + name + ' [' + state + ']',
+                                   curses.color_pair(1))
+                line += 1
+            self.stdscr.addstr(line, 0, 'Listed and not spawned')
+            line += 1
+            for i in range(len(ctrlr_status['not_spawned']['name'])):
+                name = ctrlr_status['not_spawned']['name'][i]
+                self.stdscr.addstr(line, 0,
+                                   '\t - ' + name,
+                                   curses.color_pair(3))
+                line += 1
+            self.stdscr.refresh()
+
+
+
+        
