@@ -7,10 +7,6 @@ from launch_ros.substitutions import FindPackageShare
 from launch.substitutions import LaunchConfiguration, ThisLaunchFileDir
 import os
 
-from clr_deploy.ctrl_config_compiler import compile_controller_configurations
-
-
-
 def generate_launch_description():
     
     declared_arguments = []
