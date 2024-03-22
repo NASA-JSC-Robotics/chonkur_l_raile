@@ -22,6 +22,7 @@
   <exec_depend>chonkur_deploy</exec_depend>
   <exec_depend>vention_rail_deploy</exec_depend>
   <exec_depend>ewellix_liftkit_deploy</exec_depend>
+  <exec_depend>drt_ros2_control_tools</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>
