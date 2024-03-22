@@ -1,5 +1,6 @@
 
 import curses
+# from curses import wrapper
 import os
 import yaml
 
@@ -8,6 +9,7 @@ import yaml
 import rclpy
 from rclpy.node import Node
 from rclpy.timer import Timer
+from rclpy.callback_groups import ReentrantCallbackGroup
 
 
 from ament_index_python.packages import get_package_share_directory
@@ -15,31 +17,39 @@ from ament_index_python.packages import get_package_share_directory
 from controller_manager_msgs.srv import ListControllers
 
 class ControlStatusClient(Node):
-    def __init__(self, sim):
+    def __init__(self, pkg, sim, highlight=None):
         super().__init__('ctrl_status_client')
+        self.get_logger().info(f'package: {pkg}')
+        cb_g = ReentrantCallbackGroup()
         #TODO: input argument for controller package (needs generalization)
         if sim:
-            self.get_logger().info('SIM SELECTED')
-            self.ctrlr_cfg_path = os.path.join(get_package_share_directory('clr_deploy'), 'config', 'sim_controllers.yaml')
+            # self.get_logger().info('SIM SELECTED')
+            self.ctrlr_cfg_path = os.path.join(get_package_share_directory(pkg), 'config', 'sim_controllers.yaml')
         else:
-            self.get_logger().info('HARDWARE SELECTED')
-            self.ctrlr_cfg_path = os.path.join(get_package_share_directory('clr_deploy'), 'config', 'hardware_controllers.yaml')
-        self.list_ctrlrs = self.create_client(ListControllers, '/controller_manager/list_controllers')
+            # self.get_logger().info('HARDWARE SELECTED')
+            self.ctrlr_cfg_path = os.path.join(get_package_share_directory(pkg), 'config', 'hardware_controllers.yaml')
+        self.list_ctrlrs = self.create_client(ListControllers, '/controller_manager/list_controllers', callback_group=cb_g)
         while not self.list_ctrlrs.wait_for_service(timeout_sec=1.0):
             self.get_logger().info(f'{self.list_ctrlrs.srv_name} is not available, waiting again...')
         self.list_ctrlrs_req = ListControllers.Request()
 
         self.stdscr = curses.initscr()
+        curses.noecho()
         curses.start_color()
+        self.stdscr.nodelay(False)
         curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
         curses.init_pair(2, curses.COLOR_GREEN, curses.COLOR_WHITE)
         curses.init_pair(3, curses.COLOR_RED, curses.COLOR_BLACK)
         curses.init_pair(4, curses.COLOR_BLACK, curses.COLOR_RED)
 
+        self.highlight = highlight
         # TODO: highlighted controllers list feature
+        if self.highlight:
+            with open(highlight, 'r') as file:
+                self.highlighted = yaml.safe_load(file)
 
         self.display_rate = 1.0 #Hz
-        self.display_timer = self.create_timer(1/self.display_rate, self.show_compare)
+        self.display_timer = self.create_timer(1/self.display_rate, self.show_compare, callback_group=cb_g)
 
     def get_spawned_ctrlrs(self):
         self.future = self.list_ctrlrs.call_async(self.list_ctrlrs_req)
@@ -48,7 +58,6 @@ class ControlStatusClient(Node):
         return self.spawned_ctrlrs
     
     def get_all_ctrlrs(self):
-        # TODO: If ctrlr_cfg_path doesn't exist, fail return exit
         if not os.path.exists(self.ctrlr_cfg_path):
             self.get_logger().error(f"Failed to find configuration file at {self.ctrlr_cfg_path}, file does not exist")
             self.all_ctrlrs = None
@@ -81,19 +90,33 @@ class ControlStatusClient(Node):
             for i in range(len(ctrlr_status['spawned']['name'])):
                 name = ctrlr_status['spawned']['name'][i]
                 state = ctrlr_status['spawned']['state'][i]
+                if self.highlight and name in self.highlighted:
+                    color = 2
+                else:
+                    color = 1
                 self.stdscr.addstr(line, 0,
                                    '\t - ' + name + ' [' + state + ']',
-                                   curses.color_pair(1))
+                                   curses.color_pair(color))
                 line += 1
             self.stdscr.addstr(line, 0, 'Listed and not spawned')
             line += 1
             for i in range(len(ctrlr_status['not_spawned']['name'])):
                 name = ctrlr_status['not_spawned']['name'][i]
+                if self.highlight and name in self.highlighted:
+                    color = 4
+                else:
+                    color = 3
                 self.stdscr.addstr(line, 0,
                                    '\t - ' + name,
-                                   curses.color_pair(3))
+                                   curses.color_pair(color))
                 line += 1
             self.stdscr.refresh()
+        return
+    
+    def exit(self):
+        curses.echo()
+        curses.endwin()
+        return
 
 
 
