@@ -21,12 +21,9 @@ class ControlStatusClient(Node):
         super().__init__('ctrl_status_client')
         self.get_logger().info(f'package: {pkg}')
         cb_g = ReentrantCallbackGroup()
-        #TODO: input argument for controller package (needs generalization)
         if sim:
-            # self.get_logger().info('SIM SELECTED')
             self.ctrlr_cfg_path = os.path.join(get_package_share_directory(pkg), 'config', 'sim_controllers.yaml')
         else:
-            # self.get_logger().info('HARDWARE SELECTED')
             self.ctrlr_cfg_path = os.path.join(get_package_share_directory(pkg), 'config', 'hardware_controllers.yaml')
         self.list_ctrlrs = self.create_client(ListControllers, '/controller_manager/list_controllers', callback_group=cb_g)
         while not self.list_ctrlrs.wait_for_service(timeout_sec=1.0):
@@ -43,7 +40,6 @@ class ControlStatusClient(Node):
         curses.init_pair(4, curses.COLOR_BLACK, curses.COLOR_RED)
 
         self.highlight = highlight
-        # TODO: highlighted controllers list feature
         if self.highlight:
             with open(highlight, 'r') as file:
                 self.highlighted = yaml.safe_load(file)
@@ -117,7 +113,3 @@ class ControlStatusClient(Node):
         curses.echo()
         curses.endwin()
         return
-
-
-
-        

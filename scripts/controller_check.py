@@ -18,18 +18,9 @@ def main(pkg, sim, highlight):
         clr_stat_client.exit()
         clr_stat_client.get_logger().info('Keyboard interrupt, shutting down...')
     
-    # rclpy.spin(clr_stat_client)
-
-    # while rclpy.ok():
-    #     clr_stat_client.show_compare()
-    #     time.sleep(1.0)
-    # clr_stat_client.exit()
-    
     clr_stat_client.destroy_node()
     rclpy.shutdown()
     
-
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("package",
