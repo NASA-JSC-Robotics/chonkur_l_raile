@@ -22,31 +22,6 @@ def generate_launch_description():
 
     names = os.path.join(get_package_share_directory("clr_deploy"), 'config', 'clr_control_colors.yaml')
 
-
-
-    # sim_controller_check = ExecuteProcess(
-    #     cmd=[[
-    #         FindExecutable(name='ros2'),
-    #         ' run drt_ros2_control_tools controller_check.py --sim --highlight',
-    #         names
-    #     ]],
-    #     shell=True,
-    #     output='screen'
-    # )
-
-    # sim_controller_check = ExecuteProcess(
-    #     cmd=[
-    #         'ros2 run ',
-    #         'drt_ros2_control_tools ',
-    #         'controller_check.py ',
-    #         'clr_deploy ',
-    #         '--sim --highlight ',
-    #         names
-    #     ],
-    #     shell=True,
-    #     output='screen'
-    # )
-
     sim_controller_check = ExecuteProcess(
         cmd=[[
             "gnome-terminal ", "-e ",
@@ -63,28 +38,5 @@ def generate_launch_description():
     )
 
     node = [sim_controller_check]
-
-    # sim_controller_check = Node(
-    #     package="drt_ros2_control_tools",
-    #     executable="controller_check.py",
-    #     arguments=['clr_deploy',
-    #                '--sim',
-    #                '--highlight', names],
-    #     output="none",
-    #     condition=IfCondition(sim)
-    # )
-
-    # hw_controller_check = Node(
-    #     package="drt_ros2_control_tools",
-    #     executable="controller_check.py",
-    #     arguments=['clr_deploy',
-    #                '--highlight', names],
-    #     output='screen',
-    #     condition=UnlessCondition(sim)
-    # )
-
-    # node = [sim_controller_check, hw_controller_check]
-
-
 
     return LaunchDescription(declared_arguments + node)
