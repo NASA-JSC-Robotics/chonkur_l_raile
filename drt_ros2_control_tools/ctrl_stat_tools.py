@@ -12,7 +12,6 @@ class ControlStatusClient(Node):
     def __init__(self, pkg, sim, highlight=None):
         super().__init__('ctrl_status_client')
         self.get_logger().info(f'package: {pkg}')
-        cb_g = ReentrantCallbackGroup()
         if sim:
             self.ctrlr_cfg_path = os.path.join(get_package_share_directory(pkg), 'config', 'sim_controllers.yaml')
         else:
