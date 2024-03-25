@@ -9,10 +9,6 @@ install(
   DESTINATION share/${PROJECT_NAME}
 )
 
-install(PROGRAMS scripts/monitor_controllers.py
-    DESTINATION lib/${PROJECT_NAME}
-)
-
 ament_python_install_package(${PROJECT_NAME})
 ament_python_install_module(${PROJECT_NAME}/ctrl_config_compiler.py)
 

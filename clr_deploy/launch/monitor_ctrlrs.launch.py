@@ -24,19 +24,42 @@ def generate_launch_description():
 
     sim_controller_check = ExecuteProcess(
         cmd=[[
-            "gnome-terminal ", "-e ",
-            '"',
-            'ros2 run ',
-            "drt_ros2_control_tools ",
-            "controller_check.py ",
-            "clr_deploy --sim --highlight ",
+            "gnome-terminal ", 
+            "--hide-menubar ",
+            "--title=Controllers ",
+            "-- ",
+            'ros2 ',
+            'run ',
+            'drt_ros2_control_tools ',
+            'controller_check.py ',
+            'clr_deploy --sim ',
+            '--highlight ',
             names,
-            '"'
         ]],
         shell=True,
-        output='screen'
+        output='screen',
+        condition=IfCondition(sim)
     )
 
-    node = [sim_controller_check]
+    hardware_controller_check = ExecuteProcess(
+        cmd=[[
+            "gnome-terminal ",
+            "--hide-menubar ",
+            "--title=Controllers ",
+            "-- ",
+            "ros2 ",
+            "run ",
+            "drt_ros2_control_tools ",
+            "controller_check.py ",
+            "clr_deploy ",
+            "--highlight ",
+            names,
+        ]],
+        shell=True,
+        output='screen',
+        condition=UnlessCondition(sim)
+    )
+
+    node = [sim_controller_check, hardware_controller_check]
 
     return LaunchDescription(declared_arguments + node)
