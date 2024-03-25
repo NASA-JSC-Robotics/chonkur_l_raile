@@ -1,19 +1,11 @@
-
 import curses
-# from curses import wrapper
 import os
 import yaml
-
-
-
 import rclpy
+from ament_index_python.packages import get_package_share_directory
 from rclpy.node import Node
 from rclpy.timer import Timer
 from rclpy.callback_groups import ReentrantCallbackGroup
-
-
-from ament_index_python.packages import get_package_share_directory
-
 from controller_manager_msgs.srv import ListControllers
 
 class ControlStatusClient(Node):
@@ -25,15 +17,13 @@ class ControlStatusClient(Node):
             self.ctrlr_cfg_path = os.path.join(get_package_share_directory(pkg), 'config', 'sim_controllers.yaml')
         else:
             self.ctrlr_cfg_path = os.path.join(get_package_share_directory(pkg), 'config', 'hardware_controllers.yaml')
-        self.list_ctrlrs = self.create_client(ListControllers, '/controller_manager/list_controllers', callback_group=cb_g)
+        self.list_ctrlrs = self.create_client(ListControllers, '/controller_manager/list_controllers')
         while not self.list_ctrlrs.wait_for_service(timeout_sec=1.0):
             self.get_logger().info(f'{self.list_ctrlrs.srv_name} is not available, waiting again...')
         self.list_ctrlrs_req = ListControllers.Request()
 
         self.stdscr = curses.initscr()
-        curses.noecho()
         curses.start_color()
-        self.stdscr.nodelay(False)
         curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
         curses.init_pair(2, curses.COLOR_GREEN, curses.COLOR_WHITE)
         curses.init_pair(3, curses.COLOR_RED, curses.COLOR_BLACK)
@@ -43,9 +33,6 @@ class ControlStatusClient(Node):
         if self.highlight:
             with open(highlight, 'r') as file:
                 self.highlighted = yaml.safe_load(file)
-
-        self.display_rate = 1.0 #Hz
-        self.display_timer = self.create_timer(1/self.display_rate, self.show_compare, callback_group=cb_g)
 
     def get_spawned_ctrlrs(self):
         self.future = self.list_ctrlrs.call_async(self.list_ctrlrs_req)
@@ -107,7 +94,10 @@ class ControlStatusClient(Node):
                                    curses.color_pair(color))
                 line += 1
             self.stdscr.refresh()
-        return
+            return
+        else:
+            self.get_logger().info('Comparason failed')
+            return
     
     def exit(self):
         curses.echo()

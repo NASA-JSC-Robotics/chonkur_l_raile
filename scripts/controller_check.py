@@ -2,24 +2,20 @@
 import argparse
 import time
 import rclpy
-from rclpy.executors import MultiThreadedExecutor
 from drt_ros2_control_tools.ctrl_stat_tools import ControlStatusClient
 
 
 def main(pkg, sim, highlight):
     rclpy.init()
     clr_stat_client = ControlStatusClient(pkg, sim, highlight)
-    
-    executor = MultiThreadedExecutor()
-    executor.add_node(clr_stat_client)
-    try:
-        executor.spin()
-    except KeyboardInterrupt:
-        clr_stat_client.exit()
-        clr_stat_client.get_logger().info('Keyboard interrupt, shutting down...')
-    
-    clr_stat_client.destroy_node()
-    rclpy.shutdown()
+    while rclpy.ok():
+        try:
+            clr_stat_client.show_compare()
+            time.sleep(1)
+        except KeyboardInterrupt:
+            clr_stat_client.exit()
+            clr_stat_client.get_logger().info('Keyboard interrupt, shutting down...')
+            clr_stat_client.destroy_node()
     
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
