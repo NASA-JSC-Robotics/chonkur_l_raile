@@ -73,7 +73,10 @@ class ControlStatusClient(Node):
                 name = ctrlr_status['spawned']['name'][i]
                 state = ctrlr_status['spawned']['state'][i]
                 if self.highlight and name in self.highlighted:
-                    color = 2
+                    if name=='joint_state_broadcaster' and state=='inactive':
+                        color = 4
+                    else:
+                        color = 2
                 else:
                     color = 1
                 self.stdscr.addstr(line, 0,
