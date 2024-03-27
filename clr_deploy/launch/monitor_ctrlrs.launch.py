@@ -21,6 +21,8 @@ def generate_launch_description():
     sim = LaunchConfiguration("sim")
 
     names = os.path.join(get_package_share_directory("clr_deploy"), 'config', 'clr_control_colors.yaml')
+    sim_config = os.path.join(get_package_share_directory("clr_deploy"), 'config', 'sim_controller_configs.yaml')
+    hw_config = os.path.join(get_package_share_directory("clr_deploy"), 'config', 'hardware_controller_configs.yaml')
 
     sim_controller_check = ExecuteProcess(
         cmd=[[
@@ -32,7 +34,8 @@ def generate_launch_description():
             'run ',
             'drt_ros2_control_tools ',
             'controller_check.py ',
-            'clr_deploy --sim ',
+            'clr_deploy ',
+            sim_config, ' ',
             '--highlight ',
             names,
         ]],
@@ -52,6 +55,7 @@ def generate_launch_description():
             "drt_ros2_control_tools ",
             "controller_check.py ",
             "clr_deploy ",
+            hw_config, ' ',
             "--highlight ",
             names,
         ]],
