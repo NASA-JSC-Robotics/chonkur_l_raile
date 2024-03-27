@@ -7,8 +7,6 @@ find_package(controller_manager_msgs REQUIRED)
 find_package(rclpy REQUIRED)
 
 ament_python_install_package(${PROJECT_NAME})
-# ament_python_install_module(${PROJECT_NAME}/ctrl_config_compiler.py)
-# ament_python_install_module(${PROJECT_NAME}/ctrl_stat_tools.py)
 
 install(PROGRAMS scripts/controller_check.py
     DESTINATION lib/${PROJECT_NAME}

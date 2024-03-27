@@ -16,7 +16,7 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-def compile_controller_configurations(config_paths_file: str, output_path: str, debug=False) -> int:
+def compile_controller_configurations(config_paths_file: str, output_path: str, debug=False) -> bool:
     """
     Compile ros2_control parameter configuration yamls into a single file for the controller_manager
     
