@@ -9,16 +9,9 @@ from rclpy.callback_groups import ReentrantCallbackGroup
 from controller_manager_msgs.srv import ListControllers
 
 class ControlStatusClient(Node):
-    def __init__(self, pkg, sim):
+    def __init__(self, pkg, config):
         super().__init__('ctrl_status_client')
-        # self.get_logger().info(f'package: {pkg}')
-        
-        # TODO: omit sim flag in favor of controller config filepath input
-        if sim:
-            self.ctrlr_cfg_path = os.path.join(get_package_share_directory(pkg), 'config', 'sim_controllers.yaml')
-        else:
-            self.ctrlr_cfg_path = os.path.join(get_package_share_directory(pkg), 'config', 'hardware_controllers.yaml')
-        
+        self.ctrlr_cfg_path = config
         self.list_ctrlrs = self.create_client(ListControllers, '/controller_manager/list_controllers')
         while not self.list_ctrlrs.wait_for_service(timeout_sec=1.0):
             self.get_logger().info(f'{self.list_ctrlrs.srv_name} is not available, waiting again...')
@@ -55,9 +48,9 @@ class ControlStatusClient(Node):
 
     
 class ControlStatusClientCurses(ControlStatusClient):
-    def __init__(self, pkg, sim, highlight=None):
+    def __init__(self, pkg, config, highlight=None):
 
-        super().__init__(pkg, sim)
+        super().__init__(pkg, config)
 
         self.stdscr = curses.initscr()
         curses.start_color()

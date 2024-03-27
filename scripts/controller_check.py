@@ -22,14 +22,14 @@ if __name__ == '__main__':
     parser.add_argument("package",
                         type=str,
                         help="Input the package used to run the controllers")
-    parser.add_argument("-s", "--sim",
-                        default=False,
-                        action='store_true',
-                        help="Flag to indicate robot is running in sim")
+    parser.add_argument("config",
+                        type=str,
+                        metavar='PATH',
+                        help="Filepath to controller configuration YAML file")
     parser.add_argument("--highlight",
                         default=None,
                         type=str,
                         metavar='PATH',
                         help="Filepath to YAML list of controller names to highlight")
     args, unknown = parser.parse_known_args()
-    main(args.package, args.sim, args.highlight)
+    main(args.package, args.config, args.highlight)
