@@ -8,6 +8,10 @@ install(
   DESTINATION share/${PROJECT_NAME}
 )
 
+install(PROGRAMS scripts/monitor_controllers.py
+    DESTINATION lib/${PROJECT_NAME}
+)
+
 ament_export_dependencies(${THIS_PACKAGE_INCLUDE_DEPENDS})
 
 ament_package()
