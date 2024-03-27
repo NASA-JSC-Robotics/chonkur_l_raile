@@ -2,12 +2,12 @@
 import argparse
 import time
 import rclpy
-from drt_ros2_control_tools.ctrl_stat_tools import ControlStatusClient
+from drt_ros2_control_tools.ctrl_stat_tools import ControlStatusClientCurses
 
 
 def main(pkg, sim, highlight):
     rclpy.init()
-    clr_stat_client = ControlStatusClient(pkg, sim, highlight)
+    clr_stat_client = ControlStatusClientCurses(pkg, sim, highlight)
     while rclpy.ok():
         try:
             clr_stat_client.show_compare()
