@@ -13,6 +13,17 @@ from drt_ros2_control_tools.ctrl_config_compiler import compile_controller_confi
 
 
 def generate_launch_description():
+    
+    declared_arguments = []
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "enable_admittance",
+            default_value="false",
+            description="Allow the admittance controllers to spawn",
+        )
+    )
+
+    enable_admittance = LaunchConfiguration("enable_admittance")
 
     cfgs = os.path.join(get_package_share_directory('clr_deploy'), 'config', 'hardware_controller_configs.yaml')
     cfg_out = os.path.join(get_package_share_directory('clr_deploy'), 'config', 'hardware_controllers.yaml')
@@ -24,10 +35,10 @@ def generate_launch_description():
             PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("clr_deploy"), 'launch','clr_control.launch.py')),
             launch_arguments={
                 "controllers_file": cfg_out,
-                "enable_admittance": 'true',
+                "enable_admittance": enable_admittance,
             }.items(),
         )        
-        return LaunchDescription([clr_launch])
+        return LaunchDescription(declared_arguments + [clr_launch])
     else:
         Shutdown(
             reason='Control configuration compiled failed, exiting clr_sim.launch.py'
