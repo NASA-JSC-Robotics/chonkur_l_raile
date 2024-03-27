@@ -9,7 +9,7 @@ from launch.substitutions import LaunchConfiguration, ThisLaunchFileDir
 import os
 import yaml
 
-from clr_deploy.ctrl_config_compiler import compile_controller_configurations
+from drt_ros2_control_tools.ctrl_config_compiler import compile_controller_configurations
 
 
 def generate_launch_description():

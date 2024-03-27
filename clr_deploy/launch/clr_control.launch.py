@@ -6,10 +6,6 @@ from launch_ros.actions import Node
 from launch.substitutions import LaunchConfiguration
 import os
 
-from clr_deploy.ctrl_config_compiler import compile_controller_configurations
-
-
-
 def generate_launch_description():
     
     declared_arguments = []
