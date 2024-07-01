@@ -8,7 +8,9 @@ find_package(rclpy REQUIRED)
 
 ament_python_install_package(${PROJECT_NAME})
 
-install(PROGRAMS scripts/controller_check.py
+install(PROGRAMS 
+    scripts/controller_check.py
+    scripts/estop_safety.py
     DESTINATION lib/${PROJECT_NAME}
 )
 
