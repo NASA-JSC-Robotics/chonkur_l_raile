@@ -11,22 +11,25 @@ from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
 
 
 class EStopSafety(Node):
-    def __init__(self, estop_topic, stop_values, list_controllers_service_name):
+    def __init__(self, estop_topic, stop_values, cancel_service_list, list_controllers_service_name = '/controller_manager/list_controllers', controller_types = ["joint_trajectory_controller/JointTrajectoryController"]):
         super().__init__('estop_safety')
+
         self.estop_values_list = stop_values
-        self.list_controllers_service_name = list_controllers_service_name
+        self.list_controllers_service_name = list_controllers_service_name # set this to default, but it can be set later
 
         self.estop_cb_group = MutuallyExclusiveCallbackGroup()
         self.controllers_cb_group = MutuallyExclusiveCallbackGroup()
 
-        self.subscription = self.create_subscription(
+        self.accepted_controller_types = controller_types
+        # string that will append to the controller name
+        self.joint_trajectory_cancel_service = cancel_service_list
+
+        self.estop_subscriber = self.create_subscription(
             SafetyMode,
             estop_topic,
             self.estop_listener_callback,
-            qos_profile = 10,
+            qos_profile = 10, # qos will keep the last 10 messages (this is the depth of the messaging history). Needs to match the qos_profile of the publisher to work
             callback_group = self.estop_cb_group)
-        
-        self.subscription,  # prevent unused variable warning
         
     def estop_listener_callback(self, msg):
         self.get_logger().info('I heard: "%s"' % msg)
@@ -38,36 +41,33 @@ class EStopSafety(Node):
     
     def get_controllers(self):
         # this function returns the list of the controllers
-        self.list_ctrlrs_client = self.create_client(ListControllers, self.list_controllers_service_name, callback_group= self.controllers_cb_group)
+        self.list_ctrlrs_client = self.create_client(ListControllers, self.list_controllers_service_name, callback_group = self.controllers_cb_group)
 
         while not self.list_ctrlrs_client.wait_for_service(timeout_sec=1.0):
             self.get_logger().info(f'{self.list_ctrlrs_client.srv_name} is not available, waiting again...')
-        
-        self.list_ctrlrs_req = ListControllers.Request()
-        self.controllers_list_resp = self.list_ctrlrs_client.call(self.list_ctrlrs_req)
-        #self.future = self.list_ctrlrs_client.call_async(self.list_ctrlrs_req)
-        # rclpy.spin_until_future_complete(self, self.future)
-        self.spawned_ctrlrs = self.controllers_list_resp.controller
-        self.spawned_ctrlr_names = [ctrlr.name for ctrlr in self.spawned_ctrlrs]
-        self.spawned_ctrlr_types = [ctrlr.type for ctrlr in self.spawned_ctrlrs]
+    
+        list_ctrlrs_req = ListControllers.Request()
+        list_ctrlrs_resp = self.list_ctrlrs_client.call(list_ctrlrs_req)
+        spawned_ctrlr_names = [ctrlr.name for ctrlr in list_ctrlrs_resp.controller]
+        spawned_ctrlr_types = [ctrlr.type for ctrlr in list_ctrlrs_resp.controller]
+        print(spawned_ctrlr_names)
+        print("types -----------------: ", spawned_ctrlr_types)
         self.controller_names = []
-        for i in range(0, len(self.spawned_ctrlr_names)):
-            if(self.spawned_ctrlr_types[i] == "joint_trajectory_controller/JointTrajectoryController"):
-                self.controller_names.append(self.spawned_ctrlr_names[i])
+        for i in range(0, len(spawned_ctrlr_names)):
+            if(spawned_ctrlr_types[i] in self.accepted_controller_types):
+                self.controller_names.append(spawned_ctrlr_names[i])
         print("list of controller names .....................")
         print(self.controller_names)
+
 
     def cancel_controllers(self):
         # empty cancel goal request msg (works for both full robot and gripper)
         cancel_msg = CancelGoal.Request()
 
-        # string that will append to the controller name
-        joint_trajectory_cancel_service = "/follow_joint_trajectory/_action/cancel_goal"
-
         # cancel all of the controllers actions
         self.get_logger().info("canceling controllers")
         for name in self.controller_names:
-            client_name = name + joint_trajectory_cancel_service
+            client_name = name + self.joint_trajectory_cancel_service[1] # fix
             self.get_logger().info('client_name {}'.format(client_name))
         #     print("this is the client name: ", client_name)
 
