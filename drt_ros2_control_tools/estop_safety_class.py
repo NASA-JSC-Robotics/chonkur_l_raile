@@ -11,10 +11,28 @@ from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
 
 
 class EStopSafety(Node):
-    def __init__(self, estop_topic, stop_values, cancel_service_list, list_controllers_service_name = '/controller_manager/list_controllers', controller_types = ["joint_trajectory_controller/JointTrajectoryController"]):
+    """ The EStopSafety Class is responsible for canceling all actions moving the robot after the e-stop has been triggered.
+
+    Args:
+        Node (_type_): _description_ 
+    """
+
+    def __init__(self, estop_topic, estop_values_list, joint_trajectory_cancel_service, 
+                 list_controllers_service_name = '/controller_manager/list_controllers', 
+                 controller_types = ["joint_trajectory_controller/JointTrajectoryController"]):
+        
+        """_summary_
+
+        Args:
+            estop_topic (str): the topic EStopSafety is subscribed to which publishes the e-stop status
+            estop_values_list (list): a list of e-stop values that, when published, should trigger a stop of the actions
+            joint_trajectory_cancel_service (list): list of the strings needed to append to the controller name to create the approproate cancel service name
+            list_controllers_service_name (str): the name of the service where to list the controllers. Defaults to '/controller_manager/list_controllers'.
+            controller_types (list): types of controllers responsible for actions that need to be cancelled. Defaults to ["joint_trajectory_controller/JointTrajectoryController"].
+        """
         super().__init__('estop_safety')
 
-        self.estop_values_list = stop_values
+        self.estop_values_list = estop_values_list
         self.list_controllers_service_name = list_controllers_service_name # set this to default, but it can be set later
 
         self.estop_cb_group = MutuallyExclusiveCallbackGroup()
@@ -22,7 +40,7 @@ class EStopSafety(Node):
 
         self.accepted_controller_types = controller_types
         # string that will append to the controller name
-        self.joint_trajectory_cancel_service = cancel_service_list
+        self.joint_trajectory_cancel_service = joint_trajectory_cancel_service
 
         self.estop_subscriber = self.create_subscription(
             SafetyMode,
@@ -32,6 +50,11 @@ class EStopSafety(Node):
             callback_group = self.estop_cb_group)
         
     def estop_listener_callback(self, msg):
+        """_summary_
+
+        Args:
+            msg (_type_): _description_
+        """
         self.get_logger().info('I heard: "%s"' % msg)
         if (msg.mode in self.estop_values_list): # need to abstract this out since mode is specific to UR
             # if the safety messages are triggered, get the controllers and cancel them
@@ -48,14 +71,18 @@ class EStopSafety(Node):
     
         list_ctrlrs_req = ListControllers.Request()
         list_ctrlrs_resp = self.list_ctrlrs_client.call(list_ctrlrs_req)
+        print("this is the list cont resp: " , list_ctrlrs_resp)
         spawned_ctrlr_names = [ctrlr.name for ctrlr in list_ctrlrs_resp.controller]
         spawned_ctrlr_types = [ctrlr.type for ctrlr in list_ctrlrs_resp.controller]
         print(spawned_ctrlr_names)
         print("types -----------------: ", spawned_ctrlr_types)
         self.controller_names = []
+        self.controller_types = []
         for i in range(0, len(spawned_ctrlr_names)):
             if(spawned_ctrlr_types[i] in self.accepted_controller_types):
                 self.controller_names.append(spawned_ctrlr_names[i])
+                self.controller_types.append(spawned_ctrlr_types[i])
+
         print("list of controller names .....................")
         print(self.controller_names)
 
