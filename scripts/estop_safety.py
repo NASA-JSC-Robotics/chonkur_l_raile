@@ -23,10 +23,9 @@ def main(args=None):
     cancel_list =  ["/follow_joint_trajectory/_action/cancel_goal", "/gripper_cmd/_action/cancel_goal"]
 
     try:
-        estop_node = EStopSafety(estop_topic = estop_t, estop_values_list = ur_estop_values, estop_msg_type = SafetyMode, estop_triggered = estop_triggered,
-                    joint_trajectory_cancel_service = cancel_list,
-                    list_controllers_service_name = '/controller_manager/list_controllers',
-                    controller_types= controller_types_list)
+        estop_node = EStopSafety(estop_topic = estop_t, estop_values_list = ur_estop_values, estop_msg_type = SafetyMode, 
+                    estop_triggered = estop_triggered,
+                    list_controllers_service_name = '/controller_manager/list_controllers')
 
         executor = MultiThreadedExecutor(num_threads=2) #check number 
         executor.add_node(estop_node)

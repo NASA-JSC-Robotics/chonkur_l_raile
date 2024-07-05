@@ -10,76 +10,68 @@ from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
 
 class ControllerCancelServiceExtractor(Node):
     def __init__(self):
-        # self.controller_names = []
-        # self.controller_types = []
-        # self.controller_cancel_service = []
-        self.gripper_type = "position_controllers/GripperActionController"
+
+        super().__init__('controller_cancel_service_extractor')
+
+        # standard controller types for robot body and gripper
         self.body_type = "joint_trajectory_controller/JointTrajectoryController"
+        self.gripper_type = "position_controllers/GripperActionController"
+        
+        # currently moveit_simple_controller_manager can only connect to FollowJointTrajectoryAction and GripperCommandAction servers.
+        self.append_body_srv_name = "/follow_joint_trajectory/_action/cancel_goal"
+        self.append_gripper_srv_name = "/gripper_cmd/_action/cancel_goal"
+
         self.cancel_service_list = []
 
     def add_cancel_service(self, list_ctrlrs_resp):
-        counter = 0
         for ctrlr in list_ctrlrs_resp.controller:
-            print("counter is ", counter)
-            counter+=1
             if ctrlr.type == self.body_type:
-                self.cancel_service_list.append(ctrlr.name + "/follow_joint_trajectory/_action/cancel_goal")
+                self.cancel_service_list.append(ctrlr.name + self.append_body_srv_name)
 
             elif ctrlr.type == self.gripper_type:
-                self.cancel_service_list.append(ctrlr.name + "/gripper_cmd/_action/cancel_goal")
-        print("this is the list of services to cancel")
-        print(self.cancel_service_list)
-
-    # def cancel_controllers():
-    #     for controller in self.controllers:
-    #         client_name = name + self.joint_trajectory_cancel_service[1] 
-    #         client.call
-    
-    
-            
-
-# jtc_canceller = ControllerCanceller("JointTrajectoryController","/follow_joint_trajectory/_action/cancel_goal")
-# gripper_canceller = ControllerCanceller("GripperController")
-# unkown_canceller = ControllerCanceller("UnkownController")
-
+                self.cancel_service_list.append(ctrlr.name + self.append_gripper_srv_name)
+        
+        self.get_logger().info('this is the list of all cancel services: {}'.format(self.cancel_service_list))
 
 class EStopSafety(Node):
     """ The EStopSafety Class is responsible for canceling all actions moving the robot after the e-stop has been triggered.
 
     Args:
-        Node (Node): _description_ 
+        Node (Node): inherests from the Node class
     """
-    def __init__(self, estop_topic, estop_values_list, joint_trajectory_cancel_service, estop_msg_type, estop_triggered,
-                 list_controllers_service_name = '/controller_manager/list_controllers', 
-                 controller_types = ["joint_trajectory_controller/JointTrajectoryController"]):
-        
+    def __init__(self, estop_topic, estop_values_list, estop_msg_type, estop_triggered, list_controllers_service_name = '/controller_manager/list_controllers'):
         """ the init function for the EStopSafety Class, which creates a subscriber to the EStop topic.
 
         Args:
             estop_topic (str): the topic EStopSafety is subscribed to which publishes the e-stop status
             estop_values_list (list): a list of e-stop values that, when published, should trigger a stop of the actions
-            joint_trajectory_cancel_service (list): list of the strings needed to append to the controller name to create the approproate cancel service name
-            list_controllers_service_name (str): the name of the service where it can retrive the list the controllers. Defaults to '/controller_manager/list_controllers'.
-            controller_types (list): types of controllers responsible for actions that need to be cancelled. Defaults to ["joint_trajectory_controller/JointTrajectoryController"].
+            estop_msg_type (msg type): the type of message published by the estop
+            estop_triggered (function): a function that checks if the estop has been triggered
+            list_controllers_service_name (str, optional): the name of the service where it can retrive the list the controllers. Defaults to '/controller_manager/list_controllers'.
         """
-        super().__init__('estop_safety')
 
+        super().__init__('estop_safety')
+        
+        # create an instance of the ControllerCancelServiceExtractor
         self.extractor = ControllerCancelServiceExtractor()
 
+        # the type of message published by the robot's estop
         self.estop_msg_type = estop_msg_type
 
+        # a pass in the function that checks if an estop was triggered or not
         self.estop_triggered = estop_triggered
 
+        # list of values that will trigger the estop
         self.estop_values_list = estop_values_list
+
+        # service for listing the controllers (gets all configured controllers)
         self.list_controllers_service_name = list_controllers_service_name # set this to default, but it can be set later
 
+        # create the two callback groups that the multi-threaded executr will run
         self.estop_cb_group = MutuallyExclusiveCallbackGroup()
         self.controllers_cb_group = MutuallyExclusiveCallbackGroup()
 
-        self.accepted_controller_types = controller_types
-        # string that will append to the controller name
-        self.joint_trajectory_cancel_service = joint_trajectory_cancel_service
-
+        # instantiate a subscriber to the estop topic
         self.estop_subscriber = self.create_subscription(
             self.estop_msg_type,
             estop_topic,
@@ -94,72 +86,38 @@ class EStopSafety(Node):
             msg (_type_): _description_
         """
         self.get_logger().info('I heard: "%s"' % msg)
-        #if (msg.mode in self.estop_values_list): # need to abstract this out since mode is specific to UR
-            # if the safety messages are triggered, get the controllers and cancel them
-            # self.estop_triggered("hi")
         if(self.estop_triggered(msg, self.estop_values_list)):
-            print("after estop trigger")
-            self.get_controllers()
+            self.get_logger().info('e-stop was triggered')
+            self.get_cancel_service_names()
+            self.get_logger().info('pulled cancel service names')
             self.cancel_controllers()
-            print("done cancelling actions")
+            self.get_logger().info('cancelled controllers')
     
-    def get_controllers(self):
-        # this function returns the list of the controllers
+    def get_cancel_service_names(self):
+        # create a service client to get the list of controllers
         self.list_ctrlrs_client = self.create_client(ListControllers, self.list_controllers_service_name, callback_group = self.controllers_cb_group)
-
+        # wait for the corresponding server
         while not self.list_ctrlrs_client.wait_for_service(timeout_sec=1.0):
             self.get_logger().info(f'{self.list_ctrlrs_client.srv_name} is not available, waiting again...')
-    
+        # create a list controllers request client
         list_ctrlrs_req = ListControllers.Request()
+        # get the list of controllers
         list_ctrlrs_resp = self.list_ctrlrs_client.call(list_ctrlrs_req)
+        # send the list of controllers to the ControllerCancelServiceExtractor to extract the service names
         self.extractor.add_cancel_service(list_ctrlrs_resp)
-        
-        # #print("this is the list cont resp: " , list_ctrlrs_resp)
-        # spawned_ctrlr_names = [ctrlr.name for ctrlr in list_ctrlrs_resp.controller]
-        # spawned_ctrlr_types = [ctrlr.type for ctrlr in list_ctrlrs_resp.controller]
-        # #print(spawned_ctrlr_names)
-        # #print("types -----------------: ", spawned_ctrlr_types)
-        # self.controller_names = []
-        # self.controller_types = []
-        # for i in range(0, len(spawned_ctrlr_names)):
-        #     if(spawned_ctrlr_types[i] in self.accepted_controller_types):
-        #         # self.controller_names.append(spawned_ctrlr_names[i])
-        #         # self.controller_types.append(spawned_ctrlr_types[i])
-
-        #print("list of controller names .....................")
-        #print(self.controller_names)
 
 
     def cancel_controllers(self):
         # empty cancel goal request msg (works for both full robot and gripper)
         cancel_msg = CancelGoal.Request()
-
         # cancel all of the controllers actions
         self.get_logger().info("canceling controllers")
-        #for name in self.controller_names:
         for client_name in self.extractor.cancel_service_list:
-            #client_name = name + self.joint_trajectory_cancel_service[1] # fix
-            #self.get_logger().info('client_name {}'.format(client_name))
-            print("this is the client name: ", client_name)
-
-        #     #print("this is the client name " + client_name)
-        #     # instantiate a client
+            # create a service client
             cancel_client = self.create_client(CancelGoal, client_name, callback_group=self.controllers_cb_group)
-            #cancel_client = self.create_client(CancelGoal, client_name, callback_group=self.controllers_cb_group)
+            # wait for the corresponding server
             while not cancel_client.wait_for_service(timeout_sec=1.0):
                 self.get_logger().info('service not available, waiting again...')
+            # send the request with the cancel message and get the response
             result = cancel_client.call(cancel_msg)
             self.get_logger().info('result {}'.format(result))
-
-
-
-# __init__
-#     subscriber = estop_cb
-#     service call - get controllers
-#     self.controllers = blah
-
-# def estop_cb()
-#     if estop_high:
-#         make cancel service requests
-
-
