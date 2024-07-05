@@ -8,6 +8,39 @@ from controller_manager_msgs.srv import ListControllers
 from action_msgs.srv import CancelGoal
 from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
 
+class ControllerCancelServiceExtractor(Node):
+    def __init__(self):
+        # self.controller_names = []
+        # self.controller_types = []
+        # self.controller_cancel_service = []
+        self.gripper_type = "position_controllers/GripperActionController"
+        self.body_type = "joint_trajectory_controller/JointTrajectoryController"
+        self.cancel_service_list = []
+
+    def add_cancel_service(self, list_ctrlrs_resp):
+        counter = 0
+        for ctrlr in list_ctrlrs_resp.controller:
+            print("counter is ", counter)
+            counter+=1
+            if ctrlr.type == self.body_type:
+                self.cancel_service_list.append(ctrlr.name + "/follow_joint_trajectory/_action/cancel_goal")
+
+            elif ctrlr.type == self.gripper_type:
+                self.cancel_service_list.append(ctrlr.name + "/gripper_cmd/_action/cancel_goal")
+        print("this is the list of services to cancel")
+        print(self.cancel_service_list)
+
+    # def cancel_controllers():
+    #     for controller in self.controllers:
+    #         client_name = name + self.joint_trajectory_cancel_service[1] 
+    #         client.call
+    
+    
+            
+
+# jtc_canceller = ControllerCanceller("JointTrajectoryController","/follow_joint_trajectory/_action/cancel_goal")
+# gripper_canceller = ControllerCanceller("GripperController")
+# unkown_canceller = ControllerCanceller("UnkownController")
 
 
 class EStopSafety(Node):
@@ -30,6 +63,8 @@ class EStopSafety(Node):
             controller_types (list): types of controllers responsible for actions that need to be cancelled. Defaults to ["joint_trajectory_controller/JointTrajectoryController"].
         """
         super().__init__('estop_safety')
+
+        self.extractor = ControllerCancelServiceExtractor()
 
         self.estop_msg_type = estop_msg_type
 
@@ -77,17 +112,19 @@ class EStopSafety(Node):
     
         list_ctrlrs_req = ListControllers.Request()
         list_ctrlrs_resp = self.list_ctrlrs_client.call(list_ctrlrs_req)
-        #print("this is the list cont resp: " , list_ctrlrs_resp)
-        spawned_ctrlr_names = [ctrlr.name for ctrlr in list_ctrlrs_resp.controller]
-        spawned_ctrlr_types = [ctrlr.type for ctrlr in list_ctrlrs_resp.controller]
-        #print(spawned_ctrlr_names)
-        #print("types -----------------: ", spawned_ctrlr_types)
-        self.controller_names = []
-        self.controller_types = []
-        for i in range(0, len(spawned_ctrlr_names)):
-            if(spawned_ctrlr_types[i] in self.accepted_controller_types):
-                self.controller_names.append(spawned_ctrlr_names[i])
-                self.controller_types.append(spawned_ctrlr_types[i])
+        self.extractor.add_cancel_service(list_ctrlrs_resp)
+        
+        # #print("this is the list cont resp: " , list_ctrlrs_resp)
+        # spawned_ctrlr_names = [ctrlr.name for ctrlr in list_ctrlrs_resp.controller]
+        # spawned_ctrlr_types = [ctrlr.type for ctrlr in list_ctrlrs_resp.controller]
+        # #print(spawned_ctrlr_names)
+        # #print("types -----------------: ", spawned_ctrlr_types)
+        # self.controller_names = []
+        # self.controller_types = []
+        # for i in range(0, len(spawned_ctrlr_names)):
+        #     if(spawned_ctrlr_types[i] in self.accepted_controller_types):
+        #         # self.controller_names.append(spawned_ctrlr_names[i])
+        #         # self.controller_types.append(spawned_ctrlr_types[i])
 
         #print("list of controller names .....................")
         #print(self.controller_names)
@@ -99,14 +136,16 @@ class EStopSafety(Node):
 
         # cancel all of the controllers actions
         self.get_logger().info("canceling controllers")
-        for name in self.controller_names:
-            client_name = name + self.joint_trajectory_cancel_service[1] # fix
-            self.get_logger().info('client_name {}'.format(client_name))
-        #     print("this is the client name: ", client_name)
+        #for name in self.controller_names:
+        for client_name in self.extractor.cancel_service_list:
+            #client_name = name + self.joint_trajectory_cancel_service[1] # fix
+            #self.get_logger().info('client_name {}'.format(client_name))
+            print("this is the client name: ", client_name)
 
         #     #print("this is the client name " + client_name)
         #     # instantiate a client
             cancel_client = self.create_client(CancelGoal, client_name, callback_group=self.controllers_cb_group)
+            #cancel_client = self.create_client(CancelGoal, client_name, callback_group=self.controllers_cb_group)
             while not cancel_client.wait_for_service(timeout_sec=1.0):
                 self.get_logger().info('service not available, waiting again...')
             result = cancel_client.call(cancel_msg)
