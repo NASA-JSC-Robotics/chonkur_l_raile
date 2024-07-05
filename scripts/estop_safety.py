@@ -4,6 +4,10 @@ import rclpy
 from rclpy.node import Node
 from drt_ros2_control_tools.estop_safety_class import EStopSafety
 from rclpy.executors import MultiThreadedExecutor 
+from ur_dashboard_msgs.msg import SafetyMode
+
+def estop_triggered(msg, estop_values_list):
+    return msg.mode in estop_values_list
 
 def main(args=None):
 
@@ -19,7 +23,7 @@ def main(args=None):
     cancel_list =  ["/follow_joint_trajectory/_action/cancel_goal", "/gripper_cmd/_action/cancel_goal"]
 
     try:
-        estop_node = EStopSafety(estop_topic = estop_t, estop_values_list = ur_estop_values,
+        estop_node = EStopSafety(estop_topic = estop_t, estop_values_list = ur_estop_values, estop_msg_type = SafetyMode, estop_triggered = estop_triggered,
                     joint_trajectory_cancel_service = cancel_list,
                     list_controllers_service_name = '/controller_manager/list_controllers',
                     controller_types= controller_types_list)
