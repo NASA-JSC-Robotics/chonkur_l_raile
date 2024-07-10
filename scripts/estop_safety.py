@@ -6,7 +6,7 @@ from drt_ros2_control_tools.estop_safety_class import EStopSafety
 from rclpy.executors import MultiThreadedExecutor 
 from ur_dashboard_msgs.msg import SafetyMode
 
-def estop_triggered(msg, estop_values_list):
+def estop_triggered(msg, estop_values_list): # should not be passed in.
     return msg.mode in estop_values_list
 
 def main(args=None):
