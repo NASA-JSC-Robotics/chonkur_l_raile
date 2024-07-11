@@ -10,7 +10,7 @@ def main(args=None):
     try:
         clr_estop_node = CLREStopSafety()
 
-        executor = MultiThreadedExecutor(num_threads=2) #check number 
+        executor = MultiThreadedExecutor(num_threads=2)
         executor.add_node(clr_estop_node)
 
         try: 
