@@ -9,24 +9,19 @@ from controller_manager_msgs.srv import ListControllers
 from action_msgs.srv import CancelGoal
 from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
 
-class ControllerCancelServiceExtractor(Node): #TODO pass in argumement so gripper is optional
-    def __init__(self):
+class ControllerCancelServiceExtractor(Node):
+    def __init__(self, include_gripper):
 
         super().__init__('controller_cancel_service_extractor')
 
-        # standard controller types for robot body and gripper
-        self.body_type = "joint_trajectory_controller/JointTrajectoryController"
-        self.gripper_type = "position_controllers/GripperActionController"
-        
-        # currently moveit_simple_controller_manager can only connect to FollowJointTrajectoryAction and GripperCommandAction servers.
-        self.append_body_srv_name = "/follow_joint_trajectory/_action/cancel_goal"
-        self.append_gripper_srv_name = "/gripper_cmd/_action/cancel_goal"
-
-        # make key value pairs
+        # key: standard controller types for robot body and gripper, value: server
+        # note currently moveit_simple_controller_manager can only connect to FollowJointTrajectoryAction and GripperCommandAction servers.
         self.controller_dict = {
-            "joint_trajectory_controller/JointTrajectoryController" : "/follow_joint_trajectory/_action/cancel_goal",
-            "position_controllers/GripperActionController" : "/gripper_cmd/_action/cancel_goal"
+            "joint_trajectory_controller/JointTrajectoryController" : "/follow_joint_trajectory/_action/cancel_goal"
         }
+        
+        if include_gripper:
+            self.controller_dict["position_controllers/GripperActionController"] = "/gripper_cmd/_action/cancel_goal"
 
         self.cancel_service_list = []
 
@@ -36,24 +31,13 @@ class ControllerCancelServiceExtractor(Node): #TODO pass in argumement so grippe
                 self.cancel_service_list.append(ctrlr.name + self.controller_dict[ctrlr.type])
         self.get_logger().debug('this is the list of all cancel services for node "%s" : {}'.format(self.cancel_service_list) % self.get_name())
 
-    
-    # def add_cancel_service(self, list_ctrlrs_resp):
-    #     for ctrlr in list_ctrlrs_resp.controller: # TODO abstract out into dictionaries
-    #         if ctrlr.type == self.body_type:
-    #             self.cancel_service_list.append(ctrlr.name + self.append_body_srv_name)
-
-    #         elif ctrlr.type == self.gripper_type:
-    #             self.cancel_service_list.append(ctrlr.name + self.append_gripper_srv_name)
-        
-    #     self.get_logger().debug('this is the list of all cancel services for node "%s" : {}'.format(self.cancel_service_list) % self.get_name())
-
 class EStopSafety(Node):
     """ The EStopSafety Class is responsible for canceling all actions moving the robot after the e-stop has been triggered.
 
     Args:
         Node (Node): inherests from the Node class
     """
-    def __init__(self, estop_topic, estop_values_list, estop_msg_type, list_controllers_service_name = '/controller_manager/list_controllers'):
+    def __init__(self, estop_topic, estop_values_list, estop_msg_type, include_gripper, list_controllers_service_name = '/controller_manager/list_controllers'):
         """ the init function for the EStopSafety Class, which creates a subscriber to the EStop topic.
 
         Args:
@@ -68,7 +52,7 @@ class EStopSafety(Node):
         super().__init__('estop_safety')
         
         # create an instance of the ControllerCancelServiceExtractor
-        self.extractor = ControllerCancelServiceExtractor()
+        self.extractor = ControllerCancelServiceExtractor(include_gripper = include_gripper)
 
         # the type of message published by the robot's estop
         self.estop_msg_type = estop_msg_type
@@ -119,8 +103,12 @@ class EStopSafety(Node):
         self.list_ctrlrs_client = self.create_client(ListControllers, self.list_controllers_service_name, callback_group = self.controllers_cb_group)
         # wait for the corresponding server
         #initial_time = time.time()
+        counter = 0
         while not self.list_ctrlrs_client.wait_for_service(timeout_sec=1.0):
             self.get_logger().info(f'{self.list_ctrlrs_client.srv_name} is not available, waiting again...') # TODO have a 10 sec counter, if waiting for longer than 10 sec then escelate from info to error use bcolors to make error red
+            if counter >= 10:
+                self.get_logger().error(f'unable to reach {self.list_ctrlrs_client.srv_name}') 
+            counter +=1
         # create a list controllers request client
         list_ctrlrs_req = ListControllers.Request()
         # get the list of controllers
@@ -137,8 +125,12 @@ class EStopSafety(Node):
             # create a service client
             cancel_client = self.create_client(CancelGoal, client_name, callback_group=self.controllers_cb_group)
             # wait for the corresponding server
+            counter = 0
             while not cancel_client.wait_for_service(timeout_sec=1.0):
                 self.get_logger().info('service not available, waiting again...')
+                if counter >= 10:
+                    self.get_logger().error(f'unable to reach {client_name}') 
+                counter += 1
             # send the request with the cancel message and get the response
             response = cancel_client.call(cancel_msg)
             self.get_logger().debug('response from the estop cancel request on "%s" {}'.format(response) %client_name)
