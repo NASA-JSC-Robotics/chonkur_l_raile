@@ -4,28 +4,19 @@
   <name>clr_control</name>
   <version>0.0.1</version>
   <description>
-    Control package for ChonkUR L. Rail-E's E-stop to control shut down
+    Control package for ChonkUR L. Rail-E
   </description>
 
   <maintainer email="mina.kian@nasa.gov">Mina Kian</maintainer>
 
   <license>NASA-1.3</license>
-  <!-- note to self, must continue to update with relevant buildtools etc.  -->
   <buildtool_depend>ament_cmake</buildtool_depend>
   <buildtool_depend>ament_cmake_python</buildtool_depend>
 
-  <exec_depend>launch</exec_depend>
-  <exec_depend>launch_ros</exec_depend>
-  <exec_depend>ament_index_python</exec_depend>
-  <exec_depend>controller_manager</exec_depend>
-  <exec_depend>controller_manager_msgs</exec_depend>
-  <exec_depend>clr_description</exec_depend>
-  <exec_depend>chonkur_deploy</exec_depend>
-  <exec_depend>vention_rail_deploy</exec_depend>
-  <exec_depend>ewellix_liftkit_deploy</exec_depend>
-  <exec_depend>realsense2_camera</exec_depend>
+
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>ur_dashboard_msgs</exec_depend>
   <exec_depend>drt_ros2_control_tools</exec_depend>
-  <depend>rclpy</depend>
 
   <export>
     <build_type>ament_cmake</build_type>
