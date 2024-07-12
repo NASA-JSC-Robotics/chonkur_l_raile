@@ -1,19 +1,14 @@
-import sys
-import time
-import rclpy
 from rclpy.node import Node
-
-from std_msgs.msg import String
-#from ur_dashboard_msgs.msg import SafetyMode
 from controller_manager_msgs.srv import ListControllers
+from controller_manager_msgs.srv._list_controllers import ListControllers_Request
 from action_msgs.srv import CancelGoal
 from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
-from typing import TypeVar, Type 
+from typing import TypeVar
 
 EStopROSMsg = TypeVar('EStopROSMsg')
 
 class ControllerCancelServiceExtractor(Node):
-    def __init__(self, include_gripper):
+    def __init__(self, include_gripper: bool):
         """The constructor for the ControllerCancelServiceExtractor Class, which extracts the types of controllers to be cancelled.
         Args:
             include_gripper (bool): whether or not to include the gripper in the list of controllers to cancel.
@@ -21,7 +16,7 @@ class ControllerCancelServiceExtractor(Node):
 
         super().__init__('controller_cancel_service_extractor')
 
-        # key: standard controller types for robot, value: server
+        # key: standard controller types for robot, value: the standard request name for the cancel service of that controller type (not fully rectified name) 
         self.controller_dict = {
             "joint_trajectory_controller/JointTrajectoryController" : "/follow_joint_trajectory/_action/cancel_goal"
         }
@@ -31,16 +26,17 @@ class ControllerCancelServiceExtractor(Node):
 
         self.cancel_service_list = []
 
-    def add_cancel_service(self, list_ctrlrs_resp):
+    def add_cancel_service(self, list_ctrlrs_resp: list[ListControllers_Request]):
         """Extracts the cancel services for the desired controller type.
 
         Args:
-            list_ctrlrs_resp ([String]): full list of robot controllers.
+            list_ctrlrs_resp ([ListControllers_Request]): full list of robot controllers.
         """
         for ctrlr in list_ctrlrs_resp.controller: 
             if ctrlr.type in self.controller_dict:
                 self.cancel_service_list.append(ctrlr.name + self.controller_dict[ctrlr.type])
-        self.get_logger().debug('this is the list of all cancel services for node "%s" : {}'.format(self.cancel_service_list) % self.get_name())
+        self.get_logger().info('this is the list of all cancel services for node "%s" : {}'.format(self.cancel_service_list) % self.get_name())
+        self.get_logger().debug('{node_name}: this is the list of all controllers to be cancelled {controllers}'.format(node_name = self.get_name(), controllers = self.cancel_service_list))
 
 class EStopSafety(Node):
     """This class cancels the robot's controllers when the EStop has been triggered.
@@ -49,14 +45,14 @@ class EStopSafety(Node):
         Node (Node): inherits the Node class
     """
 
-    def __init__(self, estop_topic: String, estop_msg_type: EStopROSMsg, include_gripper: bool = True, list_controllers_service_name: String = '/controller_manager/list_controllers'):
+    def __init__(self, estop_topic: str, estop_msg_type: EStopROSMsg, include_gripper: bool = True, list_controllers_service_name: str = '/controller_manager/list_controllers'):
         """ the constructor for the EStopSafety Class, which creates a subscriber to the EStop topic.
 
         Args:
-            estop_topic (String): the topic which publishes the e-stop status. 
+            estop_topic (str): the topic which publishes the e-stop status. 
             estop_msg_type (EStopRosMsg): the type of message published on the estop topic.
             include_gripper (bool, optional): whether to include the robot gripper or not. Defaults to True.
-            list_controllers_service_name (String, optional): the name of the service where it can retrive the list the controllers. Defaults to '/controller_manager/list_controllers'.
+            list_controllers_service_name (str, optional): the name of the service where it can retrive the list the controllers. Defaults to '/controller_manager/list_controllers'.
         """
         # start setting types in the init e.g. estop topic is  string
 
@@ -69,7 +65,7 @@ class EStopSafety(Node):
         self.estop_msg_type = estop_msg_type
 
         # service for listing the controllers (gets all configured controllers)
-        self.list_controllers_service_name = list_controllers_service_name # set this to default, but it can be set later
+        self.list_controllers_service_name = list_controllers_service_name 
 
         # create the two callback groups that the multi-threaded executor will run
         self.estop_cb_group = MutuallyExclusiveCallbackGroup()
@@ -83,11 +79,18 @@ class EStopSafety(Node):
             qos_profile = 10, # qos will keep the last 10 messages (this is the depth of the messaging history). Needs to match the qos_profile of the publisher to work
             callback_group = self.estop_cb_group)
         
-        # this is psudo code
-    def estop_triggered(self): # this lives in drt but in the robot specific package I will need to interit this node and properly setup the ur specific stuff
-        raise NotImplementedError
+    def estop_triggered(self, msg: EStopROSMsg) -> bool:
+        """Evaluate the estop ros msg to determine if the estop has been triggered. Returns true once the estop has been triggered and false all other times. To be overriden by the robot specific method.
 
-    def estop_listener_callback(self, msg):
+        Raises:
+            NotImplementedError
+
+        Returns:
+            bool: if the estop has been triggered or not
+        """
+        raise NotImplementedError("estop_triggered function not implemented for the robot")
+
+    def estop_listener_callback(self, msg: EStopROSMsg):
         """This callback continuously listens to the robot's estop topic. Once the estop has been triggered, 
         it calls get_cancel_service_names(), which returns the list of joint trajectory and gripper controller services,
         then it calls cancel_controllers() which sends the cancel goal request to all the controllers. 
@@ -96,12 +99,12 @@ class EStopSafety(Node):
         Args:
             msg (EStopRosMsg): message published on the estop topic
         """
-        self.get_logger().debug('I heard: "%s" on the estop topic' % msg)
+        self.get_logger().debug('{node_name} Estop msg: {e_msg}'.format(node_name = self.get_name(), e_msg = msg))
         if(self.estop_triggered(msg)):
-            self.get_logger().info('e-stop was triggered for node "%s"' % self.get_name()) # publish the node name as well self.get node name
+            self.get_logger().info('e-stop was triggered for node "%s"' % self.get_name()) 
             self.get_cancel_service_names()
             self.cancel_controllers()
-            self.get_logger().info('cancelled all joint trajectory and gripper controllers for node "%s"' % self.get_name()) 
+            self.get_logger().info('{node_name} cancelled all {keys} controllers'.format(node_name = self.get_name(), keys = self.extractor.controller_dict.keys()))
 
     def get_cancel_service_names(self):
         """Gets the names of the services for the controllers that will be cancelled. 
@@ -109,7 +112,6 @@ class EStopSafety(Node):
         # create a service client to get the list of controllers
         self.list_ctrlrs_client = self.create_client(ListControllers, self.list_controllers_service_name, callback_group = self.controllers_cb_group)
         # wait for the corresponding server
-        #initial_time = time.time()
         timeout_counter = 0
         while not self.list_ctrlrs_client.wait_for_service(timeout_sec=1.0):
             self.get_logger().info(f'{self.list_ctrlrs_client.srv_name} is not available, waiting again...') 
@@ -134,7 +136,7 @@ class EStopSafety(Node):
             # create a service client
             cancel_client = self.create_client(CancelGoal, client_name, callback_group=self.controllers_cb_group)
             # wait for the corresponding server
-            timeout_counter = 0 # TODO rename to timeout_counter
+            timeout_counter = 0 
             while not cancel_client.wait_for_service(timeout_sec=1.0):
                 self.get_logger().info(f'{client_name} service not available, waiting again...') 
                 if timeout_counter >= 10:
