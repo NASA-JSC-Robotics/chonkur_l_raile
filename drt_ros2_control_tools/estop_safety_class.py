@@ -7,15 +7,12 @@ from typing import TypeVar
 
 EStopROSMsg = TypeVar('EStopROSMsg')
 
-class ControllerCancelServiceExtractor(Node):
-    def __init__(self, include_gripper: bool):
+class ControllerCancelServiceExtractor(object):
+    def __init__(self, include_gripper: bool, node: Node):
         """The constructor for the ControllerCancelServiceExtractor Class, which extracts the types of controllers to be cancelled.
         Args:
             include_gripper (bool): whether or not to include the gripper in the list of controllers to cancel.
         """
-
-        super().__init__('controller_cancel_service_extractor')
-
         # key: standard controller types for robot, value: the standard request name for the cancel service of that controller type (not fully rectified name) 
         self.controller_dict = {
             "joint_trajectory_controller/JointTrajectoryController" : "/follow_joint_trajectory/_action/cancel_goal"
@@ -25,6 +22,7 @@ class ControllerCancelServiceExtractor(Node):
             self.controller_dict["position_controllers/GripperActionController"] = "/gripper_cmd/_action/cancel_goal"
 
         self.cancel_service_list = []
+        self.node = node
 
     def add_cancel_service(self, list_ctrlrs_resp: list[ListControllers_Request]):
         """Extracts the cancel services for the desired controller type.
@@ -35,8 +33,7 @@ class ControllerCancelServiceExtractor(Node):
         for ctrlr in list_ctrlrs_resp.controller: 
             if ctrlr.type in self.controller_dict:
                 self.cancel_service_list.append(ctrlr.name + self.controller_dict[ctrlr.type])
-        self.get_logger().info('this is the list of all cancel services for node "%s" : {}'.format(self.cancel_service_list) % self.get_name())
-        self.get_logger().debug('{node_name}: this is the list of all controllers to be cancelled {controllers}'.format(node_name = self.get_name(), controllers = self.cancel_service_list))
+        self.node.get_logger().debug('{node_name}: this is the list of all controllers to be cancelled {controllers}'.format(node_name = self.node.get_name(), controllers = self.cancel_service_list))
 
 class EStopSafety(Node):
     """This class cancels the robot's controllers when the EStop has been triggered.
@@ -59,7 +56,7 @@ class EStopSafety(Node):
         super().__init__('estop_safety')
         
         # create an instance of the ControllerCancelServiceExtractor
-        self.extractor = ControllerCancelServiceExtractor(include_gripper = include_gripper)
+        self.extractor = ControllerCancelServiceExtractor(include_gripper = include_gripper, node = self)
 
         # the type of message published by the robot's estop
         self.estop_msg_type = estop_msg_type
