@@ -67,6 +67,13 @@ class EStopSafety(Node):
         # create the two callback groups that the multi-threaded executor will run
         self.estop_cb_group = MutuallyExclusiveCallbackGroup()
         self.controllers_cb_group = MutuallyExclusiveCallbackGroup()
+        self.failed_cancel_cb_group = MutuallyExclusiveCallbackGroup()
+
+        self.failed_cancel_list = []
+        # timer
+        timer_period = 1  # seconds
+        self.failed_cancel_timer = self.create_timer(timer_period, self.failed_cancel_callback, callback_group= self.failed_cancel_cb_group)
+
 
         # instantiate a subscriber to the estop topic
         self.estop_subscriber = self.create_subscription(
@@ -113,7 +120,7 @@ class EStopSafety(Node):
         while not self.list_ctrlrs_client.wait_for_service(timeout_sec=1.0):
             self.get_logger().info(f'{self.list_ctrlrs_client.srv_name} is not available, waiting again...') 
             if timeout_counter >= 10:
-                self.get_logger().error(f'unable to reach {self.list_ctrlrs_client.srv_name}') 
+                self.get_logger().error(f'unable to reach {self.list_ctrlrs_client.srv_name}. to get the list of active controllers that need to be cancelled. Active controllers were not stopped, so there may be unexpected movement. Be careful when re-enabling the robot.')
             timeout_counter += 1
         # create a list controllers request client
         list_ctrlrs_req = ListControllers.Request()
@@ -121,7 +128,6 @@ class EStopSafety(Node):
         list_ctrlrs_resp = self.list_ctrlrs_client.call(list_ctrlrs_req)
         # send the list of controllers to the ControllerCancelServiceExtractor to extract the service names
         self.extractor.add_cancel_service(list_ctrlrs_resp)
-
 
     def cancel_controllers(self):
         """Send a cancel message to all the controller cancel services. 
@@ -133,12 +139,23 @@ class EStopSafety(Node):
             # create a service client
             cancel_client = self.create_client(CancelGoal, client_name, callback_group=self.controllers_cb_group)
             # wait for the corresponding server
-            timeout_counter = 0 
-            while not cancel_client.wait_for_service(timeout_sec=1.0):
+            timeout_counter = 0
+            failed_find_service = False 
+            while not cancel_client.wait_for_service(timeout_sec=1.0) and not failed_find_service:
                 self.get_logger().info(f'{client_name} service not available, waiting again...') 
-                if timeout_counter >= 10:
-                    self.get_logger().error(f'unable to reach {client_name}') 
+                if timeout_counter >= 2:
+                    if client_name not in self.failed_cancel_list:
+                        self.failed_cancel_list.append(client_name)
+                    self.get_logger().error(f'unable to reach {client_name} to cancel its trajectory, so there may be unexpected movement. Be careful when re-enabling the robot.') 
+                    self.failed_cancel_callback()
+                    failed_find_service = True
                 timeout_counter += 1
             # send the request with the cancel message and get the response
-            response = cancel_client.call(cancel_msg)
-            self.get_logger().debug('response from the estop cancel request on "%s" {}'.format(response) %client_name)
+            if not failed_find_service:
+                # execute the service
+                response = cancel_client.call(cancel_msg)
+                
+    def failed_cancel_callback(self):
+        for client_name in self.failed_cancel_list:
+            self.get_logger().error(f'unable to reach {client_name} to cancel its trajectory, so there may be unexpected movement. Be careful when re-enabling the robot.') 
+                    
