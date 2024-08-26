@@ -7,3 +7,4 @@
 - robotiq_activation_controller
 - robotiq_gripper_hande_controller
 - joint_state_broadcaster
+- io_and_status_controller
