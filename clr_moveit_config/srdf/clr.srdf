@@ -36,6 +36,7 @@
     <link name="finger_1_link"/>
     <link name="finger_2_link"/>
     <link name="grasp_frame"/>
+    <link name="manual_grasp_link"/>
     <joint name="finger_1_joint"/>
     <passive_joint name="finger_2_joint"/>
   </group>
