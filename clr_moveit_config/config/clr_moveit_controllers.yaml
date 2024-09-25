@@ -10,6 +10,7 @@ moveit_manage_controllers: true
 moveit_simple_controller_manager:
   controller_names:
     - clr_joint_trajectory_controller
+    - servo_controller
     - lift_rail_joint_trajectory_controller
     - robotiq_gripper_hande_controller
     - joint_trajectory_controller
@@ -17,6 +18,20 @@ moveit_simple_controller_manager:
     - lift_position_trajectory_controller
 
   clr_joint_trajectory_controller:
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints:
+      - vention_rail_base_to_carriage
+      - ewellix_lift_lower_to_higher
+      - shoulder_pan_joint
+      - shoulder_lift_joint
+      - elbow_joint
+      - wrist_1_joint
+      - wrist_2_joint
+      - wrist_3_joint
+
+  servo_controller:
     action_ns: follow_joint_trajectory
     type: FollowJointTrajectory
     default: true
