@@ -1,6 +1,6 @@
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, ExecuteProcess
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from launch.substitutions import LaunchConfiguration
@@ -30,6 +30,20 @@ def generate_launch_description():
             "headless_mode",
             default_value="false",
             description="Enable headless mode for robot control",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "description_package",
+            default_value="clr_description",
+            description="description package for the robot description",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "description_file",
+            default_value="clr.urdf.xacro",
+            description="description file for the robot description",
         )
     )
     
@@ -67,8 +81,10 @@ def generate_launch_description():
             default_value="false",
             description="start rviz?",
         )
-    )    
+    )
 
+    description_package = LaunchConfiguration("description_package")
+    description_file = LaunchConfiguration("description_file")
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     headless_mode = LaunchConfiguration("headless_mode")
@@ -78,11 +94,12 @@ def generate_launch_description():
     enable_admittance = LaunchConfiguration("enable_admittance")
     rviz = LaunchConfiguration("rviz")
     
+
     chonkur_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch','chonkur_control.launch.py')),
         launch_arguments={
-            "description_package": "clr_description",
-            "description_file": "clr.urdf.xacro",
+            "description_package": description_package,
+            "description_file": description_file,
             "tf_prefix": tf_prefix,
             "use_fake_hardware": use_fake_hardware,
             "fake_sensor_commands": "true",
