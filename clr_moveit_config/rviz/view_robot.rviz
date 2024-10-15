@@ -6,9 +6,10 @@ Panels:
       Expanded:
         - /Global Options1
         - /MotionPlanning1
+        - /MotionPlanning1/Planning Request1
         - /RobotModel1
       Splitter Ratio: 0.4957627058029175
-    Tree Height: 530
+    Tree Height: 251
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
@@ -45,7 +46,7 @@ Visualization Manager:
       Plane Cell Count: 10
       Reference Frame: <Fixed Frame>
       Value: true
-    - Acceleration_Scaling_Factor: 0.1
+    - Acceleration_Scaling_Factor: 1
       Class: moveit_rviz_plugin/MotionPlanning
       Enabled: true
       Move Group Namespace: ""
@@ -89,12 +90,22 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          center_push_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
           clr_base:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
           clr_carriage:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          end_estop_light:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -156,7 +167,62 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          lift_camera_bottom_screw_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          lift_camera_color_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          lift_camera_color_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          lift_camera_depth_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          lift_camera_depth_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          lift_camera_infra1_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          lift_camera_infra1_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          lift_camera_infra2_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          lift_camera_infra2_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          lift_camera_link:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          lift_camera_mount:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
           lower_lift_plate:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          manual_grasp_link:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          motor_side_estop_light:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -186,7 +252,7 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          robotiq_hand-e_adapter_old:
+          robotiq_hande_cb_adapter:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -229,6 +295,21 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          vention_rail_cable_0:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          vention_rail_cable_1:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          vention_rail_cable_collision:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
           vention_rail_carriage:
             Alpha: 1
             Show Axes: false
@@ -263,6 +344,47 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          wrist_mounted_camera_bottom_screw_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          wrist_mounted_camera_color_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          wrist_mounted_camera_color_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          wrist_mounted_camera_depth_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          wrist_mounted_camera_depth_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          wrist_mounted_camera_infra1_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          wrist_mounted_camera_infra1_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          wrist_mounted_camera_infra2_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          wrist_mounted_camera_infra2_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          wrist_mounted_camera_link:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
         Loop Animation: false
         Robot Alpha: 0.5
         Robot Color: 150; 50; 150
@@ -282,7 +404,7 @@ Visualization Manager:
         TextHeight: 0.07999999821186066
       Planning Request:
         Colliding Link Color: 255; 0; 0
-        Goal State Alpha: 1
+        Goal State Alpha: 0.699999988079071
         Goal State Color: 250; 128; 0
         Interactive Marker Size: 0
         Joint Violation Color: 255; 0; 255
@@ -290,7 +412,7 @@ Visualization Manager:
         Query Goal State: true
         Query Start State: false
         Show Workspace: false
-        Start State Alpha: 1
+        Start State Alpha: 0.699999988079071
         Start State Color: 0; 255; 0
       Planning Scene Topic: monitored_planning_scene
       Robot Description: robot_description
@@ -322,12 +444,22 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          center_push_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
           clr_base:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
           clr_carriage:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          end_estop_light:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -389,7 +521,62 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          lift_camera_bottom_screw_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          lift_camera_color_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          lift_camera_color_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          lift_camera_depth_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          lift_camera_depth_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          lift_camera_infra1_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          lift_camera_infra1_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          lift_camera_infra2_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          lift_camera_infra2_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          lift_camera_link:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          lift_camera_mount:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
           lower_lift_plate:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          manual_grasp_link:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          motor_side_estop_light:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -419,7 +606,7 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          robotiq_hand-e_adapter_old:
+          robotiq_hande_cb_adapter:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -462,6 +649,21 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          vention_rail_cable_0:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          vention_rail_cable_1:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          vention_rail_cable_collision:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
           vention_rail_carriage:
             Alpha: 1
             Show Axes: false
@@ -496,11 +698,52 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          wrist_mounted_camera_bottom_screw_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          wrist_mounted_camera_color_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          wrist_mounted_camera_color_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          wrist_mounted_camera_depth_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          wrist_mounted_camera_depth_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          wrist_mounted_camera_infra1_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          wrist_mounted_camera_infra1_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          wrist_mounted_camera_infra2_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          wrist_mounted_camera_infra2_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          wrist_mounted_camera_link:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
         Robot Alpha: 1
         Show Robot Collision: false
         Show Robot Visual: true
       Value: true
-      Velocity_Scaling_Factor: 0.1
+      Velocity_Scaling_Factor: 0.9999999999999999
     - Class: rviz_default_plugins/MarkerArray
       Enabled: true
       Name: MarkerArray
@@ -544,12 +787,22 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        center_push_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         clr_base:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
         clr_carriage:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        end_estop_light:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -611,7 +864,62 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        lift_camera_bottom_screw_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        lift_camera_color_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        lift_camera_color_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        lift_camera_depth_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        lift_camera_depth_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        lift_camera_infra1_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        lift_camera_infra1_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        lift_camera_infra2_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        lift_camera_infra2_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        lift_camera_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lift_camera_mount:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         lower_lift_plate:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        manual_grasp_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        motor_side_estop_light:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -641,7 +949,7 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        robotiq_hand-e_adapter_old:
+        robotiq_hande_cb_adapter:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -684,6 +992,21 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        vention_rail_cable_0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        vention_rail_cable_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        vention_rail_cable_collision:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         vention_rail_carriage:
           Alpha: 1
           Show Axes: false
@@ -714,6 +1037,47 @@ Visualization Manager:
           Show Trail: false
           Value: true
         wrist_3_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wrist_mounted_camera_bottom_screw_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wrist_mounted_camera_color_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wrist_mounted_camera_color_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wrist_mounted_camera_depth_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wrist_mounted_camera_depth_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wrist_mounted_camera_infra1_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wrist_mounted_camera_infra1_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wrist_mounted_camera_infra2_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wrist_mounted_camera_infra2_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        wrist_mounted_camera_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -772,37 +1136,37 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 4.080268859863281
+      Distance: 4.943422794342041
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.2489434778690338
-        Y: -0.013962505385279655
-        Z: 0.13800443708896637
+        X: 0.040009237825870514
+        Y: -0.25868111848831177
+        Z: 0.4666944742202759
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.6503981947898865
+      Pitch: 0.4553982615470886
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 2.5835821628570557
+      Yaw: 2.058581590652466
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 1376
+  Height: 977
   Hide Left Dock: false
   Hide Right Dock: false
   MotionPlanning:
     collapsed: false
   MotionPlanning - Trajectory Slider:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd0000000400000000000001f300000506fc020000000cfb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d000002a6000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb000000280020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000000000000000fb00000044004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000004100fffffffb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e006701000002e9000001e60000017d00fffffffb00000024005200760069007a00560069007300750061006c0054006f006f006c007300470075006901000004d50000006e0000006e00ffffff000000010000011000000506fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000003d00000506000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004420000003efc0100000002fb0000000800540069006d00650100000000000004420000000000000000fb0000000800540069006d00650100000000000004500000000000000000000006f10000050600000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000400000000000001f30000037bfc020000000cfb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003b0000018d000000c700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb000000280020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000000000000000fb00000044004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000003f00fffffffb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e006701000001ce000001740000016900fffffffb00000024005200760069007a00560069007300750061006c0054006f006f006c007300470075006901000003480000006e0000006e00ffffff00000001000001100000037bfc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000003b0000037b000000a000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004420000003efc0100000002fb0000000800540069006d00650100000000000004420000000000000000fb0000000800540069006d006501000000000000045000000000000000000000036b0000037b00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   RvizVisualToolsGui:
     collapsed: false
   Selection:
@@ -811,6 +1175,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: false
-  Width: 2560
-  X: 2320
-  Y: 827
+  Width: 1658
+  X: 70
+  Y: 27
