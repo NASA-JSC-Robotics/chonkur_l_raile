@@ -89,13 +89,13 @@ def generate_launch_description():
             "description_package",
             default_value="chonkur_description"
         )
-    )    
+    )
     declared_arguments.append(
         DeclareLaunchArgument(
             "description_file",
             default_value="chonkur.urdf.xacro"
         )
-    )    
+    )
 
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
@@ -112,6 +112,13 @@ def generate_launch_description():
 
     launches = []
 
+    # NOTE: There is an issue with the UR scripting interface that prevents it from clean shut downs
+    # when it is not connected to an actual robot. For instance, when running the simulated interface.
+    # This means the urscript_interface node will hang, and ultimately require a sigkill in order to
+    # terminate the process. It's annoying, but in future versions of the driver that node is not
+    # launched when using mock hardware.
+    #
+    # https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver/issues/838
     base_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("ur_robot_driver"), 'launch','ur_control.launch.py')),
         launch_arguments={
@@ -121,12 +128,12 @@ def generate_launch_description():
             "description_package": description_package,
             "description_file": description_file,
             "tf_prefix": tf_prefix,
-            "runtime_config_package": runtime_config_package, 
+            "runtime_config_package": runtime_config_package,
             "controllers_file": controllers_file,
             "use_fake_hardware": use_fake_hardware,
             "headless_mode": headless_mode,
             "fake_sensor_commands": fake_sensor_commands,
-            "initial_joint_controller": initial_joint_controller, 
+            "initial_joint_controller": initial_joint_controller,
             "activate_joint_controller": activate_joint_controller,
             "launch_rviz": rviz,
         }.items(),
@@ -136,7 +143,7 @@ def generate_launch_description():
     gripper_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["robotiq_gripper_hande_controller", 
+        arguments=["robotiq_gripper_hande_controller",
                    "-c", "controller_manager",
                    "-t", "position_controllers/GripperActionController",
                    "--controller-manager-timeout","100",
@@ -146,14 +153,14 @@ def generate_launch_description():
     gripper_activation_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["robotiq_activation_controller", 
+        arguments=["robotiq_activation_controller",
                    "-c", "controller_manager",
                    "-t", "robotiq_controllers/RobotiqActivationController",
                    "--controller-manager-timeout","100",
                   ]
     )
 
-    nodes = [gripper_controller_spawner, 
+    nodes = [gripper_controller_spawner,
              gripper_activation_controller_spawner]
 
     spawn_controllers_launch = IncludeLaunchDescription(
