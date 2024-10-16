@@ -23,12 +23,12 @@ class CLREStopSafety(EStopSafety):
             SafetyMode.SYSTEM_THREE_POSITION_ENABLING_STOP]
         
         ur_estop_msg_type = SafetyMode
-        include_gripper = True
+        stop_gripper = True
         list_controllers_service = '/controller_manager/list_controllers'
 
-        super().__init__(estop_topic = clr_estop_topic, estop_msg_type = ur_estop_msg_type, include_gripper = include_gripper, list_controllers_service_name = list_controllers_service)
+        super().__init__(estop_topic = clr_estop_topic, estop_msg_type = ur_estop_msg_type, stop_gripper = stop_gripper, list_controllers_service_name = list_controllers_service)
 
-    def estop_triggered(self, msg):
+    def estop_triggered(self, msg: SafetyMode):
         """Evaluate the estop SafetyMode msg to determine if the estop has been triggered. Returns true once the estop has been triggered and false all other times.
 
 

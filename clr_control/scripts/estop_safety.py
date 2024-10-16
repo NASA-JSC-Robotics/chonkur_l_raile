@@ -15,7 +15,6 @@ def main(args=None):
     executor.add_node(clr_estop_node)
 
     try:
-        print("spinning")
         executor.spin()
     except KeyboardInterrupt:
         pass
