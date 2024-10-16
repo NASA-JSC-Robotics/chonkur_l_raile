@@ -1,6 +1,6 @@
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, ExecuteProcess
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from launch.substitutions import LaunchConfiguration
@@ -30,6 +30,20 @@ def generate_launch_description():
             "headless_mode",
             default_value="false",
             description="Enable headless mode for robot control",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "description_package",
+            default_value="clr_description",
+            description="description package for the robot description",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "description_file",
+            default_value="clr.urdf.xacro",
+            description="description file for the robot description",
         )
     )
     
@@ -67,8 +81,10 @@ def generate_launch_description():
             default_value="false",
             description="start rviz?",
         )
-    )    
+    )
 
+    description_package = LaunchConfiguration("description_package")
+    description_file = LaunchConfiguration("description_file")
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     headless_mode = LaunchConfiguration("headless_mode")
@@ -78,11 +94,12 @@ def generate_launch_description():
     enable_admittance = LaunchConfiguration("enable_admittance")
     rviz = LaunchConfiguration("rviz")
     
+
     chonkur_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch','chonkur_control.launch.py')),
         launch_arguments={
-            "description_package": "clr_description",
-            "description_file": "clr.urdf.xacro",
+            "description_package": description_package,
+            "description_file": description_file,
             "tf_prefix": tf_prefix,
             "use_fake_hardware": use_fake_hardware,
             "fake_sensor_commands": "true",
@@ -132,6 +149,17 @@ def generate_launch_description():
                   ]
     )
 
+    clr_servo_controller = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["servo_controller", 
+                   "-c", "controller_manager",
+                   "-t", "joint_trajectory_controller/JointTrajectoryController ",
+                   "--controller-manager-timeout","100",
+                   "--inactive"
+                  ]
+    )
+
     streaming_controller = Node(
         package="controller_manager",
         executable="spawner",
@@ -145,9 +173,9 @@ def generate_launch_description():
 
     estop_safety = Node(
         package="clr_control",
-        executable="estop_safety.py"
+        executable="estop_safety.py",
     )
 
-    controller_nodes = [chonkur_launch, vention_controllers_launch, ewellix_controllers_launch, lift_rail_controller, clr_controller, streaming_controller]
+    controller_nodes = [chonkur_launch, vention_controllers_launch, ewellix_controllers_launch, lift_rail_controller, clr_controller, clr_servo_controller, streaming_controller]
     additional_nodes = [estop_safety]
     return LaunchDescription(declared_arguments + controller_nodes + additional_nodes)
