@@ -42,13 +42,13 @@ class EStopSafety(Node):
         Node (Node): inherits the Node class
     """
 
-    def __init__(self, estop_topic: str, estop_msg_type: EStopROSMsg, include_gripper: bool = True, list_controllers_service_name: str = '/controller_manager/list_controllers'):
+    def __init__(self, estop_topic: str, estop_msg_type: EStopROSMsg, stop_gripper: bool = True, list_controllers_service_name: str = '/controller_manager/list_controllers'):
         """ the constructor for the EStopSafety Class, which creates a subscriber to the EStop topic.
 
         Args:
             estop_topic (str): the topic which publishes the e-stop status. 
             estop_msg_type (EStopRosMsg): the type of message published on the estop topic.
-            include_gripper (bool, optional): whether to include the robot gripper or not. Defaults to True.
+            stop_gripper (bool, optional): whether to stop the robot gripper or not. Defaults to True.
             list_controllers_service_name (str, optional): the name of the service where it can retrive the list the controllers. Defaults to '/controller_manager/list_controllers'.
         """
         # start setting types in the init e.g. estop topic is  string
@@ -56,7 +56,7 @@ class EStopSafety(Node):
         super().__init__('estop_safety')
         
         # create an instance of the ControllerCancelServiceExtractor
-        self.extractor = ControllerCancelServiceExtractor(include_gripper = include_gripper, node = self)
+        self.extractor = ControllerCancelServiceExtractor(stop_gripper = stop_gripper, node = self)
 
         # the type of message published by the robot's estop
         self.estop_msg_type = estop_msg_type
