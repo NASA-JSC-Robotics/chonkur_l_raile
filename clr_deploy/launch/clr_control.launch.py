@@ -171,5 +171,11 @@ def generate_launch_description():
                   ]
     )
 
+    estop_safety = Node(
+        package="clr_control",
+        executable="estop_safety.py",
+    )
+
     controller_nodes = [chonkur_launch, vention_controllers_launch, ewellix_controllers_launch, lift_rail_controller, clr_controller, clr_servo_controller, streaming_controller]
-    return LaunchDescription(declared_arguments + controller_nodes)
+    additional_nodes = [estop_safety]
+    return LaunchDescription(declared_arguments + controller_nodes + additional_nodes)
