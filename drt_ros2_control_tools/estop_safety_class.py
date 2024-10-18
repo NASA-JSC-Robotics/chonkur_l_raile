@@ -112,7 +112,7 @@ class EStopSafety(Node):
             self.cancel_controllers()
             self.get_logger().info('{node_name} cancelled all {keys} controllers'.format(node_name = self.get_name(), keys = self.extractor.controller_dict.keys()))
 
-    def get_cancel_service_names(self) -> False:
+    def get_cancel_service_names(self) -> bool:
         """Gets the names of the services for the controllers that will be cancelled. 
         """
         # create a service client to get the list of controllers
