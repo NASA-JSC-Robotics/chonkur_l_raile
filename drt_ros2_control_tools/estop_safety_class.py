@@ -56,7 +56,7 @@ class EStopSafety(Node):
         super().__init__('estop_safety')
         
         # create an instance of the ControllerCancelServiceExtractor
-        self.extractor = ControllerCancelServiceExtractor(stop_gripper = stop_gripper, node = self)
+        self.extractor = ControllerCancelServiceExtractor(include_gripper = stop_gripper, node = self)
 
         # the type of message published by the robot's estop
         self.estop_msg_type = estop_msg_type
@@ -105,29 +105,31 @@ class EStopSafety(Node):
         """
         self.get_logger().debug('{node_name} Estop msg: {e_msg}'.format(node_name = self.get_name(), e_msg = msg))
         if(self.estop_triggered(msg)):
-            self.get_logger().info('e-stop was triggered for node "%s"' % self.get_name()) 
-            self.get_cancel_service_names()
+            self.get_logger().info(f'{self.get_name()}: e-stop was triggered') 
+            if not self.get_cancel_service_names():
+                # cannot get controllers name - should fail
+                return 
             self.cancel_controllers()
             self.get_logger().info('{node_name} cancelled all {keys} controllers'.format(node_name = self.get_name(), keys = self.extractor.controller_dict.keys()))
 
-    def get_cancel_service_names(self):
+    def get_cancel_service_names(self) -> False:
         """Gets the names of the services for the controllers that will be cancelled. 
         """
         # create a service client to get the list of controllers
         self.list_ctrlrs_client = self.create_client(ListControllers, self.list_controllers_service_name, callback_group = self.controllers_cb_group)
         # wait for the corresponding server
-        timeout_counter = 0
-        while not self.list_ctrlrs_client.wait_for_service(timeout_sec=1.0):
-            self.get_logger().info(f'{self.list_ctrlrs_client.srv_name} is not available, waiting again...') 
-            if timeout_counter >= 10:
-                self.get_logger().error(f'unable to reach {self.list_ctrlrs_client.srv_name}. to get the list of active controllers that need to be cancelled. Active controllers were not stopped, so there may be unexpected movement. Be careful when re-enabling the robot.')
-            timeout_counter += 1
+
+        if not self.list_ctrlrs_client.wait_for_service(timeout_sec=2.0):
+            # timeout reached 
+            self.get_logger().fatal(f'{self.get_name()}: unable to reach {self.list_ctrlrs_client.srv_name}. to get the list of active controllers that need to be cancelled. Active controllers were not stopped, so there may be unexpected movement. Be careful when re-enabling the robot.')
+            return False
         # create a list controllers request client
         list_ctrlrs_req = ListControllers.Request()
         # get the list of controllers
         list_ctrlrs_resp = self.list_ctrlrs_client.call(list_ctrlrs_req)
         # send the list of controllers to the ControllerCancelServiceExtractor to extract the service names
         self.extractor.add_cancel_service(list_ctrlrs_resp)
+        return True
 
     def cancel_controllers(self):
         """Send a cancel message to all the controller cancel services. 
