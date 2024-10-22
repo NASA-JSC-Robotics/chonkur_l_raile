@@ -4,9 +4,9 @@ from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from launch.conditions import IfCondition
-from launch_ros.substitutions import FindPackageShare
-from launch.substitutions import LaunchConfiguration, ThisLaunchFileDir
+from launch.substitutions import LaunchConfiguration
 import os
+
 
 def generate_launch_description():
 
@@ -104,7 +104,8 @@ def generate_launch_description():
     runtime_config_package = LaunchConfiguration("runtime_config_package")
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
     initial_joint_controller = LaunchConfiguration("initial_joint_controller")
-    activate_joint_controller = LaunchConfiguration("activate_joint_controller")
+    activate_joint_controller = LaunchConfiguration(
+        "activate_joint_controller")
     enable_admittance = LaunchConfiguration("enable_admittance")
     rviz = LaunchConfiguration("rviz")
     description_package = LaunchConfiguration("description_package")
@@ -120,7 +121,8 @@ def generate_launch_description():
     #
     # https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver/issues/838
     base_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("ur_robot_driver"), 'launch','ur_control.launch.py')),
+        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory(
+            "ur_robot_driver"), 'launch', 'ur_control.launch.py')),
         launch_arguments={
             "ur_type": "ur10e",
             "robot_ip": "192.168.1.102",
@@ -146,8 +148,8 @@ def generate_launch_description():
         arguments=["robotiq_gripper_hande_controller",
                    "-c", "controller_manager",
                    "-t", "position_controllers/GripperActionController",
-                   "--controller-manager-timeout","100",
-                  ]
+                   "--controller-manager-timeout", "100",
+                   ]
     )
 
     gripper_activation_controller_spawner = Node(
@@ -156,21 +158,39 @@ def generate_launch_description():
         arguments=["robotiq_activation_controller",
                    "-c", "controller_manager",
                    "-t", "robotiq_controllers/RobotiqActivationController",
-                   "--controller-manager-timeout","100",
-                  ]
+                   "--controller-manager-timeout", "100",
+                   ]
+    )
+
+    admittance_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["admittance_controller",
+                   "--controller-manager-timeout", "100",
+                   "-c", "controller_manager",
+                   "-t", "admittance_controller/AdmittanceController",
+                   "-p", controllers_file,
+                   "--inactive",
+                   ],
+        condition=IfCondition(enable_admittance)
+    )
+
+    admittance_jtc_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["admittance_joint_trajectory_controller",
+                   "--controller-manager-timeout", "100",
+                   "-c", "controller_manager",
+                   "-t", "joint_trajectory_controller/JointTrajectoryController ",
+                   "-p", controllers_file,
+                   "--inactive",
+                   ],
+        condition=IfCondition(enable_admittance)
     )
 
     nodes = [gripper_controller_spawner,
-             gripper_activation_controller_spawner]
-
-    spawn_controllers_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch', 'spawn_controllers.launch.py')),
-        launch_arguments={
-            "use_fake_hardware": use_fake_hardware,
-        }.items(),
-        condition=IfCondition(enable_admittance)
-    )
-    launches.append(spawn_controllers_launch)
-
+             gripper_activation_controller_spawner,
+             admittance_controller_spawner,
+             admittance_jtc_spawner,]
 
     return LaunchDescription(declared_arguments + launches + nodes)
