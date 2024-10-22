@@ -66,7 +66,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "activate_joint_controller",
-            default_value="true",
+            default_value="false",
             description="Activate loaded joint controller.",
         )
     )
@@ -170,7 +170,6 @@ def generate_launch_description():
                    "-c", "controller_manager",
                    "-t", "admittance_controller/AdmittanceController",
                    "-p", controllers_file,
-                   "--inactive",
                    ],
         condition=IfCondition(enable_admittance)
     )
@@ -183,7 +182,6 @@ def generate_launch_description():
                    "-c", "controller_manager",
                    "-t", "joint_trajectory_controller/JointTrajectoryController ",
                    "-p", controllers_file,
-                   "--inactive",
                    ],
         condition=IfCondition(enable_admittance)
     )
