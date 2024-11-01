@@ -45,8 +45,7 @@ class ControllerStopperBase(Node):
         self.get_logger().info("Waiting for switch controller service to come up on controller_manager/switch_controller")
         self.switch_controllers_srv.wait_for_service()
         self.get_logger().info("Service available")
-        self.get_logger().info("Waiting for list controllers service to come up on "
-                    "controller_manager/list_controllers")
+        self.get_logger().info("Waiting for list controllers service to come up on controller_manager/list_controllers")
         self.list_controllers_srv.wait_for_service()
         self.get_logger().info("Service available")
 
@@ -125,48 +124,38 @@ class ControllerStopperBase(Node):
         switch_controller_request.strictness = SwitchController.Request.STRICT
         switch_controller_request.timeout.nanosec = 500000000 # 0.5s
 
-        # process state of stopping controllers
-        def stop_controllers_callback(future):
-            if not future.result().ok:
+        # list the controllers that are running
+        list_controllers_response = self.list_controllers_srv.call(list_controllers_request)
+
+        # each new time this is called, we will repopulate which controllers we are stopping
+        controllers_to_stop = []
+
+        # add controllers that are active and not consistent to the list to stop
+        for controller in list_controllers_response.controller:
+            if controller.state == 'active':
+                if controller.name not in self.consistent_controllers:
+                    controllers_to_stop.append(controller.name)
+
+        # if there are any to stop, call switch_controllers to stop them
+        if controllers_to_stop:
+            switch_controller_request.deactivate_controllers = controllers_to_stop
+            switch_controllers_response = self.switch_controllers_srv.call(switch_controller_request)
+            if not switch_controllers_response.ok:
                 self.get_logger().error('Could not deactivate requested controllers')
             else:
                 self.controllers_active = False
 
-        # process the list controllers result, and call stop on the relevant ones
-        def list_controller_callback(future):
-            # each new time this is called, we will repopulate which controllers we are stopping
-            controllers_to_stop = []
-
-            # add controllers that are active and not consistent to the list to stop
-            for controller in future.result().controller:
-                if controller.state == 'active':
-                    if controller.name not in self.consistent_controllers:
-                        controllers_to_stop.append(controller.name)
-
-            # if there are any to stop, call switch_controllers to stop them
-            if controllers_to_stop:
-                switch_controller_request.deactivate_controllers = controllers_to_stop
-                switch_controllers_future = self.switch_controllers_srv.call_async(switch_controller_request)
-                switch_controllers_future.add_done_callback(stop_controllers_callback)
-
-            # combine stopped controllers with controllers to stop without duplicates
-            if save_controllers:
-                self.stopped_controllers = controllers_to_stop
-
-        # cancel all of the controllers actions
-        list_controllers_future = self.list_controllers_srv.call_async(list_controllers_request)
-        list_controllers_future.add_done_callback(list_controller_callback)
-
-        def pause_servo_callback(future):
-            if not future.result().ok:
-                self.get_logger().error('Could not pause servo node')
+        # save the stopped controllers only if we are in a state where the controllers were active
+        if save_controllers:
+            self.stopped_controllers = controllers_to_stop
 
         # if we are managing the servo controller, also pause the servo node
         if self.manage_servo:
             if self.servo_node_exists():
                 pause_servo_request.data = True
-                pause_servo_future = self.pause_servo_srv.call_async(pause_servo_request)
-                pause_servo_future.add_done_callback(pause_servo_callback)
+                pause_servo_response = self.pause_servo_srv.call(pause_servo_request)
+                if not pause_servo_response.success:
+                    self.get_logger().error('Could not pause servo node')
 
     def start_controllers(self):
         """Reactivates all of the controllers that have been stopped by this node.
@@ -179,30 +168,23 @@ class ControllerStopperBase(Node):
         switch_controller_request.strictness = SwitchController.Request.STRICT
         switch_controller_request.timeout.nanosec = 500000000 # 0.5s
 
-        # Callback to handle whether the start controllers callback was successful
-        def start_controllers_callback(future):
-            if not future.result().ok:
-                self.get_logger().error('Could not activate requested controllers')
-            else:
-                self.controllers_active = True
-
         # only run this if we have logged that some controllers have been stopped
         if self.stopped_controllers:
             switch_controller_request.activate_controllers = self.stopped_controllers
-            switch_controllers_future = self.switch_controllers_srv.call_async(switch_controller_request)
-            switch_controllers_future.add_done_callback(start_controllers_callback)
 
-        # log an error if failed to unpause servo
-        def unpause_servo_callback(future):
-            if not future.result().ok:
-                self.get_logger().error('Could not unpause servo node')
+            switch_controllers_response = self.switch_controllers_srv.call(switch_controller_request)
+            if not switch_controllers_response.ok:
+                self.get_logger().error('Could not activate requested controllers')
+            else:
+                self.controllers_active = True
 
         # if we are managing the servo controller, restart the servo node
         if self.manage_servo:
             if self.servo_node_exists():
                 pause_servo_request.data = False
-                pause_servo_future = self.pause_servo_srv.call_async(pause_servo_request)
-                pause_servo_future.add_done_callback(unpause_servo_callback)
+                pause_servo_response = self.pause_servo_srv.call(pause_servo_request)
+                if not pause_servo_response.success:
+                    self.get_logger().error('Could not unpause servo node')
 
         # clear stopped controllers for the next round to populate
-        self.stopped_controllers.clear();
+        self.stopped_controllers.clear()
