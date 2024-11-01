@@ -10,8 +10,8 @@ from std_srvs.srv import SetBool
 class ProgramStateServer(Node):
     def __init__(self):
         super().__init__('program_state_server')
-        self.srv_get_state = self.create_service(GetProgramState, '/ur_dashboard_client/get_program_state', self.get_program_state_callback)
-        self.srv_set_bool = self.create_service(SetBool, '/fake_ur_dashboard_client/set_program_state_running', self.set_program_state_callback)
+        self.srv_get_state = self.create_service(GetProgramState, '/dashboard_client/program_state', self.get_program_state_callback)
+        self.srv_set_bool = self.create_service(SetBool, '/fake_dashboard_client/set_program_state_running', self.set_program_state_callback)
 
         self.program_state = ProgramState()
         self.program_state.state = ProgramState.STOPPED

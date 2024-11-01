@@ -9,6 +9,8 @@ from launch_ros.parameter_descriptions import ParameterFile
 from launch_ros.substitutions import FindPackageShare
 from launch_ros.substitutions import FindPackageShare
 import os
+from launch.actions import RegisterEventHandler
+from launch.event_handlers import OnProcessExit
 
 
 def generate_launch_description():
@@ -200,6 +202,13 @@ def generate_launch_description():
         condition=IfCondition(enable_admittance)
     )
 
+    delay_admittance_jtc_spawner = RegisterEventHandler(
+        OnProcessExit(
+            target_action=admittance_controller_spawner,
+            on_exit=[admittance_jtc_spawner]
+        )
+    )
+
     chonkur_controller_stopper = Node(
         package="chonkur_deploy",
         executable="chonkur_controller_stopper.py",
@@ -210,7 +219,7 @@ def generate_launch_description():
     nodes = [gripper_controller_spawner,
              gripper_activation_controller_spawner,
              admittance_controller_spawner,
-             admittance_jtc_spawner,
+             delay_admittance_jtc_spawner,
              chonkur_controller_stopper]
 
     return LaunchDescription(declared_arguments + launches + nodes)
