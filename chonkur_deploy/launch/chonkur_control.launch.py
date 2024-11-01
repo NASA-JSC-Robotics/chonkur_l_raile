@@ -3,8 +3,11 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
-from launch.conditions import IfCondition
-from launch.substitutions import LaunchConfiguration
+from launch.conditions import IfCondition, UnlessCondition
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
+from launch_ros.parameter_descriptions import ParameterFile
+from launch_ros.substitutions import FindPackageShare
+from launch_ros.substitutions import FindPackageShare
 import os
 
 
@@ -96,6 +99,16 @@ def generate_launch_description():
             default_value="chonkur.urdf.xacro"
         )
     )
+    # General arguments
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "consistent_controllers_file",
+            default_value=PathJoinSubstitution(
+                [FindPackageShare("chonkur_deploy"), "config", "consistent_controllers.yaml"]
+            ),
+            description="YAML file with the controllers configuration.",
+        )
+    )
 
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
@@ -110,6 +123,7 @@ def generate_launch_description():
     rviz = LaunchConfiguration("rviz")
     description_package = LaunchConfiguration("description_package")
     description_file = LaunchConfiguration("description_file")
+    consistent_controllers_file = LaunchConfiguration("consistent_controllers_file")
 
     launches = []
 
@@ -186,9 +200,17 @@ def generate_launch_description():
         condition=IfCondition(enable_admittance)
     )
 
+    chonkur_controller_stopper = Node(
+        package="chonkur_deploy",
+        executable="chonkur_controller_stopper.py",
+        parameters=[ParameterFile(consistent_controllers_file)],
+        condition=UnlessCondition(use_fake_hardware)
+    )
+
     nodes = [gripper_controller_spawner,
              gripper_activation_controller_spawner,
              admittance_controller_spawner,
-             admittance_jtc_spawner,]
+             admittance_jtc_spawner,
+             chonkur_controller_stopper]
 
     return LaunchDescription(declared_arguments + launches + nodes)
