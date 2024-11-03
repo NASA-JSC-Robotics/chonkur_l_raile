@@ -212,7 +212,21 @@ def generate_launch_description():
     chonkur_controller_stopper = Node(
         package="chonkur_deploy",
         executable="chonkur_controller_stopper.py",
+        name="chonkur_controller_stopper",
         parameters=[ParameterFile(consistent_controllers_file)],
+        condition=UnlessCondition(use_fake_hardware)
+    )
+
+    # We use this to kill the UR controller stopper in favor of our own, because it
+    # only handles running or not running, which does not consider whether the program
+    # is stopped, which happens in the case of an estop.
+    ur_controller_stopper_node_killer = Node(
+        package="drt_ros2_launch_common",
+        executable="node_killer.py",
+        parameters=[
+            {"node_name": "controller_stopper"},
+            {"wait_for_node": True},
+        ]
         condition=UnlessCondition(use_fake_hardware)
     )
 
@@ -220,6 +234,8 @@ def generate_launch_description():
              gripper_activation_controller_spawner,
              admittance_controller_spawner,
              delay_admittance_jtc_spawner,
-             chonkur_controller_stopper]
+             chonkur_controller_stopper,
+             ur_controller_stopper_node_killer,
+             ]
 
     return LaunchDescription(declared_arguments + launches + nodes)
