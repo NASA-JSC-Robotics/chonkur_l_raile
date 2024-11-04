@@ -88,18 +88,18 @@
 
     <xacro:include filename="$(find chonkur_description)/urdf/endeff_stack_macro.xacro"/>
 
-    <xacro:endeff_stack 
+    <xacro:endeff_stack
       tf_prefix="${tf_prefix}"
       parent="${tf_prefix}tool0">
       <origin xyz="0 0 0" rpy="0 0 ${radians(90)}"/>
     </xacro:endeff_stack>
 
-    <xacro:dextivr_hande 
-      name="dextivr_hande" 
-      tf_prefix="${tf_prefix}" 
-      parent="${tf_prefix}ur_realsense_mount" 
-      use_fake_hardware="${use_fake_hardware}" 
-      com_port="${com_port_hande}" 
+    <xacro:dextivr_hande
+      name="dextivr_hande"
+      tf_prefix="${tf_prefix}"
+      parent="${tf_prefix}ur_realsense_mount"
+      use_fake_hardware="${use_fake_hardware}"
+      com_port="${com_port_hande}"
       marker_opacity="${marker_opacity}"
       finger_xacro="${finger_xacro}">
       <origin xyz="0 0 0.008" rpy="0 0 ${radians(-90)}"/>
