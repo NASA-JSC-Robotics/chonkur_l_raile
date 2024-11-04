@@ -26,10 +26,9 @@ class ControllerStopperBase(Node):
         """ the constructor for the ControllerStopperBase Class, which creates can handle stopping and starting controllers.
 
         Args:
-            estop_topic (str): the topic which publishes the e-stop status. 
-            estop_msg_type (EStopRosMsg): the type of message published on the estop topic.
-            stop_gripper (bool, optional): whether to stop the robot gripper or not. Defaults to True.
-            list_controllers_service_name (str, optional): the name of the service where it can retrive the list the controllers. Defaults to '/controller_manager/list_controllers'.
+            node_name (str, optional): the name of the node that will be created. Defaults to 'controller_stopper'
+            controller_manager_name (str, optional): the name of the controller manager node (with namespace) to use for service call prefixes. defaults to '/controller_manager'
+            servo_node_name (str, optional): the name of servo node (leave blank if there is none). defaults to ''
         """
         # initialize parent node name as 
         super().__init__(node_name)
