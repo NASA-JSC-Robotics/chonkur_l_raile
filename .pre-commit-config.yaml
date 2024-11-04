@@ -36,7 +36,7 @@ repos:
     rev: v0.42.0
     hooks:
       - id: markdownlint
-        args: ['--config', '.markdownlint.yml']  # or '.markdownlint.yml'
+        args: ['--config', '.markdownlint.yml']
         files: '\.(md|markdown)$'  # Applies only to markdown files
 
   # shellcheck hook
