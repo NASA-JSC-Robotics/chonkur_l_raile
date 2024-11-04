@@ -3,11 +3,7 @@
 import rclpy
 from rclpy.executors import MultiThreadedExecutor
 from moveit2_collision_utils.planning_scene_helper import PlanningSceneHelper
-from moveit2_collision_utils.collision_object import CollisionObjectCreator
-from moveit_msgs.msg import PlanningScene, PlanningSceneComponents
 import threading
-import time
-from copy import deepcopy
 import sys
 
 

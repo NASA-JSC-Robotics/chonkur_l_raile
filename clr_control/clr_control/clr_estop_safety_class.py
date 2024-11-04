@@ -36,8 +36,8 @@ class CLREStopSafety(EStopSafety):
         )
 
     def estop_triggered(self, msg: SafetyMode):
-        """Evaluate the estop SafetyMode msg to determine if the estop has been triggered. Returns true once the estop has been triggered and false all other times.
-
+        """Evaluate the estop SafetyMode msg to determine if the estop has been triggered.
+        Returns true once the estop has been triggered and false all other times.
 
         Args:
             msg (SafetyMode): msg published on the estop topic.
