@@ -1,15 +1,14 @@
-
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.conditions import IfCondition
-from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from ament_index_python.packages import get_package_share_directory
-from ur_moveit_config.launch_common import load_yaml
 from moveit_configs_utils import MoveItConfigsBuilder
 
 import os
+
 
 def generate_launch_description():
 
@@ -44,22 +43,18 @@ def generate_launch_description():
             default_value="true",
             description="Launch rviz?",
         )
-    )    
-    use_fake_hardware = LaunchConfiguration("use_fake_hardware")
-    tf_prefix = LaunchConfiguration("tf_prefix")
+    )
     launch_moveit = LaunchConfiguration("launch_moveit")
     launch_rviz = LaunchConfiguration("launch_rviz")
 
-    description_package = 'clr_description'
-    description_file = 'clr.urdf.xacro'
-    description_full_path = os.path.join(get_package_share_directory(description_package), 'urdf',description_file)
-    moveit_config_package = 'clr_moveit_config'
-    moveit_config_srdf_file = 'clr.srdf'
+    description_package = "clr_description"
+    description_file = "clr.urdf.xacro"
+    description_full_path = os.path.join(get_package_share_directory(description_package), "urdf", description_file)
+    moveit_config_package = "clr_moveit_config"
 
-    # TODO: look into opaque fucntion to pass in args to the robot description
+    # TODO: look into opaque function to pass in args to the robot description
     moveit_config = (
         MoveItConfigsBuilder("clr", package_name="clr_moveit_config")
-        # .robot_description(file_path=description_full_path, mappings={"use_fake_hardware": use_fake_hardware, "tf_prefix": tf_prefix})
         .robot_description(file_path=description_full_path)
         .robot_description_semantic(file_path="srdf/clr.srdf")
         .robot_description_kinematics(file_path="config/kinematics.yaml")
@@ -73,14 +68,12 @@ def generate_launch_description():
         output="screen",
         condition=IfCondition(launch_moveit),
         parameters=[
-            moveit_config.to_dict(),         
-            ]
+            moveit_config.to_dict(),
+        ],
     )
 
     # rviz with moveit configuration
-    rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare(moveit_config_package), "rviz", "view_robot.rviz"]
-    )
+    rviz_config_file = PathJoinSubstitution([FindPackageShare(moveit_config_package), "rviz", "view_robot.rviz"])
     rviz_node = Node(
         package="rviz2",
         executable="rviz2",
@@ -96,11 +89,8 @@ def generate_launch_description():
             moveit_config.joint_limits,
             moveit_config.planning_scene_monitor,
         ],
-    )    
+    )
 
-    nodes_to_start = [
-        move_group_node, 
-        rviz_node
-    ]
+    nodes_to_start = [move_group_node, rviz_node]
 
-    return LaunchDescription(declared_arguments + nodes_to_start)    
+    return LaunchDescription(declared_arguments + nodes_to_start)

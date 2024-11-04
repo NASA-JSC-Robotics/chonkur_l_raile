@@ -6,7 +6,7 @@ find_package(ament_cmake_python REQUIRED)
 
 ament_python_install_package(${PROJECT_NAME})
 
-install(PROGRAMS 
+install(PROGRAMS
     scripts/estop_safety.py
     DESTINATION lib/${PROJECT_NAME}
 )

@@ -118,7 +118,7 @@ chonkur_push2:
     - PRMstarkConfigDefault
   ##Note: commenting the following line lets moveit chose RRTConnect as default planner rather than LBKPIECE
   #projection_evaluator: joints(shoulder_pan_joint,shoulder_lift_joint)
-  longest_valid_segment_fraction: 0.01      
+  longest_valid_segment_fraction: 0.01
 clr:
   planner_configs:
     - SBLkConfigDefault
@@ -134,7 +134,7 @@ clr:
     - PRMstarkConfigDefault
   ##Note: commenting the following line lets moveit chose RRTConnect as default planner rather than LBKPIECE
   #projection_evaluator: joints(shoulder_pan_joint,shoulder_lift_joint)
-  longest_valid_segment_fraction: 0.01  
+  longest_valid_segment_fraction: 0.01
 lift:
   planner_configs:
     - SBLkConfigDefault
@@ -166,7 +166,7 @@ lr:
     - PRMstarkConfigDefault
   ##Note: commenting the following line lets moveit chose RRTConnect as default planner rather than LBKPIECE
   #projection_evaluator: joints(shoulder_pan_joint,shoulder_lift_joint)
-  longest_valid_segment_fraction: 0.01  
+  longest_valid_segment_fraction: 0.01
 rail:
   planner_configs:
     - SBLkConfigDefault

@@ -1,0 +1,4 @@
+default: true
+# Ignore line length checks in code blocks
+MD013:
+  code_blocks: false

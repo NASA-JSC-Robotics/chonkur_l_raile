@@ -105,7 +105,7 @@
 
     <!-- CLR_CARRIAGE -->
     <xacro:include filename="$(find clr_description)/urdf/clr_carriage.macro.xacro"/>
-    <xacro:clr_carriage 
+    <xacro:clr_carriage
       tf_prefix="${tf_prefix}"
       parent="${tf_prefix}vention_rail_carriage"
     >
@@ -115,7 +115,7 @@
     <!-- SAFETY_LIGHTS -->
     <material name="safety_light_blue">
       <color rgba="0 0 0.5 0.8"/>
-    </material>    
+    </material>
     <link name="${tf_prefix}motor_side_estop_light">
       <visual>
         <geometry>
@@ -127,7 +127,7 @@
         <geometry>
           <box size="0.05 0.05 0.381"/>
         </geometry>
-      </collision>      
+      </collision>
     </link>
     <joint name="${tf_prefix}motor_side_estop_light_joint" type="fixed">
       <parent link="${tf_prefix}clr_base"/>
@@ -145,7 +145,7 @@
         <geometry>
           <box size="0.05 0.05 0.381"/>
         </geometry>
-      </collision>      
+      </collision>
     </link>
     <joint name="${tf_prefix}end_estop_light_joint" type="fixed">
       <parent link="${tf_prefix}clr_base"/>
@@ -186,7 +186,7 @@
     </xacro:lift_camera>
 
     <!-- UPPER_LIFT_PLATE -->
-    <xacro:upper_lift_plate 
+    <xacro:upper_lift_plate
       tf_prefix="$(arg tf_prefix)"
       parent="$(arg tf_prefix)ewellix_lift_higher_link"
     >
@@ -205,7 +205,7 @@
     </joint>
 
     <!-- UR10E_MOUNT_PLATE -->
-    <xacro:ur10e_mount_plate 
+    <xacro:ur10e_mount_plate
       tf_prefix="${tf_prefix}"
       parent="${tf_prefix}right_angle_mount"
     >
@@ -236,5 +236,5 @@
       marker_opacity="${marker_opacity}"/>
 
   </xacro:macro>
-  
+
 </robot>
