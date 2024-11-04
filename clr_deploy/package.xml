@@ -24,7 +24,7 @@
   <exec_depend>ewellix_liftkit_deploy</exec_depend>
   <exec_depend>realsense2_camera</exec_depend>
   <exec_depend>drt_ros2_control_tools</exec_depend>
-   <exec_depend>clr_control</exec_depend> 
+   <exec_depend>clr_control</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>

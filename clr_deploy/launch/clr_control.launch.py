@@ -6,8 +6,9 @@ from launch_ros.actions import Node
 from launch.substitutions import LaunchConfiguration
 import os
 
+
 def generate_launch_description():
-    
+
     declared_arguments = []
     declared_arguments.append(
         DeclareLaunchArgument(
@@ -46,7 +47,7 @@ def generate_launch_description():
             description="description file for the robot description",
         )
     )
-    
+
     # REQUIRED
     declared_arguments.append(
         DeclareLaunchArgument(
@@ -93,10 +94,11 @@ def generate_launch_description():
     activate_joint_controller = LaunchConfiguration("activate_joint_controller")
     enable_admittance = LaunchConfiguration("enable_admittance")
     rviz = LaunchConfiguration("rviz")
-    
 
     chonkur_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("chonkur_deploy"), 'launch','chonkur_control.launch.py')),
+        PythonLaunchDescriptionSource(
+            os.path.join(get_package_share_directory("chonkur_deploy"), "launch", "chonkur_control.launch.py")
+        ),
         launch_arguments={
             "description_package": description_package,
             "description_file": description_file,
@@ -105,7 +107,7 @@ def generate_launch_description():
             "fake_sensor_commands": "true",
             "headless_mode": headless_mode,
             "controllers_file": controllers_file,
-            "runtime_config_package": "clr_deploy", 
+            "runtime_config_package": "clr_deploy",
             "initial_joint_controller": initial_joint_controller,
             "activate_joint_controller": activate_joint_controller,
             "enable_admittance": enable_admittance,
@@ -114,14 +116,18 @@ def generate_launch_description():
     )
 
     vention_controllers_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("vention_rail_deploy"), 'launch','spawn_controllers.launch.py')),
+        PythonLaunchDescriptionSource(
+            os.path.join(get_package_share_directory("vention_rail_deploy"), "launch", "spawn_controllers.launch.py")
+        ),
         launch_arguments={
             "use_fake_hardware": use_fake_hardware,
         }.items(),
     )
 
     ewellix_controllers_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory("ewellix_liftkit_deploy"), 'launch','spawn_controllers.launch.py')),
+        PythonLaunchDescriptionSource(
+            os.path.join(get_package_share_directory("ewellix_liftkit_deploy"), "launch", "spawn_controllers.launch.py")
+        ),
         launch_arguments={
             "use_fake_hardware": use_fake_hardware,
         }.items(),
@@ -130,45 +136,61 @@ def generate_launch_description():
     lift_rail_controller = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["lift_rail_joint_trajectory_controller", 
-                   "-c", "controller_manager",
-                   "-t", "joint_trajectory_controller/JointTrajectoryController ",
-                   "--controller-manager-timeout","100",
-                   "--inactive"
-                  ]
+        arguments=[
+            "lift_rail_joint_trajectory_controller",
+            "-c",
+            "controller_manager",
+            "-t",
+            "joint_trajectory_controller/JointTrajectoryController ",
+            "--controller-manager-timeout",
+            "100",
+            "--inactive",
+        ],
     )
 
     clr_controller = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["clr_joint_trajectory_controller", 
-                   "-c", "controller_manager",
-                   "-t", "joint_trajectory_controller/JointTrajectoryController ",
-                   "--controller-manager-timeout","100",
-                   "--inactive"
-                  ]
+        arguments=[
+            "clr_joint_trajectory_controller",
+            "-c",
+            "controller_manager",
+            "-t",
+            "joint_trajectory_controller/JointTrajectoryController ",
+            "--controller-manager-timeout",
+            "100",
+            "--inactive",
+        ],
     )
 
     clr_servo_controller = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["servo_controller", 
-                   "-c", "controller_manager",
-                   "-t", "joint_trajectory_controller/JointTrajectoryController ",
-                   "--controller-manager-timeout","100",
-                   "--inactive"
-                  ]
+        arguments=[
+            "servo_controller",
+            "-c",
+            "controller_manager",
+            "-t",
+            "joint_trajectory_controller/JointTrajectoryController ",
+            "--controller-manager-timeout",
+            "100",
+            "--inactive",
+        ],
     )
 
     streaming_controller = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["streaming_controller", 
-                   "-c", "controller_manager",
-                   "-t", "position_controllers/JointGroupPositionController ",
-                   "--controller-manager-timeout","100",
-                   "--inactive"
-                  ]
+        arguments=[
+            "streaming_controller",
+            "-c",
+            "controller_manager",
+            "-t",
+            "position_controllers/JointGroupPositionController ",
+            "--controller-manager-timeout",
+            "100",
+            "--inactive",
+        ],
     )
 
     estop_safety = Node(
@@ -176,6 +198,14 @@ def generate_launch_description():
         executable="estop_safety.py",
     )
 
-    controller_nodes = [chonkur_launch, vention_controllers_launch, ewellix_controllers_launch, lift_rail_controller, clr_controller, clr_servo_controller, streaming_controller]
+    controller_nodes = [
+        chonkur_launch,
+        vention_controllers_launch,
+        ewellix_controllers_launch,
+        lift_rail_controller,
+        clr_controller,
+        clr_servo_controller,
+        streaming_controller,
+    ]
     additional_nodes = [estop_safety]
     return LaunchDescription(declared_arguments + controller_nodes + additional_nodes)

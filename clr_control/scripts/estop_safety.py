@@ -26,5 +26,5 @@ def main(args=None):
         rclpy.try_shutdown()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
