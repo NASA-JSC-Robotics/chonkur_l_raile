@@ -5,8 +5,7 @@
 ## UDEV Rules
 
 We use udev rules due to USB dev changes when rebooting computers.
-It is expected in the URDF that there is a rule for the gripper, lift,
-and safety com port for the rail.
+It is expected in the URDF that there is a rule for the gripper, lift, and safety com port for the rail.
 
 ```udev
 sudo touch /etc/udev/rules.d/<name_of_rule>.rules
@@ -39,5 +38,4 @@ SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="a0:ce:c8:79:19:a0", NAME="imetr
 SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="a0:ce:c8:79:81:11", NAME="rail"
 ```
 
-A diagram showing all of the components and their connections is
-located on the [CLR Confluence Page](https://bender.jsc.nasa.gov/confluence/x/wRFBDg)
+A diagram showing all of the components and their connections is located on the [CLR Confluence Page](https://bender.jsc.nasa.gov/confluence/x/wRFBDg).
