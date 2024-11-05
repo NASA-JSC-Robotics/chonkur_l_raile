@@ -226,7 +226,7 @@ def generate_launch_description():
         parameters=[
             {"node_name": "controller_stopper"},
             {"wait_for_node": True},
-        ]
+        ],
         condition=UnlessCondition(use_fake_hardware)
     )
 
