@@ -66,7 +66,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "activate_joint_controller",
-            default_value="true",
+            default_value="false",
             description="Activate loaded joint controller.",
         )
     )
@@ -160,17 +160,45 @@ def generate_launch_description():
         ],
     )
 
-    nodes = [gripper_controller_spawner, gripper_activation_controller_spawner]
-
-    spawn_controllers_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(get_package_share_directory("chonkur_deploy"), "launch", "spawn_controllers.launch.py")
-        ),
-        launch_arguments={
-            "use_fake_hardware": use_fake_hardware,
-        }.items(),
+    admittance_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=[
+            "admittance_controller",
+            "--controller-manager-timeout",
+            "100",
+            "-c",
+            "controller_manager",
+            "-t",
+            "admittance_controller/AdmittanceController",
+            "-p",
+            controllers_file,
+        ],
         condition=IfCondition(enable_admittance),
     )
-    launches.append(spawn_controllers_launch)
+
+    admittance_jtc_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=[
+            "admittance_joint_trajectory_controller",
+            "--controller-manager-timeout",
+            "100",
+            "-c",
+            "controller_manager",
+            "-t",
+            "joint_trajectory_controller/JointTrajectoryController ",
+            "-p",
+            controllers_file,
+        ],
+        condition=IfCondition(enable_admittance),
+    )
+
+    nodes = [
+        gripper_controller_spawner,
+        gripper_activation_controller_spawner,
+        admittance_controller_spawner,
+        admittance_jtc_spawner,
+    ]
 
     return LaunchDescription(declared_arguments + launches + nodes)
