@@ -18,6 +18,7 @@
   <exec_depend>ament_index_python</exec_depend>
   <exec_depend>controller_manager</exec_depend>
   <exec_depend>chonkur_description</exec_depend>
+  <exec_depend>drt_ros2_ur_tools</exec_depend>
   <exec_depend>ur_robot_driver</exec_depend>
   <exec_depend>robotiq_driver</exec_depend>
   <exec_depend>robotiq_controllers</exec_depend>
