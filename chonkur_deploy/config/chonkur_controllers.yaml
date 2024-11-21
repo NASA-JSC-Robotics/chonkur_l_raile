@@ -203,6 +203,13 @@ admittance_controller:
       group_name: chonkur_grasp
       alpha: 0.0005
 
+    # We must separately specify the name of the base link for the kinematics plugin, as was added in
+    # https://github.com/ros-controls/kinematics_interface/blob/2f02ebd1ab16828c346c8ccc12e21bf8ef7a29a7/kinematics_interface_kdl/src/kinematics_interface_kdl.cpp#L51
+    # This is redundant, but necessary so that the IK solver for the controller only uses the UR links,
+    # and not anything the robot is attached to (e.g. a lift or rail or both!)
+    # Unfortunately, as we are still on humble we must compile that interface from source.
+    base: base_link
+
     ft_sensor:
       name: tcp_fts_sensor
       frame:
