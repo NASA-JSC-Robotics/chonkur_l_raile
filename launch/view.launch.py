@@ -8,17 +8,6 @@ from launch_ros.substitutions import FindPackageShare
 def generate_launch_description():
     declared_arguments = []
 
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "finger_xacro",
-            default_value="fngr_v2_m",
-            choices=["fngr_nail_v2", "fngr_v2_m", "fngr_v6"],
-            description="Chose which fingers are mounted to the gripper",
-        )
-    )
-
-    finger_xacro = LaunchConfiguration("finger_xacro")
-
     robot_description_content = Command(
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
@@ -28,7 +17,7 @@ def generate_launch_description():
             ),
             " ",
             "finger_xacro:=",
-            finger_xacro,
+            "fngr_v6",
         ]
     )
 
