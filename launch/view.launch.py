@@ -34,7 +34,7 @@ def generate_launch_description():
 
     robot_description = {"robot_description": robot_description_content}
 
-    rviz_config_file = PathJoinSubstitution([FindPackageShare("clr_description"), "rviz", "view_robot.rviz"])
+    rviz_config_file = PathJoinSubstitution([FindPackageShare("clr_imetro_environments"), "rviz", "view_robot.rviz"])
 
     joint_state_publisher_node = Node(
         package="joint_state_publisher_gui",
