@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>clr_imetro_environments</name>
+  <version>0.0.1</version>
+
+  <description>ChonkUR L. Rail-E MoveIt Studio Config with the Hatch and Trainer Descriptions</description>
+
+  <maintainer email="michael.e.tobia@nasa.gov">Mike Tobia</maintainer>
+
+  <license>NASA-1.3</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <exec_depend>clr_description</exec_depend>
+  <exec_depend>hatch_accessories</exec_depend>
+  <exec_depend>hatch_4040</exec_depend>
+  <exec_depend>trainer</exec_depend>
+  <exec_depend>merlin_mockup_description</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
