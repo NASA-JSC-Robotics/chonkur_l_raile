@@ -1,4 +1,4 @@
-# How to Setup ChonkUR 
+# How to Setup ChonkUR
 
 ## Networking description
 

@@ -89,18 +89,6 @@ def generate_launch_description():
             description="start rviz?",
         )
     )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "description_package",
-            default_value="chonkur_description"
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "description_file",
-            default_value="chonkur.urdf.xacro"
-        )
-    )
     # General arguments
     declared_arguments.append(
         DeclareLaunchArgument(
@@ -111,6 +99,8 @@ def generate_launch_description():
             description="YAML file with the controllers configuration.",
         )
     )
+    declared_arguments.append(DeclareLaunchArgument("description_package", default_value="chonkur_description"))
+    declared_arguments.append(DeclareLaunchArgument("description_file", default_value="chonkur.urdf.xacro"))
 
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
@@ -119,8 +109,7 @@ def generate_launch_description():
     runtime_config_package = LaunchConfiguration("runtime_config_package")
     fake_sensor_commands = LaunchConfiguration("fake_sensor_commands")
     initial_joint_controller = LaunchConfiguration("initial_joint_controller")
-    activate_joint_controller = LaunchConfiguration(
-        "activate_joint_controller")
+    activate_joint_controller = LaunchConfiguration("activate_joint_controller")
     enable_admittance = LaunchConfiguration("enable_admittance")
     rviz = LaunchConfiguration("rviz")
     description_package = LaunchConfiguration("description_package")
@@ -137,8 +126,9 @@ def generate_launch_description():
     #
     # https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver/issues/838
     base_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(get_package_share_directory(
-            "ur_robot_driver"), 'launch', 'ur_control.launch.py')),
+        PythonLaunchDescriptionSource(
+            os.path.join(get_package_share_directory("drt_ros2_ur_tools"), "launch", "chonkur_ur_control.launch.py")
+        ),
         launch_arguments={
             "ur_type": "ur10e",
             "robot_ip": "192.168.1.102",
@@ -161,45 +151,63 @@ def generate_launch_description():
     gripper_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["robotiq_gripper_hande_controller",
-                   "-c", "controller_manager",
-                   "-t", "position_controllers/GripperActionController",
-                   "--controller-manager-timeout", "100",
-                   ]
+        arguments=[
+            "robotiq_gripper_hande_controller",
+            "-c",
+            "controller_manager",
+            "-t",
+            "position_controllers/GripperActionController",
+            "--controller-manager-timeout",
+            "100",
+        ],
     )
 
     gripper_activation_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["robotiq_activation_controller",
-                   "-c", "controller_manager",
-                   "-t", "robotiq_controllers/RobotiqActivationController",
-                   "--controller-manager-timeout", "100",
-                   ]
+        arguments=[
+            "robotiq_activation_controller",
+            "-c",
+            "controller_manager",
+            "-t",
+            "robotiq_controllers/RobotiqActivationController",
+            "--controller-manager-timeout",
+            "100",
+        ],
     )
 
     admittance_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["admittance_controller",
-                   "--controller-manager-timeout", "100",
-                   "-c", "controller_manager",
-                   "-t", "admittance_controller/AdmittanceController",
-                   "-p", controllers_file,
-                   ],
-        condition=IfCondition(enable_admittance)
+        arguments=[
+            "admittance_controller",
+            "--controller-manager-timeout",
+            "100",
+            "-c",
+            "controller_manager",
+            "-t",
+            "admittance_controller/AdmittanceController",
+            "-p",
+            controllers_file,
+        ],
+        condition=IfCondition(enable_admittance),
     )
 
     admittance_jtc_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["admittance_joint_trajectory_controller",
-                   "--controller-manager-timeout", "100",
-                   "-c", "controller_manager",
-                   "-t", "joint_trajectory_controller/JointTrajectoryController ",
-                   "-p", controllers_file,
-                   ],
-        condition=IfCondition(enable_admittance)
+        arguments=[
+            "admittance_joint_trajectory_controller",
+            "--controller-manager-timeout",
+            "100",
+            "-c",
+            "controller_manager",
+            "-t",
+            "joint_trajectory_controller/JointTrajectoryController ",
+            "-p",
+            controllers_file,
+        ],
+        condition=IfCondition(enable_admittance),
     )
 
     delay_admittance_jtc_spawner = RegisterEventHandler(
@@ -216,10 +224,12 @@ def generate_launch_description():
         condition=UnlessCondition(use_fake_hardware)
     )
 
-    nodes = [gripper_controller_spawner,
-             gripper_activation_controller_spawner,
-             admittance_controller_spawner,
-             delay_admittance_jtc_spawner,
-             chonkur_controller_stopper]
+    nodes = [
+        gripper_controller_spawner,
+        gripper_activation_controller_spawner,
+        admittance_controller_spawner,
+        delay_admittance_jtc_spawner,
+        chonkur_controller_stopper,
+    ]
 
     return LaunchDescription(declared_arguments + launches + nodes)

@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro" name="chonkur">
   <xacro:arg name="tf_prefix" default="" />
-  <xacro:arg name="use_fake_hardware" default="false" />  
+  <xacro:arg name="use_fake_hardware" default="false" />
   <xacro:arg name="headless_mode" default="false" />
   <xacro:arg name="ros2_control_name" default="chonkur"/>
   <xacro:arg name="marker_opacity" default="0.5"/>
   <xacro:arg name="finger_xacro" default="fngr_v6"/>
-  
+
   <xacro:include filename="$(find chonkur_description)/urdf/chonkur_macro.xacro"/>
 
   <link name="world" />
