@@ -1,6 +1,5 @@
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
-from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
+from launch.substitutions import Command, FindExecutable, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
@@ -28,12 +27,16 @@ def generate_launch_description():
     joint_state_publisher_node = Node(
         package="joint_state_publisher_gui",
         executable="joint_state_publisher_gui",
+        namespace="multi_hatch",
+        remappings=[],
     )
     robot_state_publisher_node = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
         output="both",
         parameters=[robot_description],
+        namespace="multi_hatch",
+        remappings=[],
     )
     rviz_node = Node(
         package="rviz2",
