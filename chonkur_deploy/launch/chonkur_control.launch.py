@@ -144,6 +144,7 @@ def generate_launch_description():
             "initial_joint_controller": initial_joint_controller,
             "activate_joint_controller": activate_joint_controller,
             "launch_rviz": rviz,
+            "use_controller_stopper": "false",
         }.items(),
     )
     launches.append(base_launch)
