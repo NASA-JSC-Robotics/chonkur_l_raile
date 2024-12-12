@@ -25,15 +25,18 @@ repos:
       - id: check-symlinks
       - id: check-xml
       - id: check-yaml
+        # Allow for yaml constructors such as "!degrees"
+        args: ["--unsafe"]
       - id: debug-statements
       - id: end-of-file-fixer
+        exclude: (\.(svg|stl|dae))$
       - id: mixed-line-ending
       - id: trailing-whitespace
       - id: fix-byte-order-marker
 
   # markdownlint hook
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.43.0
+    rev: v0.42.0
     hooks:
       - id: markdownlint
         # Disable max line length check for markdown
@@ -47,7 +50,7 @@ repos:
 
   # Python hooks
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.19.0
+    rev: v3.17.0
     hooks:
     -   id: pyupgrade
         args: [--py36-plus]
@@ -66,7 +69,7 @@ repos:
 
   # CPP hooks
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: v19.1.4
+    rev: v19.1.1
     hooks:
       - id: clang-format
         files: \.(c|cc|cxx|cpp|frag|glsl|h|hpp|hxx|ih|ispc|ipp|java|m|proto|vert)$
@@ -78,3 +81,4 @@ repos:
     rev: v2.3.0
     hooks:
       - id: codespell
+        exclude: \.(svg|stl|dae)$
