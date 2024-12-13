@@ -5,4 +5,3 @@ chonkur_controller_stopper:
       - force_torque_sensor_broadcaster
       - joint_state_broadcaster
       - speed_scaling_state_broadcaster
-      - ur_configuration_controller
