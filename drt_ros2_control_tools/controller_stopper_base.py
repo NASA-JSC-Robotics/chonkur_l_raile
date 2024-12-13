@@ -67,7 +67,7 @@ class ControllerStopperBase(Node):
             [''], 
             ParameterDescriptor(
                 type=ParameterType.PARAMETER_STRING_ARRAY,
-                description='controllers which will remain active even when the pendant is not running a program'
+                description='controllers that will always remain active'
             )
         )
         self.consistent_controllers = self.get_parameter('consistent_controllers').value
