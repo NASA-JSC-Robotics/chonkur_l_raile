@@ -64,7 +64,7 @@ class ControllerStopperBase(Node):
         # if the user doesn't provide the name of the servo node, assume we don't care
         self.servo_node_name = servo_node_name
         self.manage_servo = self.servo_node_name != ""
-        self.servo_node_found = True
+        self.servo_node_found = False
 
         # only try to hook up to the node if we are managing servo as well
         if self.manage_servo:
