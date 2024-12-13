@@ -74,8 +74,6 @@ class ControllerStopperBase(Node):
                 SetBool, self.servo_node_name + "/pause_servo", callback_group=self.servo_cb_group
             )
 
-        # consistent_controllers_descriptor = ParameterDescriptor(,description='This parameter is mine!')
-
         # get parameter of list of strings for consistent_controllers (default to nothing)
         self.declare_parameter(
             "consistent_controllers",
