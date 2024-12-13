@@ -27,7 +27,7 @@ def generate_launch_description():
     joint_state_publisher_node = Node(
         package="joint_state_publisher_gui",
         executable="joint_state_publisher_gui",
-        namespace="multi_hatch",
+        namespace="imetro_environment",
         remappings=[],
     )
     robot_state_publisher_node = Node(
@@ -35,7 +35,7 @@ def generate_launch_description():
         executable="robot_state_publisher",
         output="both",
         parameters=[robot_description],
-        namespace="multi_hatch",
+        namespace="imetro_environment",
         remappings=[],
     )
     rviz_node = Node(
