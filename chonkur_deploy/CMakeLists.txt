@@ -9,7 +9,7 @@ install(
   DESTINATION share/${PROJECT_NAME}
 )
 
-install(PROGRAMS 
+install(PROGRAMS
     scripts/chonkur_controller_stopper.py
     scripts/dummy_program_state_server.py
     DESTINATION lib/${PROJECT_NAME}
