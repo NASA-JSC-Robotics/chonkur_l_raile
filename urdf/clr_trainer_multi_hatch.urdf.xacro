@@ -26,26 +26,6 @@
 
   <link name="world" />
 
-  <xacro:clr
-    tf_prefix="$(arg tf_prefix)"
-    use_fake_hardware="$(arg use_fake_hardware)"
-    headless_mode="$(arg headless_mode)"
-    ewellix_com_port="$(arg ewellix_com_port)"
-    com_port_hande="$(arg com_port_hande)"
-    finger_xacro="$(arg finger_xacro)"
-    ros2_control_name="clr"
-    parent="world"
-    sim_gazebo="false"
-    sim_ignition="false"
-    chonkur_ip="192.168.1.102"
-    rail_ip="192.168.7.2"
-    rail_port="9999"
-    rail_position_limit="2.0"
-    rail_velocity_limit="0.15"
-    ewellix_height_limit="0.7"
-    safety_com_port="/dev/safety_com_port"
-  />
-
   <!-- Load the 4040 hatch-->
   <xacro:if value="${hatch_4040}">
     <!-- Hatch frame-->
@@ -248,7 +228,7 @@
 
 
   <joint name="ground_joint" type="fixed">
-    <parent link="$(arg tf_prefix)clr_base"/>
+    <parent link="$(arg tf_prefix)world"/>
     <child link="ground_plane"/>
     <origin xyz="0 0 -0.005" rpy="0 0 0"/>
   </joint>
@@ -277,7 +257,7 @@
   </link>
 
   <joint name="room_ceiling_joint" type="fixed">
-    <parent link="$(arg tf_prefix)clr_base"/>
+    <parent link="$(arg tf_prefix)world"/>
     <child link="room_ceiling"/>
     <origin xyz="0 0 2.75" rpy="0 0 0"/>
   </joint>
