@@ -225,12 +225,19 @@ def generate_launch_description():
         condition=UnlessCondition(use_fake_hardware)
     )
 
+    delay_controller_stopper = RegisterEventHandler(
+        OnProcessExit(
+            target_action=admittance_jtc_spawner,
+            on_exit=[chonkur_controller_stopper]
+        )
+    )
+
     nodes = [
         gripper_controller_spawner,
         gripper_activation_controller_spawner,
         admittance_controller_spawner,
         delay_admittance_jtc_spawner,
-        chonkur_controller_stopper,
+        delay_controller_stopper,
     ]
 
     return LaunchDescription(declared_arguments + launches + nodes)
