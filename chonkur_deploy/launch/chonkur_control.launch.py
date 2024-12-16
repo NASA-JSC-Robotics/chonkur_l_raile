@@ -210,6 +210,8 @@ def generate_launch_description():
         condition=IfCondition(enable_admittance),
     )
 
+    # start the admittance jtc spawner after the admittance controller so that the jtc has the
+    # right chained interfaces to hook into
     delay_admittance_jtc_spawner = RegisterEventHandler(
         OnProcessExit(target_action=admittance_controller_spawner, on_exit=[admittance_jtc_spawner])
     )
