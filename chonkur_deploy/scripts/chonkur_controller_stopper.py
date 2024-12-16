@@ -30,7 +30,7 @@ class ChonkurControllerStopper(ControllerStopperBase):
         self.get_logger().info("Waiting for service to come up on /dashboard_client/program_state")
         self.get_program_state_srv.wait_for_service()
 
-        # timer at 1 second loop to check controller status and cancel
+        # timer at 0.5 second loop to check controller status and cancel
         self.timer_cb_group = ReentrantCallbackGroup()
         self.timer = self.create_timer(0.5, self.timer_callback, callback_group=self.timer_cb_group)
 
