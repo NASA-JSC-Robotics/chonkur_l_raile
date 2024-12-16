@@ -4,6 +4,7 @@ from rclpy.node import Node
 from ur_dashboard_msgs.srv import GetProgramState
 from ur_dashboard_msgs.msg import ProgramState
 from std_srvs.srv import SetBool
+from rclpy.executors import MultiThreadedExecutor
 
 # THIS FILE IS TO MOCK THE UR DASHBOARD CLIENT PROGRAM STATE IF YOU ARE TRYING TO TEST SOMETHING IN SIM
 
@@ -44,9 +45,14 @@ class ProgramStateServer(Node):
 def main(args=None):
     rclpy.init(args=args)
     program_state_server = ProgramStateServer()
-    rclpy.spin(program_state_server)
-    program_state_server.destroy_node()
-    rclpy.shutdown()
+    executor = MultiThreadedExecutor(num_threads=4)
+    executor.add_node(program_state_server)
+
+    try:
+        executor.spin()
+    finally:
+        executor.shutdown()
+        rclpy.try_shutdown()
 
 
 if __name__ == "__main__":

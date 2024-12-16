@@ -5,6 +5,7 @@ from ur_dashboard_msgs.msg import ProgramState
 from drt_ros2_control_tools.controller_stopper_base import ControllerStopperBase
 from rclpy.executors import MultiThreadedExecutor
 from rclpy.callback_groups import ReentrantCallbackGroup
+import sys
 
 
 class ChonkurControllerStopper(ControllerStopperBase):
@@ -64,9 +65,16 @@ def main(args=None):
     chonkur_controller_stopper = ChonkurControllerStopper()
     executor = MultiThreadedExecutor(num_threads=4)
     executor.add_node(chonkur_controller_stopper)
-    executor.spin()
-    chonkur_controller_stopper.destroy_node()
-    rclpy.shutdown()
+
+    try:
+        executor.spin()
+    except KeyboardInterrupt:
+        pass
+    except rclpy.executors.ExternalShutdownException:
+        sys.exit(1)
+    finally:
+        executor.shutdown()
+        rclpy.try_shutdown()
 
 
 if __name__ == "__main__":
