@@ -126,7 +126,7 @@ def generate_launch_description():
     # https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver/issues/838
     base_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(get_package_share_directory("drt_ros2_ur_tools"), "launch", "chonkur_ur_control.launch.py")
+            os.path.join(get_package_share_directory("drt_ros2_ur_tools"), "launch", "drt_ur_control.launch.py")
         ),
         launch_arguments={
             "ur_type": "ur10e",
