@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import rclpy
-import time
 from ur_dashboard_msgs.srv import GetProgramState
 from ur_dashboard_msgs.msg import ProgramState
 from drt_ros2_control_tools.controller_stopper_base import ControllerStopperBase
@@ -30,12 +29,6 @@ class ChonkurControllerStopper(ControllerStopperBase):
 
         self.get_logger().info("Waiting for service to come up on /dashboard_client/program_state")
         self.get_program_state_srv.wait_for_service()
-
-        # wait for controllers to start first. I can't think of a better way to handle this
-        # if we don't sleep, it crashes because I think we try to disable in the middle of spawning
-        # maybe this could instead wait for the admittance_jtc node to spawn? That should probably be
-        # the last to come up
-        time.sleep(1)
 
         # timer at 1 second loop to check controller status and cancel
         self.timer_cb_group = ReentrantCallbackGroup()

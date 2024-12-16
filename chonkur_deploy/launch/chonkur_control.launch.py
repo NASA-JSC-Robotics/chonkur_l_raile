@@ -223,6 +223,8 @@ def generate_launch_description():
         condition=UnlessCondition(use_fake_hardware),
     )
 
+    # wait for the controller stopper until everything else is loaded so that we can then manage,
+    # instead of coming in during the middle of the loading process
     delay_controller_stopper = RegisterEventHandler(
         OnProcessExit(target_action=admittance_jtc_spawner, on_exit=[chonkur_controller_stopper])
     )
