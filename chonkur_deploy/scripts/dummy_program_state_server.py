@@ -5,6 +5,7 @@ from ur_dashboard_msgs.srv import GetProgramState
 from ur_dashboard_msgs.msg import ProgramState
 from std_srvs.srv import SetBool
 from rclpy.executors import MultiThreadedExecutor
+import sys
 
 # THIS FILE IS TO MOCK THE UR DASHBOARD CLIENT PROGRAM STATE IF YOU ARE TRYING TO TEST SOMETHING IN SIM
 
@@ -50,6 +51,10 @@ def main(args=None):
 
     try:
         executor.spin()
+    except KeyboardInterrupt:
+        pass
+    except rclpy.executors.ExternalShutdownException:
+        sys.exit(1)
     finally:
         executor.shutdown()
         rclpy.try_shutdown()
