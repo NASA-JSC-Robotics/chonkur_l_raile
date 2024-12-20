@@ -3,9 +3,13 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
-from launch.conditions import IfCondition
-from launch.substitutions import LaunchConfiguration
+from launch.conditions import IfCondition, UnlessCondition
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
+from launch_ros.parameter_descriptions import ParameterFile
+from launch_ros.substitutions import FindPackageShare
 import os
+from launch.actions import RegisterEventHandler
+from launch.event_handlers import OnProcessExit
 
 
 def generate_launch_description():
@@ -84,6 +88,16 @@ def generate_launch_description():
             description="start rviz?",
         )
     )
+    # General arguments
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "consistent_controllers_file",
+            default_value=PathJoinSubstitution(
+                [FindPackageShare("chonkur_deploy"), "config", "consistent_controllers.yaml"]
+            ),
+            description="YAML file with the controllers configuration.",
+        )
+    )
     declared_arguments.append(DeclareLaunchArgument("description_package", default_value="chonkur_description"))
     declared_arguments.append(DeclareLaunchArgument("description_file", default_value="chonkur.urdf.xacro"))
 
@@ -99,6 +113,7 @@ def generate_launch_description():
     rviz = LaunchConfiguration("rviz")
     description_package = LaunchConfiguration("description_package")
     description_file = LaunchConfiguration("description_file")
+    consistent_controllers_file = LaunchConfiguration("consistent_controllers_file")
 
     launches = []
 
@@ -111,7 +126,7 @@ def generate_launch_description():
     # https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver/issues/838
     base_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(get_package_share_directory("ur_robot_driver"), "launch", "ur_control.launch.py")
+            os.path.join(get_package_share_directory("drt_ros2_ur_tools"), "launch", "drt_ur_control.launch.py")
         ),
         launch_arguments={
             "ur_type": "ur10e",
@@ -128,6 +143,7 @@ def generate_launch_description():
             "initial_joint_controller": initial_joint_controller,
             "activate_joint_controller": activate_joint_controller,
             "launch_rviz": rviz,
+            "use_controller_stopper": "false",
         }.items(),
     )
     launches.append(base_launch)
@@ -194,11 +210,31 @@ def generate_launch_description():
         condition=IfCondition(enable_admittance),
     )
 
+    # start the admittance jtc spawner after the admittance controller so that the jtc has the
+    # right chained interfaces to hook into
+    delay_admittance_jtc_spawner = RegisterEventHandler(
+        OnProcessExit(target_action=admittance_controller_spawner, on_exit=[admittance_jtc_spawner])
+    )
+
+    chonkur_controller_stopper = Node(
+        package="chonkur_deploy",
+        executable="chonkur_controller_stopper.py",
+        parameters=[ParameterFile(consistent_controllers_file)],
+        condition=UnlessCondition(use_fake_hardware),
+    )
+
+    # wait for the controller stopper until everything else is loaded so that we can then manage,
+    # instead of coming in during the middle of the loading process
+    delay_controller_stopper = RegisterEventHandler(
+        OnProcessExit(target_action=admittance_jtc_spawner, on_exit=[chonkur_controller_stopper])
+    )
+
     nodes = [
         gripper_controller_spawner,
         gripper_activation_controller_spawner,
         admittance_controller_spawner,
-        admittance_jtc_spawner,
+        delay_admittance_jtc_spawner,
+        delay_controller_stopper,
     ]
 
     return LaunchDescription(declared_arguments + launches + nodes)
