@@ -10,9 +10,9 @@
 joint_limits:
   ewellix_lift_lower_to_higher:
     has_velocity_limits: true
-    max_velocity: 0.1
+    max_velocity: 0.03
     has_acceleration_limits: true
-    max_acceleration: 1.0
+    max_acceleration: 0.02
   vention_rail_base_to_carriage:
     has_velocity_limits: true
     max_velocity: 0.1
