@@ -169,7 +169,7 @@
       tf_prefix="${tf_prefix}"
       parent="${tf_prefix}lower_lift_plate"
       height_limit="${ewellix_height_limit}"
-      omit_plates="${ewellix_omit_plates}}"
+      omit_plates="${ewellix_omit_plates}"
       use_fake_hardware="${use_fake_hardware}"
       com_port="${ewellix_com_port}"
     >
