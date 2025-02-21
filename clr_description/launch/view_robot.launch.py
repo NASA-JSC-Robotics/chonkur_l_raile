@@ -75,7 +75,6 @@ def generate_launch_description():
             " ",
             "height_limit:=",
             height_limit,
-            
         ]
     )
     robot_description = {"robot_description": robot_description_content}
