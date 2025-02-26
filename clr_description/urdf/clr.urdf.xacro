@@ -6,6 +6,7 @@
   <xacro:arg name="headless_mode" default="false" />
   <xacro:arg name="finger_xacro" default="fngr_v6" />
   <xacro:arg name="marker_opacity" default="0.5" />
+  <xacro:arg name="height_limit" default="0.7" />
 
   <xacro:include filename="$(find clr_description)/urdf/clr_macro.xacro"/>
 
@@ -29,7 +30,7 @@
     safety_com_port="/dev/safety_com_port"
     rail_position_limit="2.0"
     rail_velocity_limit="0.15"
-    ewellix_height_limit="0.7"
+    ewellix_height_limit="$(arg height_limit)"
   />
 
 </robot>
