@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: chonkur_description
+    relative_path: urdf/chonkur.urdf.xacro
+  srdf:
+    relative_path: config/chonkur.srdf
+  package_settings:
+    author_name: Erik Holum
+    author_email: erik.holum@nasa.gov
+    generated_timestamp: 1741184586
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
