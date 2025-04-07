@@ -159,6 +159,8 @@ def generate_launch_description():
             "position_controllers/GripperActionController",
             "--controller-manager-timeout",
             "100",
+            "-p",
+            controllers_file,
         ],
     )
 
