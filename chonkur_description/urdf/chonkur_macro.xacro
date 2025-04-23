@@ -18,7 +18,8 @@
     chonkur_ip:=192.168.1.102
     com_port_hande:=/dev/ttyUSB1
     marker_opacity:=0.5
-    finger_xacro:=fngr_v6">
+    finger_xacro:=fngr_v6
+    generate_ros2_control_tag:=true">
 
     <!-- convert to property to use substitution in function -->
     <xacro:property name="initial_positions_file" default="$(find chonkur_description)/config/initial_positions.yaml"/>
@@ -40,6 +41,7 @@
       fake_sensor_commands="false"
       sim_gazebo="${sim_gazebo}"
       sim_ignition="${sim_ignition}"
+      generate_ros2_control_tag="${generate_ros2_control_tag}"
       headless_mode="${headless_mode}"
       initial_positions="${xacro.load_yaml(initial_positions_file)}"
       use_tool_communication="false"
@@ -101,7 +103,8 @@
       use_fake_hardware="${use_fake_hardware}"
       com_port="${com_port_hande}"
       marker_opacity="${marker_opacity}"
-      finger_xacro="${finger_xacro}">
+      finger_xacro="${finger_xacro}"
+      generate_ros2_control_tag="${generate_ros2_control_tag}">
       <origin xyz="0 0 0.008" rpy="0 0 ${radians(-90)}"/>
     </xacro:dextivr_hande>
 
@@ -111,6 +114,5 @@
       <child link="${tf_prefix}manual_grasp_link"/>
       <origin xyz="0 0 0" rpy="0 0 ${radians(180)}"/>
     </joint>
-
   </xacro:macro>
 </robot>
