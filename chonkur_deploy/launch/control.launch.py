@@ -7,7 +7,7 @@ from ament_index_python.packages import get_package_share_directory
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterFile
 from launch.conditions import UnlessCondition
-from chonkur_deploy.launch_helpers import include_launch_file
+from chonkur_deploy.launch_helpers import include_launch_file, spawn_controller
 
 
 def generate_launch_description():
@@ -104,6 +104,7 @@ def generate_launch_description():
         output="both",
     )
 
+    # State publishers for ChonkUR
     robot_state_publisher = include_launch_file(
         package_name="chonkur_deploy",
         launch_file="robot_state_publisher.launch.py",
@@ -117,6 +118,7 @@ def generate_launch_description():
         }.items(),
     )
 
+    # Spawn ChonkUR specific controllers
     spawn_controllers = include_launch_file(
         package_name="chonkur_deploy",
         launch_file="spawn_controllers.launch.py",
@@ -127,6 +129,11 @@ def generate_launch_description():
         }.items(),
     )
 
+    # Include the joint state broadcaster at the top level control file so consumers
+    # can add it as needed
+    joint_state_broadcaster = spawn_controller("joint_state_broadcaster", namespace=ns)
+
+    # Launch additional UR specific tools
     ur_tools = include_launch_file(
         package_name="chonkur_deploy",
         launch_file="ur_tools.launch.py",
@@ -137,6 +144,7 @@ def generate_launch_description():
         }.items(),
     )
 
+    # E-stop controller manager integration for ChonkUR
     chonkur_controller_stopper = Node(
         package="chonkur_deploy",
         executable="chonkur_controller_stopper.py",
@@ -155,6 +163,6 @@ def generate_launch_description():
     # instead of coming in during the middle of the loading process
     delay_controller_stopper = TimerAction(period=10.0, actions=[chonkur_controller_stopper])
 
-    nodes = [control_node, chonkur_controller_stopper, delay_controller_stopper]
+    nodes = [control_node, joint_state_broadcaster, chonkur_controller_stopper, delay_controller_stopper]
     launch_files = [robot_state_publisher, spawn_controllers, ur_tools]
     return LaunchDescription(declared_arguments + nodes + launch_files)

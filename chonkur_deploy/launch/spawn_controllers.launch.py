@@ -2,7 +2,7 @@
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
-from chonkur_deploy.launch_helpers import spawn_controller, include_launch_file
+from chonkur_deploy.launch_helpers import include_launch_file
 
 
 def generate_launch_description():
@@ -51,8 +51,6 @@ def generate_launch_description():
         launch_arguments=spawner_launch_args,
     )
 
-    joint_state_broadcaster = spawn_controller("joint_state_broadcaster", namespace=ns)
-
     spawner_launch_files = [ur10e_spawners, gripper_spawners]
 
-    return LaunchDescription(declared_arguments + spawner_launch_files + [joint_state_broadcaster])
+    return LaunchDescription(declared_arguments + spawner_launch_files)
