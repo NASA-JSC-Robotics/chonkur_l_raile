@@ -16,6 +16,34 @@ def generate_launch_description():
     declared_arguments = []
     declared_arguments.append(
         DeclareLaunchArgument(
+            "ns",
+            default_value="",
+            description="Namespace for the robot.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "tf_prefix",
+            default_value="",
+            description="tf prefix for the robot joints.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_fake_hardware",
+            default_value="true",
+            description="Start robot with simulated hardware mirroring command to its states.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "robot_ip",
+            default_value="192.168.1.102",
+            description="IP address by which the robot can be reached.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "hande_dev_name",
             default_value="/dev/robotiq",
             description="File descriptor that will be generated for the tool communication device. "
@@ -29,44 +57,16 @@ def generate_launch_description():
             description="Enable headless mode for robot control",
         )
     )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "ns",
-            default_value="",
-            description="Namespace for the robot.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "robot_ip",
-            default_value="192.168.1.102",
-            description="IP address by which the robot can be reached.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "tf_prefix",
-            default_value="",
-            description="tf prefix for the robot joints.",
-        )
-    )
 
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "use_fake_hardware",
-            default_value="true",
-            description="Start robot with simulated hardware mirroring command to its states.",
-        )
-    )
-
-    hande_dev_name = LaunchConfiguration("hande_dev_name")
-    headless_mode = LaunchConfiguration("headless_mode")
     ns = LaunchConfiguration("ns")
-    robot_ip = LaunchConfiguration("robot_ip")
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
+    robot_ip = LaunchConfiguration("robot_ip")
+    hande_dev_name = LaunchConfiguration("hande_dev_name")
+    headless_mode = LaunchConfiguration("headless_mode")
 
-    # main robot description for ChonkUR
+    # main robot description for ChonkUR. Additional arguments are available in the xacro, but we only
+    # override a subset of those that change regularly depending on deployment.
     robot_description_content = Command(
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
@@ -79,20 +79,11 @@ def generate_launch_description():
             "use_fake_hardware:=",
             use_fake_hardware,
             " ",
-            "headless_mode:=",
-            headless_mode,
-            " ",
-            "ros2_control_name:=",
-            "chonkur",
-            " ",
-            "marker_opacity:=",
-            "0.5",
-            " ",
-            "finger_xacro:=",
-            "fngr_v6",
-            " ",
             "robot_ip:=",
             robot_ip,
+            " ",
+            "headless_mode:=",
+            headless_mode,
             " ",
             "com_port_hande:=",
             hande_dev_name,
