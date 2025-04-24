@@ -118,7 +118,7 @@ def generate_launch_description():
     # E-stop controller manager for CLR
     clr_safety_stopper = Node(
         package="clr_control",
-        executable="clr_estop_node.py",
+        executable="estop_safety.py",
         parameters=[
             param_file("clr_deploy", "consistent_controllers.yaml", True),
         ],
@@ -129,6 +129,6 @@ def generate_launch_description():
     # instead of coming in during the middle of the loading process
     delay_controller_stopper = TimerAction(period=10.0, actions=[clr_safety_stopper])
 
-    nodes = [control_node, joint_state_broadcaster, clr_safety_stopper, delay_controller_stopper]
+    nodes = [control_node, joint_state_broadcaster, delay_controller_stopper]
     launch_files = [robot_state_publisher, spawn_controllers, ur_tools]
     return LaunchDescription(declared_arguments + nodes + launch_files)
