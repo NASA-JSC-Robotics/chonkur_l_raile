@@ -2,12 +2,14 @@
 
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, TimerAction
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
-from ament_index_python.packages import get_package_share_directory
+from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
-from launch_ros.parameter_descriptions import ParameterFile
 from launch.conditions import UnlessCondition
-from chonkur_deploy.launch_helpers import include_launch_file, spawn_controller
+from chonkur_deploy.launch_helpers import (
+    include_launch_file,
+    parameter_file,
+    spawn_controller,
+)
 
 
 def generate_launch_description():
@@ -48,15 +50,6 @@ def generate_launch_description():
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
 
-    def param_file(package, config, allow_substs=False):
-        """
-        Return a param file given the specified package and path.
-        """
-        return ParameterFile(
-            PathJoinSubstitution([get_package_share_directory(package), "config", config]),
-            allow_substs=allow_substs,
-        )
-
     # # start the controller manager node with all of the controller config files
     control_node = Node(
         package="controller_manager",
@@ -65,14 +58,14 @@ def generate_launch_description():
         # allow_substs allows tf_prefix to be pulled in
         parameters=[
             # CLR specific controllers
-            param_file("clr_deploy", "controllers_common.yaml", True),
-            param_file("clr_deploy", "clr_controllers.yaml", True),
+            parameter_file("clr_deploy", "controllers_common.yaml", True),
+            parameter_file("clr_deploy", "clr_controllers.yaml", True),
             # Pulling in default controller configs for the hande, ur10e, lift, and rail
-            param_file("chonkur_deploy", "ur10e_update_rate.yaml", True),
-            param_file("chonkur_deploy", "ur10e_controllers.yaml", True),
-            param_file("chonkur_deploy", "hande_controllers.yaml", True),
-            param_file("ewellix_liftkit_deploy", "liftkit_controllers.yaml", True),
-            param_file("vention_rail_deploy", "rail_controllers.yaml", True),
+            parameter_file("chonkur_deploy", "ur10e_update_rate.yaml", True),
+            parameter_file("chonkur_deploy", "ur10e_controllers.yaml", True),
+            parameter_file("chonkur_deploy", "hande_controllers.yaml", True),
+            parameter_file("ewellix_liftkit_deploy", "liftkit_controllers.yaml", True),
+            parameter_file("vention_rail_deploy", "rail_controllers.yaml", True),
         ],
         remappings=[
             # remap to be able to use the global robot_description
