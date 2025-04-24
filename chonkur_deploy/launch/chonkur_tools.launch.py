@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 
-from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, TimerAction
 from launch.conditions import UnlessCondition
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
+from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
-from launch_ros.parameter_descriptions import ParameterFile
-from chonkur_deploy.launch_helpers import include_launch_file
+from chonkur_deploy.launch_helpers import include_launch_file, parameter_file
 
 
 def generate_launch_description():
@@ -74,12 +72,7 @@ def generate_launch_description():
         package="chonkur_deploy",
         executable="chonkur_controller_stopper.py",
         parameters=[
-            ParameterFile(
-                PathJoinSubstitution(
-                    [get_package_share_directory("chonkur_deploy"), "config", "consistent_controllers.yaml"]
-                ),
-                allow_substs=True,
-            ),
+            parameter_file("chonkur_deploy", "consistent_controllers.yaml", True),
         ],
         condition=UnlessCondition(use_fake_hardware),
     )

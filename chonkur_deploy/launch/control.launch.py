@@ -2,11 +2,13 @@
 
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
-from ament_index_python.packages import get_package_share_directory
+from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
-from launch_ros.parameter_descriptions import ParameterFile
-from chonkur_deploy.launch_helpers import include_launch_file, spawn_controller
+from chonkur_deploy.launch_helpers import (
+    include_launch_file,
+    parameter_file,
+    spawn_controller,
+)
 
 
 def generate_launch_description():
@@ -69,32 +71,11 @@ def generate_launch_description():
         package="controller_manager",
         executable="ros2_control_node",
         namespace=ns,
-        # allow_substs allows tf_prefix to be pulled in
         parameters=[
-            ParameterFile(
-                PathJoinSubstitution(
-                    [get_package_share_directory("chonkur_deploy"), "config", "ur10e_update_rate.yaml"]
-                ),
-                allow_substs=True,
-            ),
-            ParameterFile(
-                PathJoinSubstitution(
-                    [get_package_share_directory("chonkur_deploy"), "config", "controllers_common.yaml"]
-                ),
-                allow_substs=True,
-            ),
-            ParameterFile(
-                PathJoinSubstitution(
-                    [get_package_share_directory("chonkur_deploy"), "config", "ur10e_controllers.yaml"]
-                ),
-                allow_substs=True,
-            ),
-            ParameterFile(
-                PathJoinSubstitution(
-                    [get_package_share_directory("chonkur_deploy"), "config", "hande_controllers.yaml"]
-                ),
-                allow_substs=True,
-            ),
+            parameter_file("chonkur_deploy", "controllers_common.yaml", True),
+            parameter_file("chonkur_deploy", "ur10e_update_rate.yaml", True),
+            parameter_file("chonkur_deploy", "ur10e_controllers.yaml", True),
+            parameter_file("chonkur_deploy", "hande_controllers.yaml", True),
         ],
         remappings=[
             # remap to be able to use the global robot_description
