@@ -44,17 +44,18 @@ def generate_launch_description():
     nodes.append(spawn_controller("speed_scaling_state_broadcaster", namespace=ns))
     nodes.append(spawn_controller("force_torque_sensor_broadcaster", namespace=ns))
     nodes.append(spawn_controller("tcp_pose_broadcaster", namespace=ns, condition=UnlessCondition(use_fake_hardware)))
-    nodes.append(spawn_controller("ur_configuration_controller", namespace=ns))
     nodes.append(spawn_controller("joint_trajectory_controller", namespace=ns))
 
     # inactive controllers
     nodes.append(spawn_controller("scaled_joint_trajectory_controller", inactive=True, namespace=ns))
     nodes.append(spawn_controller("forward_velocity_controller", inactive=True, namespace=ns))
     nodes.append(spawn_controller("forward_position_controller", inactive=True, namespace=ns))
-    nodes.append(spawn_controller("force_mode_controller", inactive=True, namespace=ns))
-    nodes.append(spawn_controller("passthrough_trajectory_controller", inactive=True, namespace=ns))
     nodes.append(spawn_controller("freedrive_mode_controller", inactive=True, namespace=ns))
-    nodes.append(spawn_controller("tool_contact_controller", inactive=True, namespace=ns))
+    nodes.append(
+        spawn_controller(
+            "faked_forces_controller", inactive=True, namespace=ns, condition=IfCondition(use_fake_hardware)
+        )
+    )
 
     # admittance
     admittance_controller_spawner = spawn_controller(
