@@ -136,14 +136,6 @@ def generate_launch_description():
             "use_fake_hardware": use_fake_hardware,
         }.items(),
     )
-    ur_dashboard_client = include_launch_file(
-        package_name="ur_robot_driver",
-        launch_file="ur_dashboard_client.launch.py",
-        launch_arguments={
-            "robot_ip": robot_ip,
-        }.items(),
-        condition=UnlessCondition(use_fake_hardware),
-    )
 
     chonkur_controller_stopper = Node(
         package="chonkur_deploy",
@@ -164,5 +156,5 @@ def generate_launch_description():
     delay_controller_stopper = TimerAction(period=10.0, actions=[chonkur_controller_stopper])
 
     nodes = [control_node, chonkur_controller_stopper, delay_controller_stopper]
-    launch_files = [robot_state_publisher, spawn_controllers, ur_tools, ur_dashboard_client]
+    launch_files = [robot_state_publisher, spawn_controllers, ur_tools]
     return LaunchDescription(declared_arguments + nodes + launch_files)

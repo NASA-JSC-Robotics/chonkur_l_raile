@@ -5,6 +5,7 @@ from launch.actions import DeclareLaunchArgument
 from launch.conditions import UnlessCondition
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
+from chonkur_deploy.launch_helpers import include_launch_file
 
 
 def generate_launch_description():
@@ -53,8 +54,18 @@ def generate_launch_description():
         executable="urscript_interface",
         parameters=[{"robot_ip": robot_ip}],
         output="screen",
+        condition=UnlessCondition(use_fake_hardware),
     )
 
-    nodes = [robot_state_helper_node, urscript_interface]
+    ur_dashboard_client = include_launch_file(
+        package_name="ur_robot_driver",
+        launch_file="ur_dashboard_client.launch.py",
+        launch_arguments={
+            "robot_ip": robot_ip,
+        }.items(),
+        condition=UnlessCondition(use_fake_hardware),
+    )
+
+    nodes = [robot_state_helper_node, urscript_interface, ur_dashboard_client]
 
     return LaunchDescription(declared_arguments + nodes)
