@@ -3,8 +3,10 @@ from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import (
     LaunchConfiguration,
+    PathJoinSubstitution,
 )
 from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterFile
 from ament_index_python.packages import get_package_share_directory
 
 
@@ -16,6 +18,9 @@ def spawn_controller(
     namespace: LaunchConfiguration = "",
     condition=None,
 ):
+    """
+    Create a spawn controller node action for the specified controller and arguments.
+    """
     inactive_flags = ["--inactive"] if inactive else []
 
     return Node(
@@ -38,10 +43,29 @@ def spawn_controller(
 
 
 def include_launch_file(package_name, launch_file, launch_arguments=None, condition=None):
+    """
+    Returns a launch description for the specified package name and launch file. The target file
+    must be in the package's `launch/` directory.
+
+    Additional launch arguments or conditions can be passed through as arguments.
+    """
     return IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(get_package_share_directory(package_name), "launch", launch_file),
         ),
         launch_arguments=launch_arguments,
         condition=condition,
+    )
+
+
+def parameter_file(package, config, allow_substs=False):
+    """
+    Returns a ParameterFile for the specified package and config file name. The file must be in the
+    package's `config/` directory.
+
+    Specify `allow_substs` to pass variable substitutions to the yaml.
+    """
+    return ParameterFile(
+        PathJoinSubstitution([get_package_share_directory(package), "config", config]),
+        allow_substs=allow_substs,
     )
