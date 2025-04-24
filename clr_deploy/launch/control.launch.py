@@ -91,7 +91,7 @@ def generate_launch_description():
         }.items(),
     )
 
-    # Spawn CLR controllers
+    # Spawn all relevant CLR controllers
     spawn_controllers = include_launch_file(
         package_name="clr_deploy",
         launch_file="spawn_controllers.launch.py",
@@ -103,10 +103,10 @@ def generate_launch_description():
         }.items(),
     )
 
-    # Additional tools for the UR10e from UR
+    # Additional ROS node utilities for ChonkUR
     ur_tools = include_launch_file(
         package_name="chonkur_deploy",
-        launch_file="ur_tools.launch.py",
+        launch_file="chonkur_tools.launch.py",
         launch_arguments={
             "use_fake_hardware": use_fake_hardware,
         }.items(),
@@ -116,19 +116,16 @@ def generate_launch_description():
     joint_state_broadcaster = spawn_controller("joint_state_broadcaster", namespace=ns)
 
     # E-stop controller manager for CLR
-    clr_safety_stopper = Node(
+    clr_estop_safety = Node(
         package="clr_control",
         executable="estop_safety.py",
-        parameters=[
-            param_file("clr_deploy", "consistent_controllers.yaml", True),
-        ],
         condition=UnlessCondition(use_fake_hardware),
     )
 
     # wait for the controller stopper until everything else is loaded so that we can then manage,
     # instead of coming in during the middle of the loading process
-    delay_controller_stopper = TimerAction(period=10.0, actions=[clr_safety_stopper])
+    delay_clr_estop_safety = TimerAction(period=10.0, actions=[clr_estop_safety])
 
-    nodes = [control_node, joint_state_broadcaster, delay_controller_stopper]
+    nodes = [control_node, joint_state_broadcaster, delay_clr_estop_safety]
     launch_files = [robot_state_publisher, spawn_controllers, ur_tools]
     return LaunchDescription(declared_arguments + nodes + launch_files)
