@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
+from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, TimerAction
 from launch.conditions import UnlessCondition
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterFile
 from chonkur_deploy.launch_helpers import include_launch_file
 
 
@@ -32,6 +34,7 @@ def generate_launch_description():
             description="Start robot with fake hardware mirroring command to its states.",
         )
     )
+
     # Initialize Arguments
     headless_mode = LaunchConfiguration("headless_mode")
     robot_ip = LaunchConfiguration("robot_ip")
@@ -66,6 +69,25 @@ def generate_launch_description():
         condition=UnlessCondition(use_fake_hardware),
     )
 
-    nodes = [robot_state_helper_node, urscript_interface, ur_dashboard_client]
+    # E-stop controller manager integration for ChonkUR
+    chonkur_controller_stopper = Node(
+        package="chonkur_deploy",
+        executable="chonkur_controller_stopper.py",
+        parameters=[
+            ParameterFile(
+                PathJoinSubstitution(
+                    [get_package_share_directory("chonkur_deploy"), "config", "consistent_controllers.yaml"]
+                ),
+                allow_substs=True,
+            ),
+        ],
+        condition=UnlessCondition(use_fake_hardware),
+    )
+
+    # wait for the controller stopper until everything else is loaded so that we can then manage,
+    # instead of coming in during the middle of the loading process
+    delay_controller_stopper = TimerAction(period=10.0, actions=[chonkur_controller_stopper])
+
+    nodes = [robot_state_helper_node, urscript_interface, ur_dashboard_client, delay_controller_stopper]
 
     return LaunchDescription(declared_arguments + nodes)

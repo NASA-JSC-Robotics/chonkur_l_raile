@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, TimerAction
+from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from ament_index_python.packages import get_package_share_directory
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterFile
-from launch.conditions import UnlessCondition
 from chonkur_deploy.launch_helpers import include_launch_file, spawn_controller
 
 
@@ -134,9 +133,9 @@ def generate_launch_description():
     joint_state_broadcaster = spawn_controller("joint_state_broadcaster", namespace=ns)
 
     # Launch additional UR specific tools
-    ur_tools = include_launch_file(
+    chonkur_tools = include_launch_file(
         package_name="chonkur_deploy",
-        launch_file="ur_tools.launch.py",
+        launch_file="chonkur_tools.launch.py",
         launch_arguments={
             "headless_mode": headless_mode,
             "robot_ip": robot_ip,
@@ -144,25 +143,6 @@ def generate_launch_description():
         }.items(),
     )
 
-    # E-stop controller manager integration for ChonkUR
-    chonkur_controller_stopper = Node(
-        package="chonkur_deploy",
-        executable="chonkur_controller_stopper.py",
-        parameters=[
-            ParameterFile(
-                PathJoinSubstitution(
-                    [get_package_share_directory("chonkur_deploy"), "config", "consistent_controllers.yaml"]
-                ),
-                allow_substs=True,
-            ),
-        ],
-        condition=UnlessCondition(use_fake_hardware),
-    )
-
-    # wait for the controller stopper until everything else is loaded so that we can then manage,
-    # instead of coming in during the middle of the loading process
-    delay_controller_stopper = TimerAction(period=10.0, actions=[chonkur_controller_stopper])
-
-    nodes = [control_node, joint_state_broadcaster, delay_controller_stopper]
-    launch_files = [robot_state_publisher, spawn_controllers, ur_tools]
+    nodes = [control_node, joint_state_broadcaster]
+    launch_files = [robot_state_publisher, spawn_controllers, chonkur_tools]
     return LaunchDescription(declared_arguments + nodes + launch_files)
