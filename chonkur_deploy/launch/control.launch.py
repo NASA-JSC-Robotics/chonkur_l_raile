@@ -163,6 +163,6 @@ def generate_launch_description():
     # instead of coming in during the middle of the loading process
     delay_controller_stopper = TimerAction(period=10.0, actions=[chonkur_controller_stopper])
 
-    nodes = [control_node, joint_state_broadcaster, chonkur_controller_stopper, delay_controller_stopper]
+    nodes = [control_node, joint_state_broadcaster, delay_controller_stopper]
     launch_files = [robot_state_publisher, spawn_controllers, ur_tools]
     return LaunchDescription(declared_arguments + nodes + launch_files)
