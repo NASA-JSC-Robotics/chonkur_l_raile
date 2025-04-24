@@ -34,6 +34,12 @@ def generate_launch_description():
     ns = LaunchConfiguration("ns")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
 
+    spawner_launch_args = {
+        "enable_admittance": enable_admittance,
+        "ns": ns,
+        "use_fake_hardware": use_fake_hardware,
+    }.items()
+
     # Load CLR specific controllers
     lift_rail_controller = spawn_controller("lift_rail_joint_trajectory_controller", namespace=ns, inactive=True)
     clr_controller = spawn_controller("clr_joint_trajectory_controller", namespace=ns, inactive=True)
@@ -51,25 +57,17 @@ def generate_launch_description():
     chonkur_controllers = include_launch_file(
         package_name="chonkur_deploy",
         launch_file="spawn_controllers.launch.py",
-        launch_arguments={
-            "enable_admittance": enable_admittance,
-            "ns": ns,
-            "use_fake_hardware": use_fake_hardware,
-        }.items(),
+        launch_arguments=spawner_launch_args,
     )
     ewellix_controllers = include_launch_file(
         package_name="ewellix_liftkit_deploy",
         launch_file="spawn_controllers.launch.py",
-        launch_arguments={
-            "use_fake_hardware": use_fake_hardware,
-        }.items(),
+        launch_arguments=spawner_launch_args,
     )
     vention_controllers = include_launch_file(
         package_name="vention_rail_deploy",
         launch_file="spawn_controllers.launch.py",
-        launch_arguments={
-            "use_fake_hardware": use_fake_hardware,
-        }.items(),
+        launch_arguments=spawner_launch_args,
     )
 
     spawner_launch_files = [
