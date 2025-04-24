@@ -40,7 +40,8 @@ def generate_launch_description():
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
 
-    # main robot description for CLR
+    # Main robot description for CLR. Additional arguments are available in the xacro, but we only
+    # override a subset of those that change regularly depending on deployment.
     robot_description_content = Command(
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
@@ -52,15 +53,6 @@ def generate_launch_description():
             " ",
             "use_fake_hardware:=",
             use_fake_hardware,
-            " ",
-            "ros2_control_name:=",
-            "clr",
-            " ",
-            "marker_opacity:=",
-            "0.5",
-            " ",
-            "finger_xacro:=",
-            "fngr_v6",
             " ",
         ]
     )
