@@ -40,7 +40,7 @@ def generate_launch_description():
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
 
-    # main robot description for Phoebe
+    # main robot description for CLR
     robot_description_content = Command(
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
