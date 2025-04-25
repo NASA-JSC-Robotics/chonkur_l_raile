@@ -11,10 +11,14 @@ The hardware includes the ChonkUR robot mounted on an Ewellix Lift and Vention L
 ## Usage
 
 The project includes a kinematic simulation for the robot.
-To launch the simulation with mock hardware:
+Launching the controllers and hardware interface is done using the provided launch files:
 
 ```bash
-ros2 launch clr_deploy control.launch.py use_fake_hardware:=true
+# To launch the kinematic simulation
+ros2 launch clr_deploy clr_sim.launch.py
+
+# To launch the hardware robot
+ros2 launch clr_deploy clr_hw.launch.py
 ```
 
 A MoveIt RViz widget can then be launched with:
