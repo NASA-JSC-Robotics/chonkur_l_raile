@@ -15,13 +15,22 @@ The robot includes:
 ## Usage
 
 The project includes a kinematic simulation for the robot.
-Launching the controllers and hardware interface is done using the provided launch files:
+Launching the controllers and hardware interface is done using the provided launch files.
+
+To launch the Kinematic simulation:
 
 ```bash
-# To launch the kinematic simulation
 ros2 launch chonkur_deploy chonkur_sim.launch.py
+```
 
-# To launch the hardware robot
+For hardware we run the UR pendantless, which is a two part launch process:
+
+```bash
+# To launch the hardware robot, first deploy the UR tools to activate the dashboard client
+# in its own long-lived shell.
+ros2 launch chonkur_deploy ur_tools.launch.py
+
+# Then start the hardware interface.
 ros2 launch chonkur_deploy chonkur_hw.launch.py
 ```
 

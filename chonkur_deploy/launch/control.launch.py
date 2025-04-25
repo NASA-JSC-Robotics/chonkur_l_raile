@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, TimerAction
+from launch.conditions import UnlessCondition
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from chonkur_deploy.launch_helpers import (
@@ -113,17 +114,20 @@ def generate_launch_description():
     # can add it as needed
     joint_state_broadcaster = spawn_controller("joint_state_broadcaster", namespace=ns)
 
-    # Launch additional UR specific tools
-    chonkur_tools = include_launch_file(
-        package_name="chonkur_deploy",
-        launch_file="chonkur_tools.launch.py",
-        launch_arguments={
-            "headless_mode": headless_mode,
-            "robot_ip": robot_ip,
-            "use_fake_hardware": use_fake_hardware,
-        }.items(),
+    # E-stop controller manager integration for ChonkUR
+    chonkur_controller_stopper = Node(
+        package="chonkur_deploy",
+        executable="chonkur_controller_stopper.py",
+        parameters=[
+            parameter_file("chonkur_deploy", "consistent_controllers.yaml", True),
+        ],
+        condition=UnlessCondition(use_fake_hardware),
     )
 
+    # wait for the controller stopper until everything else is loaded so that we can then manage,
+    # instead of coming in during the middle of the loading process
+    delay_controller_stopper = TimerAction(period=10.0, actions=[chonkur_controller_stopper])
+
     nodes = [control_node, joint_state_broadcaster]
-    launch_files = [robot_state_publisher, spawn_controllers, chonkur_tools]
+    launch_files = [robot_state_publisher, spawn_controllers, delay_controller_stopper]
     return LaunchDescription(declared_arguments + nodes + launch_files)

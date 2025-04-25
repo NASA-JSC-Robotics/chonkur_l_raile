@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, TimerAction
+from launch.actions import DeclareLaunchArgument
 from launch.conditions import UnlessCondition
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
-from chonkur_deploy.launch_helpers import include_launch_file, parameter_file
+from chonkur_deploy.launch_helpers import include_launch_file
 
 
 def generate_launch_description():
@@ -67,20 +67,6 @@ def generate_launch_description():
         condition=UnlessCondition(use_fake_hardware),
     )
 
-    # E-stop controller manager integration for ChonkUR
-    chonkur_controller_stopper = Node(
-        package="chonkur_deploy",
-        executable="chonkur_controller_stopper.py",
-        parameters=[
-            parameter_file("chonkur_deploy", "consistent_controllers.yaml", True),
-        ],
-        condition=UnlessCondition(use_fake_hardware),
-    )
-
-    # wait for the controller stopper until everything else is loaded so that we can then manage,
-    # instead of coming in during the middle of the loading process
-    delay_controller_stopper = TimerAction(period=10.0, actions=[chonkur_controller_stopper])
-
-    nodes = [robot_state_helper_node, urscript_interface, ur_dashboard_client, delay_controller_stopper]
+    nodes = [robot_state_helper_node, urscript_interface, ur_dashboard_client]
 
     return LaunchDescription(declared_arguments + nodes)
