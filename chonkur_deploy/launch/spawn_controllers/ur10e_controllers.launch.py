@@ -72,8 +72,6 @@ def generate_launch_description():
     )
     admittance_controller_nodes = [
         admittance_controller_spawner,
-        admittance_jtc_spawner,
-        admittance_jtc_spawner,
         delay_admittance_jtc_spawner,
     ]
 
