@@ -98,17 +98,22 @@ def generate_launch_description():
     # CLR specific joint_state_broadcaster
     joint_state_broadcaster = spawn_controller("joint_state_broadcaster", namespace=ns)
 
-    # E-stop controller manager for CLR
-    clr_estop_safety = Node(
-        package="clr_control",
-        executable="estop_safety.py",
+    # E-stop controller manager for CLR. We use the stopper for ChonkUR, since the rail and lift
+    # do not require any consistent controllers. If that changes we may need to add a separate
+    # stopper implementation for CLR.
+    clr_controller_stopper = Node(
+        package="chonkur_deploy",
+        executable="chonkur_controller_stopper.py",
+        parameters=[
+            parameter_file("chonkur_deploy", "consistent_controllers.yaml", True),
+        ],
         condition=UnlessCondition(use_fake_hardware),
     )
 
     # wait for the controller stopper until everything else is loaded so that we can then manage,
     # instead of coming in during the middle of the loading process
-    delay_clr_estop_safety = TimerAction(period=10.0, actions=[clr_estop_safety])
+    delay_controller_stopper = TimerAction(period=10.0, actions=[clr_controller_stopper])
 
-    nodes = [control_node, joint_state_broadcaster, delay_clr_estop_safety]
+    nodes = [control_node, joint_state_broadcaster, delay_controller_stopper]
     launch_files = [robot_state_publisher, spawn_controllers]
     return LaunchDescription(declared_arguments + nodes + launch_files)
