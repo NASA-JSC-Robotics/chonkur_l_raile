@@ -12,4 +12,9 @@ def generate_launch_description():
         }.items(),
     )
 
-    return LaunchDescription([clr_launch])
+    camera_launch = include_launch_file(
+        package_name="clr_deploy",
+        launch_file="realsense_cameras.launch.py",
+    )
+
+    return LaunchDescription([clr_launch, camera_launch])
