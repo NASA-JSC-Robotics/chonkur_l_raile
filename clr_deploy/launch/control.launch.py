@@ -18,7 +18,7 @@ def generate_launch_description():
     declared_arguments = []
     declared_arguments.append(
         DeclareLaunchArgument(
-            "ns",
+            "namespace",
             default_value="",
             description="Namespace for the robot.",
         )
@@ -46,7 +46,7 @@ def generate_launch_description():
     )
 
     enable_admittance = LaunchConfiguration("enable_admittance")
-    ns = LaunchConfiguration("ns")
+    namespace = LaunchConfiguration("namespace")
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
 
@@ -54,7 +54,7 @@ def generate_launch_description():
     control_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        namespace=ns,
+        namespace=namespace,
         # allow_substs allows tf_prefix to be pulled in
         parameters=[
             # CLR specific controllers
@@ -77,7 +77,7 @@ def generate_launch_description():
         package_name="clr_deploy",
         launch_file="robot_state_publisher.launch.py",
         launch_arguments={
-            "ns": ns,
+            "namespace": namespace,
             "tf_prefix": tf_prefix,
             "use_fake_hardware": use_fake_hardware,
         }.items(),
@@ -88,7 +88,7 @@ def generate_launch_description():
         package_name="clr_deploy",
         launch_file="spawn_controllers.launch.py",
         launch_arguments={
-            "ns": ns,
+            "namespace": namespace,
             "tf_prefix": tf_prefix,
             "use_fake_hardware": use_fake_hardware,
             "enable_admittance": enable_admittance,
@@ -96,7 +96,7 @@ def generate_launch_description():
     )
 
     # CLR specific joint_state_broadcaster
-    joint_state_broadcaster = spawn_controller("joint_state_broadcaster", namespace=ns)
+    joint_state_broadcaster = spawn_controller("joint_state_broadcaster", namespace=namespace)
 
     # E-stop controller manager for CLR. We use the stopper for ChonkUR, since the rail and lift
     # do not require any consistent controllers. If that changes we may need to add a separate
