@@ -11,13 +11,22 @@ The hardware includes the ChonkUR robot mounted on an Ewellix Lift and Vention L
 ## Usage
 
 The project includes a kinematic simulation for the robot.
-Launching the controllers and hardware interface is done using the provided launch files:
+Launching the controllers and hardware interface is done using the provided launch files.
+
+To launch the Kinematic simulation:
 
 ```bash
-# To launch the kinematic simulation
 ros2 launch clr_deploy clr_sim.launch.py
+```
 
-# To launch the hardware robot
+For hardware we run the UR pendantless, which is a two part launch process:
+
+```bash
+# To launch the hardware robot, first deploy the UR tools to activate the dashboard client
+# in its own long-lived shell.
+ros2 launch chonkur_deploy ur_tools.launch.py
+
+# Start the hardware interfaces for the rail, lift, and ChonkUR.
 ros2 launch clr_deploy clr_hw.launch.py
 ```
 

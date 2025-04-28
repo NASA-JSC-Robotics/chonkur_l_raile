@@ -96,15 +96,6 @@ def generate_launch_description():
         }.items(),
     )
 
-    # Additional ROS node utilities for ChonkUR
-    ur_tools = include_launch_file(
-        package_name="chonkur_deploy",
-        launch_file="chonkur_tools.launch.py",
-        launch_arguments={
-            "use_fake_hardware": use_fake_hardware,
-        }.items(),
-    )
-
     # CLR specific joint_state_broadcaster
     joint_state_broadcaster = spawn_controller("joint_state_broadcaster", namespace=ns)
 
@@ -120,5 +111,5 @@ def generate_launch_description():
     delay_clr_estop_safety = TimerAction(period=10.0, actions=[clr_estop_safety])
 
     nodes = [control_node, joint_state_broadcaster, delay_clr_estop_safety]
-    launch_files = [robot_state_publisher, spawn_controllers, ur_tools]
+    launch_files = [robot_state_publisher, spawn_controllers]
     return LaunchDescription(declared_arguments + nodes + launch_files)
