@@ -32,7 +32,7 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "ns",
+            "namespace",
             default_value="",
             description="Namespace for the robot.",
         )
@@ -62,7 +62,7 @@ def generate_launch_description():
 
     enable_admittance = LaunchConfiguration("enable_admittance")
     headless_mode = LaunchConfiguration("headless_mode")
-    ns = LaunchConfiguration("ns")
+    namespace = LaunchConfiguration("namespace")
     robot_ip = LaunchConfiguration("robot_ip")
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
@@ -71,7 +71,7 @@ def generate_launch_description():
     control_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        namespace=ns,
+        namespace=namespace,
         parameters=[
             parameter_file("chonkur_deploy", "controllers_common.yaml", True),
             parameter_file("chonkur_deploy", "ur10e_controllers.yaml", True),
@@ -90,7 +90,7 @@ def generate_launch_description():
         launch_file="robot_state_publisher.launch.py",
         launch_arguments={
             "headless_mode": headless_mode,
-            "ns": ns,
+            "namespace": namespace,
             "robot_ip": robot_ip,
             "tf_prefix": tf_prefix,
             "use_fake_hardware": use_fake_hardware,
@@ -104,14 +104,14 @@ def generate_launch_description():
         launch_file="spawn_controllers.launch.py",
         launch_arguments={
             "enable_admittance": enable_admittance,
-            "ns": ns,
+            "namespace": namespace,
             "use_fake_hardware": use_fake_hardware,
         }.items(),
     )
 
     # Include the joint state broadcaster at the top level control file so consumers
     # can add it as needed
-    joint_state_broadcaster = spawn_controller("joint_state_broadcaster", namespace=ns)
+    joint_state_broadcaster = spawn_controller("joint_state_broadcaster", namespace=namespace)
 
     # E-stop controller manager integration for ChonkUR
     chonkur_controller_stopper = Node(

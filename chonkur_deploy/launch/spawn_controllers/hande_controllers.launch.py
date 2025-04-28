@@ -13,17 +13,17 @@ def generate_launch_description():
 
     declared_arguments.append(
         DeclareLaunchArgument(
-            "ns",
+            "namespace",
             default_value="",
             description="Namespace for the hardware robot",
         )
     )
 
-    ns = LaunchConfiguration("ns")
+    namespace = LaunchConfiguration("namespace")
 
     nodes = []
 
-    nodes.append(spawn_controller("robotiq_gripper_hande_controller", namespace=ns))
-    nodes.append(spawn_controller("robotiq_activation_controller", namespace=ns))
+    nodes.append(spawn_controller("robotiq_gripper_hande_controller", namespace=namespace))
+    nodes.append(spawn_controller("robotiq_activation_controller", namespace=namespace))
 
     return LaunchDescription(declared_arguments + nodes)

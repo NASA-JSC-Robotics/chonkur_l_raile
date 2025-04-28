@@ -17,7 +17,7 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "ns",
+            "namespace",
             default_value="",
             description="Namespace for the hardware robot",
         )
@@ -31,12 +31,12 @@ def generate_launch_description():
     )
     # Initialize Arguments
     enable_admittance = LaunchConfiguration("enable_admittance")
-    ns = LaunchConfiguration("ns")
+    namespace = LaunchConfiguration("namespace")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
 
     spawner_launch_args = {
         "enable_admittance": enable_admittance,
-        "ns": ns,
+        "namespace": namespace,
         "use_fake_hardware": use_fake_hardware,
     }.items()
 
