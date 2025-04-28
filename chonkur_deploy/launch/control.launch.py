@@ -74,7 +74,6 @@ def generate_launch_description():
         namespace=ns,
         parameters=[
             parameter_file("chonkur_deploy", "controllers_common.yaml", True),
-            parameter_file("chonkur_deploy", "ur10e_update_rate.yaml", True),
             parameter_file("chonkur_deploy", "ur10e_controllers.yaml", True),
             parameter_file("chonkur_deploy", "hande_controllers.yaml", True),
         ],
