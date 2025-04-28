@@ -61,7 +61,6 @@ def generate_launch_description():
             parameter_file("clr_deploy", "controllers_common.yaml", True),
             parameter_file("clr_deploy", "clr_controllers.yaml", True),
             # Pulling in default controller configs for the hande, ur10e, lift, and rail
-            parameter_file("chonkur_deploy", "ur10e_update_rate.yaml", True),
             parameter_file("chonkur_deploy", "ur10e_controllers.yaml", True),
             parameter_file("chonkur_deploy", "hande_controllers.yaml", True),
             parameter_file("ewellix_liftkit_deploy", "liftkit_controllers.yaml", True),
