@@ -1,17 +1,16 @@
-/**:
-  controller_manager:
-    ros__parameters:
+controller_manager:
+  ros__parameters:
 
-      robotiq_gripper_hande_controller:
-        type: position_controllers/GripperActionController
-      robotiq_activation_controller:
-        type: robotiq_controllers/RobotiqActivationController
+    robotiq_gripper_hande_controller:
+      type: position_controllers/GripperActionController
+    robotiq_activation_controller:
+      type: robotiq_controllers/RobotiqActivationController
 
-  robotiq_gripper_hande_controller:
-    ros__parameters:
-      default: true
-      joint: finger_1_joint
+robotiq_gripper_hande_controller:
+  ros__parameters:
+    default: true
+    joint: finger_1_joint
 
-  robotiq_activation_controller:
-    ros__parameters:
-      default: true
+robotiq_activation_controller:
+  ros__parameters:
+    default: true
