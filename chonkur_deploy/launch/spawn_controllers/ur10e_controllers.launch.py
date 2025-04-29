@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, RegisterEventHandler
-from launch.conditions import IfCondition, UnlessCondition
+from launch.conditions import IfCondition
 from launch.event_handlers import OnProcessExit
 from launch.substitutions import (
     LaunchConfiguration,
@@ -43,9 +43,6 @@ def generate_launch_description():
     nodes.append(spawn_controller("io_and_status_controller", namespace=namespace))
     nodes.append(spawn_controller("speed_scaling_state_broadcaster", namespace=namespace))
     nodes.append(spawn_controller("force_torque_sensor_broadcaster", namespace=namespace))
-    nodes.append(
-        spawn_controller("tcp_pose_broadcaster", namespace=namespace, condition=UnlessCondition(use_fake_hardware))
-    )
     nodes.append(spawn_controller("joint_trajectory_controller", namespace=namespace))
 
     # inactive controllers
