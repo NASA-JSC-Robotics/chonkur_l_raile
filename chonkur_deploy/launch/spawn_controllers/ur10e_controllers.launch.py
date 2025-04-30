@@ -58,10 +58,13 @@ def generate_launch_description():
 
     # admittance
     admittance_controller_spawner = spawn_controller(
-        "admittance_controller", namespace=namespace, condition=IfCondition(enable_admittance)
+        "admittance_controller", inactive=True, namespace=namespace, condition=IfCondition(enable_admittance)
     )
     admittance_jtc_spawner = spawn_controller(
-        "admittance_joint_trajectory_controller", namespace=namespace, condition=IfCondition(enable_admittance)
+        "admittance_joint_trajectory_controller",
+        inactive=True,
+        namespace=namespace,
+        condition=IfCondition(enable_admittance),
     )
 
     # start the admittance jtc spawner after the admittance controller so that the jtc has the

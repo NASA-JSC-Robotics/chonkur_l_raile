@@ -37,7 +37,7 @@ def spawn_controller(
             controller_name,
         ]
         + inactive_flags,
-        output="screen",
+        output="both",
         condition=condition,
     )
 
