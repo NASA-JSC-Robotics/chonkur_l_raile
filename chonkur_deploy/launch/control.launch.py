@@ -112,6 +112,7 @@ def generate_launch_description():
     robot_description = {"robot_description": ParameterValue(value=robot_description_content, value_type=str)}
 
     # State publishers for ChonkUR. We include here for access to the top level robot_description content.
+    # TODO: Separate this out once we are able to load the robot description from a topic in the controller manager.
     robot_state_publisher_node = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
