@@ -44,8 +44,16 @@ def generate_launch_description():
             description="Launch rviz?",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_sim_time",
+            default_value="false",
+            description="If the robot is running in simulation, use the published clock",
+        )
+    )
     launch_moveit = LaunchConfiguration("launch_moveit")
     launch_rviz = LaunchConfiguration("launch_rviz")
+    use_sim_time = {"use_sim_time": LaunchConfiguration("use_sim_time")}
 
     description_package = "clr_description"
     description_file = "clr.urdf.xacro"
@@ -69,6 +77,7 @@ def generate_launch_description():
         condition=IfCondition(launch_moveit),
         parameters=[
             moveit_config.to_dict(),
+            use_sim_time,
         ],
     )
 
@@ -88,6 +97,7 @@ def generate_launch_description():
             moveit_config.planning_pipelines,
             moveit_config.joint_limits,
             moveit_config.planning_scene_monitor,
+            use_sim_time,
         ],
     )
 
