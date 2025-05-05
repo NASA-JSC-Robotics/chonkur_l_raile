@@ -20,6 +20,16 @@
         <joint name="finger_1_joint"/>
         <passive_joint name="finger_2_joint"/>
     </group>
+
+    <group_state group="gripper" name="open">
+        <joint name="finger_1_joint" value="0.025"/>
+        <joint name="finger_2_joint" value="0.025"/>
+    </group_state>
+    <group_state group="gripper" name="close">
+        <joint name="finger_1_joint" value="0"/>
+        <joint name="finger_2_joint" value="0"/>
+    </group_state>
+
     <!--PASSIVE JOINT: Purpose: this element is used to mark joints that are not actuated-->
     <passive_joint name="finger_2_joint"/>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->

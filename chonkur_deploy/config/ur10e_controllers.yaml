@@ -1,9 +1,5 @@
 controller_manager:
   ros__parameters:
-    update_rate: 500
-
-    joint_state_broadcaster:
-      type: joint_state_broadcaster/JointStateBroadcaster
 
     io_and_status_controller:
       type: ur_controllers/GPIOController

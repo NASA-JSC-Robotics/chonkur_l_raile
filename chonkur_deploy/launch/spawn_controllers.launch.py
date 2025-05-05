@@ -1,11 +1,27 @@
+#!/usr/bin/env python3
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
-from launch_ros.actions import Node
+from launch.substitutions import LaunchConfiguration
+from chonkur_deploy.launch_helpers import include_launch_file
 
 
 def generate_launch_description():
-
+    # Declare arguments
     declared_arguments = []
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "enable_admittance",
+            default_value="false",
+            description="Allow the admittance controllers to spawn",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "namespace",
+            default_value="",
+            description="Namespace for the hardware robot",
+        )
+    )
     declared_arguments.append(
         DeclareLaunchArgument(
             "use_fake_hardware",
@@ -13,40 +29,28 @@ def generate_launch_description():
             description="Start robot with fake hardware mirroring command to its states.",
         )
     )
+    # Initialize Arguments
+    enable_admittance = LaunchConfiguration("enable_admittance")
+    namespace = LaunchConfiguration("namespace")
+    use_fake_hardware = LaunchConfiguration("use_fake_hardware")
 
-    # controller_params_file =
-    # os.path.join(get_package_share_directory("chonkur_deploy"), 'config','chonkur_controllers.yaml')
-    admittance_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=[
-            "admittance_controller",
-            "--controller-manager-timeout",
-            "100",
-            "-c",
-            "controller_manager",
-            "-t",
-            "admittance_controller/AdmittanceController",
-            #    "-p", controller_params_file,
-            #    "--inactive",
-        ],
+    spawner_launch_args = {
+        "enable_admittance": enable_admittance,
+        "namespace": namespace,
+        "use_fake_hardware": use_fake_hardware,
+    }.items()
+
+    ur10e_spawners = include_launch_file(
+        package_name="chonkur_deploy",
+        launch_file="spawn_controllers/ur10e_controllers.launch.py",
+        launch_arguments=spawner_launch_args,
     )
-    admittance_jtc_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=[
-            "admittance_joint_trajectory_controller",
-            "--controller-manager-timeout",
-            "100",
-            "-c",
-            "controller_manager",
-            "-t",
-            "joint_trajectory_controller/JointTrajectoryController ",
-            #    "-p", controller_params_file,
-            #    "--inactive",
-        ],
+    gripper_spawners = include_launch_file(
+        package_name="chonkur_deploy",
+        launch_file="spawn_controllers/hande_controllers.launch.py",
+        launch_arguments=spawner_launch_args,
     )
 
-    nodes = [admittance_controller_spawner, admittance_jtc_spawner]
+    spawner_launch_files = [ur10e_spawners, gripper_spawners]
 
-    return LaunchDescription(declared_arguments + nodes)
+    return LaunchDescription(declared_arguments + spawner_launch_files)
