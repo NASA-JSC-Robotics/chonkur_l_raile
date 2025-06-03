@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <!-- import macros -->
+  <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro"/>
+  <xacro:include filename="$(find dextivr_hande_description)/urdf/dextivr_hande.xacro"/>
+
+  <!-- trying to reuse ur control launch files. So cannot pass in any additional args to the xacro.-->
+
+  <xacro:macro name="chonkur" params="
+    tf_prefix
+    use_fake_hardware:=false
+    headless_mode:=false
+    ros2_control_name:=chonkur
+    parent:=world
+    sim_gazebo:=false
+    sim_ignition:=false
+    chonkur_ip:=192.168.1.102
+    com_port_hande:=/dev/ttyUSB1
+    marker_opacity:=0.5
+    finger_xacro:=fngr_v6
+    generate_ros2_control_tag:=true">
+
+    <!-- convert to property to use substitution in function -->
+    <xacro:property name="initial_positions_file" default="$(find chonkur_description)/config/initial_positions.yaml"/>
+
+    <!-- arm -->
+    <xacro:ur_robot
+      name="${ros2_control_name}"
+      tf_prefix="${tf_prefix}"
+      parent="${parent}"
+      joint_limits_parameters_file="$(find chonkur_description)/config/joint_limits.yaml"
+      kinematics_parameters_file="$(find chonkur_description)/config/calibrated_kinematics.yaml"
+      physical_parameters_file="$(find ur_description)/config/ur10e/physical_parameters.yaml"
+      visual_parameters_file="$(find ur_description)/config/ur10e/visual_parameters.yaml"
+      transmission_hw_interface="hardware_interface/PositionJointInterface"
+      safety_limits="false"
+      safety_pos_margin="0.15"
+      safety_k_position="20"
+      use_fake_hardware="${use_fake_hardware}"
+      fake_sensor_commands="false"
+      sim_gazebo="${sim_gazebo}"
+      sim_ignition="${sim_ignition}"
+      generate_ros2_control_tag="${generate_ros2_control_tag}"
+      headless_mode="${headless_mode}"
+      initial_positions="${xacro.load_yaml(initial_positions_file)}"
+      use_tool_communication="false"
+      tool_voltage="0"
+      tool_parity="0"
+      tool_baud_rate="115200"
+      tool_stop_bits="1"
+      tool_rx_idle_chars="1.5"
+      tool_tx_idle_chars="3.5"
+      tool_device_name="/tmp/ttyUR"
+      tool_tcp_port="54321"
+      robot_ip="${chonkur_ip}"
+      script_filename="$(find ur_client_library)/resources/external_control.urscript"
+      output_recipe_filename="$(find ur_robot_driver)/resources/rtde_output_recipe.txt"
+      input_recipe_filename="$(find ur_robot_driver)/resources/rtde_input_recipe.txt"
+      reverse_ip="0.0.0.0"
+      script_command_port="50004"
+      >
+      <origin xyz="0 0 0" rpy="0 0 0" />          <!-- position robot in the world -->
+    </xacro:ur_robot>
+
+    <xacro:if value="${sim_gazebo}">
+      <!-- Gazebo plugins -->
+      <gazebo reference="world">
+      </gazebo>
+      <gazebo>
+        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+          <parameters>$(arg simulation_controllers)</parameters>
+        </plugin>
+      </gazebo>
+    </xacro:if>
+
+    <xacro:if value="${sim_ignition}">
+      <!-- Gazebo plugins -->
+      <gazebo reference="world">
+      </gazebo>
+      <gazebo>
+        <plugin filename="libign_ros2_control-system.so" name="ign_ros2_control::IgnitionROS2ControlPlugin">
+          <parameters>$(arg simulation_controllers)</parameters>
+          <controller_manager_node_name>${tf_prefix}controller_manager</controller_manager_node_name>
+        </plugin>
+      </gazebo>
+    </xacro:if>
+
+    <!-- END EFFECTOR STACK -->
+
+    <xacro:include filename="$(find chonkur_description)/urdf/endeff_stack_macro.xacro"/>
+
+    <xacro:endeff_stack
+      tf_prefix="${tf_prefix}"
+      parent="${tf_prefix}tool0">
+      <origin xyz="0 0 0" rpy="0 0 ${radians(90)}"/>
+    </xacro:endeff_stack>
+
+    <xacro:dextivr_hande
+      name="dextivr_hande"
+      tf_prefix="${tf_prefix}"
+      parent="${tf_prefix}ur_realsense_mount"
+      use_fake_hardware="${use_fake_hardware}"
+      com_port="${com_port_hande}"
+      marker_opacity="${marker_opacity}"
+      finger_xacro="${finger_xacro}"
+      generate_ros2_control_tag="${generate_ros2_control_tag}">
+      <origin xyz="0 0 0.008" rpy="0 0 ${radians(-90)}"/>
+    </xacro:dextivr_hande>
+
+    <link name="manual_grasp_link" />
+    <joint name="${tf_prefix}temp_studio_joint" type="fixed">
+      <parent link="${tf_prefix}grasp_frame"/>
+      <child link="${tf_prefix}manual_grasp_link"/>
+      <origin xyz="0 0 0" rpy="0 0 ${radians(180)}"/>
+    </joint>
+  </xacro:macro>
+</robot>

@@ -1,0 +1,7 @@
+chonkur_controller_stopper:
+  ros__parameters:
+    consistent_controllers:
+      - io_and_status_controller
+      - force_torque_sensor_broadcaster
+      - joint_state_broadcaster
+      - speed_scaling_state_broadcaster
