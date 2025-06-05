@@ -1,10 +1,10 @@
 # ChonkUR L Rail-E
 
-Descriptions, deployments, and MoveIt configuration for the ChonkUR L Rail-E robot system,
+Descriptions, deployments, tooling, and MoveIt configuration for the ChonkUR L Rail-E robot system,
 part of the [iMETRO Facility](https://ntrs.nasa.gov/citations/20240013956) at NASA's Johnson Space Center.
 This project is intended for use in one of ER4's managed workspaces (such as the `clr_ws`).
 
-The hardware includes the ChonkUR robot mounted on an Ewellix Lift and Vention Linear Rail system.
+The hardware includes the [ChonkUR robot](chonkur/README.md) mounted on an Ewellix Lift and Vention Linear Rail system.
 
 ![alt text](./clr.png "CLR MockUp")
 
