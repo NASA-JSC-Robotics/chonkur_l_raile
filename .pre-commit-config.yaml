@@ -25,8 +25,11 @@ repos:
       - id: check-symlinks
       - id: check-xml
       - id: check-yaml
+        # Allow for yaml constructors such as "!degrees"
+        args: ["--unsafe"]
       - id: debug-statements
       - id: end-of-file-fixer
+        exclude: (\.(svg|stl|dae))$
       - id: mixed-line-ending
       - id: trailing-whitespace
       - id: fix-byte-order-marker

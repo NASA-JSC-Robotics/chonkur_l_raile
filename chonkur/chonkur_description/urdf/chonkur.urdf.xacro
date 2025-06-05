@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="chonkur">
+
+  <xacro:arg name="tf_prefix" default="" />
+  <xacro:arg name="use_fake_hardware" default="false" />
+  <xacro:arg name="headless_mode" default="false" />
+  <xacro:arg name="ros2_control_name" default="chonkur"/>
+  <xacro:arg name="marker_opacity" default="0.5"/>
+  <xacro:arg name="finger_xacro" default="fngr_v6"/>
+  <xacro:arg name="robot_ip" default="192.168.1.102"/>
+  <xacro:arg name="com_port_hande" default="/dev/robotiq"/>
+
+  <xacro:include filename="$(find chonkur_description)/urdf/chonkur_macro.xacro"/>
+
+  <link name="world" />
+  <xacro:chonkur
+    tf_prefix="$(arg tf_prefix)"
+    use_fake_hardware="$(arg use_fake_hardware)"
+    headless_mode="$(arg headless_mode)"
+    ros2_control_name="$(arg ros2_control_name)"
+    finger_xacro="$(arg finger_xacro)"
+    parent="world"
+    sim_gazebo="false"
+    sim_ignition="false"
+    chonkur_ip="$(arg robot_ip)"
+    marker_opacity="$(arg marker_opacity)"
+    com_port_hande="$(arg com_port_hande)"/>
+
+</robot>
