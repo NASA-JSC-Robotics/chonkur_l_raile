@@ -8,7 +8,6 @@ find_package(rclpy REQUIRED)
 ament_python_install_package(${PROJECT_NAME})
 
 install(PROGRAMS
-    scripts/controller_check.py
     DESTINATION lib/${PROJECT_NAME}
 )
 
