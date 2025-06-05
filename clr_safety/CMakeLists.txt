@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(drt_ros2_control_tools)
+project(clr_safety)
 
 find_package(ament_cmake REQUIRED)
 find_package(ament_cmake_python REQUIRED)
