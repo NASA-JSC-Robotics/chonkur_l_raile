@@ -2,7 +2,7 @@
 import rclpy
 from ur_dashboard_msgs.srv import GetProgramState
 from ur_dashboard_msgs.msg import ProgramState
-from drt_ros2_control_tools.controller_stopper_base import ControllerStopperBase
+from clr_safety.controller_stopper_base import ControllerStopperBase
 from rclpy.executors import MultiThreadedExecutor
 from rclpy.callback_groups import ReentrantCallbackGroup
 import sys
