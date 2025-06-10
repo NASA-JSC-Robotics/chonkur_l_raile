@@ -2,14 +2,12 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>clr_safety</name>
-  <version>0.0.1</version>
+  <version>1.0.0</version>
   <description>
     Safety tooling for CLR
   </description>
-
   <maintainer email="michael.e.tobia@nasa.gov">Mike Tobia</maintainer>
-
-  <license>NASA-1.3</license>
+  <license>Apache License, Version 2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
   <buildtool_depend>ament_cmake_python</buildtool_depend>
