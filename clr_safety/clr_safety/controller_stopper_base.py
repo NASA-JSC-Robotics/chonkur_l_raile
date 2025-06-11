@@ -17,6 +17,8 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import rclpy
+
 from rclpy.node import Node
 from rcl_interfaces.msg import ParameterDescriptor, ParameterType
 from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
@@ -70,13 +72,6 @@ class ControllerStopperBase(Node):
             ListControllers, controller_manager_name + "/list_controllers", callback_group=self.cm_cb_group
         )
 
-        # wait until all required services are available from controller_manager
-        self.get_logger().info(
-            "Waiting for switch controller service to come up on controller_manager/switch_controller"
-        )
-        self.wait_for_service(self.switch_controllers_srv)
-        self.wait_for_service(self.list_controllers_srv)
-
         # if the user doesn't provide the name of the servo node, assume we don't care
         self.servo_node_name = servo_node_name
         self.manage_servo = self.servo_node_name != ""
@@ -108,21 +103,49 @@ class ControllerStopperBase(Node):
         # variable to keep track of whether we are in a state where we have restarted controllers
         self.controllers_active = True
 
+    def initialize(self):
+        """Waits for the relevant states to be ready before starting."""
+
+        # wait until all required services are available from controller_manager
+        self.get_logger().info(
+            "Waiting for switch controller service to come up on controller_manager/switch_controller"
+        )
+        self.wait_for_service(self.switch_controllers_srv)
+        self.wait_for_service(self.list_controllers_srv)
+
     def wait_for_service(self, client, timeout=1, retries=-1):
         """Waits for the ROS 2 service to be available at the specified timeout.
 
         If retries < 0 this will wait forever.
         """
         attempts = 0
-        while True:
+        while rclpy.ok():
             if client.wait_for_service(timeout):
-                break
+                self.get_logger().info(f"{client.srv_name} found!")
+                return
             attempts += 1
             if retries > 0 and attempts > retries:
                 raise RuntimeError(f"Timed out waiting for service to be available: {client.srv_name}")
             self.get_logger().info(
                 f"{bcolors.WARNING}Waiting for service {client.srv_name} to be available...{bcolors.ENDC}"
             )
+
+    def call_async(self, client, request, timeout=3):
+        """Calls the provided client and waits the timeout for a response.
+
+        Returns the response if available, or else None.
+        """
+        future = client.call_async(request)
+
+        start_time = self.get_clock().now()
+        while not future.done():
+            elapsed_time = (self.get_clock().now() - start_time).nanoseconds / 1e9
+            if elapsed_time > timeout:
+                self.get_logger().warn(f"Service call to {client.srv_name} timed out after {timeout}s")
+                future.cancel()
+                return None
+
+        return future.result()
 
     def servo_node_exists(self):
         """Returns true if the servo node was found in active ROS session. And logs a message if the state
@@ -151,7 +174,7 @@ class ControllerStopperBase(Node):
 
     def call_list_controllers(self):
         list_controllers_request = ListControllers.Request()
-        list_controllers_response = self.list_controllers_srv.call(list_controllers_request)
+        list_controllers_response = self.call_async(self.list_controllers_srv, list_controllers_request)
         return list_controllers_response
 
     def call_stop_controllers(self, controllers_to_stop=[], controllers_to_start=[]):
