@@ -18,7 +18,7 @@
 # under the License.
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, TimerAction
+from launch.actions import DeclareLaunchArgument
 from launch.conditions import UnlessCondition
 from launch.substitutions import (
     Command,
@@ -142,13 +142,12 @@ def generate_launch_description():
         executable="chonkur_controller_stopper.py",
         parameters=[
             parameter_file("chonkur_deploy", "consistent_controllers.yaml", True),
+            # This is generally the last controller to come up, so if it is available the controller
+            # stopper should be good to initialize.
+            {"target_controller": "admittance_joint_trajectory_controller"},
         ],
         condition=UnlessCondition(use_fake_hardware),
     )
 
-    # wait for the controller stopper until everything else is loaded so that we can then manage,
-    # instead of coming in during the middle of the loading process
-    delay_controller_stopper = TimerAction(period=10.0, actions=[clr_controller_stopper])
-
-    nodes = [robot_state_publisher_node, control_node, joint_state_broadcaster, delay_controller_stopper]
+    nodes = [robot_state_publisher_node, control_node, joint_state_broadcaster, clr_controller_stopper]
     return LaunchDescription(declared_arguments + nodes + [spawn_controllers])
