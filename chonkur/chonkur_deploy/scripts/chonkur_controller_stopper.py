@@ -68,7 +68,7 @@ class ChonkurControllerStopper(ControllerStopperBase):
         self.wait_for_controller(self.target_controller)
 
         # Wait for the dashboard client to be available
-        # self.wait_for_service(self.get_program_state_srv)
+        self.wait_for_service(self.get_program_state_srv)
 
         # timer at 0.5 second loop to check controller status and cancel
         self.timer_cb_group = ReentrantCallbackGroup()
@@ -95,9 +95,9 @@ class ChonkurControllerStopper(ControllerStopperBase):
 
     def timer_callback(self):
         request = GetProgramState.Request()
-        result = self.get_program_state_srv.call(request)
+        result = self.call_async(self.get_program_state_srv, request)
 
-        if not result.success:
+        if result is None or not result.success:
             self.get_logger().error("was not able to get the state of the program")
             return  # dashboard client publishes its own failure message
 

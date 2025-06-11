@@ -186,15 +186,19 @@ class ControllerStopperBase(Node):
         switch_controller_request.activate_controllers = controllers_to_start
 
         # Call the service
-        switch_controllers_response = self.switch_controllers_srv.call(switch_controller_request)
+        switch_controllers_response = self.call_async(self.switch_controllers_srv, switch_controller_request)
 
-        return switch_controllers_response.ok
+        if switch_controllers_response:
+            return switch_controllers_response.ok
+        else:
+            return False
 
     def call_pause_servo(self, servo_active):
         pause_servo_request = SetBool.Request()
         pause_servo_request.data = servo_active
-        pause_servo_response = self.pause_servo_srv.call(pause_servo_request)
-        if not pause_servo_response.success:
+        pause_servo_response = self.call_async(self.pause_servo_srv, pause_servo_request)
+
+        if pause_servo_response is None or not pause_servo_response.success:
             self.get_logger().error("Could not pause servo node")
 
     def stop_controllers(self):
