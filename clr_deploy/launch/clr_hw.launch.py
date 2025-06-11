@@ -28,10 +28,6 @@ def generate_launch_description():
         launch_file="control.launch.py",
         launch_arguments={
             "use_fake_hardware": "false",
-            # The admittance controller will not work with the default humble controller, as the default IK
-            # solver will include the full kinematic chain from the tool to the rail - which is 2 extra joints.
-            # This is "fixed" moving forward by https://github.com/ros-controls/kinematics_interface/pull/73/files.
-            # "enable_admittance": "true",
         }.items(),
     )
 

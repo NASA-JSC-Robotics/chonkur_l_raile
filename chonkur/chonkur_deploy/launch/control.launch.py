@@ -40,13 +40,7 @@ def generate_launch_description():
 
     # arguments
     declared_arguments = []
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "enable_admittance",
-            default_value="false",
-            description="Allow the admittance controllers to spawn",
-        )
-    )
+
     declared_arguments.append(
         DeclareLaunchArgument(
             "headless_mode",
@@ -92,7 +86,6 @@ def generate_launch_description():
         )
     )
 
-    enable_admittance = LaunchConfiguration("enable_admittance")
     headless_mode = LaunchConfiguration("headless_mode")
     namespace = LaunchConfiguration("namespace")
     robot_ip = LaunchConfiguration("robot_ip")
@@ -162,7 +155,6 @@ def generate_launch_description():
         package_name="chonkur_deploy",
         launch_file="spawn_controllers.launch.py",
         launch_arguments={
-            "enable_admittance": enable_admittance,
             "namespace": namespace,
             "use_fake_hardware": use_fake_hardware,
         }.items(),
