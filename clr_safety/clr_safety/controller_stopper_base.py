@@ -95,7 +95,7 @@ class ControllerStopperBase(Node):
         )
         self.consistent_controllers = self.get_parameter("consistent_controllers").value
         if self.consistent_controllers == [""]:
-            self.consistent_controllers == []
+            self.consistent_controllers = []
 
         # variable to keep track of which controllers have been stopped so they can be restarted
         self.stopped_controllers = []
