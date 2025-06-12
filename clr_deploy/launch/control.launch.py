@@ -61,10 +61,19 @@ def generate_launch_description():
             description="Start robot with simulated hardware mirroring command to its states.",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "hande_dev_name",
+            default_value="/dev/robotiq",
+            description="File descriptor that will be generated for the tool communication device. "
+            "The user has be be allowed to write to this location. ",
+        )
+    )
 
     namespace = LaunchConfiguration("namespace")
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
+    hande_dev_name = LaunchConfiguration("hande_dev_name")
 
     # Main robot description for CLR. Additional arguments are available in the xacro, but we only
     # override a subset of those that change regularly depending on deployment.
@@ -79,6 +88,9 @@ def generate_launch_description():
             " ",
             "use_fake_hardware:=",
             use_fake_hardware,
+            " ",
+            "com_port_hande:=",
+            hande_dev_name,
             " ",
         ]
     )
