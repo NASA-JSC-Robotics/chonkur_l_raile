@@ -65,7 +65,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "hande_dev_name",
-            default_value="/dev/ttyUSB1",
+            default_value="/dev/robotiq",
             description="File descriptor that will be generated for the tool communication device. "
             "The user has be be allowed to write to this location. ",
         )
