@@ -20,6 +20,9 @@
                 <geometry>
                     <box size="0.310 0.310 0.01905"/>
                 </geometry>
+                <material name="${tf_prefix}lower_lift_plate">
+                    <color rgba="0.8 0.8 0.8 1"/>
+                </material>
             </visual>
             <collision>
                 <geometry>
@@ -45,6 +48,9 @@
                 <geometry>
                     <box size="0.225 0.225 0.01905"/>
                 </geometry>
+                <material name="${tf_prefix}upper_lift_plate">
+                    <color rgba="0.8 0.8 0.8 1"/>
+                </material>
             </visual>
             <collision>
                 <geometry>

@@ -21,7 +21,9 @@
             <geometry>
                 <mesh filename= "package://clr_description/meshes/visual/lift_camera_mount.stl"/>
             </geometry>
-            <color rgba="0.1 0.1 0.1 1"/>
+            <material name="${tf_prefix}lift_camera_mount">
+                <color rgba="0.8 0.8 0.8 1"/>
+            </material>
         </visual>
         <collision>
             <origin rpy="0 0 0" xyz="${mount_width_meters/2} ${-1*mount_depth_meters/2} ${-1*mount_height_meters/2}"/>
