@@ -177,7 +177,7 @@ class ControllerStopperBase(Node):
         list_controllers_response = self.call_async(self.list_controllers_srv, list_controllers_request)
         return list_controllers_response
 
-    def call_stop_controllers(self, controllers_to_stop=[], controllers_to_start=[]):
+    def call_switch_controllers(self, controllers_to_stop=[], controllers_to_start=[]):
         switch_controller_request = SwitchController.Request()
         # set strictness to strict to show that this fails if anything went wrong
         switch_controller_request.strictness = SwitchController.Request.STRICT
@@ -226,7 +226,7 @@ class ControllerStopperBase(Node):
 
         # if there are any to stop, call switch_controllers to stop them
         if controllers_to_stop:
-            if not self.call_stop_controllers(controllers_to_stop=controllers_to_stop):
+            if not self.call_switch_controllers(controllers_to_stop=controllers_to_stop):
                 self.get_logger().error("Could not deactivate requested controllers")
             else:
                 self.controllers_active = False
@@ -245,7 +245,7 @@ class ControllerStopperBase(Node):
 
         # only run this if we have logged that some controllers have been stopped
         if self.stopped_controllers:
-            if not self.call_stop_controllers(controllers_to_start=self.stopped_controllers):
+            if not self.call_switch_controllers(controllers_to_start=self.stopped_controllers):
                 self.get_logger().error("Could not activate requested controllers")
             else:
                 self.controllers_active = True
