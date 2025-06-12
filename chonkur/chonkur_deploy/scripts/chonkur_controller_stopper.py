@@ -73,7 +73,7 @@ class ChonkurControllerStopper(ControllerStopperBase):
         # timer at 0.5 second loop to check controller status and cancel
         self.timer_cb_group = ReentrantCallbackGroup()
         self.timer = self.create_timer(0.5, self.timer_callback, callback_group=self.timer_cb_group)
-        self.get_logger().info("Chonkur Controller Stopper is running!")
+        self.get_logger().info(f"{bcolors.OKBLUE}Chonkur Controller Stopper is running!{bcolors.OKBLUE}")
 
     def wait_for_controller(self, target_controller, retries=-1):
         attempts = 0
@@ -107,12 +107,14 @@ class ChonkurControllerStopper(ControllerStopperBase):
         # if we just transitioned to a running state, and the controllers weren't active,
         # start the controllers
         if self.robot_running and not self.controllers_active:
+            self.get_logger().info(f"{bcolors.WARNING}Transitioning to running, restarting controllers{bcolors.ENDC}")
             # stop controllers first to get rid of anything that may have happened recently
             self.stop_controllers()
             # start controllers
             self.start_controllers()
         # if robot is either paused or stopped, consistently stop controllers to cancel anything that may have started
         elif not self.robot_running:
+            self.get_logger().debug("Robot not running, stopping controllers")
             self.stop_controllers()
 
 
