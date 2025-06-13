@@ -4,7 +4,7 @@ trajectory_execution:
   allowed_goal_duration_margin: 0.5
   allowed_start_tolerance: 0.01
 
-moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControllerManager
+moveit_controller_manager: moveit_ros_control_interface/Ros2ControlManager
 moveit_manage_controllers: true
 
 moveit_simple_controller_manager:
@@ -19,7 +19,7 @@ moveit_simple_controller_manager:
   clr_joint_trajectory_controller:
     action_ns: follow_joint_trajectory
     type: FollowJointTrajectory
-    default: true
+    default: false
     joints:
       - vention_rail_base_to_carriage
       - ewellix_lift_lower_to_higher
@@ -41,7 +41,7 @@ moveit_simple_controller_manager:
   joint_trajectory_controller:
     action_ns: follow_joint_trajectory
     type: FollowJointTrajectory
-    default: false
+    default: true
     joints:
       - shoulder_pan_joint
       - shoulder_lift_joint
@@ -53,14 +53,14 @@ moveit_simple_controller_manager:
   rail_position_trajectory_controller:
     action_ns: follow_joint_trajectory
     type: FollowJointTrajectory
-    default: false
+    default: true
     joints:
       - vention_rail_base_to_carriage
 
   lift_position_trajectory_controller:
     action_ns: follow_joint_trajectory
     type: FollowJointTrajectory
-    default: false
+    default: true
     joints:
       - ewellix_lift_lower_to_higher
 
