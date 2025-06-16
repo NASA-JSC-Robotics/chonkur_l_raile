@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://wiki.ros.org/xacro" name="clr">
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="imetro_env">
 
   <xacro:arg name="name" default=""/>
   <xacro:arg name="tf_prefix" default="" />
@@ -10,7 +10,7 @@
   <xacro:arg name="ewellix_com_port" default="/dev/ewellix" />
   <xacro:arg name="finger_xacro" default="fngr_v2_m" />
 
-  <xacro:include filename="$(find clr_description)/urdf/clr_macro.xacro"/>
+  <xacro:include filename="$(find clr_description)/urdf/clr.urdf.xacro"/>
   <xacro:include filename="$(find clr_imetro_environments)/urdf/colors.xacro"/>
   <xacro:include filename="$(find clr_imetro_environments)/urdf/long_bench.xacro"/>
   <xacro:include filename="$(find clr_imetro_environments)/urdf/express_rack.xacro"/>
@@ -23,8 +23,6 @@
   <xacro:property name="express_rack" default="true"/>
   <xacro:property name="hatch_4060" default="true"/>
   <xacro:property name="second_trainer" value="false"/>
-
-  <link name="world" />
 
   <!-- Load the 4040 hatch-->
   <xacro:if value="${hatch_4040}">
