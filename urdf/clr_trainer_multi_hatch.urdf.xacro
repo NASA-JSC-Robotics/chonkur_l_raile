@@ -9,30 +9,39 @@
   <xacro:arg name="com_port_hande" default="/dev/robotiq" />
   <xacro:arg name="ewellix_com_port" default="/dev/ewellix" />
   <xacro:arg name="finger_xacro" default="fngr_v2_m" />
-  <xacro:arg name="include_clr" default="true" />
 
+  <!-- Optional includes -->
+  <xacro:arg name="clr" default="true" />
+  <xacro:arg name="shelf" default="false"/>
+  <xacro:arg name="ceiling_prop" default="false"/>
+  <xacro:arg name="hatch_4040" default="false"/>
+  <xacro:arg name="express_rack" default="true"/>
+  <xacro:arg name="hatch_4060" default="true"/>
+  <xacro:arg name="second_trainer" default="false"/>
+
+  <!-- Convert some args to properties for flexibility -->
+  <xacro:property name="clr" value="$(arg clr)"/>
+  <xacro:property name="shelf" value="$(arg shelf)"/>
+  <xacro:property name="ceiling_prop" value="$(arg ceiling_prop)"/>
+  <xacro:property name="hatch_4040" value="$(arg hatch_4040)"/>
+  <xacro:property name="express_rack" value="$(arg express_rack)"/>
+  <xacro:property name="hatch_4060" value="$(arg hatch_4060)"/>
+  <xacro:property name="second_trainer" value="$(arg second_trainer)"/>
+
+  <!-- Include xacros -->
   <xacro:include filename="$(find clr_imetro_environments)/urdf/colors.xacro"/>
   <xacro:include filename="$(find clr_imetro_environments)/urdf/long_bench.xacro"/>
   <xacro:include filename="$(find clr_imetro_environments)/urdf/express_rack.xacro"/>
   <xacro:include filename="$(find hatch_accessories)/urdf/hatch_frame.xacro"/>
   <xacro:include filename="$(find trainer)/urdf/trainer_frame.xacro"/>
 
-  <!-- Optionally include CLR -->
-  <xacro:property name="clr" default="$(arg include_clr)"/>
-
+  <!-- Load CLR as urdf to use default CLR macro config-->
   <xacro:if value="${clr}">
     <xacro:include filename="$(find clr_description)/urdf/clr.urdf.xacro"/>
   </xacro:if>
   <xacro:if value="${not clr}">
     <link name="world" />
   </xacro:if>
-
-  <xacro:property name="shelf" default="false"/>
-  <xacro:property name="ceiling_prop" value="false"/>
-  <xacro:property name="hatch_4040" default="false"/>
-  <xacro:property name="express_rack" default="true"/>
-  <xacro:property name="hatch_4060" default="true"/>
-  <xacro:property name="second_trainer" value="false"/>
 
   <!-- Load the 4040 hatch-->
   <xacro:if value="${hatch_4040}">
