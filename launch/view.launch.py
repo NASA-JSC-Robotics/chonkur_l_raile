@@ -1,11 +1,23 @@
 from launch import LaunchDescription
-from launch.substitutions import Command, FindExecutable, PathJoinSubstitution
+from launch.actions import DeclareLaunchArgument
+from launch.substitutions import Command, FindExecutable, PathJoinSubstitution, LaunchConfiguration
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description():
     declared_arguments = []
+
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "clr",
+            default_value="true",
+            choices=["true", "false"],
+            description="Choose whether to view CLR in the environment",
+        )
+    )
+
+    clr = LaunchConfiguration("clr")
 
     robot_description_content = Command(
         [
@@ -14,6 +26,9 @@ def generate_launch_description():
             PathJoinSubstitution(
                 [FindPackageShare("clr_imetro_environments"), "urdf", "clr_trainer_multi_hatch.urdf.xacro"]
             ),
+            " ",
+            "clr:=",
+            clr,
         ]
     )
 
