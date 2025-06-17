@@ -14,9 +14,6 @@ def generate_launch_description():
             PathJoinSubstitution(
                 [FindPackageShare("clr_imetro_environments"), "urdf", "clr_trainer_multi_hatch.urdf.xacro"]
             ),
-            " ",
-            "finger_xacro:=",
-            "fngr_v6",
         ]
     )
 

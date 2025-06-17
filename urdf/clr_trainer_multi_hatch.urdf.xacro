@@ -7,7 +7,7 @@
   <xacro:arg name="headless_mode" default="false" />
   <xacro:arg name="com_port_hande" default="/dev/robotiq" />
   <xacro:arg name="ewellix_com_port" default="/dev/ewellix" />
-  <xacro:arg name="finger_xacro" default="fngr_v2_m" />
+  <xacro:arg name="finger_xacro" default="fngr_v6" />
 
   <!-- Optional includes -->
   <xacro:arg name="clr" default="true" />
