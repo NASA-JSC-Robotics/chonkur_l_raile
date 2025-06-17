@@ -9,13 +9,23 @@
   <xacro:arg name="com_port_hande" default="/dev/robotiq" />
   <xacro:arg name="ewellix_com_port" default="/dev/ewellix" />
   <xacro:arg name="finger_xacro" default="fngr_v2_m" />
+  <xacro:arg name="include_clr" default="true" />
 
-  <xacro:include filename="$(find clr_description)/urdf/clr.urdf.xacro"/>
   <xacro:include filename="$(find clr_imetro_environments)/urdf/colors.xacro"/>
   <xacro:include filename="$(find clr_imetro_environments)/urdf/long_bench.xacro"/>
   <xacro:include filename="$(find clr_imetro_environments)/urdf/express_rack.xacro"/>
   <xacro:include filename="$(find hatch_accessories)/urdf/hatch_frame.xacro"/>
   <xacro:include filename="$(find trainer)/urdf/trainer_frame.xacro"/>
+
+  <!-- Optionally include CLR -->
+  <xacro:property name="clr" default="$(arg include_clr)"/>
+
+  <xacro:if value="${clr}">
+    <xacro:include filename="$(find clr_description)/urdf/clr.urdf.xacro"/>
+  </xacro:if>
+  <xacro:if value="${not clr}">
+    <link name="world" />
+  </xacro:if>
 
   <xacro:property name="shelf" default="false"/>
   <xacro:property name="ceiling_prop" value="false"/>
