@@ -28,13 +28,6 @@ def generate_launch_description():
     declared_arguments = []
     declared_arguments.append(
         DeclareLaunchArgument(
-            "enable_admittance",
-            default_value="false",
-            description="Allow the admittance controllers to spawn",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
             "namespace",
             default_value="",
             description="Namespace for the hardware robot",
@@ -48,12 +41,10 @@ def generate_launch_description():
         )
     )
     # Initialize Arguments
-    enable_admittance = LaunchConfiguration("enable_admittance")
     namespace = LaunchConfiguration("namespace")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
 
     spawner_launch_args = {
-        "enable_admittance": enable_admittance,
         "namespace": namespace,
         "use_fake_hardware": use_fake_hardware,
     }.items()

@@ -18,7 +18,7 @@
 # under the License.
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, TimerAction
+from launch.actions import DeclareLaunchArgument
 from launch.conditions import UnlessCondition
 from launch.substitutions import (
     Command,
@@ -56,23 +56,24 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "enable_admittance",
-            default_value="false",
-            description="Allow the admittance controllers to spawn",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
             "use_fake_hardware",
             default_value="true",
             description="Start robot with simulated hardware mirroring command to its states.",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "hande_dev_name",
+            default_value="/dev/robotiq",
+            description="File descriptor that will be generated for the tool communication device. "
+            "The user has be be allowed to write to this location. ",
+        )
+    )
 
-    enable_admittance = LaunchConfiguration("enable_admittance")
     namespace = LaunchConfiguration("namespace")
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
+    hande_dev_name = LaunchConfiguration("hande_dev_name")
 
     # Main robot description for CLR. Additional arguments are available in the xacro, but we only
     # override a subset of those that change regularly depending on deployment.
@@ -87,6 +88,9 @@ def generate_launch_description():
             " ",
             "use_fake_hardware:=",
             use_fake_hardware,
+            " ",
+            "com_port_hande:=",
+            hande_dev_name,
             " ",
         ]
     )
@@ -136,7 +140,6 @@ def generate_launch_description():
             "namespace": namespace,
             "tf_prefix": tf_prefix,
             "use_fake_hardware": use_fake_hardware,
-            "enable_admittance": enable_admittance,
         }.items(),
     )
 
@@ -151,13 +154,12 @@ def generate_launch_description():
         executable="chonkur_controller_stopper.py",
         parameters=[
             parameter_file("chonkur_deploy", "consistent_controllers.yaml", True),
+            # This is generally the last controller to come up, so if it is available the controller
+            # stopper should be good to initialize.
+            {"target_controller": "admittance_joint_trajectory_controller"},
         ],
         condition=UnlessCondition(use_fake_hardware),
     )
 
-    # wait for the controller stopper until everything else is loaded so that we can then manage,
-    # instead of coming in during the middle of the loading process
-    delay_controller_stopper = TimerAction(period=10.0, actions=[clr_controller_stopper])
-
-    nodes = [robot_state_publisher_node, control_node, joint_state_broadcaster, delay_controller_stopper]
+    nodes = [robot_state_publisher_node, control_node, joint_state_broadcaster, clr_controller_stopper]
     return LaunchDescription(declared_arguments + nodes + [spawn_controllers])

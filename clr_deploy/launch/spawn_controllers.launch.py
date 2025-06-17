@@ -26,13 +26,7 @@ from chonkur_deploy.launch_helpers import spawn_controller, include_launch_file
 def generate_launch_description():
     # Declare arguments
     declared_arguments = []
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "enable_admittance",
-            default_value="false",
-            description="Allow the admittance controllers to spawn",
-        )
-    )
+
     declared_arguments.append(
         DeclareLaunchArgument(
             "namespace",
@@ -48,12 +42,10 @@ def generate_launch_description():
         )
     )
     # Initialize Arguments
-    enable_admittance = LaunchConfiguration("enable_admittance")
     namespace = LaunchConfiguration("namespace")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
 
     spawner_launch_args = {
-        "enable_admittance": enable_admittance,
         "namespace": namespace,
         "use_fake_hardware": use_fake_hardware,
     }.items()

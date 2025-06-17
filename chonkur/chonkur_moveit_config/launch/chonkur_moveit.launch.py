@@ -86,6 +86,7 @@ def generate_launch_description():
         .robot_description_semantic(file_path="config/chonkur.srdf")
         .robot_description_kinematics(file_path="config/kinematics.yaml")
         .joint_limits(file_path="config/joint_limits.yaml")
+        .trajectory_execution(file_path="config/moveit_controllers.yaml")
         .to_moveit_configs()
     )
 

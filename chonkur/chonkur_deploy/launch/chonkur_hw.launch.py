@@ -28,7 +28,7 @@ def generate_launch_description():
         launch_file="control.launch.py",
         launch_arguments={
             "use_fake_hardware": "false",
-            "enable_admittance": "true",
+            "hande_dev_name": "/dev/ttyUSB1",
         }.items(),
     )
 
