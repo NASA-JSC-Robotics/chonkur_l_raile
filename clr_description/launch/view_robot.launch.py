@@ -60,10 +60,9 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "height_limit",
-            default_value="0.7",
-            description="Maximum operational height in meters for the lift. \
-                Can be set to a value less than or equal to the maximum stroke height of the liftkit",
+            "generate_ros2_control_tag",
+            default_value="false",
+            description="Whether to generate the ros2 control tag",
         )
     )
 
@@ -72,7 +71,7 @@ def generate_launch_description():
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     headless_mode = LaunchConfiguration("headless_mode")
     finger_xacro = LaunchConfiguration("finger_xacro")
-    height_limit = LaunchConfiguration("height_limit")
+    generate_ros2_control_tag = LaunchConfiguration("generate_ros2_control_tag")
 
     robot_description_content = Command(
         [
@@ -92,8 +91,8 @@ def generate_launch_description():
             "finger_xacro:=",
             finger_xacro,
             " ",
-            "height_limit:=",
-            height_limit,
+            "generate_ros2_control_tag:=",
+            generate_ros2_control_tag,
         ]
     )
     robot_description = {"robot_description": robot_description_content}
