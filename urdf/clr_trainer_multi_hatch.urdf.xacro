@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro" name="imetro_env">
 
-  <xacro:arg name="name" default=""/>
   <xacro:arg name="tf_prefix" default="" />
   <xacro:arg name="use_fake_hardware" default="false" />
   <xacro:arg name="headless_mode" default="false" />
@@ -50,12 +49,12 @@
   <!-- Load the 4040 hatch-->
   <xacro:if value="${hatch_4040}">
     <!-- Hatch frame-->
-    <xacro:hatch_frame name="$(arg name)" prefix="smol/" parent="world">
+    <xacro:hatch_frame prefix="smol/" parent="world">
       <origin xyz="${-0.04248125 + 0.014} ${1.25 + 0.58 + 0.016} 0.0" rpy="0 0 4.7112"/>
     </xacro:hatch_frame>
 
     <xacro:include filename="$(find hatch_4040)/urdf/hatch_4040.xacro"/>
-    <xacro:hatch_4040 name="$(arg name)" prefix="smol/" parent="smol/hatch_frame">
+    <xacro:hatch_4040 prefix="smol/" parent="smol/hatch_frame">
       <origin xyz="0.678 0.06 ${0.657 + 0.017 - 0.013}" rpy="0 0 0"/>
     </xacro:hatch_4040>
   </xacro:if>
@@ -101,7 +100,7 @@
     <!-- End Localization links/joints -->
 
     <!-- Hatch frame-->
-    <xacro:hatch_frame name="$(arg name)" prefix="lorge/" parent="lorge/hatch_localization_y">
+    <xacro:hatch_frame prefix="lorge/" parent="lorge/hatch_localization_y">
       <origin xyz="${1.36508 + 0.012 + 0.005 + 0.02} ${-0.814983 - 0.012 + 0.025} ${0.0 - 0.013 + 0.011}" rpy="0 0 0"/>
     </xacro:hatch_frame>
 
@@ -111,7 +110,7 @@
     <xacro:property name="internal_handle_1" default="false"/>
     <xacro:property name="internal_handle_2" default="true"/>
     <xacro:include filename="$(find hatch_4060)/urdf/hatch_4060.xacro"/>
-    <xacro:hatch_4060 name="$(arg name)" prefix="lorge/" parent="lorge/hatch_frame"
+    <xacro:hatch_4060 prefix="lorge/" parent="lorge/hatch_frame"
       external_handle_1="${external_handle_1}" external_handle_2="${external_handle_2}" external_handle_3="${external_handle_3}"
       internal_handle_1="${internal_handle_1}" internal_handle_2="${internal_handle_2}">
       <!-- <origin xyz="${0.678 + 0.012} 0.057 ${0.716 - 0.013}" rpy="0 0 0"/> -->
@@ -145,58 +144,58 @@
 
   <!-- End Localization links/joints -->
 
-  <xacro:trainer_frame name="$(arg name)" prefix="$(arg tf_prefix)" parent="trainer_localization_y">
+  <xacro:trainer_frame prefix="$(arg tf_prefix)" parent="trainer_localization_y">
     <origin xyz="${-0.9 - 1.2192 + 0.02 } ${1.8596 + 0.58 - 0.005} 0.0" rpy="0 0 4.7112"/>
   </xacro:trainer_frame>
 
   <xacro:include filename="$(find trainer)/urdf/bench_seat.xacro"/>
-  <xacro:bench_seat name="$(arg name)" prefix="$(arg tf_prefix)" parent="$(arg tf_prefix)trainer_frame">
+  <xacro:bench_seat prefix="$(arg tf_prefix)" parent="$(arg tf_prefix)trainer_frame">
     <origin xyz="1.261 0 0.4769" rpy="0 0 0"/>
   </xacro:bench_seat>
 
   <xacro:if value="${ceiling_prop}">
     <xacro:include filename="$(find trainer)/urdf/ceiling.xacro"/>
-    <xacro:ceiling name="$(arg name)" prefix="$(arg tf_prefix)" parent="$(arg tf_prefix)trainer_frame">
+    <xacro:ceiling prefix="$(arg tf_prefix)" parent="$(arg tf_prefix)trainer_frame">
       <origin xyz="0.0 0.0 1.6002" rpy="0 0 0"/>
     </xacro:ceiling>
   </xacro:if>
 
   <xacro:include filename="$(find trainer)/urdf/trainer_front_left_face.xacro"/>
-  <xacro:trainer_front_left_face name="$(arg name)" prefix="$(arg tf_prefix)" parent="$(arg tf_prefix)trainer_frame" shelf="${shelf}">
+  <xacro:trainer_front_left_face prefix="$(arg tf_prefix)" parent="$(arg tf_prefix)trainer_frame" shelf="${shelf}">
     <origin xyz="1.25 0.08 0.457" rpy="0 0 0"/>
   </xacro:trainer_front_left_face>
 
   <xacro:include filename="$(find trainer)/urdf/trainer_front_right_face.xacro"/>
-  <xacro:trainer_front_right_face name="$(arg name)" prefix="$(arg tf_prefix)" parent="$(arg tf_prefix)trainer_frame">
+  <xacro:trainer_front_right_face prefix="$(arg tf_prefix)" parent="$(arg tf_prefix)trainer_frame">
     <origin xyz="1.25 0.465 0.457" rpy="0 0 0"/>
   </xacro:trainer_front_right_face>
 
   <xacro:include filename="$(find trainer)/urdf/trainer_side.xacro"/>
-  <xacro:side_face name="$(arg name)" prefix="$(arg tf_prefix)" parent="$(arg tf_prefix)trainer_frame">
+  <xacro:side_face prefix="$(arg tf_prefix)" parent="$(arg tf_prefix)trainer_frame">
     <origin xyz="0.812 0.887 0.04" rpy="0 0 0"/>
   </xacro:side_face>
 
   <xacro:if value="${second_trainer}">
-    <xacro:trainer_frame name="$(arg name)" prefix="second_trainer/" parent="world">
+    <xacro:trainer_frame prefix="second_trainer/" parent="world">
       <origin xyz="${-0.9 - 1.2192 + 0.02 + 1.1} ${1.8596 + 0.58} 0.0" rpy="0 0 4.7112"/>
     </xacro:trainer_frame>
-    <xacro:bench_seat name="$(arg name)" prefix="second_trainer/" parent="second_trainer/trainer_frame">
+    <xacro:bench_seat prefix="second_trainer/" parent="second_trainer/trainer_frame">
       <origin xyz="1.261 0 0.4769" rpy="0 0 0"/>
     </xacro:bench_seat>
-    <xacro:trainer_front_left_face name="$(arg name)" prefix="second_trainer/" parent="second_trainer/trainer_frame" shelf="${shelf}">
+    <xacro:trainer_front_left_face prefix="second_trainer/" parent="second_trainer/trainer_frame" shelf="${shelf}">
       <origin xyz="1.25 0.08 0.457" rpy="0 0 0"/>
     </xacro:trainer_front_left_face>
-    <xacro:trainer_front_right_face name="$(arg name)" prefix="second_trainer/" parent="second_trainer/trainer_frame">
+    <xacro:trainer_front_right_face prefix="second_trainer/" parent="second_trainer/trainer_frame">
       <origin xyz="1.25 0.465 0.457" rpy="0 0 0"/>
     </xacro:trainer_front_right_face>
-    <xacro:side_face name="$(arg name)" prefix="second_trainer/" parent="second_trainer/trainer_frame">
+    <xacro:side_face prefix="second_trainer/" parent="second_trainer/trainer_frame">
       <origin xyz="0.812 0.887 0.04" rpy="0 0 0"/>
     </xacro:side_face>
   </xacro:if>
 
   <!-- long bench
   <xacro:include filename="$(find clr_imetro_environments)/urdf/long_bench.xacro"/>
-  <xacro:long_bench_seat name="$(arg name)" prefix="long_bench/" parent="world">
+  <xacro:long_bench_seat prefix="long_bench/" parent="world">
     <origin xyz="${-0.9 - 1.2192 + 0.02 + 2.1} 1.175 0.475" rpy="0 0 4.7112"/>
   </xacro:long_bench_seat> -->
 
