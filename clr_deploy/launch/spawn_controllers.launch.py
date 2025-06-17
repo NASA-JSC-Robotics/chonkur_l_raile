@@ -41,13 +41,22 @@ def generate_launch_description():
             description="Start robot with fake hardware mirroring command to its states.",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_sim_time",
+            default_value="false",
+            description="If the robot is running in simulation, use the published clock",
+        )
+    )
     # Initialize Arguments
     namespace = LaunchConfiguration("namespace")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
+    use_sim_time = LaunchConfiguration("use_sim_time")
 
     spawner_launch_args = {
         "namespace": namespace,
         "use_fake_hardware": use_fake_hardware,
+        "use_sim_time": use_sim_time,
     }.items()
 
     # Load CLR specific controllers

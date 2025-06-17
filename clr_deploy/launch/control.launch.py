@@ -69,11 +69,35 @@ def generate_launch_description():
             "The user has be be allowed to write to this location. ",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "robot_description_package",
+            default_value="clr_description",
+            description="The package to find the robot description.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "robot_description_file",
+            default_value="clr.urdf.xacro",
+            description="The name of the robot description file. Must be in the 'urdf' folder of the description package.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_sim_time",
+            default_value="false",
+            description="If the robot is running in simulation, use the published clock",
+        )
+    )
 
     namespace = LaunchConfiguration("namespace")
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     hande_dev_name = LaunchConfiguration("hande_dev_name")
+    robot_description_package = LaunchConfiguration("robot_description_package")
+    robot_description_file = LaunchConfiguration("robot_description_file")
+    use_sim_time = LaunchConfiguration("use_sim_time")
 
     # Main robot description for CLR. Additional arguments are available in the xacro, but we only
     # override a subset of those that change regularly depending on deployment.
@@ -81,7 +105,7 @@ def generate_launch_description():
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
-            PathJoinSubstitution([FindPackageShare("clr_description"), "urdf", "clr.urdf.xacro"]),
+            PathJoinSubstitution([FindPackageShare(robot_description_package), "urdf", robot_description_file]),
             " ",
             "tf_prefix:=",
             tf_prefix,
@@ -104,7 +128,10 @@ def generate_launch_description():
         executable="robot_state_publisher",
         namespace=namespace,
         output="both",
-        parameters=[robot_description],
+        parameters=[
+            robot_description,
+            {"use_sim_time": use_sim_time},
+        ],
     )
 
     # # start the controller manager node with all of the controller config files
@@ -128,6 +155,7 @@ def generate_launch_description():
             parameter_file("chonkur_deploy", "hande_controllers.yaml", True),
             parameter_file("ewellix_liftkit_deploy", "liftkit_controllers.yaml", True),
             parameter_file("vention_rail_deploy", "rail_controllers.yaml", True),
+            {"use_sim_time": use_sim_time},
         ],
         output="both",
     )
@@ -140,6 +168,7 @@ def generate_launch_description():
             "namespace": namespace,
             "tf_prefix": tf_prefix,
             "use_fake_hardware": use_fake_hardware,
+            "use_sim_time": use_sim_time,
         }.items(),
     )
 
@@ -157,6 +186,7 @@ def generate_launch_description():
             # This is generally the last controller to come up, so if it is available the controller
             # stopper should be good to initialize.
             {"target_controller": "admittance_joint_trajectory_controller"},
+            {"use_sim_time": use_sim_time},
         ],
         condition=UnlessCondition(use_fake_hardware),
     )
