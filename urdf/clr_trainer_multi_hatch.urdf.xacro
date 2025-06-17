@@ -3,7 +3,6 @@
 
   <xacro:arg name="name" default=""/>
   <xacro:arg name="tf_prefix" default="" />
-  <xacro:arg name="prefix" default="$(arg tf_prefix)"/>
   <xacro:arg name="use_fake_hardware" default="false" />
   <xacro:arg name="headless_mode" default="false" />
   <xacro:arg name="com_port_hande" default="/dev/robotiq" />
@@ -141,34 +140,34 @@
 
   <!-- End Localization links/joints -->
 
-  <xacro:trainer_frame name="$(arg name)" prefix="$(arg prefix)" parent="trainer_localization_y">
+  <xacro:trainer_frame name="$(arg name)" prefix="$(arg tf_prefix)" parent="trainer_localization_y">
     <origin xyz="${-0.9 - 1.2192 + 0.02 } ${1.8596 + 0.58 - 0.005} 0.0" rpy="0 0 4.7112"/>
   </xacro:trainer_frame>
 
   <xacro:include filename="$(find trainer)/urdf/bench_seat.xacro"/>
-  <xacro:bench_seat name="$(arg name)" prefix="$(arg prefix)" parent="$(arg tf_prefix)trainer_frame">
+  <xacro:bench_seat name="$(arg name)" prefix="$(arg tf_prefix)" parent="$(arg tf_prefix)trainer_frame">
     <origin xyz="1.261 0 0.4769" rpy="0 0 0"/>
   </xacro:bench_seat>
 
   <xacro:if value="${ceiling_prop}">
     <xacro:include filename="$(find trainer)/urdf/ceiling.xacro"/>
-    <xacro:ceiling name="$(arg name)" prefix="$(arg prefix)" parent="$(arg tf_prefix)trainer_frame">
+    <xacro:ceiling name="$(arg name)" prefix="$(arg tf_prefix)" parent="$(arg tf_prefix)trainer_frame">
       <origin xyz="0.0 0.0 1.6002" rpy="0 0 0"/>
     </xacro:ceiling>
   </xacro:if>
 
   <xacro:include filename="$(find trainer)/urdf/trainer_front_left_face.xacro"/>
-  <xacro:trainer_front_left_face name="$(arg name)" prefix="$(arg prefix)" parent="$(arg tf_prefix)trainer_frame" shelf="${shelf}">
+  <xacro:trainer_front_left_face name="$(arg name)" prefix="$(arg tf_prefix)" parent="$(arg tf_prefix)trainer_frame" shelf="${shelf}">
     <origin xyz="1.25 0.08 0.457" rpy="0 0 0"/>
   </xacro:trainer_front_left_face>
 
   <xacro:include filename="$(find trainer)/urdf/trainer_front_right_face.xacro"/>
-  <xacro:trainer_front_right_face name="$(arg name)" prefix="$(arg prefix)" parent="$(arg tf_prefix)trainer_frame">
+  <xacro:trainer_front_right_face name="$(arg name)" prefix="$(arg tf_prefix)" parent="$(arg tf_prefix)trainer_frame">
     <origin xyz="1.25 0.465 0.457" rpy="0 0 0"/>
   </xacro:trainer_front_right_face>
 
   <xacro:include filename="$(find trainer)/urdf/trainer_side.xacro"/>
-  <xacro:side_face name="$(arg name)" prefix="$(arg prefix)" parent="$(arg tf_prefix)trainer_frame">
+  <xacro:side_face name="$(arg name)" prefix="$(arg tf_prefix)" parent="$(arg tf_prefix)trainer_frame">
     <origin xyz="0.812 0.887 0.04" rpy="0 0 0"/>
   </xacro:side_face>
 
