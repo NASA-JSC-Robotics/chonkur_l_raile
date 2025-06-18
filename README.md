@@ -1,1 +1,1 @@
-This repository has the description for the ChonkUR L. Rail-E robot with the Hatch, Trainer, and Express Rack descriptions.
+This repository contains a combined description for the ChonkUR L. Rail-E robot with mockups. It also contains the Express Rack and Long Bench Seat xacros and stls.
