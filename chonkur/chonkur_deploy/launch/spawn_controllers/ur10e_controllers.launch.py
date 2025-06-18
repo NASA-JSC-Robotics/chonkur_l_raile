@@ -32,13 +32,6 @@ def generate_launch_description():
     declared_arguments = []
     declared_arguments.append(
         DeclareLaunchArgument(
-            "enable_admittance",
-            default_value="false",
-            description="Allow the admittance controllers to spawn",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
             "namespace",
             default_value="",
             description="Namespace for the hardware robot",
@@ -51,7 +44,6 @@ def generate_launch_description():
             description="Start robot with fake hardware mirroring command to its states.",
         )
     )
-    enable_admittance = LaunchConfiguration("enable_admittance")
     namespace = LaunchConfiguration("namespace")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
 
@@ -74,15 +66,16 @@ def generate_launch_description():
         )
     )
 
-    # admittance
+    # We always load the admittance controllers in an inactive state
     admittance_controller_spawner = spawn_controller(
-        "admittance_controller", inactive=True, namespace=namespace, condition=IfCondition(enable_admittance)
+        "admittance_controller",
+        inactive=True,
+        namespace=namespace,
     )
     admittance_jtc_spawner = spawn_controller(
         "admittance_joint_trajectory_controller",
         inactive=True,
         namespace=namespace,
-        condition=IfCondition(enable_admittance),
     )
 
     # start the admittance jtc spawner after the admittance controller so that the jtc has the

@@ -17,6 +17,8 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import rclpy
+
 from rclpy.node import Node
 from rcl_interfaces.msg import ParameterDescriptor, ParameterType
 from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
@@ -70,16 +72,6 @@ class ControllerStopperBase(Node):
             ListControllers, controller_manager_name + "/list_controllers", callback_group=self.cm_cb_group
         )
 
-        # wait until all required services are available from controller_manager
-        self.get_logger().info(
-            "Waiting for switch controller service to come up on controller_manager/switch_controller"
-        )
-        self.switch_controllers_srv.wait_for_service()
-        self.get_logger().info("Service available")
-        self.get_logger().info("Waiting for list controllers service to come up on controller_manager/list_controllers")
-        self.list_controllers_srv.wait_for_service()
-        self.get_logger().info("Service available")
-
         # if the user doesn't provide the name of the servo node, assume we don't care
         self.servo_node_name = servo_node_name
         self.manage_servo = self.servo_node_name != ""
@@ -103,13 +95,57 @@ class ControllerStopperBase(Node):
         )
         self.consistent_controllers = self.get_parameter("consistent_controllers").value
         if self.consistent_controllers == [""]:
-            self.consistent_controllers == []
+            self.consistent_controllers = []
 
         # variable to keep track of which controllers have been stopped so they can be restarted
         self.stopped_controllers = []
 
         # variable to keep track of whether we are in a state where we have restarted controllers
         self.controllers_active = True
+
+    def initialize(self):
+        """Waits for the relevant states to be ready before starting."""
+
+        # wait until all required services are available from controller_manager
+        self.get_logger().info(
+            "Waiting for switch controller service to come up on controller_manager/switch_controller"
+        )
+        self.wait_for_service(self.switch_controllers_srv)
+        self.wait_for_service(self.list_controllers_srv)
+
+    def wait_for_service(self, client, timeout=1, retries=-1):
+        """Waits for the ROS 2 service to be available at the specified timeout.
+
+        If retries < 0 this will wait forever.
+        """
+        attempts = 0
+        while rclpy.ok():
+            if client.wait_for_service(timeout):
+                self.get_logger().info(f"{client.srv_name} found!")
+                return
+            attempts += 1
+            if retries > 0 and attempts > retries:
+                raise RuntimeError(f"Timed out waiting for service to be available: {client.srv_name}")
+            self.get_logger().info(
+                f"{bcolors.WARNING}Waiting for service {client.srv_name} to be available...{bcolors.ENDC}"
+            )
+
+    def call_async(self, client, request, timeout=3):
+        """Calls the provided client and waits the timeout for a response.
+
+        Returns the response if available, or else None.
+        """
+        future = client.call_async(request)
+
+        start_time = self.get_clock().now()
+        while not future.done():
+            elapsed_time = (self.get_clock().now() - start_time).nanoseconds / 1e9
+            if elapsed_time > timeout:
+                self.get_logger().warn(f"Service call to {client.srv_name} timed out after {timeout}s")
+                future.cancel()
+                return None
+
+        return future.result()
 
     def servo_node_exists(self):
         """Returns true if the servo node was found in active ROS session. And logs a message if the state
@@ -136,6 +172,35 @@ class ControllerStopperBase(Node):
 
         return False
 
+    def call_list_controllers(self):
+        list_controllers_request = ListControllers.Request()
+        list_controllers_response = self.call_async(self.list_controllers_srv, list_controllers_request)
+        return list_controllers_response
+
+    def call_switch_controllers(self, controllers_to_stop=[], controllers_to_start=[]):
+        switch_controller_request = SwitchController.Request()
+        # set strictness to strict to show that this fails if anything went wrong
+        switch_controller_request.strictness = SwitchController.Request.STRICT
+        switch_controller_request.timeout.nanosec = 500000000  # 0.5s
+        switch_controller_request.deactivate_controllers = controllers_to_stop
+        switch_controller_request.activate_controllers = controllers_to_start
+
+        # Call the service
+        switch_controllers_response = self.call_async(self.switch_controllers_srv, switch_controller_request)
+
+        if switch_controllers_response:
+            return switch_controllers_response.ok
+        else:
+            return False
+
+    def call_pause_servo(self, servo_active):
+        pause_servo_request = SetBool.Request()
+        pause_servo_request.data = servo_active
+        pause_servo_response = self.call_async(self.pause_servo_srv, pause_servo_request)
+
+        if pause_servo_response is None or not pause_servo_response.success:
+            self.get_logger().error("Could not pause servo node")
+
     def stop_controllers(self):
         """Deactivates all of the controllers that are not listed as consistent.
         This can be called several times without causing issues. This is useful because
@@ -147,20 +212,11 @@ class ControllerStopperBase(Node):
         # interfaces as one that was already active
         save_controllers = self.controllers_active
 
-        # request to get switch controller, list controller, and pause servo
-        switch_controller_request = SwitchController.Request()
-        list_controllers_request = ListControllers.Request()
-        pause_servo_request = SetBool.Request()
-
-        # set strictness to strict to show that this fails if anything went wrong
-        switch_controller_request.strictness = SwitchController.Request.STRICT
-        switch_controller_request.timeout.nanosec = 500000000  # 0.5s
-
-        # list the controllers that are running
-        list_controllers_response = self.list_controllers_srv.call(list_controllers_request)
-
         # each new time this is called, we will repopulate which controllers we are stopping
         controllers_to_stop = []
+
+        # Get list of controllers from the CM
+        list_controllers_response = self.call_list_controllers()
 
         # add controllers that are active and not consistent to the list to stop
         for controller in list_controllers_response.controller:
@@ -170,9 +226,7 @@ class ControllerStopperBase(Node):
 
         # if there are any to stop, call switch_controllers to stop them
         if controllers_to_stop:
-            switch_controller_request.deactivate_controllers = controllers_to_stop
-            switch_controllers_response = self.switch_controllers_srv.call(switch_controller_request)
-            if not switch_controllers_response.ok:
+            if not self.call_switch_controllers(controllers_to_stop=controllers_to_stop):
                 self.get_logger().error("Could not deactivate requested controllers")
             else:
                 self.controllers_active = False
@@ -184,27 +238,14 @@ class ControllerStopperBase(Node):
         # if we are managing the servo controller, also pause the servo node
         if self.manage_servo:
             if self.servo_node_exists():
-                pause_servo_request.data = True
-                pause_servo_response = self.pause_servo_srv.call(pause_servo_request)
-                if not pause_servo_response.success:
-                    self.get_logger().error("Could not pause servo node")
+                self.call_pause_servo(True)
 
     def start_controllers(self):
         """Reactivates all of the controllers that have been stopped by this node."""
-        # initialize service requests
-        switch_controller_request = SwitchController.Request()
-        pause_servo_request = SetBool.Request()
-
-        # set strictness to strict to show that this fails if anything went wrong
-        switch_controller_request.strictness = SwitchController.Request.STRICT
-        switch_controller_request.timeout.nanosec = 500000000  # 0.5s
 
         # only run this if we have logged that some controllers have been stopped
         if self.stopped_controllers:
-            switch_controller_request.activate_controllers = self.stopped_controllers
-
-            switch_controllers_response = self.switch_controllers_srv.call(switch_controller_request)
-            if not switch_controllers_response.ok:
+            if not self.call_switch_controllers(controllers_to_start=self.stopped_controllers):
                 self.get_logger().error("Could not activate requested controllers")
             else:
                 self.controllers_active = True
@@ -212,10 +253,7 @@ class ControllerStopperBase(Node):
         # if we are managing the servo controller, restart the servo node
         if self.manage_servo:
             if self.servo_node_exists():
-                pause_servo_request.data = False
-                pause_servo_response = self.pause_servo_srv.call(pause_servo_request)
-                if not pause_servo_response.success:
-                    self.get_logger().error("Could not unpause servo node")
+                self.call_pause_servo(False)
 
         # clear stopped controllers for the next round to populate
         self.stopped_controllers.clear()
