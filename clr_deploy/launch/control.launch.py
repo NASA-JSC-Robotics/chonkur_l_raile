@@ -80,7 +80,8 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "robot_description_file",
             default_value="clr.urdf.xacro",
-            description="The name of the robot description file. Must be in the 'urdf' folder of the description package.",
+            description="The name of the robot description file. "
+            "Must be in the 'urdf' folder of the description package.",
         )
     )
     declared_arguments.append(
