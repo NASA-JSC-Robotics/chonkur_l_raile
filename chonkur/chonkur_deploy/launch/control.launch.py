@@ -72,12 +72,25 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "robot_description_package",
+            default_value="chonkur_description",
+            description="The package to find the robot description.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "robot_description_file",
+            default_value="chonkur.urdf.xacro",
+            description="The name of the robot description file. Must be in the 'urdf' folder of the description package.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "tf_prefix",
             default_value="",
             description="tf prefix for the robot joints.",
         )
     )
-
     declared_arguments.append(
         DeclareLaunchArgument(
             "use_fake_hardware",
@@ -90,6 +103,8 @@ def generate_launch_description():
     namespace = LaunchConfiguration("namespace")
     robot_ip = LaunchConfiguration("robot_ip")
     hande_dev_name = LaunchConfiguration("hande_dev_name")
+    robot_description_package = LaunchConfiguration("robot_description_package")
+    robot_description_file = LaunchConfiguration("robot_description_file")
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
 
@@ -99,7 +114,7 @@ def generate_launch_description():
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
-            PathJoinSubstitution([FindPackageShare("chonkur_description"), "urdf", "chonkur.urdf.xacro"]),
+            PathJoinSubstitution([FindPackageShare(robot_description_package), "urdf", robot_description_file]),
             " ",
             "tf_prefix:=",
             tf_prefix,
