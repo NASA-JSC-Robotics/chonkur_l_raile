@@ -24,6 +24,7 @@ from launch.substitutions import (
     Command,
     FindExecutable,
     LaunchConfiguration,
+    OrSubstitution,
     PathJoinSubstitution,
 )
 from launch_ros.actions import Node
@@ -91,6 +92,13 @@ def generate_launch_description():
             description="If the robot is running in simulation, use the published clock",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "is_sim",
+            default_value="false",
+            description="If the robot is running with simulated drivers in some capacity (e.g. mujoco).",
+        )
+    )
 
     namespace = LaunchConfiguration("namespace")
     tf_prefix = LaunchConfiguration("tf_prefix")
@@ -99,6 +107,7 @@ def generate_launch_description():
     robot_description_package = LaunchConfiguration("robot_description_package")
     robot_description_file = LaunchConfiguration("robot_description_file")
     use_sim_time = LaunchConfiguration("use_sim_time")
+    is_sim = LaunchConfiguration("is_sim")
 
     # Main robot description for CLR. Additional arguments are available in the xacro, but we only
     # override a subset of those that change regularly depending on deployment.
@@ -178,7 +187,7 @@ def generate_launch_description():
 
     # E-stop controller manager for CLR. We use the stopper for ChonkUR, since the rail and lift
     # do not require any consistent controllers. If that changes we may need to add a separate
-    # stopper implementation for CLR.
+    # stopper implementation for CLR. Only launched on hardware
     clr_controller_stopper = Node(
         package="chonkur_deploy",
         executable="chonkur_controller_stopper.py",
@@ -189,7 +198,7 @@ def generate_launch_description():
             {"target_controller": "admittance_joint_trajectory_controller"},
             {"use_sim_time": use_sim_time},
         ],
-        condition=UnlessCondition(use_fake_hardware),
+        condition=UnlessCondition(OrSubstitution(use_fake_hardware, is_sim)),
     )
 
     nodes = [robot_state_publisher_node, control_node, joint_state_broadcaster, clr_controller_stopper]

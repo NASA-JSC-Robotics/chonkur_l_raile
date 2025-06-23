@@ -19,7 +19,7 @@
 
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, OrSubstitution
 from chonkur_deploy.launch_helpers import spawn_controller, include_launch_file
 
 
@@ -48,15 +48,25 @@ def generate_launch_description():
             description="If the robot is running in simulation, use the published clock",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "is_sim",
+            default_value="false",
+            description="If the robot is running with simulated drivers in some capacity (e.g. mujoco).",
+        )
+    )
+
     # Initialize Arguments
     namespace = LaunchConfiguration("namespace")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     use_sim_time = LaunchConfiguration("use_sim_time")
+    is_sim = LaunchConfiguration("is_sim")
 
     spawner_launch_args = {
         "namespace": namespace,
         "use_fake_hardware": use_fake_hardware,
         "use_sim_time": use_sim_time,
+        "is_sim": is_sim,
     }.items()
 
     # Load CLR specific controllers
@@ -86,7 +96,10 @@ def generate_launch_description():
     vention_controllers = include_launch_file(
         package_name="vention_rail_deploy",
         launch_file="spawn_controllers.launch.py",
-        launch_arguments=spawner_launch_args,
+        launch_arguments={
+            # Override this directly to handle the rail e stop controller
+            "use_fake_hardware": OrSubstitution(use_fake_hardware, is_sim)
+        }.items(),
     )
 
     spawner_launch_files = [
