@@ -28,8 +28,9 @@ from moveit_configs_utils import MoveItConfigsBuilder
 
 import os
 
+
 def launch_setup(context, *args, **kwargs):
-    
+
     model_env = LaunchConfiguration("model_env")
 
     global description_package
@@ -39,7 +40,7 @@ def launch_setup(context, *args, **kwargs):
     if model_env.perform(context) == "true":
         description_package = "clr_imetro_environments"
         description_file = "clr_trainer_multi_hatch.urdf.xacro"
-        moveit_config_file_path= "srdf/clr_and_mockups.srdf.xacro"
+        moveit_config_file_path = "srdf/clr_and_mockups.srdf.xacro"
     else:
         description_package = "clr_description"
         description_file = "clr.urdf.xacro"
@@ -95,6 +96,7 @@ def launch_setup(context, *args, **kwargs):
     )
 
     return [move_group_node, rviz_node]
+
 
 def generate_launch_description():
 
