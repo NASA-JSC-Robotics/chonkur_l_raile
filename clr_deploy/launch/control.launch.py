@@ -79,6 +79,13 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "model_env",
+            default_value="false",
+            description="Use full iMETRO environment + robot description."
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "use_sim_time",
             default_value="false",
             description="If the robot is running in simulation, use the published clock",
@@ -97,6 +104,7 @@ def generate_launch_description():
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     robot_description_package = LaunchConfiguration("robot_description_package")
     robot_description_file = LaunchConfiguration("robot_description_file")
+    model_env = LaunchConfiguration("model_env")
     use_sim_time = LaunchConfiguration("use_sim_time")
     is_sim = LaunchConfiguration("is_sim")
 
@@ -114,6 +122,8 @@ def generate_launch_description():
             "use_fake_hardware:=",
             use_fake_hardware,
             " ",
+            "model_env:=",
+            model_env
         ]
     )
 
