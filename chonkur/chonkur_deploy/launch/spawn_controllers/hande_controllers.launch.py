@@ -19,6 +19,7 @@
 
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
+from launch.conditions import UnlessCondition
 from launch.substitutions import (
     LaunchConfiguration,
 )
@@ -36,12 +37,22 @@ def generate_launch_description():
             description="Namespace for the hardware robot",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "is_sim",
+            default_value="false",
+            description="Whether or not the controllers are running in sim.",
+        )
+    )
 
     namespace = LaunchConfiguration("namespace")
+    is_sim = LaunchConfiguration("is_sim")
 
     nodes = []
 
     nodes.append(spawn_controller("robotiq_gripper_hande_controller", namespace=namespace))
-    nodes.append(spawn_controller("robotiq_activation_controller", namespace=namespace))
+    nodes.append(
+        spawn_controller("robotiq_activation_controller", namespace=namespace, condition=UnlessCondition(is_sim))
+    )
 
     return LaunchDescription(declared_arguments + nodes)

@@ -24,6 +24,7 @@ from launch.substitutions import (
     Command,
     FindExecutable,
     LaunchConfiguration,
+    OrSubstitution,
     PathJoinSubstitution,
 )
 from launch_ros.actions import Node
@@ -72,12 +73,26 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "robot_description_package",
+            default_value="chonkur_description",
+            description="The package to find the robot description.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "robot_description_file",
+            default_value="chonkur.urdf.xacro",
+            description="The name of the robot description file. "
+            "Must be in the 'urdf' folder of the description package.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "tf_prefix",
             default_value="",
             description="tf prefix for the robot joints.",
         )
     )
-
     declared_arguments.append(
         DeclareLaunchArgument(
             "use_fake_hardware",
@@ -85,13 +100,31 @@ def generate_launch_description():
             description="Start robot with simulated hardware mirroring command to its states.",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_sim_time",
+            default_value="false",
+            description="If the robot is running in simulation, use the published clock",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "is_sim",
+            default_value="false",
+            description="If the robot is running with simulated drivers in some capacity (e.g. mujoco).",
+        )
+    )
 
     headless_mode = LaunchConfiguration("headless_mode")
     namespace = LaunchConfiguration("namespace")
     robot_ip = LaunchConfiguration("robot_ip")
     hande_dev_name = LaunchConfiguration("hande_dev_name")
+    robot_description_package = LaunchConfiguration("robot_description_package")
+    robot_description_file = LaunchConfiguration("robot_description_file")
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
+    use_sim_time = LaunchConfiguration("use_sim_time")
+    is_sim = LaunchConfiguration("is_sim")
 
     # The main robot description for ChonkUR. Additional arguments are available in the xacro, but we only
     # override a subset of those that change regularly depending on deployment.
@@ -99,7 +132,7 @@ def generate_launch_description():
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
-            PathJoinSubstitution([FindPackageShare("chonkur_description"), "urdf", "chonkur.urdf.xacro"]),
+            PathJoinSubstitution([FindPackageShare(robot_description_package), "urdf", robot_description_file]),
             " ",
             "tf_prefix:=",
             tf_prefix,
@@ -128,7 +161,10 @@ def generate_launch_description():
         executable="robot_state_publisher",
         namespace=namespace,
         output="both",
-        parameters=[robot_description],
+        parameters=[
+            robot_description,
+            {"use_sim_time": use_sim_time},
+        ],
     )
 
     # start the controller manager node with all of the controller config files
@@ -146,6 +182,7 @@ def generate_launch_description():
             parameter_file("chonkur_deploy", "controllers_common.yaml", True),
             parameter_file("chonkur_deploy", "ur10e_controllers.yaml", True),
             parameter_file("chonkur_deploy", "hande_controllers.yaml", True),
+            {"use_sim_time": use_sim_time},
         ],
         output="both",
     )
@@ -156,7 +193,7 @@ def generate_launch_description():
         launch_file="spawn_controllers.launch.py",
         launch_arguments={
             "namespace": namespace,
-            "use_fake_hardware": use_fake_hardware,
+            "is_sim": OrSubstitution(use_fake_hardware, is_sim),
         }.items(),
     )
 
@@ -164,7 +201,7 @@ def generate_launch_description():
     # can add it as needed
     joint_state_broadcaster = spawn_controller("joint_state_broadcaster", namespace=namespace)
 
-    # E-stop controller manager integration for ChonkUR
+    # E-stop controller manager integration for ChonkUR, only launched on hardware
     chonkur_controller_stopper = Node(
         package="chonkur_deploy",
         executable="chonkur_controller_stopper.py",
@@ -174,7 +211,7 @@ def generate_launch_description():
             # stopper should be good to initialize.
             {"target_controller": "admittance_joint_trajectory_controller"},
         ],
-        condition=UnlessCondition(use_fake_hardware),
+        condition=UnlessCondition(OrSubstitution(use_fake_hardware, is_sim)),
     )
 
     nodes = [robot_state_publisher_node, control_node, joint_state_broadcaster, chonkur_controller_stopper]

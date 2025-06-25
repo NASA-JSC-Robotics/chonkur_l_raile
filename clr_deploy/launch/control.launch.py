@@ -24,6 +24,7 @@ from launch.substitutions import (
     Command,
     FindExecutable,
     LaunchConfiguration,
+    OrSubstitution,
     PathJoinSubstitution,
 )
 from launch_ros.actions import Node
@@ -61,10 +62,43 @@ def generate_launch_description():
             description="Start robot with simulated hardware mirroring command to its states.",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "robot_description_package",
+            default_value="clr_description",
+            description="The package to find the robot description.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "robot_description_file",
+            default_value="clr.urdf.xacro",
+            description="The name of the robot description file. "
+            "Must be in the 'urdf' folder of the description package.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_sim_time",
+            default_value="false",
+            description="If the robot is running in simulation, use the published clock",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "is_sim",
+            default_value="false",
+            description="If the robot is running with simulated drivers in some capacity (e.g. mujoco).",
+        )
+    )
 
     namespace = LaunchConfiguration("namespace")
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
+    robot_description_package = LaunchConfiguration("robot_description_package")
+    robot_description_file = LaunchConfiguration("robot_description_file")
+    use_sim_time = LaunchConfiguration("use_sim_time")
+    is_sim = LaunchConfiguration("is_sim")
 
     # Main robot description for CLR. Additional arguments are available in the xacro, but we only
     # override a subset of those that change regularly depending on deployment.
@@ -72,7 +106,7 @@ def generate_launch_description():
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
-            PathJoinSubstitution([FindPackageShare("clr_description"), "urdf", "clr.urdf.xacro"]),
+            PathJoinSubstitution([FindPackageShare(robot_description_package), "urdf", robot_description_file]),
             " ",
             "tf_prefix:=",
             tf_prefix,
@@ -92,7 +126,10 @@ def generate_launch_description():
         executable="robot_state_publisher",
         namespace=namespace,
         output="both",
-        parameters=[robot_description],
+        parameters=[
+            robot_description,
+            {"use_sim_time": use_sim_time},
+        ],
     )
 
     # # start the controller manager node with all of the controller config files
@@ -116,6 +153,7 @@ def generate_launch_description():
             parameter_file("chonkur_deploy", "hande_controllers.yaml", True),
             parameter_file("ewellix_liftkit_deploy", "liftkit_controllers.yaml", True),
             parameter_file("vention_rail_deploy", "rail_controllers.yaml", True),
+            {"use_sim_time": use_sim_time},
         ],
         output="both",
     )
@@ -128,6 +166,7 @@ def generate_launch_description():
             "namespace": namespace,
             "tf_prefix": tf_prefix,
             "use_fake_hardware": use_fake_hardware,
+            "use_sim_time": use_sim_time,
         }.items(),
     )
 
@@ -136,7 +175,7 @@ def generate_launch_description():
 
     # E-stop controller manager for CLR. We use the stopper for ChonkUR, since the rail and lift
     # do not require any consistent controllers. If that changes we may need to add a separate
-    # stopper implementation for CLR.
+    # stopper implementation for CLR. Only launched on hardware
     clr_controller_stopper = Node(
         package="chonkur_deploy",
         executable="chonkur_controller_stopper.py",
@@ -145,8 +184,9 @@ def generate_launch_description():
             # This is generally the last controller to come up, so if it is available the controller
             # stopper should be good to initialize.
             {"target_controller": "admittance_joint_trajectory_controller"},
+            {"use_sim_time": use_sim_time},
         ],
-        condition=UnlessCondition(use_fake_hardware),
+        condition=UnlessCondition(OrSubstitution(use_fake_hardware, is_sim)),
     )
 
     nodes = [robot_state_publisher_node, control_node, joint_state_broadcaster, clr_controller_stopper]
