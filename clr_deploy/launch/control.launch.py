@@ -64,14 +64,6 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "hande_dev_name",
-            default_value="/dev/robotiq",
-            description="File descriptor that will be generated for the tool communication device. "
-            "The user has be be allowed to write to this location. ",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
             "robot_description_package",
             default_value="clr_description",
             description="The package to find the robot description.",
@@ -103,7 +95,6 @@ def generate_launch_description():
     namespace = LaunchConfiguration("namespace")
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
-    hande_dev_name = LaunchConfiguration("hande_dev_name")
     robot_description_package = LaunchConfiguration("robot_description_package")
     robot_description_file = LaunchConfiguration("robot_description_file")
     use_sim_time = LaunchConfiguration("use_sim_time")
@@ -122,9 +113,6 @@ def generate_launch_description():
             " ",
             "use_fake_hardware:=",
             use_fake_hardware,
-            " ",
-            "com_port_hande:=",
-            hande_dev_name,
             " ",
         ]
     )

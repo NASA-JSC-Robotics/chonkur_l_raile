@@ -58,21 +58,12 @@ def generate_launch_description():
             description="Chose which fingers are mounted to the gripper",
         )
     )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "height_limit",
-            default_value="0.7",
-            description="Maximum operational height in meters for the lift. \
-                Can be set to a value less than or equal to the maximum stroke height of the liftkit",
-        )
-    )
 
     # Initialize Arguments
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     headless_mode = LaunchConfiguration("headless_mode")
     finger_xacro = LaunchConfiguration("finger_xacro")
-    height_limit = LaunchConfiguration("height_limit")
 
     robot_description_content = Command(
         [
@@ -92,8 +83,8 @@ def generate_launch_description():
             "finger_xacro:=",
             finger_xacro,
             " ",
-            "height_limit:=",
-            height_limit,
+            "generate_ros2_control_tag:=",
+            "false",
         ]
     )
     robot_description = {"robot_description": robot_description_content}
