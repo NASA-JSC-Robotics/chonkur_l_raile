@@ -58,20 +58,12 @@ def generate_launch_description():
             description="Chose which fingers are mounted to the gripper",
         )
     )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "generate_ros2_control_tag",
-            default_value="false",
-            description="Whether to generate the ros2 control tag",
-        )
-    )
 
     # Initialize Arguments
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     headless_mode = LaunchConfiguration("headless_mode")
     finger_xacro = LaunchConfiguration("finger_xacro")
-    generate_ros2_control_tag = LaunchConfiguration("generate_ros2_control_tag")
 
     robot_description_content = Command(
         [
@@ -92,7 +84,7 @@ def generate_launch_description():
             finger_xacro,
             " ",
             "generate_ros2_control_tag:=",
-            generate_ros2_control_tag,
+            "false",
         ]
     )
     robot_description = {"robot_description": robot_description_content}
