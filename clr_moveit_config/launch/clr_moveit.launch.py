@@ -18,9 +18,9 @@
 # under the License.
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
-from launch.conditions import IfCondition
-from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
+from launch.actions import DeclareLaunchArgument, SetLaunchConfiguration, OpaqueFunction
+from launch.conditions import IfCondition, UnlessCondition
+from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution, PythonExpression
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from ament_index_python.packages import get_package_share_directory
@@ -28,55 +28,27 @@ from moveit_configs_utils import MoveItConfigsBuilder
 
 import os
 
+def launch_setup(context, *args, **kwargs):
+    
+    model_env = LaunchConfiguration("model_env")
 
-def generate_launch_description():
+    global description_package
+    global description_file
+    global moveit_config_file_path
 
-    declared_arguments = []
+    if model_env.perform(context) == "true":
+        description_package = "clr_imetro_environments"
+        description_file = "clr_trainer_multi_hatch.urdf.xacro"
+        moveit_config_file_path= "srdf/clr_and_mockups.srdf.xacro"
+    else:
+        description_package = "clr_description"
+        description_file = "clr.urdf.xacro"
+        moveit_config_file_path = "srdf/clr.srdf.xacro"
 
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "use_fake_hardware",
-            default_value="false",
-            description="Start robot with fake hardware mirroring command to its states.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "tf_prefix",
-            default_value='""',
-            description="tf_prefix of the joint names, useful for \
-        multi-robot setup. If changed, also joint names in the controllers' configuration \
-        have to be updated.",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "launch_moveit",
-            default_value="true",
-            description="Launch moveit?",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "launch_rviz",
-            default_value="true",
-            description="Launch rviz?",
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "use_sim_time",
-            default_value="false",
-            description="If the robot is running in simulation, use the published clock",
-        )
-    )
     launch_moveit = LaunchConfiguration("launch_moveit")
     launch_rviz = LaunchConfiguration("launch_rviz")
     use_sim_time = {"use_sim_time": LaunchConfiguration("use_sim_time")}
-
-    description_package = "clr_imetro_environments"
-    description_file = "clr_trainer_multi_hatch.urdf.xacro"
-    moveit_config_file_path = "srdf/clr_and_mockups.srdf.xacro"
+    model_env = LaunchConfiguration("model_env")
 
 
     description_full_path = os.path.join(get_package_share_directory(description_package), "urdf", description_file)
@@ -123,6 +95,57 @@ def generate_launch_description():
         ],
     )
 
-    nodes_to_start = [move_group_node, rviz_node]
+    return [move_group_node, rviz_node]
 
-    return LaunchDescription(declared_arguments + nodes_to_start)
+
+
+def generate_launch_description():
+
+    declared_arguments = []
+
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_fake_hardware",
+            default_value="false",
+            description="Start robot with fake hardware mirroring command to its states.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "tf_prefix",
+            default_value='""',
+            description="tf_prefix of the joint names, useful for \
+        multi-robot setup. If changed, also joint names in the controllers' configuration \
+        have to be updated.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "launch_moveit",
+            default_value="true",
+            description="Launch moveit?",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "launch_rviz",
+            default_value="true",
+            description="Launch rviz?",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_sim_time",
+            default_value="false",
+            description="If the robot is running in simulation, use the published clock",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "model_env",
+            default_value="false",
+            description="Use full iMETRO environment + robot description and publish mockup joint states.",
+        )
+    )
+
+    return LaunchDescription(declared_arguments + [OpaqueFunction(function=launch_setup)])
