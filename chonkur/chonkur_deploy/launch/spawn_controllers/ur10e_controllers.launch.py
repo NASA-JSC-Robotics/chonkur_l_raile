@@ -19,7 +19,7 @@
 
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, RegisterEventHandler
-from launch.conditions import IfCondition
+from launch.conditions import IfCondition, UnlessCondition
 from launch.event_handlers import OnProcessExit
 from launch.substitutions import (
     LaunchConfiguration,
@@ -39,21 +39,25 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "use_fake_hardware",
+            "is_sim",
             default_value="false",
-            description="Start robot with fake hardware mirroring command to its states.",
+            description="Whether or not the controllers are running in sim.",
         )
     )
     namespace = LaunchConfiguration("namespace")
-    use_fake_hardware = LaunchConfiguration("use_fake_hardware")
+    is_sim = LaunchConfiguration("is_sim")
 
     nodes = []
 
     # active controllers
-    nodes.append(spawn_controller("io_and_status_controller", namespace=namespace))
-    nodes.append(spawn_controller("speed_scaling_state_broadcaster", namespace=namespace))
     nodes.append(spawn_controller("force_torque_sensor_broadcaster", namespace=namespace))
     nodes.append(spawn_controller("joint_trajectory_controller", namespace=namespace))
+
+    # Only include the ur_controllers in non-simulated environments
+    nodes.append(
+        spawn_controller("speed_scaling_state_broadcaster", namespace=namespace, condition=UnlessCondition(is_sim))
+    )
+    nodes.append(spawn_controller("io_and_status_controller", namespace=namespace, condition=UnlessCondition(is_sim)))
 
     # inactive controllers
     nodes.append(spawn_controller("scaled_joint_trajectory_controller", inactive=True, namespace=namespace))
@@ -61,9 +65,7 @@ def generate_launch_description():
     nodes.append(spawn_controller("forward_position_controller", inactive=True, namespace=namespace))
     nodes.append(spawn_controller("freedrive_mode_controller", inactive=True, namespace=namespace))
     nodes.append(
-        spawn_controller(
-            "faked_forces_controller", inactive=True, namespace=namespace, condition=IfCondition(use_fake_hardware)
-        )
+        spawn_controller("faked_forces_controller", inactive=True, namespace=namespace, condition=IfCondition(is_sim))
     )
 
     # We always load the admittance controllers in an inactive state
