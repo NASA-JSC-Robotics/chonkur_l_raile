@@ -1,265 +1,36 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://wiki.ros.org/xacro" name="clr">
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="imetro_env">
 
-  <xacro:arg name="name" default=""/>
   <xacro:arg name="tf_prefix" default="" />
-  <xacro:arg name="prefix" default="$(arg tf_prefix)"/>
   <xacro:arg name="use_fake_hardware" default="false" />
   <xacro:arg name="headless_mode" default="false" />
-  <xacro:arg name="com_port_hande" default="/dev/robotiq" />
-  <xacro:arg name="ewellix_com_port" default="/dev/ewellix" />
-  <xacro:arg name="finger_xacro" default="fngr_v2_m" />
+  <xacro:arg name="finger_xacro" default="fngr_v6" />
+  <xacro:arg name="generate_ros2_control_tag" default="true" />
+  <xacro:arg name="clr" default="true" />
+  <xacro:arg name="shelf" default="false"/>
+  <xacro:arg name="ceiling_prop" default="false"/>
+  <xacro:arg name="hatch_4040" default="false"/>
+  <xacro:arg name="express_rack" default="true"/>
+  <xacro:arg name="hatch_4060" default="true"/>
+  <xacro:arg name="second_trainer" default="false"/>
 
-  <xacro:include filename="$(find clr_description)/urdf/clr_macro.xacro"/>
-  <xacro:include filename="$(find clr_imetro_environments)/urdf/colors.xacro"/>
-  <xacro:include filename="$(find clr_imetro_environments)/urdf/long_bench.xacro"/>
-  <xacro:include filename="$(find clr_imetro_environments)/urdf/express_rack.xacro"/>
-  <xacro:include filename="$(find hatch_accessories)/urdf/hatch_frame.xacro"/>
-  <xacro:include filename="$(find trainer)/urdf/trainer_frame.xacro"/>
-
-  <xacro:property name="shelf" default="false"/>
-  <xacro:property name="ceiling_prop" value="false"/>
-  <xacro:property name="hatch_4040" default="false"/>
-  <xacro:property name="express_rack" default="true"/>
-  <xacro:property name="hatch_4060" default="true"/>
-  <xacro:property name="second_trainer" value="false"/>
+  <xacro:include filename="$(find clr_imetro_environments)/urdf/clr_trainer_multi_hatch_macro.xacro"/>
 
   <link name="world" />
 
-  <!-- Load the 4040 hatch-->
-  <xacro:if value="${hatch_4040}">
-    <!-- Hatch frame-->
-    <xacro:hatch_frame name="$(arg name)" prefix="smol/" parent="world">
-      <origin xyz="${-0.04248125 + 0.014} ${1.25 + 0.58 + 0.016} 0.0" rpy="0 0 4.7112"/>
-    </xacro:hatch_frame>
-
-    <xacro:include filename="$(find hatch_4040)/urdf/hatch_4040.xacro"/>
-    <xacro:hatch_4040 name="$(arg name)" prefix="smol/" parent="smol/hatch_frame">
-      <origin xyz="0.678 0.06 ${0.657 + 0.017 - 0.013}" rpy="0 0 0"/>
-    </xacro:hatch_4040>
-  </xacro:if>
-
-  <!-- Load the express rack -->
-  <xacro:if value="${express_rack}">
-    <xacro:express_rack name="express_rack" prefix="" parent="world">
-      <origin xyz="0.508 1.1678 0.98425" rpy="1.5707963 0 0"/>
-    </xacro:express_rack>
-
-    <xacro:include filename="$(find merlin_mockup_description)/urdf/merlin_mockup.xacro"/>
-    <xacro:merlin_mockup prefix="" parent="express_rack">
-      <origin xyz="${-9*0.0254} 0.083 0" rpy="1.5707963 0 3.1415927"/>
-    </xacro:merlin_mockup>
-  </xacro:if>
-
-  <!-- Load the 4060 hatch-->
-  <xacro:if value="${hatch_4060}">
-    <!--TODO which handles are mounted?-->
-
-    <!-- Localization links/joints -->
-
-    <joint name="lorge/hatch_localization_x_joint" type="prismatic">
-      <axis xyz="1 0 0"/>
-      <limit effort="10.0" lower="-0.02" upper="0.02" velocity="0.5"/> <!-- -2cm to +2cm -->
-      <parent link="world"/>
-      <child link="lorge/hatch_localization_x"/>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-    </joint>
-
-    <link name="lorge/hatch_localization_x"/>
-
-    <joint name="lorge/hatch_localization_y_joint" type="prismatic">
-      <axis xyz="0 1 0"/>
-      <limit effort="10.0" lower="-0.02" upper="0.02" velocity="0.5"/> <!-- -2cm to +2cm -->
-      <parent link="lorge/hatch_localization_x"/>
-      <child link="lorge/hatch_localization_y"/>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-    </joint>
-
-    <link name="lorge/hatch_localization_y"/>
-
-    <!-- End Localization links/joints -->
-
-    <!-- Hatch frame-->
-    <xacro:hatch_frame name="$(arg name)" prefix="lorge/" parent="lorge/hatch_localization_y">
-      <origin xyz="${1.36508 + 0.012 + 0.005 + 0.02} ${-0.814983 - 0.012 + 0.025} ${0.0 - 0.013 + 0.011}" rpy="0 0 0"/>
-    </xacro:hatch_frame>
-
-    <xacro:property name="external_handle_1" default="true"/>
-    <xacro:property name="external_handle_2" default="true"/>
-    <xacro:property name="external_handle_3" default="true"/>
-    <xacro:property name="internal_handle_1" default="false"/>
-    <xacro:property name="internal_handle_2" default="true"/>
-    <xacro:include filename="$(find hatch_4060)/urdf/hatch_4060.xacro"/>
-    <xacro:hatch_4060 name="$(arg name)" prefix="lorge/" parent="lorge/hatch_frame"
-      external_handle_1="${external_handle_1}" external_handle_2="${external_handle_2}" external_handle_3="${external_handle_3}"
-      internal_handle_1="${internal_handle_1}" internal_handle_2="${internal_handle_2}">
-      <!-- <origin xyz="${0.678 + 0.012} 0.057 ${0.716 - 0.013}" rpy="0 0 0"/> -->
-      <origin xyz="0.678 0.057 0.716" rpy="0 0 0"/>
-    </xacro:hatch_4060>
-  </xacro:if>
-
-  <!-- Trainer -->
-
-  <!-- Localization links/joints -->
-
-  <joint name="trainer_localization_x_joint" type="prismatic">
-    <axis xyz="1 0 0"/>
-    <limit effort="10.0" lower="-0.02" upper="0.02" velocity="0.5"/> <!-- -2cm to +2cm -->
-    <parent link="world"/>
-    <child link="trainer_localization_x"/>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-  </joint>
-
-  <link name="trainer_localization_x"/>
-
-  <joint name="trainer_localization_y_joint" type="prismatic">
-    <axis xyz="0 1 0"/>
-    <limit effort="10.0" lower="-0.02" upper="0.02" velocity="0.5"/> <!-- -2cm to +2cm -->
-    <parent link="trainer_localization_x"/>
-    <child link="trainer_localization_y"/>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-  </joint>
-
-  <link name="trainer_localization_y"/>
-
-  <!-- End Localization links/joints -->
-
-  <xacro:trainer_frame name="$(arg name)" prefix="$(arg prefix)" parent="trainer_localization_y">
-    <origin xyz="${-0.9 - 1.2192 + 0.02 } ${1.8596 + 0.58 - 0.005} 0.0" rpy="0 0 4.7112"/>
-  </xacro:trainer_frame>
-
-  <xacro:include filename="$(find trainer)/urdf/bench_seat.xacro"/>
-  <xacro:bench_seat name="$(arg name)" prefix="$(arg prefix)" parent="trainer_frame">
-    <origin xyz="1.261 0 0.4769" rpy="0 0 0"/>
-  </xacro:bench_seat>
-
-  <xacro:if value="${ceiling_prop}">
-    <xacro:include filename="$(find trainer)/urdf/ceiling.xacro"/>
-    <xacro:ceiling name="$(arg name)" prefix="$(arg prefix)" parent="trainer_frame">
-      <origin xyz="0.0 0.0 1.6002" rpy="0 0 0"/>
-    </xacro:ceiling>
-  </xacro:if>
-
-  <xacro:include filename="$(find trainer)/urdf/trainer_front_left_face.xacro"/>
-  <xacro:trainer_front_left_face name="$(arg name)" prefix="$(arg prefix)" parent="trainer_frame" shelf="${shelf}">
-    <origin xyz="1.25 0.08 0.457" rpy="0 0 0"/>
-  </xacro:trainer_front_left_face>
-
-  <xacro:include filename="$(find trainer)/urdf/trainer_front_right_face.xacro"/>
-  <xacro:trainer_front_right_face name="$(arg name)" prefix="$(arg prefix)" parent="trainer_frame">
-    <origin xyz="1.25 0.465 0.457" rpy="0 0 0"/>
-  </xacro:trainer_front_right_face>
-
-  <xacro:include filename="$(find trainer)/urdf/trainer_side.xacro"/>
-  <xacro:side_face name="$(arg name)" prefix="$(arg prefix)" parent="trainer_frame">
-    <origin xyz="0.812 0.887 0.04" rpy="0 0 0"/>
-  </xacro:side_face>
-
-  <xacro:if value="${second_trainer}">
-    <xacro:trainer_frame name="$(arg name)" prefix="second_trainer/" parent="world">
-      <origin xyz="${-0.9 - 1.2192 + 0.02 + 1.1} ${1.8596 + 0.58} 0.0" rpy="0 0 4.7112"/>
-    </xacro:trainer_frame>
-    <xacro:bench_seat name="$(arg name)" prefix="second_trainer/" parent="second_trainer/trainer_frame">
-      <origin xyz="1.261 0 0.4769" rpy="0 0 0"/>
-    </xacro:bench_seat>
-    <xacro:trainer_front_left_face name="$(arg name)" prefix="second_trainer/" parent="second_trainer/trainer_frame" shelf="${shelf}">
-      <origin xyz="1.25 0.08 0.457" rpy="0 0 0"/>
-    </xacro:trainer_front_left_face>
-    <xacro:trainer_front_right_face name="$(arg name)" prefix="second_trainer/" parent="second_trainer/trainer_frame">
-      <origin xyz="1.25 0.465 0.457" rpy="0 0 0"/>
-    </xacro:trainer_front_right_face>
-    <xacro:side_face name="$(arg name)" prefix="second_trainer/" parent="second_trainer/trainer_frame">
-      <origin xyz="0.812 0.887 0.04" rpy="0 0 0"/>
-    </xacro:side_face>
-  </xacro:if>
-
-  <!-- long bench
-  <xacro:include filename="$(find clr_imetro_environments)/urdf/long_bench.xacro"/>
-  <xacro:long_bench_seat name="$(arg name)" prefix="long_bench/" parent="world">
-    <origin xyz="${-0.9 - 1.2192 + 0.02 + 2.1} 1.175 0.475" rpy="0 0 4.7112"/>
-  </xacro:long_bench_seat> -->
-
-  <!--This is for when there is a bench at the level of the bottom of the hatch opening.-->
-  <joint name="hatch_level_bench_joint" type="fixed">
-    <parent link="bench_back"/>
-    <child link="hatch_level_bench"/>
-    <origin xyz="0.706 0.895 0.0" rpy="0 0 0"/>
-  </joint>
-
-  <link name="hatch_level_bench">
-    <visual>
-      <origin xyz="${-1.2192/2} ${1.193/2} ${0.0527/2}" rpy="0 0 0"/>
-      <geometry>
-        <box size="1.2192 1.193 0.0527"/>
-      </geometry>
-      <material name="gray"/>
-    </visual>
-    <collision>
-      <origin xyz="${-1.2192/2} ${1.193/2} ${0.0527/2}" rpy="0 0 0"/>
-      <geometry>
-        <box size="1.2192 1.193 0.0527"/>
-      </geometry>
-      <material name="gray"/>
-    </collision>
-  </link>
-
-  <!-- Plane -->
-  <link name="ground_plane">
-    <visual>
-        <geometry>
-            <box size="20 20 0.01"/>
-            <origin rpy="0 0 0" xyz="0 0 0"/>
-        </geometry>
-        <material name="Grey">
-          <color rgba="1.0 1.0 1.0 0.075"/>
-        </material>
-    </visual>
-    <collision>
-          <geometry>
-            <box size="20 20 0.01"/>
-            <origin rpy="0 0 0" xyz="0 0 0"/>
-        </geometry>
-    </collision>
-    <inertial>
-        <mass value="0"/>
-        <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
-    </inertial>
-  </link>
-
-
-  <joint name="ground_joint" type="fixed">
-    <parent link="$(arg tf_prefix)world"/>
-    <child link="ground_plane"/>
-    <origin xyz="0 0 -0.005" rpy="0 0 0"/>
-  </joint>
-
-  <!-- Plane -->
-  <link name="room_ceiling">
-      <visual>
-          <geometry>
-              <box size="20 20 0.01"/>
-              <origin rpy="0 0 0" xyz="0 0 0"/>
-          </geometry>
-          <material name="Grey">
-            <color rgba="1.0 1.0 1.0 0.075"/>
-          </material>
-      </visual>
-      <collision>
-            <geometry>
-              <box size="20 20 0.01"/>
-              <origin rpy="0 0 0" xyz="0 0 0"/>
-          </geometry>
-      </collision>
-      <inertial>
-          <mass value="0"/>
-          <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
-      </inertial>
-  </link>
-
-  <joint name="room_ceiling_joint" type="fixed">
-    <parent link="$(arg tf_prefix)world"/>
-    <child link="room_ceiling"/>
-    <origin xyz="0 0 2.75" rpy="0 0 0"/>
-  </joint>
+  <xacro:imetro_env
+    tf_prefix="$(arg tf_prefix)"
+    use_fake_hardware="$(arg use_fake_hardware)"
+    headless_mode="$(arg headless_mode)"
+    finger_xacro="$(arg finger_xacro)"
+    generate_ros2_control_tag="$(arg generate_ros2_control_tag)"
+    clr="$(arg clr)"
+    shelf="$(arg shelf)"
+    ceiling_prop="$(arg ceiling_prop)"
+    hatch_4040="$(arg hatch_4040)"
+    express_rack="$(arg express_rack)"
+    hatch_4060="$(arg hatch_4060)"
+    second_trainer="$(arg second_trainer)"
+  />
 
 </robot>
