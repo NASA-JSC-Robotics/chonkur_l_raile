@@ -7283,7 +7283,5 @@
         <disable_collisions link1="trainer_top" link2="velcro" reason="Never"/>
         <disable_collisions link1="trainer_top" link2="wood_frame" reason="Never"/>
         <disable_collisions link1="velcro" link2="wood_frame" reason="Adjacent"/>
-
     </xacro:macro>
-  
 </robot>

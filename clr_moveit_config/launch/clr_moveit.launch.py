@@ -50,7 +50,6 @@ def launch_setup(context, *args, **kwargs):
     use_sim_time = {"use_sim_time": LaunchConfiguration("use_sim_time")}
     model_env = LaunchConfiguration("model_env")
 
-
     description_full_path = os.path.join(get_package_share_directory(description_package), "urdf", description_file)
     moveit_config_package = "clr_moveit_config"
 
@@ -96,8 +95,6 @@ def launch_setup(context, *args, **kwargs):
     )
 
     return [move_group_node, rviz_node]
-
-
 
 def generate_launch_description():
 
