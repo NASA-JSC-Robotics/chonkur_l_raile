@@ -79,9 +79,7 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "model_env",
-            default_value="false",
-            description="Use full iMETRO environment + robot description."
+            "model_env", default_value="false", description="Use full iMETRO environment + robot description."
         )
     )
     declared_arguments.append(
@@ -123,7 +121,7 @@ def generate_launch_description():
             use_fake_hardware,
             " ",
             "model_env:=",
-            model_env
+            model_env,
         ]
     )
 
