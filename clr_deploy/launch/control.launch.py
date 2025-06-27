@@ -79,6 +79,14 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "model_env",
+            default_value="false",
+            description="If using a URDF from the clr_imetro_environments package, "
+            "specifies whether to include the iMETRO environment in CLR's robot description.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "use_sim_time",
             default_value="false",
             description="If the robot is running in simulation, use the published clock",
@@ -97,11 +105,13 @@ def generate_launch_description():
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     robot_description_package = LaunchConfiguration("robot_description_package")
     robot_description_file = LaunchConfiguration("robot_description_file")
+    model_env = LaunchConfiguration("model_env")
     use_sim_time = LaunchConfiguration("use_sim_time")
     is_sim = LaunchConfiguration("is_sim")
 
     # Main robot description for CLR. Additional arguments are available in the xacro, but we only
-    # override a subset of those that change regularly depending on deployment.
+    # override a subset of those that change regularly depending on deployment. Arguments here that
+    # may not be applicable to the specified xacro, such as model_env, are ignored.
     robot_description_content = Command(
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
@@ -114,6 +124,8 @@ def generate_launch_description():
             "use_fake_hardware:=",
             use_fake_hardware,
             " ",
+            "model_env:=",
+            model_env,
         ]
     )
 

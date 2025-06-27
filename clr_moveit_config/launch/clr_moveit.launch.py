@@ -33,10 +33,6 @@ def launch_setup(context, *args, **kwargs):
 
     model_env = LaunchConfiguration("model_env")
 
-    global description_package
-    global description_file
-    global moveit_config_file_path
-
     if model_env.perform(context) == "true":
         description_package = "clr_imetro_environments"
         description_file = "clr_trainer_multi_hatch.urdf.xacro"
