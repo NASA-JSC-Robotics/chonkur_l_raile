@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="imetro_env">
+
+  <xacro:arg name="tf_prefix" default="" />
+  <xacro:arg name="use_fake_hardware" default="false" />
+  <xacro:arg name="headless_mode" default="false" />
+  <xacro:arg name="finger_xacro" default="fngr_v6" />
+  <xacro:arg name="generate_ros2_control_tag" default="true" />
+  <xacro:arg name="clr" default="true" />
+  <xacro:arg name="shelf" default="false"/>
+  <xacro:arg name="ceiling_prop" default="false"/>
+  <xacro:arg name="hatch_4040" default="false"/>
+  <xacro:arg name="express_rack" default="true"/>
+  <xacro:arg name="hatch_4060" default="true"/>
+  <xacro:arg name="second_trainer" default="false"/>
+
+  <xacro:include filename="$(find clr_imetro_environments)/urdf/clr_trainer_multi_hatch_macro.xacro"/>
+
+  <link name="world" />
+
+  <xacro:imetro_env
+    tf_prefix="$(arg tf_prefix)"
+    use_fake_hardware="$(arg use_fake_hardware)"
+    headless_mode="$(arg headless_mode)"
+    finger_xacro="$(arg finger_xacro)"
+    generate_ros2_control_tag="$(arg generate_ros2_control_tag)"
+    clr="$(arg clr)"
+    shelf="$(arg shelf)"
+    ceiling_prop="$(arg ceiling_prop)"
+    hatch_4040="$(arg hatch_4040)"
+    express_rack="$(arg express_rack)"
+    hatch_4060="$(arg hatch_4060)"
+    second_trainer="$(arg second_trainer)"
+  />
+
+</robot>
