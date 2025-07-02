@@ -116,7 +116,6 @@ def generate_launch_description():
     hatch_4060 = LaunchConfiguration("hatch_4060")
     second_trainer = LaunchConfiguration("second_trainer")
 
-
     robot_description_content = Command(
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
