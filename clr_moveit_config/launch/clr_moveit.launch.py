@@ -109,8 +109,8 @@ def generate_launch_description():
             "tf_prefix",
             default_value='""',
             description="tf_prefix of the joint names, useful for \
-        multi-robot setup. If changed, also joint names in the controllers' configuration \
-        have to be updated.",
+                multi-robot setup. If changed, also joint names in the controllers' configuration \
+                have to be updated.",
         )
     )
     declared_arguments.append(
@@ -138,7 +138,8 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "sim_env",
             default_value="false",
-            description="Represent the iMETRO simulated mockup environment in the robot description and publish mockup joint states.",
+            description="Represent the iMETRO simulated mockup environment in \
+                the robot description and publish mockup joint states.",
         )
     )
 
