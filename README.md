@@ -13,10 +13,13 @@ The hardware includes the [ChonkUR robot](chonkur/README.md) mounted on an Ewell
 The project includes a kinematic simulation for the robot.
 Launching the controllers and hardware interface is done using the provided launch files.
 
-To launch the Kinematic simulation:
+To launch the kinematic simulation:
 
 ```bash
 ros2 launch clr_deploy clr_sim.launch.py
+
+# Or to include the environment mockups
+ros2 launch clr_deploy clr_sim.launch.py model_env:=true
 ```
 
 For hardware we run the UR pendantless, which is a two part launch process:
@@ -34,4 +37,7 @@ A MoveIt RViz widget can then be launched with:
 
 ```bash
 ros2 launch clr_moveit_config clr_moveit.launch.py
+
+# Or to include the environment mockups
+ros2 launch clr_moveit_config clr_moveit.launch.py model_env:=true
 ```
