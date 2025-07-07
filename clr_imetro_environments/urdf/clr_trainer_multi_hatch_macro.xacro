@@ -13,6 +13,7 @@
     express_rack:=true
     hatch_4060:=true
     second_trainer:=false
+    add_localization_joints:=false
   ">
 
     <!-- Include xacros -->
@@ -64,31 +65,39 @@
       <!--TODO which handles are mounted?-->
 
       <!-- Localization links/joints -->
+      <xacro:if value="${add_localization_joints}">
 
-      <joint name="lorge/hatch_localization_x_joint" type="prismatic">
-        <axis xyz="1 0 0"/>
-        <limit effort="10.0" lower="-0.02" upper="0.02" velocity="0.5"/> <!-- -2cm to +2cm -->
-        <parent link="world"/>
-        <child link="lorge/hatch_localization_x"/>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-      </joint>
+        <joint name="lorge/hatch_localization_x_joint" type="prismatic">
+          <axis xyz="1 0 0"/>
+          <limit effort="10.0" lower="-0.02" upper="0.02" velocity="0.5"/> <!-- -2cm to +2cm -->
+          <parent link="world"/>
+          <child link="lorge/hatch_localization_x"/>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+        </joint>
 
-      <link name="lorge/hatch_localization_x"/>
+        <link name="lorge/hatch_localization_x"/>
 
-      <joint name="lorge/hatch_localization_y_joint" type="prismatic">
-        <axis xyz="0 1 0"/>
-        <limit effort="10.0" lower="-0.02" upper="0.02" velocity="0.5"/> <!-- -2cm to +2cm -->
-        <parent link="lorge/hatch_localization_x"/>
-        <child link="lorge/hatch_localization_y"/>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-      </joint>
+        <joint name="lorge/hatch_localization_y_joint" type="prismatic">
+          <axis xyz="0 1 0"/>
+          <limit effort="10.0" lower="-0.02" upper="0.02" velocity="0.5"/> <!-- -2cm to +2cm -->
+          <parent link="lorge/hatch_localization_x"/>
+          <child link="lorge/hatch_localization_y"/>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+        </joint>
 
-      <link name="lorge/hatch_localization_y"/>
+        <link name="lorge/hatch_localization_y"/>
 
+        <!-- set large hatch parent to be localization frame -->
+        <xacro:property name="lorge_hatch_parent_frame" value="lorge/hatch_localization_y"/>
+      </xacro:if>
+      <xacro:unless value="${add_localization_joints}">
+        <!-- set large hatch parent to be world frame -->
+        <xacro:property name="lorge_hatch_parent_frame" value="world"/>
+      </xacro:unless>
       <!-- End Localization links/joints -->
 
       <!-- Hatch frame-->
-      <xacro:hatch_frame prefix="lorge/" parent="lorge/hatch_localization_y">
+      <xacro:hatch_frame prefix="lorge/" parent="${lorge_hatch_parent_frame}">
         <origin xyz="${1.36508 + 0.012 + 0.005 + 0.02} ${-0.814983 - 0.012 + 0.025} ${0.0 - 0.013 + 0.011}" rpy="0 0 0"/>
       </xacro:hatch_frame>
 
@@ -109,30 +118,38 @@
     <!-- Trainer -->
 
     <!-- Localization links/joints -->
+    <xacro:if value="${add_localization_joints}">
+      <joint name="trainer_localization_x_joint" type="prismatic">
+        <axis xyz="1 0 0"/>
+        <limit effort="10.0" lower="-0.02" upper="0.02" velocity="0.5"/> <!-- -2cm to +2cm -->
+        <parent link="world"/>
+        <child link="trainer_localization_x"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+      </joint>
 
-    <joint name="trainer_localization_x_joint" type="prismatic">
-      <axis xyz="1 0 0"/>
-      <limit effort="10.0" lower="-0.02" upper="0.02" velocity="0.5"/> <!-- -2cm to +2cm -->
-      <parent link="world"/>
-      <child link="trainer_localization_x"/>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-    </joint>
+      <link name="trainer_localization_x"/>
 
-    <link name="trainer_localization_x"/>
+      <joint name="trainer_localization_y_joint" type="prismatic">
+        <axis xyz="0 1 0"/>
+        <limit effort="10.0" lower="-0.02" upper="0.02" velocity="0.5"/> <!-- -2cm to +2cm -->
+        <parent link="trainer_localization_x"/>
+        <child link="trainer_localization_y"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+      </joint>
 
-    <joint name="trainer_localization_y_joint" type="prismatic">
-      <axis xyz="0 1 0"/>
-      <limit effort="10.0" lower="-0.02" upper="0.02" velocity="0.5"/> <!-- -2cm to +2cm -->
-      <parent link="trainer_localization_x"/>
-      <child link="trainer_localization_y"/>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-    </joint>
+      <link name="trainer_localization_y"/>
 
-    <link name="trainer_localization_y"/>
+      <!-- set trainer parent to be localization frame -->
+      <xacro:property name="trainer_parent_frame" value="trainer_localization_y"/>
 
+    </xacro:if>
+    <xacro:unless value="${add_localization_joints}">
+      <!-- set trainer parent to be world frame -->
+      <xacro:property name="trainer_parent_frame" value="world"/>
+    </xacro:unless>
     <!-- End Localization links/joints -->
 
-    <xacro:trainer_frame prefix="${tf_prefix}" parent="trainer_localization_y">
+    <xacro:trainer_frame prefix="${tf_prefix}" parent="${trainer_parent_frame}">
       <origin xyz="${-0.9 - 1.2192 + 0.02 } ${1.8596 + 0.58 - 0.005} 0.0" rpy="0 0 4.7112"/>
     </xacro:trainer_frame>
 
@@ -214,18 +231,18 @@
     <!-- Plane -->
     <link name="${tf_prefix}ground_plane">
       <visual>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
           <geometry>
               <box size="20 20 0.01"/>
-              <origin rpy="0 0 0" xyz="0 0 0"/>
           </geometry>
           <material name="Grey">
             <color rgba="1.0 1.0 1.0 0.075"/>
           </material>
       </visual>
       <collision>
-            <geometry>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+          <geometry>
               <box size="20 20 0.01"/>
-              <origin rpy="0 0 0" xyz="0 0 0"/>
           </geometry>
       </collision>
       <inertial>
@@ -244,18 +261,18 @@
     <!-- Plane -->
     <link name="${tf_prefix}room_ceiling">
         <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
                 <box size="20 20 0.01"/>
-                <origin rpy="0 0 0" xyz="0 0 0"/>
             </geometry>
             <material name="Grey">
               <color rgba="1.0 1.0 1.0 0.075"/>
             </material>
         </visual>
         <collision>
-              <geometry>
-                <box size="20 20 0.01"/>
-                <origin rpy="0 0 0" xyz="0 0 0"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+              <box size="20 20 0.01"/>
             </geometry>
         </collision>
         <inertial>

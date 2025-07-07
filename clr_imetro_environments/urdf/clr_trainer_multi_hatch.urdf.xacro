@@ -13,6 +13,7 @@
   <xacro:arg name="express_rack" default="true"/>
   <xacro:arg name="hatch_4060" default="true"/>
   <xacro:arg name="second_trainer" default="false"/>
+  <xacro:arg name="add_localization_joints" default="false"/>
 
   <xacro:include filename="$(find clr_imetro_environments)/urdf/clr_trainer_multi_hatch_macro.xacro"/>
 
@@ -31,6 +32,7 @@
     express_rack="$(arg express_rack)"
     hatch_4060="$(arg hatch_4060)"
     second_trainer="$(arg second_trainer)"
+    add_localization_joints="$(arg add_localization_joints)"
   />
 
 </robot>
