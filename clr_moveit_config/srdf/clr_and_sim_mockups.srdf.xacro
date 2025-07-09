@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot xmlns:xacro="http://wiki.ros.org/xacro" name="clr">
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="imetro_env">
 
   <xacro:include filename="$(find clr_moveit_config)/srdf/clr_macro.srdf.xacro"/>
-  <xacro:include filename="$(find clr_moveit_config)/srdf/mockups_macro.srdf.xacro"/>
+  <xacro:include filename="$(find clr_moveit_config)/srdf/sim_env_macro.srdf.xacro"/>
 
   <xacro:clr/>
   <xacro:mockups/>

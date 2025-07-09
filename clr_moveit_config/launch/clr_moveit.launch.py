@@ -31,12 +31,12 @@ import os
 
 def launch_setup(context, *args, **kwargs):
 
-    model_env = LaunchConfiguration("model_env")
+    sim_env = LaunchConfiguration("sim_env")
 
-    if model_env.perform(context) == "true":
+    if sim_env.perform(context) == "true":
         description_package = "clr_imetro_environments"
         description_file = "clr_trainer_multi_hatch.urdf.xacro"
-        moveit_config_file_path = "srdf/clr_and_mockups.srdf.xacro"
+        moveit_config_file_path = "srdf/clr_and_sim_mockups.srdf.xacro"
     else:
         description_package = "clr_description"
         description_file = "clr.urdf.xacro"
@@ -45,7 +45,6 @@ def launch_setup(context, *args, **kwargs):
     launch_moveit = LaunchConfiguration("launch_moveit")
     launch_rviz = LaunchConfiguration("launch_rviz")
     use_sim_time = {"use_sim_time": LaunchConfiguration("use_sim_time")}
-    model_env = LaunchConfiguration("model_env")
 
     description_full_path = os.path.join(get_package_share_directory(description_package), "urdf", description_file)
     moveit_config_package = "clr_moveit_config"
@@ -110,8 +109,8 @@ def generate_launch_description():
             "tf_prefix",
             default_value='""',
             description="tf_prefix of the joint names, useful for \
-        multi-robot setup. If changed, also joint names in the controllers' configuration \
-        have to be updated.",
+                multi-robot setup. If changed, also joint names in the controllers' configuration \
+                have to be updated.",
         )
     )
     declared_arguments.append(
@@ -137,9 +136,10 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "model_env",
+            "sim_env",
             default_value="false",
-            description="Use full iMETRO environment + robot description and publish mockup joint states.",
+            description="Represent the iMETRO simulated mockup environment in \
+                the robot description and publish mockup joint states.",
         )
     )
 
