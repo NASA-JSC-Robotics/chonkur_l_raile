@@ -48,6 +48,10 @@
         <disable_collisions link1="bench_back" link2="front_right_face" reason="Adjacent"/>
         <disable_collisions link1="bench_back" link2="ground_plane" reason="Adjacent"/>
         <disable_collisions link1="bench_back" link2="hatch_level_bench" reason="Adjacent"/>
+        <disable_collisions link1="bench_back" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="bench_back" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="bench_back" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="bench_back" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="bench_back" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="bench_back" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="bench_back" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -73,6 +77,7 @@
         <disable_collisions link1="bench_back" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="bench_back" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="bench_back" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="bench_back" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="bench_back" link2="room_ceiling" reason="Adjacent"/>
         <disable_collisions link1="bench_back" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="bench_back" link2="round_latch_housing" reason="Never"/>
@@ -111,6 +116,10 @@
         <disable_collisions link1="bench_front" link2="front_right_face" reason="Never"/>
         <disable_collisions link1="bench_front" link2="ground_plane" reason="Never"/>
         <disable_collisions link1="bench_front" link2="hatch_level_bench" reason="Never"/>
+        <disable_collisions link1="bench_front" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="bench_front" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="bench_front" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="bench_front" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="bench_front" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="bench_front" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="bench_front" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -136,6 +145,7 @@
         <disable_collisions link1="bench_front" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="bench_front" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="bench_front" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="bench_front" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="bench_front" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="bench_front" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="bench_front" link2="round_latch_housing" reason="Never"/>
@@ -173,6 +183,10 @@
         <disable_collisions link1="bench_left" link2="front_right_face" reason="Never"/>
         <disable_collisions link1="bench_left" link2="ground_plane" reason="Never"/>
         <disable_collisions link1="bench_left" link2="hatch_level_bench" reason="Never"/>
+        <disable_collisions link1="bench_left" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="bench_left" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="bench_left" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="bench_left" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="bench_left" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="bench_left" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="bench_left" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -198,6 +212,7 @@
         <disable_collisions link1="bench_left" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="bench_left" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="bench_left" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="bench_left" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="bench_left" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="bench_left" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="bench_left" link2="round_latch_housing" reason="Never"/>
@@ -234,6 +249,10 @@
         <disable_collisions link1="bench_lid" link2="front_right_face" reason="Never"/>
         <disable_collisions link1="bench_lid" link2="ground_plane" reason="Never"/>
         <disable_collisions link1="bench_lid" link2="hatch_level_bench" reason="User"/>
+        <disable_collisions link1="bench_lid" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="bench_lid" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="bench_lid" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="bench_lid" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="bench_lid" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="bench_lid" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="bench_lid" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -259,6 +278,7 @@
         <disable_collisions link1="bench_lid" link2="push_latch_housing" reason="User"/>
         <disable_collisions link1="bench_lid" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="bench_lid" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="bench_lid" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="bench_lid" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="bench_lid" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="bench_lid" link2="round_latch_housing" reason="Never"/>
@@ -294,6 +314,10 @@
         <disable_collisions link1="bench_right" link2="front_right_face" reason="Never"/>
         <disable_collisions link1="bench_right" link2="ground_plane" reason="Never"/>
         <disable_collisions link1="bench_right" link2="hatch_level_bench" reason="Default"/>
+        <disable_collisions link1="bench_right" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="bench_right" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="bench_right" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="bench_right" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="bench_right" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="bench_right" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="bench_right" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -319,6 +343,7 @@
         <disable_collisions link1="bench_right" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="bench_right" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="bench_right" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="bench_right" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="bench_right" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="bench_right" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="bench_right" link2="round_latch_housing" reason="Never"/>
@@ -353,6 +378,10 @@
         <disable_collisions link1="cabinet_1" link2="front_right_face" reason="Adjacent"/>
         <disable_collisions link1="cabinet_1" link2="ground_plane" reason="Never"/>
         <disable_collisions link1="cabinet_1" link2="hatch_level_bench" reason="Never"/>
+        <disable_collisions link1="cabinet_1" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="cabinet_1" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="cabinet_1" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="cabinet_1" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="cabinet_1" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="cabinet_1" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="cabinet_1" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -378,6 +407,7 @@
         <disable_collisions link1="cabinet_1" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="cabinet_1" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="cabinet_1" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="cabinet_1" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="cabinet_1" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="cabinet_1" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="cabinet_1" link2="round_latch_housing" reason="Adjacent"/>
@@ -411,6 +441,10 @@
         <disable_collisions link1="cabinet_2" link2="front_right_face" reason="Adjacent"/>
         <disable_collisions link1="cabinet_2" link2="ground_plane" reason="Never"/>
         <disable_collisions link1="cabinet_2" link2="hatch_level_bench" reason="Never"/>
+        <disable_collisions link1="cabinet_2" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="cabinet_2" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="cabinet_2" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="cabinet_2" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="cabinet_2" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="cabinet_2" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="cabinet_2" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -436,6 +470,7 @@
         <disable_collisions link1="cabinet_2" link2="push_latch_housing" reason="Adjacent"/>
         <disable_collisions link1="cabinet_2" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="cabinet_2" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="cabinet_2" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="cabinet_2" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="cabinet_2" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="cabinet_2" link2="round_latch_housing" reason="Never"/>
@@ -468,6 +503,10 @@
         <disable_collisions link1="cabinet_3" link2="front_right_face" reason="Adjacent"/>
         <disable_collisions link1="cabinet_3" link2="ground_plane" reason="Never"/>
         <disable_collisions link1="cabinet_3" link2="hatch_level_bench" reason="User"/>
+        <disable_collisions link1="cabinet_3" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="cabinet_3" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="cabinet_3" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="cabinet_3" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="cabinet_3" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="cabinet_3" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="cabinet_3" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -493,6 +532,7 @@
         <disable_collisions link1="cabinet_3" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="cabinet_3" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="cabinet_3" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="cabinet_3" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="cabinet_3" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="cabinet_3" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="cabinet_3" link2="round_latch_housing" reason="Never"/>
@@ -524,6 +564,10 @@
         <disable_collisions link1="cabinet_4" link2="front_right_face" reason="Never"/>
         <disable_collisions link1="cabinet_4" link2="ground_plane" reason="Never"/>
         <disable_collisions link1="cabinet_4" link2="hatch_level_bench" reason="Never"/>
+        <disable_collisions link1="cabinet_4" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="cabinet_4" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="cabinet_4" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="cabinet_4" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="cabinet_4" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="cabinet_4" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="cabinet_4" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -549,6 +593,7 @@
         <disable_collisions link1="cabinet_4" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="cabinet_4" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="cabinet_4" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="cabinet_4" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="cabinet_4" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="cabinet_4" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="cabinet_4" link2="round_latch_housing" reason="Never"/>
@@ -579,6 +624,10 @@
         <disable_collisions link1="csm_faceplate_cover" link2="front_right_face" reason="Never"/>
         <disable_collisions link1="csm_faceplate_cover" link2="ground_plane" reason="Never"/>
         <disable_collisions link1="csm_faceplate_cover" link2="hatch_level_bench" reason="Never"/>
+        <disable_collisions link1="csm_faceplate_cover" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="csm_faceplate_cover" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="csm_faceplate_cover" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="csm_faceplate_cover" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="csm_faceplate_cover" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="csm_faceplate_cover" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="csm_faceplate_cover" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -604,6 +653,7 @@
         <disable_collisions link1="csm_faceplate_cover" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="csm_faceplate_cover" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="csm_faceplate_cover" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="csm_faceplate_cover" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="csm_faceplate_cover" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="csm_faceplate_cover" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="csm_faceplate_cover" link2="round_latch_housing" reason="Never"/>
@@ -633,6 +683,10 @@
         <disable_collisions link1="cubby_1" link2="front_right_face" reason="Never"/>
         <disable_collisions link1="cubby_1" link2="ground_plane" reason="Never"/>
         <disable_collisions link1="cubby_1" link2="hatch_level_bench" reason="Never"/>
+        <disable_collisions link1="cubby_1" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="cubby_1" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="cubby_1" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="cubby_1" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="cubby_1" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="cubby_1" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="cubby_1" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -658,6 +712,7 @@
         <disable_collisions link1="cubby_1" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="cubby_1" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="cubby_1" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="cubby_1" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="cubby_1" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="cubby_1" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="cubby_1" link2="round_latch_housing" reason="Never"/>
@@ -686,6 +741,10 @@
         <disable_collisions link1="cubby_2" link2="front_right_face" reason="Never"/>
         <disable_collisions link1="cubby_2" link2="ground_plane" reason="Never"/>
         <disable_collisions link1="cubby_2" link2="hatch_level_bench" reason="Never"/>
+        <disable_collisions link1="cubby_2" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="cubby_2" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="cubby_2" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="cubby_2" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="cubby_2" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="cubby_2" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="cubby_2" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -711,6 +770,7 @@
         <disable_collisions link1="cubby_2" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="cubby_2" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="cubby_2" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="cubby_2" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="cubby_2" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="cubby_2" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="cubby_2" link2="round_latch_housing" reason="Never"/>
@@ -738,6 +798,10 @@
         <disable_collisions link1="door" link2="front_right_face" reason="Never"/>
         <disable_collisions link1="door" link2="ground_plane" reason="Never"/>
         <disable_collisions link1="door" link2="hatch_level_bench" reason="Never"/>
+        <disable_collisions link1="door" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="door" link2="latch_housing" reason="Adjacent"/>
+        <disable_collisions link1="door" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="door" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="door" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="door" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="door" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -763,6 +827,7 @@
         <disable_collisions link1="door" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="door" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="door" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="door" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="door" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="door" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="door" link2="round_latch_housing" reason="Never"/>
@@ -789,6 +854,10 @@
         <disable_collisions link1="drawer_1_bottom" link2="front_right_face" reason="Never"/>
         <disable_collisions link1="drawer_1_bottom" link2="ground_plane" reason="Never"/>
         <disable_collisions link1="drawer_1_bottom" link2="hatch_level_bench" reason="Never"/>
+        <disable_collisions link1="drawer_1_bottom" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="drawer_1_bottom" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="drawer_1_bottom" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="drawer_1_bottom" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="drawer_1_bottom" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="drawer_1_bottom" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="drawer_1_bottom" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -814,6 +883,7 @@
         <disable_collisions link1="drawer_1_bottom" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="drawer_1_bottom" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="drawer_1_bottom" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="drawer_1_bottom" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="drawer_1_bottom" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="drawer_1_bottom" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="drawer_1_bottom" link2="round_latch_housing" reason="Never"/>
@@ -839,6 +909,10 @@
         <disable_collisions link1="drawer_1_face" link2="front_right_face" reason="Never"/>
         <disable_collisions link1="drawer_1_face" link2="ground_plane" reason="Never"/>
         <disable_collisions link1="drawer_1_face" link2="hatch_level_bench" reason="Never"/>
+        <disable_collisions link1="drawer_1_face" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="drawer_1_face" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="drawer_1_face" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="drawer_1_face" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="drawer_1_face" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="drawer_1_face" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="drawer_1_face" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -864,6 +938,7 @@
         <disable_collisions link1="drawer_1_face" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="drawer_1_face" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="drawer_1_face" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="drawer_1_face" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="drawer_1_face" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="drawer_1_face" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="drawer_1_face" link2="round_latch_housing" reason="Never"/>
@@ -888,6 +963,10 @@
         <disable_collisions link1="drawer_1_left" link2="front_right_face" reason="Never"/>
         <disable_collisions link1="drawer_1_left" link2="ground_plane" reason="Never"/>
         <disable_collisions link1="drawer_1_left" link2="hatch_level_bench" reason="Never"/>
+        <disable_collisions link1="drawer_1_left" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="drawer_1_left" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="drawer_1_left" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="drawer_1_left" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="drawer_1_left" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="drawer_1_left" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="drawer_1_left" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -913,6 +992,7 @@
         <disable_collisions link1="drawer_1_left" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="drawer_1_left" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="drawer_1_left" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="drawer_1_left" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="drawer_1_left" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="drawer_1_left" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="drawer_1_left" link2="round_latch_housing" reason="Never"/>
@@ -936,6 +1016,10 @@
         <disable_collisions link1="drawer_1_right" link2="front_right_face" reason="Never"/>
         <disable_collisions link1="drawer_1_right" link2="ground_plane" reason="Never"/>
         <disable_collisions link1="drawer_1_right" link2="hatch_level_bench" reason="Never"/>
+        <disable_collisions link1="drawer_1_right" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="drawer_1_right" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="drawer_1_right" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="drawer_1_right" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="drawer_1_right" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="drawer_1_right" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="drawer_1_right" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -961,6 +1045,7 @@
         <disable_collisions link1="drawer_1_right" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="drawer_1_right" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="drawer_1_right" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="drawer_1_right" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="drawer_1_right" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="drawer_1_right" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="drawer_1_right" link2="round_latch_housing" reason="Never"/>
@@ -983,6 +1068,10 @@
         <disable_collisions link1="drawer_2_bottom" link2="front_right_face" reason="Never"/>
         <disable_collisions link1="drawer_2_bottom" link2="ground_plane" reason="Never"/>
         <disable_collisions link1="drawer_2_bottom" link2="hatch_level_bench" reason="Never"/>
+        <disable_collisions link1="drawer_2_bottom" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="drawer_2_bottom" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="drawer_2_bottom" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="drawer_2_bottom" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="drawer_2_bottom" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="drawer_2_bottom" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="drawer_2_bottom" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -1008,6 +1097,7 @@
         <disable_collisions link1="drawer_2_bottom" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="drawer_2_bottom" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="drawer_2_bottom" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="drawer_2_bottom" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="drawer_2_bottom" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="drawer_2_bottom" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="drawer_2_bottom" link2="round_latch_housing" reason="Never"/>
@@ -1029,6 +1119,10 @@
         <disable_collisions link1="drawer_2_face" link2="front_right_face" reason="Never"/>
         <disable_collisions link1="drawer_2_face" link2="ground_plane" reason="Never"/>
         <disable_collisions link1="drawer_2_face" link2="hatch_level_bench" reason="Never"/>
+        <disable_collisions link1="drawer_2_face" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="drawer_2_face" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="drawer_2_face" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="drawer_2_face" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="drawer_2_face" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="drawer_2_face" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="drawer_2_face" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -1054,6 +1148,7 @@
         <disable_collisions link1="drawer_2_face" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="drawer_2_face" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="drawer_2_face" link2="recessed_latch_housing" reason="Adjacent"/>
+        <disable_collisions link1="drawer_2_face" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="drawer_2_face" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="drawer_2_face" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="drawer_2_face" link2="round_latch_housing" reason="Never"/>
@@ -1074,6 +1169,10 @@
         <disable_collisions link1="drawer_2_left" link2="front_right_face" reason="Never"/>
         <disable_collisions link1="drawer_2_left" link2="ground_plane" reason="Never"/>
         <disable_collisions link1="drawer_2_left" link2="hatch_level_bench" reason="Never"/>
+        <disable_collisions link1="drawer_2_left" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="drawer_2_left" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="drawer_2_left" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="drawer_2_left" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="drawer_2_left" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="drawer_2_left" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="drawer_2_left" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -1099,6 +1198,7 @@
         <disable_collisions link1="drawer_2_left" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="drawer_2_left" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="drawer_2_left" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="drawer_2_left" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="drawer_2_left" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="drawer_2_left" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="drawer_2_left" link2="round_latch_housing" reason="Never"/>
@@ -1118,6 +1218,10 @@
         <disable_collisions link1="drawer_2_right" link2="front_right_face" reason="Never"/>
         <disable_collisions link1="drawer_2_right" link2="ground_plane" reason="Never"/>
         <disable_collisions link1="drawer_2_right" link2="hatch_level_bench" reason="Never"/>
+        <disable_collisions link1="drawer_2_right" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="drawer_2_right" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="drawer_2_right" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="drawer_2_right" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="drawer_2_right" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="drawer_2_right" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="drawer_2_right" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -1143,6 +1247,7 @@
         <disable_collisions link1="drawer_2_right" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="drawer_2_right" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="drawer_2_right" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="drawer_2_right" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="drawer_2_right" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="drawer_2_right" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="drawer_2_right" link2="round_latch_housing" reason="Never"/>
@@ -1161,6 +1266,10 @@
         <disable_collisions link1="express_rack" link2="front_right_face" reason="Adjacent"/>
         <disable_collisions link1="express_rack" link2="ground_plane" reason="Adjacent"/>
         <disable_collisions link1="express_rack" link2="hatch_level_bench" reason="Default"/>
+        <disable_collisions link1="express_rack" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="express_rack" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="express_rack" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="express_rack" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="express_rack" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="express_rack" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="express_rack" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -1186,6 +1295,7 @@
         <disable_collisions link1="express_rack" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="express_rack" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="express_rack" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="express_rack" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="express_rack" link2="room_ceiling" reason="Adjacent"/>
         <disable_collisions link1="express_rack" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="express_rack" link2="round_latch_housing" reason="Never"/>
@@ -1203,6 +1313,10 @@
         <disable_collisions link1="front_left_face" link2="front_right_face" reason="Adjacent"/>
         <disable_collisions link1="front_left_face" link2="ground_plane" reason="Adjacent"/>
         <disable_collisions link1="front_left_face" link2="hatch_level_bench" reason="Never"/>
+        <disable_collisions link1="front_left_face" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="front_left_face" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="front_left_face" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="front_left_face" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="front_left_face" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="front_left_face" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="front_left_face" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -1228,6 +1342,7 @@
         <disable_collisions link1="front_left_face" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="front_left_face" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="front_left_face" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="front_left_face" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="front_left_face" link2="room_ceiling" reason="Adjacent"/>
         <disable_collisions link1="front_left_face" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="front_left_face" link2="round_latch_housing" reason="Never"/>
@@ -1244,6 +1359,10 @@
         <disable_collisions link1="front_left_face" link2="wood_frame" reason="Never"/>
         <disable_collisions link1="front_right_face" link2="ground_plane" reason="Adjacent"/>
         <disable_collisions link1="front_right_face" link2="hatch_level_bench" reason="Never"/>
+        <disable_collisions link1="front_right_face" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="front_right_face" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="front_right_face" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="front_right_face" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="front_right_face" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="front_right_face" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="front_right_face" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -1269,6 +1388,7 @@
         <disable_collisions link1="front_right_face" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="front_right_face" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="front_right_face" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="front_right_face" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="front_right_face" link2="room_ceiling" reason="Adjacent"/>
         <disable_collisions link1="front_right_face" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="front_right_face" link2="round_latch_housing" reason="Never"/>
@@ -1284,6 +1404,10 @@
         <disable_collisions link1="front_right_face" link2="velcro" reason="Never"/>
         <disable_collisions link1="front_right_face" link2="wood_frame" reason="Never"/>
         <disable_collisions link1="ground_plane" link2="hatch_level_bench" reason="Never"/>
+        <disable_collisions link1="ground_plane" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="ground_plane" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="ground_plane" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="ground_plane" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="ground_plane" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="ground_plane" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="ground_plane" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -1309,6 +1433,7 @@
         <disable_collisions link1="ground_plane" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="ground_plane" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="ground_plane" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="ground_plane" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="ground_plane" link2="room_ceiling" reason="Adjacent"/>
         <disable_collisions link1="ground_plane" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="ground_plane" link2="round_latch_housing" reason="Never"/>
@@ -1323,6 +1448,10 @@
         <disable_collisions link1="ground_plane" link2="trainer_top" reason="Adjacent"/>
         <disable_collisions link1="ground_plane" link2="velcro" reason="Never"/>
         <disable_collisions link1="ground_plane" link2="wood_frame" reason="Never"/>
+        <disable_collisions link1="hatch_level_bench" link2="latch_cover" reason="Never"/>
+        <disable_collisions link1="hatch_level_bench" link2="latch_housing" reason="Never"/>
+        <disable_collisions link1="hatch_level_bench" link2="latch_lock" reason="Never"/>
+        <disable_collisions link1="hatch_level_bench" link2="left_latch_pull" reason="Never"/>
         <disable_collisions link1="hatch_level_bench" link2="lorge/external_1_grab_handle" reason="Never"/>
         <disable_collisions link1="hatch_level_bench" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="hatch_level_bench" link2="lorge/external_3_grab_handle" reason="Never"/>
@@ -1348,6 +1477,7 @@
         <disable_collisions link1="hatch_level_bench" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="hatch_level_bench" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="hatch_level_bench" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="hatch_level_bench" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="hatch_level_bench" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="hatch_level_bench" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="hatch_level_bench" link2="round_latch_housing" reason="Never"/>
@@ -1362,6 +1492,172 @@
         <disable_collisions link1="hatch_level_bench" link2="trainer_top" reason="Never"/>
         <disable_collisions link1="hatch_level_bench" link2="velcro" reason="Never"/>
         <disable_collisions link1="hatch_level_bench" link2="wood_frame" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="latch_housing" reason="Adjacent"/>
+        <disable_collisions link1="latch_cover" link2="latch_lock" reason="Default"/>
+        <disable_collisions link1="latch_cover" link2="left_latch_pull" reason="Default"/>
+        <disable_collisions link1="latch_cover" link2="lorge/external_1_grab_handle" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="lorge/external_2_grab_handle" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="lorge/external_3_grab_handle" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="lorge/external_rotary_handle" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="lorge/external_rotary_wheel" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="lorge/hatch_back" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="lorge/hatch_bench" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="lorge/hatch_bottom" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="lorge/hatch_face" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="lorge/hatch_front" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="lorge/hatch_inner_frame" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="lorge/hatch_left" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="lorge/hatch_outer_frame" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="lorge/hatch_right" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="lorge/hatch_top" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="lorge/internal_2_grab_handle" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="lorge/internal_rotary_handle" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="lorge/internal_rotary_wheel" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="paddle_latch_handle" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="paddle_latch_housing" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="push_latch_button" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="push_latch_handle" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="push_latch_housing" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="recessed_latch_handle" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="right_latch_pull" reason="Default"/>
+        <disable_collisions link1="latch_cover" link2="room_ceiling" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="round_latch_handle" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="round_latch_housing" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="seal" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="side_bottom_face" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="side_top_face" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="trainer_box" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="trainer_plane_left" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="trainer_plane_middle" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="trainer_plane_right_1" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="trainer_plane_right_2" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="trainer_top" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="velcro" reason="Never"/>
+        <disable_collisions link1="latch_cover" link2="wood_frame" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="latch_lock" reason="Adjacent"/>
+        <disable_collisions link1="latch_housing" link2="left_latch_pull" reason="Adjacent"/>
+        <disable_collisions link1="latch_housing" link2="lorge/external_1_grab_handle" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="lorge/external_2_grab_handle" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="lorge/external_3_grab_handle" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="lorge/external_rotary_handle" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="lorge/external_rotary_wheel" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="lorge/hatch_back" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="lorge/hatch_bench" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="lorge/hatch_bottom" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="lorge/hatch_face" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="lorge/hatch_front" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="lorge/hatch_inner_frame" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="lorge/hatch_left" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="lorge/hatch_outer_frame" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="lorge/hatch_right" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="lorge/hatch_top" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="lorge/internal_2_grab_handle" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="lorge/internal_rotary_handle" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="lorge/internal_rotary_wheel" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="paddle_latch_handle" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="paddle_latch_housing" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="push_latch_button" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="push_latch_handle" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="push_latch_housing" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="recessed_latch_handle" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="right_latch_pull" reason="Adjacent"/>
+        <disable_collisions link1="latch_housing" link2="room_ceiling" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="round_latch_handle" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="round_latch_housing" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="seal" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="side_bottom_face" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="side_top_face" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="trainer_box" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="trainer_plane_left" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="trainer_plane_middle" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="trainer_plane_right_1" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="trainer_plane_right_2" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="trainer_top" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="velcro" reason="Never"/>
+        <disable_collisions link1="latch_housing" link2="wood_frame" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="left_latch_pull" reason="User"/>
+        <disable_collisions link1="latch_lock" link2="lorge/external_1_grab_handle" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="lorge/external_2_grab_handle" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="lorge/external_3_grab_handle" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="lorge/external_rotary_handle" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="lorge/external_rotary_wheel" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="lorge/hatch_back" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="lorge/hatch_bench" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="lorge/hatch_bottom" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="lorge/hatch_face" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="lorge/hatch_front" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="lorge/hatch_inner_frame" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="lorge/hatch_left" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="lorge/hatch_outer_frame" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="lorge/hatch_right" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="lorge/hatch_top" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="lorge/internal_2_grab_handle" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="lorge/internal_rotary_handle" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="lorge/internal_rotary_wheel" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="paddle_latch_handle" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="paddle_latch_housing" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="push_latch_button" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="push_latch_handle" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="push_latch_housing" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="recessed_latch_handle" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="right_latch_pull" reason="User"/>
+        <disable_collisions link1="latch_lock" link2="room_ceiling" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="round_latch_handle" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="round_latch_housing" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="seal" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="side_bottom_face" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="side_top_face" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="trainer_box" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="trainer_plane_left" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="trainer_plane_middle" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="trainer_plane_right_1" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="trainer_plane_right_2" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="trainer_top" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="velcro" reason="Never"/>
+        <disable_collisions link1="latch_lock" link2="wood_frame" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="lorge/external_1_grab_handle" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="lorge/external_2_grab_handle" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="lorge/external_3_grab_handle" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="lorge/external_rotary_handle" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="lorge/external_rotary_wheel" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="lorge/hatch_back" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="lorge/hatch_bench" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="lorge/hatch_bottom" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="lorge/hatch_face" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="lorge/hatch_front" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="lorge/hatch_inner_frame" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="lorge/hatch_left" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="lorge/hatch_outer_frame" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="lorge/hatch_right" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="lorge/hatch_top" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="lorge/internal_2_grab_handle" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="lorge/internal_rotary_handle" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="lorge/internal_rotary_wheel" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="paddle_latch_handle" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="paddle_latch_housing" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="push_latch_button" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="push_latch_handle" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="push_latch_housing" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="recessed_latch_handle" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="right_latch_pull" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="room_ceiling" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="round_latch_handle" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="round_latch_housing" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="seal" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="side_bottom_face" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="side_top_face" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="trainer_box" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="trainer_plane_left" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="trainer_plane_middle" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="trainer_plane_right_1" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="trainer_plane_right_2" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="trainer_top" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="velcro" reason="Never"/>
+        <disable_collisions link1="left_latch_pull" link2="wood_frame" reason="Never"/>
         <disable_collisions link1="lorge/external_1_grab_handle" link2="lorge/external_2_grab_handle" reason="Never"/>
         <disable_collisions link1="lorge/external_1_grab_handle" link2="lorge/external_3_grab_handle" reason="Never"/>
         <disable_collisions link1="lorge/external_1_grab_handle" link2="lorge/external_rotary_handle" reason="Never"/>
@@ -1386,6 +1682,7 @@
         <disable_collisions link1="lorge/external_1_grab_handle" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="lorge/external_1_grab_handle" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/external_1_grab_handle" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="lorge/external_1_grab_handle" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="lorge/external_1_grab_handle" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="lorge/external_1_grab_handle" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/external_1_grab_handle" link2="round_latch_housing" reason="Never"/>
@@ -1423,6 +1720,7 @@
         <disable_collisions link1="lorge/external_2_grab_handle" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="lorge/external_2_grab_handle" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/external_2_grab_handle" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="lorge/external_2_grab_handle" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="lorge/external_2_grab_handle" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="lorge/external_2_grab_handle" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/external_2_grab_handle" link2="round_latch_housing" reason="Never"/>
@@ -1459,6 +1757,7 @@
         <disable_collisions link1="lorge/external_3_grab_handle" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="lorge/external_3_grab_handle" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/external_3_grab_handle" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="lorge/external_3_grab_handle" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="lorge/external_3_grab_handle" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="lorge/external_3_grab_handle" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/external_3_grab_handle" link2="round_latch_housing" reason="Never"/>
@@ -1494,6 +1793,7 @@
         <disable_collisions link1="lorge/external_rotary_handle" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="lorge/external_rotary_handle" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/external_rotary_handle" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="lorge/external_rotary_handle" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="lorge/external_rotary_handle" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="lorge/external_rotary_handle" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/external_rotary_handle" link2="round_latch_housing" reason="Never"/>
@@ -1528,6 +1828,7 @@
         <disable_collisions link1="lorge/external_rotary_wheel" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="lorge/external_rotary_wheel" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/external_rotary_wheel" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="lorge/external_rotary_wheel" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="lorge/external_rotary_wheel" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="lorge/external_rotary_wheel" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/external_rotary_wheel" link2="round_latch_housing" reason="Never"/>
@@ -1561,6 +1862,7 @@
         <disable_collisions link1="lorge/hatch_back" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="lorge/hatch_back" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/hatch_back" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="lorge/hatch_back" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="lorge/hatch_back" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="lorge/hatch_back" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/hatch_back" link2="round_latch_housing" reason="Never"/>
@@ -1593,6 +1895,7 @@
         <disable_collisions link1="lorge/hatch_bench" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="lorge/hatch_bench" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/hatch_bench" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="lorge/hatch_bench" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="lorge/hatch_bench" link2="room_ceiling" reason="Adjacent"/>
         <disable_collisions link1="lorge/hatch_bench" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/hatch_bench" link2="round_latch_housing" reason="Never"/>
@@ -1624,6 +1927,7 @@
         <disable_collisions link1="lorge/hatch_bottom" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="lorge/hatch_bottom" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/hatch_bottom" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="lorge/hatch_bottom" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="lorge/hatch_bottom" link2="room_ceiling" reason="Adjacent"/>
         <disable_collisions link1="lorge/hatch_bottom" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/hatch_bottom" link2="round_latch_housing" reason="Never"/>
@@ -1654,6 +1958,7 @@
         <disable_collisions link1="lorge/hatch_face" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="lorge/hatch_face" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/hatch_face" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="lorge/hatch_face" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="lorge/hatch_face" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="lorge/hatch_face" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/hatch_face" link2="round_latch_housing" reason="Never"/>
@@ -1683,6 +1988,7 @@
         <disable_collisions link1="lorge/hatch_front" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="lorge/hatch_front" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/hatch_front" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="lorge/hatch_front" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="lorge/hatch_front" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="lorge/hatch_front" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/hatch_front" link2="round_latch_housing" reason="Never"/>
@@ -1711,6 +2017,7 @@
         <disable_collisions link1="lorge/hatch_inner_frame" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="lorge/hatch_inner_frame" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/hatch_inner_frame" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="lorge/hatch_inner_frame" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="lorge/hatch_inner_frame" link2="room_ceiling" reason="Adjacent"/>
         <disable_collisions link1="lorge/hatch_inner_frame" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/hatch_inner_frame" link2="round_latch_housing" reason="Never"/>
@@ -1738,6 +2045,7 @@
         <disable_collisions link1="lorge/hatch_left" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="lorge/hatch_left" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/hatch_left" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="lorge/hatch_left" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="lorge/hatch_left" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="lorge/hatch_left" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/hatch_left" link2="round_latch_housing" reason="Never"/>
@@ -1764,6 +2072,7 @@
         <disable_collisions link1="lorge/hatch_outer_frame" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="lorge/hatch_outer_frame" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/hatch_outer_frame" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="lorge/hatch_outer_frame" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="lorge/hatch_outer_frame" link2="room_ceiling" reason="Adjacent"/>
         <disable_collisions link1="lorge/hatch_outer_frame" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/hatch_outer_frame" link2="round_latch_housing" reason="Never"/>
@@ -1789,6 +2098,7 @@
         <disable_collisions link1="lorge/hatch_right" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="lorge/hatch_right" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/hatch_right" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="lorge/hatch_right" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="lorge/hatch_right" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="lorge/hatch_right" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/hatch_right" link2="round_latch_housing" reason="Never"/>
@@ -1813,6 +2123,7 @@
         <disable_collisions link1="lorge/hatch_top" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="lorge/hatch_top" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/hatch_top" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="lorge/hatch_top" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="lorge/hatch_top" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="lorge/hatch_top" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/hatch_top" link2="round_latch_housing" reason="Never"/>
@@ -1836,6 +2147,7 @@
         <disable_collisions link1="lorge/internal_2_grab_handle" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="lorge/internal_2_grab_handle" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/internal_2_grab_handle" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="lorge/internal_2_grab_handle" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="lorge/internal_2_grab_handle" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="lorge/internal_2_grab_handle" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/internal_2_grab_handle" link2="round_latch_housing" reason="Never"/>
@@ -1858,6 +2170,7 @@
         <disable_collisions link1="lorge/internal_rotary_handle" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="lorge/internal_rotary_handle" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/internal_rotary_handle" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="lorge/internal_rotary_handle" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="lorge/internal_rotary_handle" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="lorge/internal_rotary_handle" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/internal_rotary_handle" link2="round_latch_housing" reason="Never"/>
@@ -1879,6 +2192,7 @@
         <disable_collisions link1="lorge/internal_rotary_wheel" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="lorge/internal_rotary_wheel" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/internal_rotary_wheel" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="lorge/internal_rotary_wheel" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="lorge/internal_rotary_wheel" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="lorge/internal_rotary_wheel" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="lorge/internal_rotary_wheel" link2="round_latch_housing" reason="Never"/>
@@ -1899,6 +2213,7 @@
         <disable_collisions link1="paddle_latch_handle" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="paddle_latch_handle" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="paddle_latch_handle" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="paddle_latch_handle" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="paddle_latch_handle" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="paddle_latch_handle" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="paddle_latch_handle" link2="round_latch_housing" reason="Never"/>
@@ -1918,6 +2233,7 @@
         <disable_collisions link1="paddle_latch_housing" link2="push_latch_housing" reason="Never"/>
         <disable_collisions link1="paddle_latch_housing" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="paddle_latch_housing" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="paddle_latch_housing" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="paddle_latch_housing" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="paddle_latch_housing" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="paddle_latch_housing" link2="round_latch_housing" reason="Never"/>
@@ -1936,6 +2252,7 @@
         <disable_collisions link1="push_latch_button" link2="push_latch_housing" reason="Adjacent"/>
         <disable_collisions link1="push_latch_button" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="push_latch_button" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="push_latch_button" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="push_latch_button" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="push_latch_button" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="push_latch_button" link2="round_latch_housing" reason="Never"/>
@@ -1953,6 +2270,7 @@
         <disable_collisions link1="push_latch_handle" link2="push_latch_housing" reason="Adjacent"/>
         <disable_collisions link1="push_latch_handle" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="push_latch_handle" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="push_latch_handle" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="push_latch_handle" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="push_latch_handle" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="push_latch_handle" link2="round_latch_housing" reason="Never"/>
@@ -1969,6 +2287,7 @@
         <disable_collisions link1="push_latch_handle" link2="wood_frame" reason="Never"/>
         <disable_collisions link1="push_latch_housing" link2="recessed_latch_handle" reason="Never"/>
         <disable_collisions link1="push_latch_housing" link2="recessed_latch_housing" reason="Never"/>
+        <disable_collisions link1="push_latch_housing" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="push_latch_housing" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="push_latch_housing" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="push_latch_housing" link2="round_latch_housing" reason="Never"/>
@@ -1984,6 +2303,7 @@
         <disable_collisions link1="push_latch_housing" link2="velcro" reason="Never"/>
         <disable_collisions link1="push_latch_housing" link2="wood_frame" reason="Never"/>
         <disable_collisions link1="recessed_latch_handle" link2="recessed_latch_housing" reason="Adjacent"/>
+        <disable_collisions link1="recessed_latch_handle" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="recessed_latch_handle" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="recessed_latch_handle" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="recessed_latch_handle" link2="round_latch_housing" reason="Never"/>
@@ -1998,6 +2318,7 @@
         <disable_collisions link1="recessed_latch_handle" link2="trainer_top" reason="Never"/>
         <disable_collisions link1="recessed_latch_handle" link2="velcro" reason="Never"/>
         <disable_collisions link1="recessed_latch_handle" link2="wood_frame" reason="Never"/>
+        <disable_collisions link1="recessed_latch_housing" link2="right_latch_pull" reason="Never"/>
         <disable_collisions link1="recessed_latch_housing" link2="room_ceiling" reason="Never"/>
         <disable_collisions link1="recessed_latch_housing" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="recessed_latch_housing" link2="round_latch_housing" reason="Never"/>
@@ -2012,6 +2333,20 @@
         <disable_collisions link1="recessed_latch_housing" link2="trainer_top" reason="Never"/>
         <disable_collisions link1="recessed_latch_housing" link2="velcro" reason="Never"/>
         <disable_collisions link1="recessed_latch_housing" link2="wood_frame" reason="Never"/>
+        <disable_collisions link1="right_latch_pull" link2="room_ceiling" reason="Never"/>
+        <disable_collisions link1="right_latch_pull" link2="round_latch_handle" reason="Never"/>
+        <disable_collisions link1="right_latch_pull" link2="round_latch_housing" reason="Never"/>
+        <disable_collisions link1="right_latch_pull" link2="seal" reason="Never"/>
+        <disable_collisions link1="right_latch_pull" link2="side_bottom_face" reason="Never"/>
+        <disable_collisions link1="right_latch_pull" link2="side_top_face" reason="Never"/>
+        <disable_collisions link1="right_latch_pull" link2="trainer_box" reason="Never"/>
+        <disable_collisions link1="right_latch_pull" link2="trainer_plane_left" reason="Never"/>
+        <disable_collisions link1="right_latch_pull" link2="trainer_plane_middle" reason="Never"/>
+        <disable_collisions link1="right_latch_pull" link2="trainer_plane_right_1" reason="Never"/>
+        <disable_collisions link1="right_latch_pull" link2="trainer_plane_right_2" reason="Never"/>
+        <disable_collisions link1="right_latch_pull" link2="trainer_top" reason="Never"/>
+        <disable_collisions link1="right_latch_pull" link2="velcro" reason="Never"/>
+        <disable_collisions link1="right_latch_pull" link2="wood_frame" reason="Never"/>
         <disable_collisions link1="room_ceiling" link2="round_latch_handle" reason="Never"/>
         <disable_collisions link1="room_ceiling" link2="round_latch_housing" reason="Never"/>
         <disable_collisions link1="room_ceiling" link2="seal" reason="Never"/>
