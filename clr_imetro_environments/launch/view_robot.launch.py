@@ -121,6 +121,14 @@ def generate_launch_description():
             description="Choose whether to view second_trainer in the environment",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "add_localization_joints",
+            default_value="false",
+            choices=["true", "false"],
+            description="Choose whether to include localization joints to mock poor localization",
+        )
+    )
 
     tf_prefix = LaunchConfiguration("tf_prefix")
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
@@ -134,6 +142,7 @@ def generate_launch_description():
     express_rack = LaunchConfiguration("express_rack")
     hatch_4060 = LaunchConfiguration("hatch_4060")
     second_trainer = LaunchConfiguration("second_trainer")
+    add_localization_joints = LaunchConfiguration("add_localization_joints")
 
     robot_description_content = Command(
         [
@@ -178,6 +187,9 @@ def generate_launch_description():
             " ",
             "second_trainer:=",
             second_trainer,
+            " ",
+            "add_localization_joints:=",
+            add_localization_joints,
             " ",
         ]
     )
