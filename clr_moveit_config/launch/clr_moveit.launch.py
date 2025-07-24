@@ -85,7 +85,6 @@ def launch_setup(context, *args, **kwargs):
             moveit_config.robot_description_kinematics,
             moveit_config.planning_pipelines,
             moveit_config.joint_limits,
-            moveit_config.planning_scene_monitor,
             use_sim_time,
         ],
     )
