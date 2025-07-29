@@ -12,6 +12,7 @@
     chonkur_ip:=192.168.1.102
     com_port_hande:=/dev/robotiq
     finger_xacro:=fngr_v6
+    add_grasp_push_frames:=true
     marker_opacity:=0.5
     rail_ip:=192.168.7.2
     rail_port:=9999
@@ -238,6 +239,7 @@
       chonkur_ip="${chonkur_ip}"
       com_port_hande="${com_port_hande}"
       finger_xacro="${finger_xacro}"
+      add_grasp_push_frames="${add_grasp_push_frames}"
       marker_opacity="${marker_opacity}"
       generate_ros2_control_tag="${generate_ros2_control_tag}"/>
 

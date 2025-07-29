@@ -18,6 +18,7 @@
     chonkur_ip:=192.168.1.102
     com_port_hande:=/dev/ttyUSB1
     marker_opacity:=0.5
+    add_grasp_push_frames:=true
     finger_xacro:=fngr_v6
     generate_ros2_control_tag:=true">
 
@@ -104,6 +105,7 @@
       com_port="${com_port_hande}"
       marker_opacity="${marker_opacity}"
       finger_xacro="${finger_xacro}"
+      add_grasp_push_frames="${add_grasp_push_frames}"
       generate_ros2_control_tag="${generate_ros2_control_tag}">
       <origin xyz="0 0 0.008" rpy="0 0 ${radians(-90)}"/>
     </xacro:dextivr_hande>

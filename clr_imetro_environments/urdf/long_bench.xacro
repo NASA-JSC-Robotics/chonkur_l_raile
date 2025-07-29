@@ -109,6 +109,7 @@
       <parent link="${prefix}bench_back"/>
       <child link="${prefix}bench_lid"/>
       <origin xyz="0.127 0.0 0.0475" rpy="0 0 0"/>
+      <dynamics friction="3.0" damping="3.0"/>
     </joint>
 
     <link name="${prefix}bench_lid">
