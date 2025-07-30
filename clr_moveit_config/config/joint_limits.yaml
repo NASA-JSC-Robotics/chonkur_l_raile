@@ -7,8 +7,8 @@
 # to max accel in 1 ms) the acceleration limits are the ones that satisfy
 # max_jerk = (max_acceleration - min_acceleration) / 0.001
 
+default_robot_padding: 0.003
 joint_limits:
-  default_robot_padding: 0.003
   ewellix_lift_lower_to_higher:
     has_velocity_limits: true
     max_velocity: 0.03
