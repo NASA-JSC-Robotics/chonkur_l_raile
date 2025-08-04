@@ -20,8 +20,8 @@
     <!-- Include xacros -->
     <xacro:include filename="$(find clr_description)/urdf/clr_macro.xacro"/>
     <xacro:include filename="$(find clr_imetro_environments)/urdf/colors.xacro"/>
-    <xacro:include filename="$(find clr_imetro_environments)/urdf/long_bench.xacro"/>
-    <xacro:include filename="$(find clr_imetro_environments)/urdf/express_rack.xacro"/>
+    <xacro:include filename="$(find long_bench)/urdf/long_bench.xacro"/>
+    <xacro:include filename="$(find express_rack)/urdf/express_rack.xacro"/>
     <xacro:include filename="$(find hatch_accessories)/urdf/hatch_frame.xacro"/>
     <xacro:include filename="$(find trainer)/urdf/trainer_frame.xacro"/>
 
