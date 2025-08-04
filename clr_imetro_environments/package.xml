@@ -14,6 +14,9 @@
   <exec_depend>clr_description</exec_depend>
   <exec_depend>hatch_accessories</exec_depend>
   <exec_depend>hatch_4040</exec_depend>
+  <exec_depend>hatch_4060</exec_depend>
+  <exec_depend>express_rack</exec_depend>
+  <exec_depend>long_bench</exec_depend>
   <exec_depend>trainer</exec_depend>
   <exec_depend>merlin_mockup_description</exec_depend>
 
