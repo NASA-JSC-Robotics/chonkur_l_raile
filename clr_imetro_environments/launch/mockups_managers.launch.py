@@ -18,47 +18,10 @@
 # under the License.
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, OpaqueFunction
+from launch.actions import DeclareLaunchArgument
 from launch.conditions import IfCondition
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
-
-
-def launch_setup(context, *args, **kwargs):
-    tf_prefix = LaunchConfiguration("tf_prefix").perform(context)
-
-    nodes_to_start = [
-        Node(
-            package="hatch_4040",
-            executable="hatch4040_manager.py",
-            output="both",
-            condition=IfCondition(LaunchConfiguration("hatch_4040")),
-            parameters=[
-                {"prefix": "lorge/"},
-            ],
-        ),
-        Node(
-            package="trainer",
-            executable="trainer_manager.py",
-            output="both",
-            condition=IfCondition(LaunchConfiguration("trainer")),
-            parameters=[
-                {"prefix": tf_prefix},
-            ],
-        ),
-        Node(
-            package="trainer",
-            executable="trainer_manager.py",
-            name="second_trainer_manager",
-            output="both",
-            condition=IfCondition(LaunchConfiguration("second_trainer")),
-            parameters=[
-                {"prefix": "second_trainer/"},
-            ],
-        ),
-    ]
-
-    return nodes_to_start
 
 
 def generate_launch_description():
@@ -89,4 +52,35 @@ def generate_launch_description():
         )
     )
 
-    return LaunchDescription(declared_arguments + [OpaqueFunction(function=launch_setup)])
+    nodes_to_start = [
+        Node(
+            package="hatch_4040",
+            executable="hatch4040_manager.py",
+            output="both",
+            condition=IfCondition(LaunchConfiguration("hatch_4040")),
+            parameters=[
+                {"prefix": "lorge/"},
+            ],
+        ),
+        Node(
+            package="trainer",
+            executable="trainer_manager.py",
+            output="both",
+            condition=IfCondition(LaunchConfiguration("trainer")),
+            parameters=[
+                {"prefix": LaunchConfiguration("tf_prefix")},
+            ],
+        ),
+        Node(
+            package="trainer",
+            executable="trainer_manager.py",
+            name="second_trainer_manager",
+            output="both",
+            condition=IfCondition(LaunchConfiguration("second_trainer")),
+            parameters=[
+                {"prefix": "second_trainer/"},
+            ],
+        ),
+    ]
+
+    return LaunchDescription(declared_arguments + nodes_to_start)
