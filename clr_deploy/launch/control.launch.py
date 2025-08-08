@@ -18,8 +18,8 @@
 # under the License.
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
-from launch.conditions import UnlessCondition
+from launch.actions import DeclareLaunchArgument, SetLaunchConfiguration
+from launch.conditions import IfCondition, UnlessCondition
 from launch.substitutions import (
     Command,
     FindExecutable,
@@ -97,6 +97,29 @@ def generate_launch_description():
             "is_sim",
             default_value="false",
             description="If the robot is running with simulated drivers in some capacity (e.g. mujoco).",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "include_mockups_in_description",
+            default_value="false",
+            description="Represent the iMETRO mockup environment in the robot description.",
+        )
+    )
+
+    mapped_arguments = []
+    mapped_arguments.append(
+        SetLaunchConfiguration(
+            "robot_description_package",
+            "clr_imetro_environments",
+            condition=IfCondition(LaunchConfiguration("include_mockups_in_description")),
+        )
+    )
+    mapped_arguments.append(
+        SetLaunchConfiguration(
+            "robot_description_file",
+            "clr_trainer_multi_hatch.urdf.xacro",
+            condition=IfCondition(LaunchConfiguration("include_mockups_in_description")),
         )
     )
 
@@ -202,4 +225,4 @@ def generate_launch_description():
     )
 
     nodes = [robot_state_publisher_node, control_node, joint_state_broadcaster, clr_controller_stopper]
-    return LaunchDescription(declared_arguments + nodes + [spawn_controllers])
+    return LaunchDescription(declared_arguments + mapped_arguments + nodes + [spawn_controllers])

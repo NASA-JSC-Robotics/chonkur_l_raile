@@ -7,6 +7,7 @@
 # to max accel in 1 ms) the acceleration limits are the ones that satisfy
 # max_jerk = (max_acceleration - min_acceleration) / 0.001
 
+default_robot_padding: 0.003 # This adds padding only between elements of the robot_description and scene objects. It does not work for self-collisions.
 joint_limits:
   ewellix_lift_lower_to_higher:
     has_velocity_limits: true

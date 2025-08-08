@@ -31,9 +31,9 @@ import os
 
 def launch_setup(context, *args, **kwargs):
 
-    sim_env = LaunchConfiguration("sim_env")
+    mockups = LaunchConfiguration("include_mockups_in_description")
 
-    if sim_env.perform(context) == "true":
+    if mockups.perform(context) == "true":
         description_package = "clr_imetro_environments"
         description_file = "clr_trainer_multi_hatch.urdf.xacro"
         moveit_config_file_path = "srdf/clr_and_sim_mockups.srdf.xacro"
@@ -85,7 +85,6 @@ def launch_setup(context, *args, **kwargs):
             moveit_config.robot_description_kinematics,
             moveit_config.planning_pipelines,
             moveit_config.joint_limits,
-            moveit_config.planning_scene_monitor,
             use_sim_time,
         ],
     )
@@ -136,10 +135,9 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "sim_env",
+            "include_mockups_in_description",
             default_value="false",
-            description="Represent the iMETRO simulated mockup environment in \
-                the robot description and publish mockup joint states.",
+            description="Represent the iMETRO mockup environment in the robot description.",
         )
     )
 

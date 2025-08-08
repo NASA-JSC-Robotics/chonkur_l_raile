@@ -73,6 +73,14 @@
         <joint name="wrist_2_joint" value="-1.6" />
         <joint name="wrist_3_joint" value="-0.11" />
       </group_state>
+      <group_state name="stow" group="ur_manipulator">
+        <joint name="elbow_joint" value="2.44346" />
+        <joint name="shoulder_lift_joint" value="-2.6529" />
+        <joint name="shoulder_pan_joint" value="-2.11185" />
+        <joint name="wrist_1_joint" value="0.0" />
+        <joint name="wrist_2_joint" value="1.0821" />
+        <joint name="wrist_3_joint" value="3.26377" />
+      </group_state>
       <group_state name="clr_home" group="clr">
         <joint name="ewellix_lift_lower_to_higher" value="0.004344256" />
         <joint name="vention_rail_base_to_carriage" value="0.0"/>
