@@ -41,3 +41,14 @@ ros2 launch clr_moveit_config clr_moveit.launch.py
 # Or to include the environment mockups
 ros2 launch clr_moveit_config clr_moveit.launch.py model_env:=true
 ```
+
+A MuJoCo simulation including the environment is available in [clr_mujoco_config](./clr_mujoco_config/README.md).
+Note that it requires the [MuJoCo ROS 2 simulation hardware interface](https://github.com/NASA-JSC-Robotics/mujoco_ros2_simulation) to run.
+
+```bash
+# Start the mujoco ros2 control-based simulation
+ros2 launch clr_mujoco_config clr_mujoco.launch.py
+
+# In another shell launch the moveit interface with sim parameters set
+ros2 launch clr_moveit_config clr_moveit.launch.py include_mockups_in_description:=true use_sim_time:=true
+```
