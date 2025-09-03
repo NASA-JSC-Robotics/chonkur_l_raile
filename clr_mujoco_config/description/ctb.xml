@@ -1,0 +1,38 @@
+<mujoco model="ctb">
+  <compiler angle="radian" meshdir="assets/"/>
+  <asset>
+    <mesh file="full/ctb_body/ctb_body.obj" scale="0.0254 0.0254 0.0254"/>
+    <material name="ctb_gray" specular="0.5" shininess="0.36" rgba="1.000000 1.000000 1.000000 1.000000"/>
+    <mesh file="decomposed/ctb_handle/ctb_handle/ctb_handle.obj" scale="0.0254 0.0254 0.0254"/>
+    <mesh file="decomposed/ctb_handle/ctb_handle/ctb_handle_collision_0.obj" scale="0.0254 0.0254 0.0254"/>
+    <mesh file="decomposed/ctb_handle/ctb_handle/ctb_handle_collision_1.obj" scale="0.0254 0.0254 0.0254"/>
+    <mesh file="decomposed/ctb_handle/ctb_handle/ctb_handle_collision_2.obj" scale="0.0254 0.0254 0.0254"/>
+    <mesh file="decomposed/ctb_handle/ctb_handle/ctb_handle_collision_3.obj" scale="0.0254 0.0254 0.0254"/>
+    <mesh file="decomposed/ctb_handle/ctb_handle/ctb_handle_collision_4.obj" scale="0.0254 0.0254 0.0254"/>
+    <mesh file="decomposed/ctb_handle/ctb_handle/ctb_handle_collision_5.obj" scale="0.0254 0.0254 0.0254"/>
+    <mesh file="decomposed/ctb_handle/ctb_handle/ctb_handle_collision_6.obj" scale="0.0254 0.0254 0.0254"/>
+    <mesh file="decomposed/ctb_handle/ctb_handle/ctb_handle_collision_7.obj" scale="0.0254 0.0254 0.0254"/>
+    <mesh file="decomposed/ctb_handle/ctb_handle/ctb_handle_collision_8.obj" scale="0.0254 0.0254 0.0254"/>
+    <mesh file="decomposed/ctb_handle/ctb_handle/ctb_handle_collision_9.obj" scale="0.0254 0.0254 0.0254"/>
+    <material name="ctb_red" specular="0.5" shininess="0.36" rgba="1.000000 0.000000 0.000000 1.000000"/>
+  </asset>
+  <worldbody>
+    <body name="ctb" pos="0.8 0.8 0.25" quat="0.7071068 0.0 0.0 0.7071068">
+        <geom material="ctb_gray" mesh="ctb_body" class="visual" pos="" quat="0.707388 -0.706825 0 0"/>
+        <geom mesh="ctb_body" class="collision" pos="" quat="0.707388 -0.706825 0 0"/>
+        <geom material="ctb_red" mesh="ctb_handle" class="visual" pos="0 0.08 0.264" quat="0.707388 0.706825 0 0"/>
+        <geom mesh="ctb_handle_collision_0" rgba="0.8935481976346451 0.6119554495440046 0.09689008883980699 1" class="collision" pos="0 0.08 0.264" quat="0.707388 0.706825 0 0"/>
+        <geom mesh="ctb_handle_collision_1" rgba="0.32153406200628987 0.632057082479087 0.6097735398623567 1" class="collision" pos="0 0.08 0.264" quat="0.707388 0.706825 0 0"/>
+        <geom mesh="ctb_handle_collision_2" rgba="0.1345454016341704 0.2595130325163436 0.9279424206995212 1" class="collision" pos="0 0.08 0.264" quat="0.707388 0.706825 0 0"/>
+        <geom mesh="ctb_handle_collision_3" rgba="0.3479486735652588 0.43947475888800736 0.10701001971490531 1" class="collision" pos="0 0.08 0.264" quat="0.707388 0.706825 0 0"/>
+        <geom mesh="ctb_handle_collision_4" rgba="0.20420621259098515 0.21280233853154573 0.401172167533808 1" class="collision" pos="0 0.08 0.264" quat="0.707388 0.706825 0 0"/>
+        <geom mesh="ctb_handle_collision_5" rgba="0.2881519670362771 0.19932589612044382 0.34220645884165046 1" class="collision" pos="0 0.08 0.264" quat="0.707388 0.706825 0 0"/>
+        <geom mesh="ctb_handle_collision_6" rgba="0.12408592054013645 0.22602809375881738 0.9929639611447764 1" class="collision" pos="0 0.08 0.264" quat="0.707388 0.706825 0 0"/>
+        <geom mesh="ctb_handle_collision_7" rgba="0.8368316613145566 0.32630359173646106 0.9754162782142649 1" class="collision" pos="0 0.08 0.264" quat="0.707388 0.706825 0 0"/>
+        <geom mesh="ctb_handle_collision_8" rgba="0.578682443892342 0.0162173732305817 0.2524539690703289 1" class="collision" pos="0 0.08 0.264" quat="0.707388 0.706825 0 0"/>
+        <geom mesh="ctb_handle_collision_9" rgba="0.2855312743239955 0.7140649605609088 0.27940610242451114 1" class="collision" pos="0 0.08 0.264" quat="0.707388 0.706825 0 0"/>
+        <freejoint/>
+        <inertial mass="2.0" pos="0 0 -0.1" diaginertia="0.1 0.1 0.1"/>
+    </body>
+  </worldbody>
+</mujoco>

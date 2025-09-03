@@ -1,0 +1,20 @@
+<mujoco model="right_angle_mount">
+  <default>
+    <default class="visual">
+      <geom group="2" type="mesh" contype="0" conaffinity="0"/>
+    </default>
+    <default class="collision">
+      <geom group="3" type="mesh"/>
+    </default>
+  </default>
+  <asset>
+    <material name="DEFAULT_MTL.008" specular="0.0" shininess="0.25" rgba="0.800000 0.800000 0.800000 1.000000"/>
+    <mesh file="right_angle_mount.obj"/>
+  </asset>
+  <worldbody>
+    <body name="right_angle_mount">
+      <geom material="DEFAULT_MTL.008" mesh="right_angle_mount" class="visual"/>
+      <geom mesh="right_angle_mount" class="collision"/>
+    </body>
+  </worldbody>
+</mujoco>

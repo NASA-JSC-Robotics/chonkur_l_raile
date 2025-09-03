@@ -1,0 +1,5 @@
+<mujoco_inputs>
+  <processed_inputs>
+    <decompose_mesh mesh_name="ctb_handle" threshold="0.01"/>
+  </processed_inputs>
+</mujoco_inputs>

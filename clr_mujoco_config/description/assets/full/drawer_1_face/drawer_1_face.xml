@@ -1,0 +1,20 @@
+<mujoco model="drawer_1_face">
+  <default>
+    <default class="visual">
+      <geom group="2" type="mesh" contype="0" conaffinity="0"/>
+    </default>
+    <default class="collision">
+      <geom group="3" type="mesh"/>
+    </default>
+  </default>
+  <asset>
+    <material name="new_mat_color.036" specular="0.5" shininess="0.36" rgba="0.000000 0.000000 1.000000 1.000000"/>
+    <mesh file="drawer_1_face.obj"/>
+  </asset>
+  <worldbody>
+    <body name="drawer_1_face">
+      <geom material="new_mat_color.036" mesh="drawer_1_face" class="visual"/>
+      <geom mesh="drawer_1_face" class="collision"/>
+    </body>
+  </worldbody>
+</mujoco>

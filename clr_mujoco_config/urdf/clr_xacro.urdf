@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="clr">
+  <xacro:arg name="tf_prefix" default="" />
+  <xacro:arg name="headless_mode" default="false" />
+  <xacro:arg name="finger_xacro" default="fngr_v6"/>
+  <xacro:arg name="add_grasp_push_frames" default="true"/>
+  <!-- Legacy argument to leave out the environment mockups, though for now we generally -->
+  <!-- always want this to be true. -->
+  <xacro:arg name="model_env" default="true"/>
+
+  <xacro:property name="model_env" value="$(arg model_env)"/>
+
+  <xacro:include filename="$(find clr_imetro_environments)/urdf/clr_trainer_multi_hatch_macro.xacro"/>
+  <xacro:include filename="$(find clr_description)/urdf/clr_macro.xacro"/>
+
+  <link name="world" />
+
+  <xacro:if value="${model_env}">
+    <xacro:imetro_env
+      tf_prefix="$(arg tf_prefix)"
+      use_fake_hardware="false"
+      headless_mode="$(arg headless_mode)"
+      add_grasp_push_frames="$(arg add_grasp_push_frames)"
+      finger_xacro="$(arg finger_xacro)"
+      generate_ros2_control_tag="false"
+      clr="true"
+      shelf="false"
+      ceiling_prop="false"
+      hatch_4040="false"
+      express_rack="true"
+      hatch_4060="true"
+      second_trainer="false"
+    />
+  </xacro:if>
+  <xacro:if value="${not model_env}">
+    <xacro:clr
+      tf_prefix="$(arg tf_prefix)"
+      use_fake_hardware="false"
+      headless_mode="$(arg headless_mode)"
+      finger_xacro="$(arg finger_xacro)"
+      add_grasp_push_frames="$(arg add_grasp_push_frames)"
+      generate_ros2_control_tag="false"/>
+  </xacro:if>
+
+  <ros2_control name="MujocoSystem" type="system">
+    <hardware>
+      <plugin>mujoco_ros2_simulation/MujocoSystemInterface</plugin>
+      <param name="mujoco_model">$(find clr_mujoco_config)/description/scene.xml</param>
+
+      <!-- Increase this parameter to run the sim faster than realtime. -->
+      <param name="sim_speed_factor">1.0</param>
+
+      <!-- Publish camera images at 5 hz -->
+      <param name="camera_publish_rate">5.0</param>
+    </hardware>
+    <joint name="vention_rail_base_to_carriage">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="ewellix_lift_lower_to_higher">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="shoulder_pan_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">${radians(-213)}</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="shoulder_lift_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">${radians(-172)}</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="elbow_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">${radians(-55)}</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="wrist_1_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">${radians(-40)}</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="wrist_2_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">${radians(-87)}</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="wrist_3_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">${radians(121)}</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <!-- Robotiq gripper -->
+    <joint name="finger_1_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0.025</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <sensor name="tcp_fts_sensor">
+      <param name="mujoco_type">fts</param>
+      <param name="mujoco_sensor_name">tcp_fts_sensor</param>
+      <state_interface name="force.x"/>
+      <state_interface name="force.y"/>
+      <state_interface name="force.z"/>
+      <state_interface name="torque.x"/>
+      <state_interface name="torque.y"/>
+      <state_interface name="torque.z"/>
+    </sensor>
+
+    <!-- Cameras -->
+    <!-- For cameras, the sensor name _must_ match the camera name in the MJCF -->
+    <sensor name="wrist_mounted_camera">
+      <param name="frame_name">wrist_mounted_camera_color_optical_frame</param>
+      <param name="info_topic">/wrist_mounted_camera/color/camera_info</param>
+      <param name="image_topic">/wrist_mounted_camera/color/image_raw</param>
+      <param name="depth_topic">/wrist_mounted_camera/aligned_depth_to_color/image_raw</param>
+    </sensor>
+    <sensor name="lift_camera">
+      <param name="frame_name">lift_camera_color_optical_frame</param>
+      <param name="info_topic">/lift_camera/color/camera_info</param>
+      <param name="image_topic">/lift_camera/color/image_raw</param>
+      <param name="depth_topic">/lift_camera/aligned_depth_to_color/image_raw</param>
+    </sensor>
+
+    <xacro:if value="${model_env}">
+      <!-- Mockups -->
+      <joint name="door_to_frame_joint">
+        <state_interface name="position"/>
+      </joint>
+      <joint name="housing_to_latch_lock">
+        <state_interface name="position"/>
+      </joint>
+      <joint name="housing_to_left_latch_pull">
+        <state_interface name="position"/>
+      </joint>
+      <joint name="housing_to_right_latch_pull">
+        <state_interface name="position"/>
+      </joint>
+      <joint name="lorge/hatch_outer_frame_face_joint">
+        <state_interface name="position"/>
+      </joint>
+      <joint name="lorge/external_rotary_joint">
+        <state_interface name="position"/>
+      </joint>
+      <joint name="lorge/external_rotary_handle_joint">
+        <state_interface name="position"/>
+      </joint>
+      <joint name="lorge/internal_rotary_joint">
+        <state_interface name="position"/>
+      </joint>
+      <joint name="lorge/internal_rotary_handle_joint">
+        <state_interface name="position"/>
+      </joint>
+      <joint name="bench_lid_joint">
+        <state_interface name="position"/>
+      </joint>
+      <joint name="cabinet_1_joint">
+        <state_interface name="position"/>
+      </joint>
+      <joint name="cabinet_2_joint">
+        <state_interface name="position"/>
+      </joint>
+      <joint name="round_latch_joint">
+        <state_interface name="position"/>
+      </joint>
+      <joint name="push_latch_button_joint">
+        <state_interface name="position"/>
+      </joint>
+      <joint name="push_latch_handle_joint">
+        <state_interface name="position"/>
+      </joint>
+      <joint name="cabinet_3_joint">
+        <state_interface name="position"/>
+      </joint>
+      <joint name="cabinet_4_joint">
+        <state_interface name="position"/>
+      </joint>
+      <joint name="paddle_latch_handle_joint">
+        <state_interface name="position"/>
+      </joint>
+      <joint name="drawer_1_joint">
+        <state_interface name="position"/>
+      </joint>
+      <joint name="drawer_2_joint">
+        <state_interface name="position"/>
+      </joint>
+      <joint name="recessed_latch_handle_joint">
+        <state_interface name="position"/>
+      </joint>
+    </xacro:if>
+
+  </ros2_control>
+</robot>

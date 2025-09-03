@@ -1,0 +1,35 @@
+<mujoco model="grab_handle">
+  <default>
+    <default class="visual">
+      <geom group="2" type="mesh" contype="0" conaffinity="0"/>
+    </default>
+    <default class="collision">
+      <geom group="3" type="mesh"/>
+    </default>
+  </default>
+  <asset>
+    <material name="new_mat_color.016" specular="0.5" shininess="0.36" rgba="0.000000 0.000000 1.000000 1.000000"/>
+    <mesh file="grab_handle.obj"/>
+    <mesh file="grab_handle_collision_0.obj"/>
+    <mesh file="grab_handle_collision_1.obj"/>
+    <mesh file="grab_handle_collision_2.obj"/>
+    <mesh file="grab_handle_collision_3.obj"/>
+    <mesh file="grab_handle_collision_4.obj"/>
+    <mesh file="grab_handle_collision_5.obj"/>
+    <mesh file="grab_handle_collision_6.obj"/>
+    <mesh file="grab_handle_collision_7.obj"/>
+  </asset>
+  <worldbody>
+    <body name="grab_handle">
+      <geom material="new_mat_color.016" mesh="grab_handle" class="visual"/>
+      <geom mesh="grab_handle_collision_0" rgba="0.7362393336615551 0.32774541240575106 0.8759338436675915 1" class="collision"/>
+      <geom mesh="grab_handle_collision_1" rgba="0.419020889544657 0.8282883967983362 0.6849115066188258 1" class="collision"/>
+      <geom mesh="grab_handle_collision_2" rgba="0.3284523641665479 0.7713303210508883 0.2826825124491005 1" class="collision"/>
+      <geom mesh="grab_handle_collision_3" rgba="0.4882927890571732 0.4726966119477215 0.8696375368021868 1" class="collision"/>
+      <geom mesh="grab_handle_collision_4" rgba="0.49631131982885646 0.9764813094904085 0.4501036308433629 1" class="collision"/>
+      <geom mesh="grab_handle_collision_5" rgba="0.7102210154635407 0.26526570669981253 0.9472556119532515 1" class="collision"/>
+      <geom mesh="grab_handle_collision_6" rgba="0.873602737080983 0.610283940837291 0.4222249640481468 1" class="collision"/>
+      <geom mesh="grab_handle_collision_7" rgba="0.1712850611561645 0.8602855438449819 0.9376714912658347 1" class="collision"/>
+    </body>
+  </worldbody>
+</mujoco>
