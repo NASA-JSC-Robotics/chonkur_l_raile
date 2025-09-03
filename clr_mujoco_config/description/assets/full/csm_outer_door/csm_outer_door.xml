@@ -1,0 +1,20 @@
+<mujoco model="csm_outer_door">
+  <default>
+    <default class="visual">
+      <geom group="2" type="mesh" contype="0" conaffinity="0"/>
+    </default>
+    <default class="collision">
+      <geom group="3" type="mesh"/>
+    </default>
+  </default>
+  <asset>
+    <material name="new_mat_color.006" specular="0.5" shininess="0.36" rgba="0.500000 0.500000 0.500000 1.000000"/>
+    <mesh file="csm_outer_door.obj"/>
+  </asset>
+  <worldbody>
+    <body name="csm_outer_door">
+      <geom material="new_mat_color.006" mesh="csm_outer_door" class="visual"/>
+      <geom mesh="csm_outer_door" class="collision"/>
+    </body>
+  </worldbody>
+</mujoco>

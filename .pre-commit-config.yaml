@@ -29,7 +29,7 @@ repos:
         args: ["--unsafe"]
       - id: debug-statements
       - id: end-of-file-fixer
-        exclude: (\.(svg|stl|dae))$
+        exclude: (\.(svg|stl|dae|obj))$
       - id: mixed-line-ending
       - id: trailing-whitespace
       - id: fix-byte-order-marker

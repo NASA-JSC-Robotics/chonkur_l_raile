@@ -1,0 +1,20 @@
+<mujoco model="rail_des_live_body">
+  <default>
+    <default class="visual">
+      <geom group="2" type="mesh" contype="0" conaffinity="0"/>
+    </default>
+    <default class="collision">
+      <geom group="3" type="mesh"/>
+    </default>
+  </default>
+  <asset>
+    <material name="DEFAULT_MTL.001" specular="0.0" shininess="0.25" rgba="0.800000 0.800000 0.800000 1.000000"/>
+    <mesh file="rail_des_live_body.obj"/>
+  </asset>
+  <worldbody>
+    <body name="rail_des_live_body">
+      <geom material="DEFAULT_MTL.001" mesh="rail_des_live_body" class="visual"/>
+      <geom mesh="rail_des_live_body" class="collision"/>
+    </body>
+  </worldbody>
+</mujoco>

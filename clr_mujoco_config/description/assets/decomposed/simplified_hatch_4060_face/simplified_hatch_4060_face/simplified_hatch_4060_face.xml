@@ -1,0 +1,53 @@
+<mujoco model="simplified_hatch_4060_face">
+  <default>
+    <default class="visual">
+      <geom group="2" type="mesh" contype="0" conaffinity="0"/>
+    </default>
+    <default class="collision">
+      <geom group="3" type="mesh"/>
+    </default>
+  </default>
+  <asset>
+    <material name="new_mat_color.013" specular="0.5" shininess="0.36" rgba="0.850000 0.850000 0.850000 1.000000"/>
+    <mesh file="simplified_hatch_4060_face.obj"/>
+    <mesh file="simplified_hatch_4060_face_collision_0.obj"/>
+    <mesh file="simplified_hatch_4060_face_collision_1.obj"/>
+    <mesh file="simplified_hatch_4060_face_collision_2.obj"/>
+    <mesh file="simplified_hatch_4060_face_collision_3.obj"/>
+    <mesh file="simplified_hatch_4060_face_collision_4.obj"/>
+    <mesh file="simplified_hatch_4060_face_collision_5.obj"/>
+    <mesh file="simplified_hatch_4060_face_collision_6.obj"/>
+    <mesh file="simplified_hatch_4060_face_collision_7.obj"/>
+    <mesh file="simplified_hatch_4060_face_collision_8.obj"/>
+    <mesh file="simplified_hatch_4060_face_collision_9.obj"/>
+    <mesh file="simplified_hatch_4060_face_collision_10.obj"/>
+    <mesh file="simplified_hatch_4060_face_collision_11.obj"/>
+    <mesh file="simplified_hatch_4060_face_collision_12.obj"/>
+    <mesh file="simplified_hatch_4060_face_collision_13.obj"/>
+    <mesh file="simplified_hatch_4060_face_collision_14.obj"/>
+    <mesh file="simplified_hatch_4060_face_collision_15.obj"/>
+    <mesh file="simplified_hatch_4060_face_collision_16.obj"/>
+  </asset>
+  <worldbody>
+    <body name="simplified_hatch_4060_face">
+      <geom material="new_mat_color.013" mesh="simplified_hatch_4060_face" class="visual"/>
+      <geom mesh="simplified_hatch_4060_face_collision_0" rgba="0.23114486446067817 0.6443186093814433 0.8157719947585795 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_1" rgba="0.2852520794576222 0.46912330212483255 0.3072842247308417 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_2" rgba="0.8530487553194221 0.3179077121549385 0.23740639023622678 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_3" rgba="0.07340089161331187 0.7690064037558115 0.5232351646385106 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_4" rgba="0.8207971783058254 0.7997273434766986 0.28541637573374656 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_5" rgba="0.09108419656598521 0.8230172962002147 0.08877060058664643 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_6" rgba="0.059661663835094636 0.9619791835456151 0.7472274800485074 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_7" rgba="0.5340204678381737 0.9314474642834248 0.4947627062666987 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_8" rgba="0.4415129038437209 0.5894484087112726 0.41516833366825245 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_9" rgba="0.6719627657156616 0.045795911128130085 0.3262505648734221 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_10" rgba="0.1850151106290987 0.080190100312305 0.07913458759468173 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_11" rgba="0.12755441599340722 0.0842661915764441 0.28419829840453115 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_12" rgba="0.23194550890158738 0.7941711635697464 0.5874596319845911 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_13" rgba="0.5416684517874121 0.5098106431971308 0.8337395310702412 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_14" rgba="0.10595901412844377 0.4867124120047853 0.7268166726136124 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_15" rgba="0.10898509725837724 0.08967220493069572 0.3839657593086372 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_16" rgba="0.005237806879949236 0.24284666452008263 0.6224166242241426 1" class="collision"/>
+    </body>
+  </worldbody>
+</mujoco>
