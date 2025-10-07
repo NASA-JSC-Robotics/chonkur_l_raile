@@ -1,12 +1,12 @@
-import os
-from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch_ros.actions import Node
 from launch.substitutions import (
     Command,
     FindExecutable,
-    FindPackageShare,
     PathJoinSubstitution,
+)
+from launch_ros.substitutions import (
+    FindPackageShare,
 )
 
 
@@ -14,9 +14,10 @@ def generate_launch_description():
 
     clr_mujoco_package_name = "clr_mujoco_config"
     clr_mujoco_description_file = "clr_xacro.urdf"
-    clr_mujoco_package_path = get_package_share_directory(clr_mujoco_package_name)
 
-    mujoco_inputs = os.path.join(clr_mujoco_package_path, "description", "mujoco_inputs.xml")
+    mujoco_inputs = PathJoinSubstitution(
+        [FindPackageShare(clr_mujoco_package_name), "description", "mujoco_inputs.xml"]
+    )
 
     # Main robot description for CLR
     robot_description_content = Command(
