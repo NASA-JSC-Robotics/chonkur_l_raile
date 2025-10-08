@@ -995,7 +995,7 @@
     <position class="size2" name="wrist_1_joint" joint="wrist_1_joint"/>
     <position class="size2" name="wrist_2_joint" joint="wrist_2_joint"/>
     <position class="size2" name="wrist_3_joint" joint="wrist_3_joint"/>
-    <position tendon="split" name="finger_1_joint" kp="7500" dampratio="3.0" ctrlrange="0.0 0.025" forcerange="-100 100"/>
+    <position tendon="split" name="finger_1_joint" kp="10000" dampratio="3.0" ctrlrange="0.0 0.025" forcerange="-100 100"/>
   </actuator>
   <tendon>
     <fixed name="split">
