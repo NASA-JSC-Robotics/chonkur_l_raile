@@ -79,6 +79,14 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
+            "control_node_package",
+            default_value="controller_manager",
+            description="To support mujoco, "
+            "optionally launch a ros2_control_node from a different package.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
             "model_env",
             default_value="false",
             description="If using a URDF from the clr_imetro_environments package, "
@@ -128,6 +136,7 @@ def generate_launch_description():
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
     robot_description_package = LaunchConfiguration("robot_description_package")
     robot_description_file = LaunchConfiguration("robot_description_file")
+    control_node_package = LaunchConfiguration("control_node_package")
     model_env = LaunchConfiguration("model_env")
     use_sim_time = LaunchConfiguration("use_sim_time")
     is_sim = LaunchConfiguration("is_sim")
@@ -169,7 +178,7 @@ def generate_launch_description():
 
     # # start the controller manager node with all of the controller config files
     control_node = Node(
-        package="controller_manager",
+        package=control_node_package,
         executable="ros2_control_node",
         namespace=namespace,
         # allow_substs allows tf_prefix to be pulled in
