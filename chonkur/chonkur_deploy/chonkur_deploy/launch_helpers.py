@@ -42,20 +42,23 @@ def spawn_controller(
     """
     inactive_flags = ["--inactive"] if inactive else []
 
+    namespace_args = []
+    if namespace:
+        namespace_args = ["--namespace", namespace]
+
     return Node(
         package="controller_manager",
         executable="spawner",
         name=controller_name,
         arguments=[
+            controller_name,
             "--controller-manager",
             controller_manager_name,
             "--controller-manager-timeout",
             str(timeout),
-            "--namespace",
-            namespace,
-            controller_name,
         ]
-        + inactive_flags,
+        + inactive_flags
+        + namespace_args,
         output="both",
         condition=condition,
     )
