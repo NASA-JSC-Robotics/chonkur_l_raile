@@ -81,8 +81,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "control_node_package",
             default_value="controller_manager",
-            description="To support mujoco, "
-            "optionally launch a ros2_control_node from a different package.",
+            description="To support mujoco, " "optionally launch a ros2_control_node from a different package.",
         )
     )
     declared_arguments.append(
