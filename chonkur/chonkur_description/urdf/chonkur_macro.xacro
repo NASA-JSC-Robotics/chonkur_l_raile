@@ -94,7 +94,7 @@
     <xacro:endeff_stack
       tf_prefix="${tf_prefix}"
       parent="${tf_prefix}tool0">
-      <origin xyz="0 0 0" rpy="0 0 ${radians(90)}"/>
+      <origin xyz="0 0 0" rpy="0 0 ${radians(-90)}"/>
     </xacro:endeff_stack>
 
     <xacro:dextivr_hande
