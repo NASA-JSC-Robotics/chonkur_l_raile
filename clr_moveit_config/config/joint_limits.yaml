@@ -12,7 +12,7 @@ joint_limits:
   ewellix_lift_lower_to_higher:
     has_position_limits: true
     has_velocity_limits: true
-    # This is a very hacky solution to accomodate idiosycrasies in simulation.
+    # This is a very hacky solution to accommodate idiosycrasies in simulation.
     min_position: -0.001
     max_velocity: 0.03
     has_acceleration_limits: true
