@@ -12,7 +12,7 @@
         <chain base_link="ewellix_lift_lower_link" tip_link="ewellix_lift_tip_link" />
       </group>
       <group name="clr">
-        <chain base_link="vention_rail_base_link" tip_link="tool0" />
+        <chain base_link="vention_rail_base_link" tip_link="grasp_frame" />
       </group>
       <group name="lr">
         <group name="rail" />
