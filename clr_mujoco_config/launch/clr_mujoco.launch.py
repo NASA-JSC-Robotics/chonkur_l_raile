@@ -19,6 +19,7 @@
 
 from launch import LaunchDescription
 from chonkur_deploy.launch_helpers import include_launch_file
+from launch_ros.actions import Node
 
 
 def generate_launch_description():
@@ -38,4 +39,15 @@ def generate_launch_description():
         }.items(),
     )
 
-    return LaunchDescription(declared_arguments + [clr_launch])
+    point_cloud_proc = Node(
+        package='depth_image_proc',
+        executable='point_cloud_xyzrgb_node',
+        remappings=[
+            ('rgb/image_rect_color', '/wrist_mounted_camera/color/image_raw'),
+            ('rgb/camera_info', '/wrist_mounted_camera/color/camera_info'),
+            ('depth_registered/image_rect', '/wrist_mounted_camera/aligned_depth_to_color/image_raw'),
+            ('points', '/wrist_mounted_camera/depth/color/points'),
+        ],
+    )
+
+    return LaunchDescription(declared_arguments + [clr_launch, point_cloud_proc])
