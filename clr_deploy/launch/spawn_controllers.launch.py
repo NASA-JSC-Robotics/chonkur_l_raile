@@ -73,6 +73,7 @@ def generate_launch_description():
     lift_rail_controller = spawn_controller("lift_rail_joint_trajectory_controller", namespace=namespace, inactive=True)
     clr_controller = spawn_controller("clr_joint_trajectory_controller", namespace=namespace, inactive=True)
     streaming_controller = spawn_controller("streaming_controller", namespace=namespace, inactive=True)
+    clr_servo_controller = spawn_controller("servo_controller", namespace=namespace, inactive=True)
 
     controller_spawners = [
         lift_rail_controller,
@@ -104,6 +105,7 @@ def generate_launch_description():
         chonkur_controllers,
         ewellix_controllers,
         vention_controllers,
+        clr_servo_controller,
     ]
 
     return LaunchDescription(declared_arguments + controller_spawners + spawner_launch_files)
