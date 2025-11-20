@@ -29,7 +29,7 @@ def generate_launch_description():
         launch_arguments={
             "camera_name": "wrist_mounted_camera",
             "camera_namespace": "",
-            "serial_no": "'938422070949'",
+            "serial_no": "'207122078580'",
             "rgb_camera.profile": "1280,720,30",
             "initial_reset": "true",
             "pointcloud.enable": "false",
