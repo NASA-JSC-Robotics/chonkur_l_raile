@@ -29,7 +29,7 @@ def generate_launch_description():
         launch_arguments={
             "camera_name": "lift_camera",
             "camera_namespace": "",
-            "serial_no": "'207122078580'",
+            "serial_no": "'938422070949'",
             "rgb_camera.profile": "1280,720,30",
             "initial_reset": "true",
             "pointcloud.enable": "false",
