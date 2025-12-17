@@ -13,6 +13,7 @@ install(
     description
     launch
     urdf
+    resources
   DESTINATION
     share/${PROJECT_NAME}
 )

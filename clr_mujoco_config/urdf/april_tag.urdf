@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="clr">
+	<link name="world"/>
+
+	<joint name="at_joint" type="fixed">
+		<parent link="world"/>
+		<child link="at"/>
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+	</joint>
+	<!-- CLR BASE -->
+	<link name="at">
+		<visual>
+			<geometry>
+				<mesh filename="package://clr_mujoco_config/urdf/AprilTag.dae"/>
+			</geometry>
+		</visual>
+	</link>
+
+	<joint name="at_joint2" type="fixed">
+		<parent link="at"/>
+		<child link="at2"/>
+		<origin rpy="0 0 0" xyz="0.1 0 0"/>
+	</joint>
+
+	<link name="at2">
+		<visual>
+			<geometry>
+				<mesh filename="package://clr_mujoco_config/urdf/AprilTag2.dae"/>
+			</geometry>
+		</visual>
+	</link>
+
+</robot>

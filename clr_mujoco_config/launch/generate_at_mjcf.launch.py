@@ -13,27 +13,15 @@ from launch_ros.substitutions import (
 def generate_launch_description():
 
     clr_mujoco_package_name = "clr_mujoco_config"
-    clr_mujoco_description_file = "clr_xacro.urdf"
-
-    mujoco_inputs = PathJoinSubstitution(
-        [FindPackageShare(clr_mujoco_package_name), "description", "mujoco_inputs.xml"]
-    )
-
     scene = PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "resources", "scene.xml"])
+    mujoco_inputs = PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "description", "at_inputs.xml"])
 
     # Main robot description for CLR
     robot_description_content = Command(
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
-            PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "urdf", clr_mujoco_description_file]),
-            " ",
-            # Grasp frames should not be converted to MJCF objects
-            "add_grasp_push_frames:=",
-            "false",
-            " ",
-            "model_env:=",
-            "true",
+            PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "urdf", "april_tag.urdf"]),
         ]
     )
 
