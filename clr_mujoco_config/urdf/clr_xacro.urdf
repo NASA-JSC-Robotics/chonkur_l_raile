@@ -170,6 +170,11 @@
       <joint name="lorge/hatch_outer_frame_face_joint">
         <state_interface name="position"/>
       </joint>
+
+      <joint name="lorge/latch_spring">
+        <state_interface name="position"/>
+      </joint>
+
       <joint name="lorge/external_rotary_joint">
         <state_interface name="position"/>
       </joint>
