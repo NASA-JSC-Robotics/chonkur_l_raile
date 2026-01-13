@@ -52,7 +52,7 @@ ros2 launch clr_mujoco_config clr_mujoco.launch.py
 # In another shell launch the moveit interface with sim parameters set
 ros2 launch clr_moveit_config clr_moveit.launch.py include_mockups_in_description:=true use_sim_time:=true
 ```
-### Citation
+## Citation
 
 This project falls under the purview of the iMETRO project. If you use this in your own work, please cite the following paper:
 
