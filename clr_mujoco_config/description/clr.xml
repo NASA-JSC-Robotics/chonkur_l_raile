@@ -633,7 +633,7 @@
     </body>
     <body name="lorge/hatch_latch_catch" pos="2.14892 -0.760758 1.31568">
       <inertial pos="0 0 0" mass="0.0671" diaginertia="4.345e-06 4.345e-06 4.345e-06"/>
-      <joint name="lorge/latch_spring" pos="0 0 0" axis="0 0 -1" type="slide" limited="true" range="0 0.027" springref="0.25" stiffness="15000" damping="2" armature="0.001" frictionloss="100.0" solreflimit="0.001 1" solimplimit="0.98 0.99 0.001"/>
+      <joint name="lorge/latch_spring" pos="0 0 0" axis="0 0 -1" type="slide" limited="true" range="0 0.035" springref="0.035" stiffness="10000" damping="2" armature="0.001"/>
       <geom size="0.03" type="sphere" class="collision"/>
       <site name="lorge/hatch_latch_catch" pos="0 0 0" quat="1.0 0 0 0"/>
     </body>
