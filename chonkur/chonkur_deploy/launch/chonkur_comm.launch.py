@@ -95,14 +95,6 @@ def generate_launch_description():
         output="screen",
     )
 
-    # ur_dashboard_client = include_launch_file(
-    #     package_name="ur_robot_driver",
-    #     launch_file="ur_dashboard_client.launch.py",
-    #     launch_arguments={
-    #         "robot_ip": robot_ip,
-    #     }.items(),
-    # )
-
     ur_dashboard_client = Node(
         package="ur_robot_driver",
         executable="dashboard_client",
