@@ -1,0 +1,19 @@
+<mujoco model="trigger">
+  <default>
+    <default class="visual">
+      <geom group="2" type="mesh" contype="0" conaffinity="0"/>
+    </default>
+    <default class="collision">
+      <geom group="3" type="mesh"/>
+    </default>
+  </default>
+  <asset>
+    <mesh file="trigger.obj"/>
+  </asset>
+  <worldbody>
+    <body name="trigger">
+      <geom mesh="trigger" class="visual"/>
+      <geom mesh="trigger" class="collision"/>
+    </body>
+  </worldbody>
+</mujoco>

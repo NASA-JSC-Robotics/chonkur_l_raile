@@ -1,0 +1,19 @@
+<mujoco model="top">
+  <default>
+    <default class="visual">
+      <geom group="2" type="mesh" contype="0" conaffinity="0"/>
+    </default>
+    <default class="collision">
+      <geom group="3" type="mesh"/>
+    </default>
+  </default>
+  <asset>
+    <mesh file="top.obj"/>
+  </asset>
+  <worldbody>
+    <body name="top">
+      <geom mesh="top" class="visual"/>
+      <geom mesh="top" class="collision"/>
+    </body>
+  </worldbody>
+</mujoco>
