@@ -43,7 +43,7 @@ ros2 launch clr_moveit_config clr_moveit.launch.py model_env:=true
 ```
 
 A MuJoCo simulation including the environment is available in [clr_mujoco_config](./clr_mujoco_config/README.md).
-Note that it requires the [MuJoCo ROS 2 simulation hardware interface](https://github.com/NASA-JSC-Robotics/mujoco_ros2_simulation) to run.
+Note that it requires the [MuJoCo ROS 2 simulation hardware interface](https://github.com/ros-controls/mujoco_ros2_control) to run.
 
 ```bash
 # Start the mujoco ros2 control-based simulation
