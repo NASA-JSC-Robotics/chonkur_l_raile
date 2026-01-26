@@ -16,7 +16,7 @@
   <exec_depend>rviz2</exec_depend>
   <exec_depend>urdf</exec_depend>
   <exec_depend>xacro</exec_depend>
-  <exec_depend>mujoco_ros2_simulation</exec_depend>
+  <exec_depend>mujoco_ros2_control</exec_depend>
   <exec_depend>depth_image_proc</exec_depend>
 
   <export>

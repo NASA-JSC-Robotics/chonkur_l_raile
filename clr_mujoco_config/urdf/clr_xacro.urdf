@@ -44,7 +44,7 @@
 
   <ros2_control name="MujocoSystem" type="system">
     <hardware>
-      <plugin>mujoco_ros2_simulation/MujocoSystemInterface</plugin>
+      <plugin>mujoco_ros2_control/MujocoSystemInterface</plugin>
       <param name="mujoco_model">$(find clr_mujoco_config)/description/scene.xml</param>
 
       <!-- Increase this parameter to run the sim faster than realtime. -->
