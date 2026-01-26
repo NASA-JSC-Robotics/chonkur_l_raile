@@ -19,9 +19,7 @@ def generate_launch_description():
         [FindPackageShare(clr_mujoco_package_name), "description", "mujoco_inputs.xml"]
     )
 
-    scene_xml = PathJoinSubstitution(
-        [FindPackageShare(clr_mujoco_package_name), "description", "scene.xml"]
-    )
+    scene_xml = PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "description", "scene.xml"])
 
     # Main robot description for CLR
     robot_description_content = Command(
@@ -52,7 +50,7 @@ def generate_launch_description():
             "--scene",
             scene_xml,
             "--convert_stl_to_obj",
-            "--save_only"
+            "--save_only",
         ],
     )
 
