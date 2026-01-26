@@ -54,7 +54,7 @@ ros2 launch clr_moveit_config clr_moveit.launch.py include_mockups_in_descriptio
 ```
 ## Citation
 
-This project falls under the purview of the iMETRO project. 
+This project falls under the purview of the iMETRO project.
 If you use this in your own work, please cite the following paper:
 
 ```bibtex
