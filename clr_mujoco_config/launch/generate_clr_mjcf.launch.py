@@ -19,6 +19,10 @@ def generate_launch_description():
         [FindPackageShare(clr_mujoco_package_name), "description", "mujoco_inputs.xml"]
     )
 
+    scene_xml = PathJoinSubstitution(
+        [FindPackageShare(clr_mujoco_package_name), "description", "scene.xml"]
+    )
+
     # Main robot description for CLR
     robot_description_content = Command(
         [
@@ -35,6 +39,7 @@ def generate_launch_description():
         ]
     )
 
+    # TODO: Generate this on the fly?
     make_mjcf_from_robot_description = Node(
         package="mujoco_ros2_control",
         executable="make_mjcf_from_robot_description.py",
@@ -44,7 +49,10 @@ def generate_launch_description():
             robot_description_content,
             "-m",
             mujoco_inputs,
-            "-c",  # convert stl to obj
+            "--scene",
+            scene_xml,
+            "--convert_stl_to_obj",
+            "--save_only"
         ],
     )
 
