@@ -27,7 +27,7 @@ For hardware we run the UR pendantless, which is a two part launch process:
 ```bash
 # To launch the hardware robot, first deploy the UR tools to activate the dashboard client
 # in its own long-lived shell.
-ros2 launch chonkur_deploy ur_tools.launch.py
+ros2 launch chonkur_deploy chonkur_comm.launch.py
 
 # Start the hardware interfaces for the rail, lift, and ChonkUR.
 ros2 launch clr_deploy clr_hw.launch.py
