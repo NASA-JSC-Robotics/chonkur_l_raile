@@ -44,7 +44,7 @@
 
   <ros2_control name="MujocoSystem" type="system">
     <hardware>
-      <plugin>mujoco_ros2_simulation/MujocoSystemInterface</plugin>
+      <plugin>mujoco_ros2_control/MujocoSystemInterface</plugin>
       <param name="mujoco_model">$(find clr_mujoco_config)/description/scene.xml</param>
 
       <!-- Increase this parameter to run the sim faster than realtime. -->
@@ -170,6 +170,11 @@
       <joint name="lorge/hatch_outer_frame_face_joint">
         <state_interface name="position"/>
       </joint>
+
+      <joint name="lorge/latch_spring">
+        <state_interface name="position"/>
+      </joint>
+
       <joint name="lorge/external_rotary_joint">
         <state_interface name="position"/>
       </joint>
