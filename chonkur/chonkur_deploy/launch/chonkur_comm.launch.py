@@ -27,9 +27,8 @@ from chonkur_deploy.launch_helpers import include_launch_file
 from ament_index_python.packages import get_package_share_directory
 
 
-
 def generate_launch_description():
-    
+
     # Declare arguments
     declared_arguments = []
     declared_arguments.append(
@@ -132,5 +131,3 @@ def generate_launch_description():
     nodes = [robot_state_helper_node, urscript_interface, ur_dashboard_client, hande_comm_node, ur_gui]
 
     return LaunchDescription(declared_arguments + nodes)
-
-
