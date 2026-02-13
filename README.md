@@ -26,7 +26,7 @@ For hardware we run the UR pendantless, which is a two part launch process:
 
 ```bash
 # To launch the hardware robot, first deploy the UR tools to activate the dashboard client
-# in its own long-lived shell.
+# in its own long-lived shell on the controls machine.
 ros2 launch chonkur_deploy chonkur_comm.launch.py
 
 # Start the hardware interfaces for the rail, lift, and ChonkUR.
@@ -52,6 +52,7 @@ ros2 launch clr_mujoco_config clr_mujoco.launch.py
 # In another shell launch the moveit interface with sim parameters set
 ros2 launch clr_moveit_config clr_moveit.launch.py include_mockups_in_description:=true use_sim_time:=true
 ```
+
 ## Citation
 
 This project falls under the purview of the iMETRO project.
