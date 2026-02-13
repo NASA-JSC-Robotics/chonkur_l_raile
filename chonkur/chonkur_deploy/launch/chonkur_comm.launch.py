@@ -64,8 +64,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "tool_tcp_port",
             default_value="54321",
-            description="Remote port that will be used for bridging the tool's serial device. "
-            "Only effective, if use_tool_communication is set to True.",
+            description="Remote port that will be used for bridging the tool's serial device.",
         )
     )
 
@@ -80,25 +79,18 @@ def generate_launch_description():
         package="ur_robot_driver",
         executable="robot_state_helper",
         name="ur_robot_state_helper",
-        output="screen",
+        output="both",
         parameters=[
             {"headless_mode": headless_mode},
             {"robot_ip": robot_ip},
         ],
     )
 
-    urscript_interface = Node(
-        package="ur_robot_driver",
-        executable="urscript_interface",
-        parameters=[{"robot_ip": robot_ip}],
-        output="screen",
-    )
-
     ur_dashboard_client = Node(
         package="ur_robot_driver",
         executable="dashboard_client",
         name="dashboard_client",
-        output="screen",
+        output="both",
         parameters=[{"robot_ip": robot_ip}],
     )
 
@@ -128,6 +120,6 @@ def generate_launch_description():
         }.items(),
     )
 
-    nodes = [robot_state_helper_node, urscript_interface, ur_dashboard_client, hande_comm_node, ur_gui]
+    nodes = [robot_state_helper_node, ur_dashboard_client, hande_comm_node, ur_gui]
 
     return LaunchDescription(declared_arguments + nodes)
