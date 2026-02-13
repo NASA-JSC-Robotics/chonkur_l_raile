@@ -202,6 +202,9 @@
     <mesh file="decomposed/simplified_hatch_4060_face/simplified_hatch_4060_face/simplified_hatch_4060_face_collision_0.obj" scale="1.0 1.0 1.0"/>
     <mesh file="decomposed/simplified_hatch_4060_face/simplified_hatch_4060_face/simplified_hatch_4060_face_collision_1.obj" scale="1.0 1.0 1.0"/>
     <mesh file="decomposed/simplified_hatch_4060_face/simplified_hatch_4060_face/simplified_hatch_4060_face_collision_2.obj" scale="1.0 1.0 1.0"/>
+    <mesh name="apriltag" content_type="model/obj" file="full/apriltag/apriltag.obj"/>
+    <texture type="2d" name="material_m36_0" file="assets/full/apriltag/material_m36_0.png"/>
+    <material name="material_m36_0" texture="material_m36_0" specular="0.4000000000000001" shininess="0.001"/>
     <mesh file="decomposed/simplified_hatch_4060_face/simplified_hatch_4060_face/simplified_hatch_4060_face_collision_3.obj" scale="1.0 1.0 1.0"/>
     <mesh file="decomposed/simplified_hatch_4060_face/simplified_hatch_4060_face/simplified_hatch_4060_face_collision_4.obj" scale="1.0 1.0 1.0"/>
     <mesh file="decomposed/simplified_hatch_4060_face/simplified_hatch_4060_face/simplified_hatch_4060_face_collision_5.obj" scale="1.0 1.0 1.0"/>
@@ -559,6 +562,7 @@
         <site name="lorge/internal_rotary_wheel" pos="0 0 0" quat="1.0 0 0 0"/>
       </body>
       <geom material="new_mat_color.013" mesh="simplified_hatch_4060_face" class="visual" pos="" quat=""/>
+      <geom pos="-0.1 -1 1.1" type="mesh" material="material_m36_0" contype="0" conaffinity="0" group="1" density="0" mesh="apriltag"/>
       <geom mesh="simplified_hatch_4060_face_collision_0" rgba="0.23114486446067817 0.6443186093814433 0.8157719947585795 1" class="collision" pos="" quat=""/>
       <geom mesh="simplified_hatch_4060_face_collision_1" rgba="0.2852520794576222 0.46912330212483255 0.3072842247308417 1" class="collision" pos="" quat=""/>
       <geom mesh="simplified_hatch_4060_face_collision_2" rgba="0.8530487553194221 0.3179077121549385 0.23740639023622678 1" class="collision" pos="" quat=""/>
