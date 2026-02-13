@@ -38,7 +38,9 @@
     <mesh name="ivr_hatch_frame_no_left" content_type="model/obj" file="decomposed/ivr_hatch_frame_no_left/ivr_hatch_frame_no_left.obj"/>
     <mesh name="hatch_4060_frame" content_type="model/obj" file="decomposed/hatch_4060_frame/hatch_4060_frame.obj"/>
     <mesh name="simplified_hatch_4060_face" content_type="model/obj" file="decomposed/simplified_hatch_4060_face/simplified_hatch_4060_face.obj"/>
-    <mesh name="apriltag" content_type="model/obj" file="full/apriltag.obj"/>
+    <mesh name="apriltag" content_type="model/obj" file="full/apriltag/apriltag.obj"/>
+    <texture type="2d" name="material_m36_0" file="full/apriltag/material_m36_0.png"/>
+    <material name="material_m36_0" texture="material_m36_0" specular="0.4000000000000001" shininess="0.001"/>
     <mesh name="crank_wheel" content_type="model/obj" file="full/crank_wheel.obj"/>
     <mesh name="crank_handle" content_type="model/obj" file="full/crank_handle.obj"/>
     <mesh name="grab_handle" content_type="model/obj" file="decomposed/grab_handle/grab_handle.obj"/>
@@ -198,7 +200,7 @@
       <inertial pos="-0.0271034 -0.626781 0.503828" quat="0.998067 -0.0358608 -0.0464364 0.0205011" mass="19.3438" diaginertia="6.25224 4.62674 2.75053"/>
       <joint name="lorge/hatch_outer_frame_face_joint" pos="0 0 0" axis="0 0 1" range="0 1.65806" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
       <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.85 0.85 0.85 1" mesh="simplified_hatch_4060_face"/>
-      <geom pos="-0.07 -1 1.1" type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="apriltag"/>
+      <geom pos="-0.1 -1 1.1" type="mesh" material="material_m36_0" contype="0" conaffinity="0" group="1" density="0" mesh="apriltag"/>
       <geom size="0.0127" pos="-0.0341587 -1.22925 0.666224" contype="0" conaffinity="0" group="1" density="0" rgba="1 1 1 0"/>
       <geom pos="-0.07 -0.9016 0.8021" quat="0 0 1 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0 0 1 1" mesh="grab_handle"/>
       <geom pos="-0.07 -1.0273 0.6887" quat="0 0 0.707107 0.707107" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0 0 1 1" mesh="grab_handle"/>
