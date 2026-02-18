@@ -30,7 +30,7 @@ For hardware we run the UR pendantless, which is a two part launch process:
 ros2 launch chonkur_deploy chonkur_comm.launch.py
 
 # On the console machine, launch the UR GUI, which handles most operations that normally occur on the UR pendant
-ros2 launch chonkur_deploy chonkur_gui.launch.py 
+ros2 launch chonkur_deploy chonkur_gui.launch.py
 
 # Back on the controls machine, after reading the UR arm
 # Start the hardware interfaces for the rail, lift, and ChonkUR
