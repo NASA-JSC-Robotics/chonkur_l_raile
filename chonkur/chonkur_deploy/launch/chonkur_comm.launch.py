@@ -109,17 +109,6 @@ def generate_launch_description():
         ],
     )
 
-    gui_config_path = os.path.join(get_package_share_directory("chonkur_deploy"), "config", "drt_ur_gui_config.yaml")
-
-    ur_gui = include_launch_file(
-        package_name="drt_ur_gui",
-        launch_file="one_arm.launch.py",
-        launch_arguments={
-            "ns": namespace,
-            "config_file_path": gui_config_path,
-        }.items(),
-    )
-
-    nodes = [robot_state_helper_node, ur_dashboard_client, hande_comm_node, ur_gui]
+    nodes = [robot_state_helper_node, ur_dashboard_client, hande_comm_node]
 
     return LaunchDescription(declared_arguments + nodes)
