@@ -26,6 +26,14 @@ def generate_launch_description():
 
     declared_arguments = []
 
+    Node(
+        package="mujoco_ros2_control",
+        executable="robot_description_to_mjcf.sh",
+        output="both",
+        emulate_tty=True,
+        arguments=["--publish_topic", "/mujoco_robot_description"],
+    )
+
     clr_launch = include_launch_file(
         package_name="clr_deploy",
         launch_file="control.launch.py",
