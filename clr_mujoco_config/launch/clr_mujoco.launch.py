@@ -20,18 +20,49 @@
 from launch import LaunchDescription
 from chonkur_deploy.launch_helpers import include_launch_file
 from launch_ros.actions import Node
+from launch.substitutions import (
+    Command,
+    FindExecutable,
+    PathJoinSubstitution,
+)
+from launch_ros.substitutions import (
+    FindPackageShare,
+)
 
 
 def generate_launch_description():
 
     declared_arguments = []
 
-    Node(
+    clr_mujoco_package_name = "clr_mujoco_config"
+    clr_mujoco_description_file = "clr_xacro.urdf"
+
+    mjcf_robot_description_content = Command(
+        [
+            PathJoinSubstitution([FindExecutable(name="xacro")]),
+            " ",
+            PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "urdf", clr_mujoco_description_file]),
+            # Grasp frames should not be converted to MJCF objects
+            " add_grasp_push_frames:=false",
+            " model_env:=true",
+        ]
+    )
+
+    generate_mjcf = Node(
         package="mujoco_ros2_control",
         executable="robot_description_to_mjcf.sh",
         output="both",
         emulate_tty=True,
-        arguments=["--publish_topic", "/mujoco_robot_description"],
+        arguments=[
+            "--publish_topic",
+            "/mujoco_robot_description",
+            "--robot_description",
+            mjcf_robot_description_content,
+            "--convert_stl_to_obj",
+            "--asset_dir",
+            # PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "description", "assets"]),
+            "/home/er4-user/ws/src/mjcf_data/assets",
+        ],
     )
 
     clr_launch = include_launch_file(
@@ -63,4 +94,4 @@ def generate_launch_description():
         ],
     )
 
-    return LaunchDescription(declared_arguments + [clr_launch, point_cloud_proc])
+    return LaunchDescription(declared_arguments + [generate_mjcf, clr_launch, point_cloud_proc])
