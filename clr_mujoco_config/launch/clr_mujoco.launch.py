@@ -20,11 +20,7 @@
 from launch import LaunchDescription
 from chonkur_deploy.launch_helpers import include_launch_file
 from launch_ros.actions import Node
-from launch.substitutions import (
-    Command,
-    FindExecutable,
-    PathJoinSubstitution,
-)
+from launch.substitutions import PathJoinSubstitution
 from launch_ros.substitutions import (
     FindPackageShare,
 )
@@ -35,18 +31,18 @@ def generate_launch_description():
     declared_arguments = []
 
     clr_mujoco_package_name = "clr_mujoco_config"
-    clr_mujoco_description_file = "clr_xacro.urdf"
+    # clr_mujoco_description_file = "clr_xacro.urdf"
 
-    mjcf_robot_description_content = Command(
-        [
-            PathJoinSubstitution([FindExecutable(name="xacro")]),
-            " ",
-            PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "urdf", clr_mujoco_description_file]),
-            # Grasp frames should not be converted to MJCF objects
-            " add_grasp_push_frames:=false",
-            " model_env:=true",
-        ]
-    )
+    # mjcf_robot_description_content = Command(
+    #     [
+    #         PathJoinSubstitution([FindExecutable(name="xacro")]),
+    #         " ",
+    #         PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "urdf", clr_mujoco_description_file]),
+    #         # Grasp frames should not be converted to MJCF objects
+    #         " add_grasp_push_frames:=false",
+    #         " model_env:=true",
+    #     ]
+    # )
 
     generate_mjcf = Node(
         package="mujoco_ros2_control",

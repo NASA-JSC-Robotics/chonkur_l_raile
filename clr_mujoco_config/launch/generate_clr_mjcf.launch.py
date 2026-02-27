@@ -15,11 +15,11 @@ def generate_launch_description():
     clr_mujoco_package_name = "clr_mujoco_config"
     clr_mujoco_description_file = "clr_xacro.urdf"
 
-    mujoco_inputs = PathJoinSubstitution(
-        [FindPackageShare(clr_mujoco_package_name), "description", "mujoco_inputs.xml"]
-    )
+    # mujoco_inputs = PathJoinSubstitution(
+    #     [FindPackageShare(clr_mujoco_package_name), "description", "mujoco_inputs.xml"]
+    # )
 
-    scene_xml = PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "description", "scene.xml"])
+    # scene_xml = PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "description", "scene.xml"])
 
     # Main robot description for CLR
     robot_description_content = Command(
