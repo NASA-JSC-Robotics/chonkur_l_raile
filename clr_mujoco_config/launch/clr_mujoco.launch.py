@@ -56,12 +56,12 @@ def generate_launch_description():
         arguments=[
             "--publish_topic",
             "/mujoco_robot_description",
-            "--robot_description",
-            mjcf_robot_description_content,
+            # TODO: What to do about this? Too long of shell script
+            # "--robot_description",
+            # mjcf_robot_description_content,
             "--convert_stl_to_obj",
             "--asset_dir",
-            # PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "description", "assets"]),
-            "/home/er4-user/ws/src/mjcf_data/assets",
+            PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "description", "assets"]),
         ],
     )
 

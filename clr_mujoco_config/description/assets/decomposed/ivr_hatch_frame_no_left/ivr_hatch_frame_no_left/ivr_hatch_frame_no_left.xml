@@ -8,7 +8,7 @@
     </default>
   </default>
   <asset>
-    <material name="new_mat_color.011" specular="0.5" shininess="0.36" rgba="0.850000 0.850000 0.850000 1.000000"/>
+    <material name="mtl_m33" specular="0.20000000000000004" shininess="1.0" rgba="0.85098039 0.85098039 0.85098039 1.0"/>
     <mesh file="ivr_hatch_frame_no_left.obj"/>
     <mesh file="ivr_hatch_frame_no_left_collision_0.obj"/>
     <mesh file="ivr_hatch_frame_no_left_collision_1.obj"/>
@@ -39,51 +39,39 @@
     <mesh file="ivr_hatch_frame_no_left_collision_26.obj"/>
     <mesh file="ivr_hatch_frame_no_left_collision_27.obj"/>
     <mesh file="ivr_hatch_frame_no_left_collision_28.obj"/>
-    <mesh file="ivr_hatch_frame_no_left_collision_29.obj"/>
-    <mesh file="ivr_hatch_frame_no_left_collision_30.obj"/>
-    <mesh file="ivr_hatch_frame_no_left_collision_31.obj"/>
-    <mesh file="ivr_hatch_frame_no_left_collision_32.obj"/>
-    <mesh file="ivr_hatch_frame_no_left_collision_33.obj"/>
-    <mesh file="ivr_hatch_frame_no_left_collision_34.obj"/>
   </asset>
   <worldbody>
     <body name="ivr_hatch_frame_no_left">
-      <geom material="new_mat_color.011" mesh="ivr_hatch_frame_no_left" class="visual"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_0" rgba="0.747565022403924 0.5811025604129177 0.39863989658586463 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_1" rgba="0.4907429738464193 0.19333450685549636 0.3391358132579273 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_2" rgba="0.2114763669648957 0.06696154620536332 0.4024747661266792 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_3" rgba="0.6126755396663088 0.5917442660927049 0.3306716530955236 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_4" rgba="0.7037451358651751 0.3537681447851906 0.6899349971864484 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_5" rgba="0.5059299741750148 0.6030062156478219 0.09318993967972844 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_6" rgba="0.25524737098137384 0.48135602202671923 0.6513243597138259 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_7" rgba="0.2561790482771171 0.8020512152938265 0.5087135286370061 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_8" rgba="0.024667950476040867 0.23445751347050503 0.4935862459528615 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_9" rgba="0.14085805997897893 0.855291884754799 0.8769166753048641 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_10" rgba="0.07242214505032252 0.8858825374058815 0.2903792823431417 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_11" rgba="0.8689474990309304 0.37883593325226184 0.0732661826499239 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_12" rgba="0.7425318275299496 0.08077599957997539 0.8736771307600341 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_13" rgba="0.482979598723152 0.5962120671148253 0.4404507767618826 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_14" rgba="0.3549848013666079 0.6043522723949653 0.9063144139137692 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_15" rgba="0.15379830876421718 0.45834124099484375 0.36895202019510687 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_16" rgba="0.8145876747053109 0.8341368464925749 0.5885777123143344 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_17" rgba="0.6108723612901213 0.6982407889408344 0.700261182474456 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_18" rgba="0.6761253327133122 0.9050120845559738 0.4717358240333249 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_19" rgba="0.9723569057777401 0.8141790145820498 0.8412746835817232 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_20" rgba="0.6897745549676757 0.047907111576980466 0.8907193146215807 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_21" rgba="0.40542224383931214 0.5165537326663795 0.9436579170783069 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_22" rgba="0.8267355959057291 0.9748800118596148 0.05480406538408511 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_23" rgba="0.4631965713430882 0.9040599375833752 0.9892327633054461 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_24" rgba="0.7264483587293863 0.9946157693169989 0.953086389998544 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_25" rgba="0.05956570379590276 0.10467085905585882 0.5556770386053173 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_26" rgba="0.5305816166259137 0.11510594294982524 0.8067435333333086 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_27" rgba="0.4543650624648766 0.8847861610147987 0.26177749907931114 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_28" rgba="0.7498282338591974 0.6455435061630438 0.041188394225811775 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_29" rgba="0.9558762650872077 0.3503444895447895 0.5205864572304483 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_30" rgba="0.45701184117849425 0.2233776651284295 0.5802301021060862 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_31" rgba="0.5292052667092715 0.5974690237399481 0.8715989468206663 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_32" rgba="0.8285755695934741 0.38488927482106416 0.12421016262773754 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_33" rgba="0.5431923802284445 0.5125125552506784 0.8647952492938477 1" class="collision"/>
-      <geom mesh="ivr_hatch_frame_no_left_collision_34" rgba="0.48047399390549705 0.19294119839792423 0.7964482576613721 1" class="collision"/>
+      <geom material="mtl_m33" mesh="ivr_hatch_frame_no_left" class="visual"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_0" rgba="0.4721063351027994 0.6002038016224245 0.04638489051071282 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_1" rgba="0.4583808324238964 0.08440412119620688 0.690348275954232 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_2" rgba="0.6016076421505783 0.6425542583042524 0.18359219250866365 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_3" rgba="0.9061521901315387 0.3028130209034744 0.5358097569005693 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_4" rgba="0.9391100216791743 0.6864648610501471 0.7227880207278679 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_5" rgba="0.8365027156809146 0.03200607098131292 0.5227550066723183 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_6" rgba="0.8826692703129664 0.7084815301395883 0.7261844131129739 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_7" rgba="0.28115125153127063 0.5247745060520503 0.9558798748736583 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_8" rgba="0.5827638487561828 0.1874143328920045 0.4056140872248597 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_9" rgba="0.18127528188955522 0.41045567125180904 0.9925459872040227 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_10" rgba="0.1842057473695189 0.694591083064771 0.17203905285716925 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_11" rgba="0.19238484943635692 0.2696443834641675 0.3384464332046555 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_12" rgba="0.8503455926579984 0.10073069594419615 0.4142776379842429 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_13" rgba="0.06056270601025415 0.37299711479185826 0.7387082352275975 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_14" rgba="0.4058320396642009 0.9392095712311362 0.7493789796149238 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_15" rgba="0.7154818787672819 0.015578709454956874 0.9183798002528708 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_16" rgba="0.13853441803377842 0.9626181011598463 0.16878537479203315 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_17" rgba="0.626093529704679 0.6877114517002337 0.2473616864554098 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_18" rgba="0.7304941101050609 0.8563977602034536 0.3317424126094668 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_19" rgba="0.37540835679984597 0.14346976034809344 0.062041029989949426 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_20" rgba="0.3675140571526 0.5799870932211355 0.7503670696011995 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_21" rgba="0.025139648062581288 0.3977433216877486 0.7392137113227341 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_22" rgba="0.10493776016773926 0.10614468877253325 0.04472604824878368 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_23" rgba="0.4363518990657598 0.05962961846028669 0.5998351412533642 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_24" rgba="0.11949673165373109 0.3608712091967423 0.2700790251847257 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_25" rgba="0.3919680897726271 0.7981857730264386 0.4493923179596231 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_26" rgba="0.8159416984161316 0.7876651566427413 0.1019505275397995 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_27" rgba="0.7006670695742027 0.7109875172822671 0.5903172011749601 1" class="collision"/>
+      <geom mesh="ivr_hatch_frame_no_left_collision_28" rgba="0.6794705129429084 0.3654819376762224 0.7131922077946516 1" class="collision"/>
     </body>
   </worldbody>
 </mujoco>

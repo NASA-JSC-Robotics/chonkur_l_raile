@@ -43,12 +43,8 @@ def generate_launch_description():
         executable="make_mjcf_from_robot_description.py",
         output="screen",
         arguments=[
-            "-r",
+            "--robot_description",
             robot_description_content,
-            "-m",
-            mujoco_inputs,
-            "--scene",
-            scene_xml,
             "--convert_stl_to_obj",
             "--save_only",
         ],

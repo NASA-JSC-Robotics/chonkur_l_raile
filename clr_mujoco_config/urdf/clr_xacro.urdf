@@ -12,6 +12,7 @@
 
   <xacro:include filename="$(find clr_imetro_environments)/urdf/clr_trainer_multi_hatch_macro.xacro"/>
   <xacro:include filename="$(find clr_description)/urdf/clr_macro.xacro"/>
+  <xacro:include filename="$(find ctb)/urdf/ctb_macro.xacro"/>
 
   <link name="world" />
 
@@ -42,6 +43,9 @@
       generate_ros2_control_tag="false"/>
   </xacro:if>
 
+  <xacro:ctb prefix="" parent="world">
+    <origin xyz="0.8 0.8 0.25" rpy="0 0 ${radians(90)}"/>
+  </xacro:ctb>
 
   <mujoco_inputs>
 
@@ -181,6 +185,7 @@
       <decompose_mesh mesh_name="ivr_hatch_frame_no_left" threshold="0.05"/>
       <decompose_mesh mesh_name="hatch_4060_frame" threshold="0.05"/>
       <decompose_mesh mesh_name="bench_lid" threshold="0.05"/>
+      <decompose_mesh mesh_name="ctb_handle" threshold="0.01"/>
 
       <!-- The camera with the specified values will be added at the specified site name. -->
       <!-- The position and quaterinion will be filled in by the converter -->

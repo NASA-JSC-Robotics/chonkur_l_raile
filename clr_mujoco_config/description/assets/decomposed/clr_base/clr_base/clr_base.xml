@@ -8,7 +8,7 @@
     </default>
   </default>
   <asset>
-    <material name="DEFAULT_MTL" specular="0.0" shininess="0.25" rgba="0.800000 0.800000 0.800000 1.000000"/>
+    <material name="material_m0_0" specular="0.20000000000000004" shininess="1.0" rgba="0.80000000 0.80000000 0.80000000 1.0"/>
     <mesh file="clr_base.obj"/>
     <mesh file="clr_base_collision_0.obj"/>
     <mesh file="clr_base_collision_1.obj"/>
@@ -50,50 +50,52 @@
     <mesh file="clr_base_collision_37.obj"/>
     <mesh file="clr_base_collision_38.obj"/>
     <mesh file="clr_base_collision_39.obj"/>
+    <mesh file="clr_base_collision_40.obj"/>
   </asset>
   <worldbody>
     <body name="clr_base">
-      <geom material="DEFAULT_MTL" mesh="clr_base" class="visual"/>
-      <geom mesh="clr_base_collision_0" rgba="0.607701974822334 0.5514769929432431 0.9365764613237132 1" class="collision"/>
-      <geom mesh="clr_base_collision_1" rgba="0.5262274436951084 0.8043941727099488 0.6743277335428575 1" class="collision"/>
-      <geom mesh="clr_base_collision_2" rgba="0.866390710011528 0.3615566569493255 0.03491160881706035 1" class="collision"/>
-      <geom mesh="clr_base_collision_3" rgba="0.5955406942049135 0.3914815157672963 0.4345757861152578 1" class="collision"/>
-      <geom mesh="clr_base_collision_4" rgba="0.2323441227870383 0.8506160532463379 0.9730474493670331 1" class="collision"/>
-      <geom mesh="clr_base_collision_5" rgba="0.24727657450507456 0.511515824761385 0.569774410655175 1" class="collision"/>
-      <geom mesh="clr_base_collision_6" rgba="0.6690358044219527 0.5099292174627359 0.6520544585676621 1" class="collision"/>
-      <geom mesh="clr_base_collision_7" rgba="0.28870791293352516 0.3415730166246872 0.532745081109575 1" class="collision"/>
-      <geom mesh="clr_base_collision_8" rgba="0.07279135401927317 0.10901566815764607 0.8311010939481268 1" class="collision"/>
-      <geom mesh="clr_base_collision_9" rgba="0.6424990840731785 0.8561764610048896 0.511733708060231 1" class="collision"/>
-      <geom mesh="clr_base_collision_10" rgba="0.9983926564699527 0.0486964380171383 0.8149228626870478 1" class="collision"/>
-      <geom mesh="clr_base_collision_11" rgba="0.952826027408708 0.5381282237606081 0.773277831942304 1" class="collision"/>
-      <geom mesh="clr_base_collision_12" rgba="0.3574420778011874 0.49805760728639337 0.9554011083996374 1" class="collision"/>
-      <geom mesh="clr_base_collision_13" rgba="0.6632290058051744 0.18026241233724416 0.7563254774590783 1" class="collision"/>
-      <geom mesh="clr_base_collision_14" rgba="0.07924257484431785 0.4248008859028164 0.28622217013363593 1" class="collision"/>
-      <geom mesh="clr_base_collision_15" rgba="0.7043497677871964 0.1654839530772767 0.5392667183861928 1" class="collision"/>
-      <geom mesh="clr_base_collision_16" rgba="0.7304880408774046 0.9938300879561935 0.10326944288150341 1" class="collision"/>
-      <geom mesh="clr_base_collision_17" rgba="0.2647709735659448 0.9212306987418466 0.5034536504384841 1" class="collision"/>
-      <geom mesh="clr_base_collision_18" rgba="0.733918759286089 0.4917661786716552 0.6921593048655043 1" class="collision"/>
-      <geom mesh="clr_base_collision_19" rgba="0.783119810953089 0.8535579706738959 0.23870791284772797 1" class="collision"/>
-      <geom mesh="clr_base_collision_20" rgba="0.5193140024638377 0.2562567938920195 0.734970957408365 1" class="collision"/>
-      <geom mesh="clr_base_collision_21" rgba="0.13954427563135574 0.9691896009077062 0.011762698585966347 1" class="collision"/>
-      <geom mesh="clr_base_collision_22" rgba="0.3256882560623291 0.31636038409227885 0.7411736568175827 1" class="collision"/>
-      <geom mesh="clr_base_collision_23" rgba="0.5911967540700849 0.45706878022690633 0.37464652295539314 1" class="collision"/>
-      <geom mesh="clr_base_collision_24" rgba="0.01622346722570389 0.8200674946117624 0.5993688068340588 1" class="collision"/>
-      <geom mesh="clr_base_collision_25" rgba="0.4731989197419214 0.20847167865562166 0.429424793429122 1" class="collision"/>
-      <geom mesh="clr_base_collision_26" rgba="0.20951448394715388 0.15553198009279434 0.9613320390070591 1" class="collision"/>
-      <geom mesh="clr_base_collision_27" rgba="0.837613598461277 0.5510478107994901 0.22499792917956463 1" class="collision"/>
-      <geom mesh="clr_base_collision_28" rgba="0.16307004144060333 0.47150367522600845 0.37982462200860323 1" class="collision"/>
-      <geom mesh="clr_base_collision_29" rgba="0.4644423039664024 0.5527616404693217 0.8009409249950132 1" class="collision"/>
-      <geom mesh="clr_base_collision_30" rgba="0.8003725828153949 0.26393114771154325 0.5438809715330689 1" class="collision"/>
-      <geom mesh="clr_base_collision_31" rgba="0.2117292308525972 0.22975184549129146 0.5212137677623278 1" class="collision"/>
-      <geom mesh="clr_base_collision_32" rgba="0.46846037475340907 0.0556152604150455 0.5933452835879082 1" class="collision"/>
-      <geom mesh="clr_base_collision_33" rgba="0.33656849346026196 0.6508453043536669 0.03323359116473146 1" class="collision"/>
-      <geom mesh="clr_base_collision_34" rgba="0.7137540266029748 0.8008697306163788 0.844913184896723 1" class="collision"/>
-      <geom mesh="clr_base_collision_35" rgba="0.7924714721073992 0.5956836128111196 0.19038468749810056 1" class="collision"/>
-      <geom mesh="clr_base_collision_36" rgba="0.5060057976368341 0.19096002825538827 0.2603168251540393 1" class="collision"/>
-      <geom mesh="clr_base_collision_37" rgba="0.7250357504067351 0.32978706737752805 0.3123781626242629 1" class="collision"/>
-      <geom mesh="clr_base_collision_38" rgba="0.8430635217006499 0.6720463177560997 0.0775846009196911 1" class="collision"/>
-      <geom mesh="clr_base_collision_39" rgba="0.3815118947825624 0.5622329145365417 0.4514921947485926 1" class="collision"/>
+      <geom material="material_m0_0" mesh="clr_base" class="visual"/>
+      <geom mesh="clr_base_collision_0" rgba="0.9890524425570308 0.48170965091465234 0.6711118442629367 1" class="collision"/>
+      <geom mesh="clr_base_collision_1" rgba="0.45299708944362094 0.42199503161940455 0.5732067902827672 1" class="collision"/>
+      <geom mesh="clr_base_collision_2" rgba="0.6287285005350901 0.9689063970387645 0.597831325938863 1" class="collision"/>
+      <geom mesh="clr_base_collision_3" rgba="0.6105988908321643 0.016022695401242903 0.45374277309931743 1" class="collision"/>
+      <geom mesh="clr_base_collision_4" rgba="0.5911728830754507 0.5644643898014314 0.8387733863274477 1" class="collision"/>
+      <geom mesh="clr_base_collision_5" rgba="0.847989881078687 0.5336785420778859 0.7980079169206524 1" class="collision"/>
+      <geom mesh="clr_base_collision_6" rgba="0.4292203954027711 0.5529438946150188 0.5990149603521052 1" class="collision"/>
+      <geom mesh="clr_base_collision_7" rgba="0.7915294448422976 0.11233490666281487 0.17534358647534198 1" class="collision"/>
+      <geom mesh="clr_base_collision_8" rgba="0.47793890351944246 0.19875935280080803 0.016358618884704024 1" class="collision"/>
+      <geom mesh="clr_base_collision_9" rgba="0.4634247856714614 0.1607470481325346 0.15721851814613963 1" class="collision"/>
+      <geom mesh="clr_base_collision_10" rgba="0.6868335301515344 0.04775417523378889 0.9902873702311557 1" class="collision"/>
+      <geom mesh="clr_base_collision_11" rgba="0.9290889279882621 0.8124591516351682 0.9665489971600036 1" class="collision"/>
+      <geom mesh="clr_base_collision_12" rgba="0.19451428934901127 0.43611164096550736 0.5160623202372071 1" class="collision"/>
+      <geom mesh="clr_base_collision_13" rgba="0.7054552766671945 0.7508062424569147 0.9814425886340089 1" class="collision"/>
+      <geom mesh="clr_base_collision_14" rgba="0.789574943419169 0.18835800120660473 0.1633294680323607 1" class="collision"/>
+      <geom mesh="clr_base_collision_15" rgba="0.496953169084304 0.9157963924044207 0.28614209235260335 1" class="collision"/>
+      <geom mesh="clr_base_collision_16" rgba="0.8559000949149839 0.6485553651274542 0.02508849434983018 1" class="collision"/>
+      <geom mesh="clr_base_collision_17" rgba="0.9716158382536788 0.09312093729998716 0.48119563777710816 1" class="collision"/>
+      <geom mesh="clr_base_collision_18" rgba="0.2429480558054642 0.7379201435132355 0.5250864697205856 1" class="collision"/>
+      <geom mesh="clr_base_collision_19" rgba="0.38996853484246097 0.05840426994792147 0.021245680160559055 1" class="collision"/>
+      <geom mesh="clr_base_collision_20" rgba="0.9816914059474123 0.8225472142928446 0.535613991308243 1" class="collision"/>
+      <geom mesh="clr_base_collision_21" rgba="0.0962005919973451 0.1402635871465776 0.02486884629197006 1" class="collision"/>
+      <geom mesh="clr_base_collision_22" rgba="0.8832870531403757 0.37442301784082477 0.9716104344048078 1" class="collision"/>
+      <geom mesh="clr_base_collision_23" rgba="0.7132327520136101 0.6365341446333009 0.6364305878205673 1" class="collision"/>
+      <geom mesh="clr_base_collision_24" rgba="0.5618725075514663 0.35662712388895823 0.5816644334746286 1" class="collision"/>
+      <geom mesh="clr_base_collision_25" rgba="0.9659187196848179 0.017378291113035904 0.003164618142978415 1" class="collision"/>
+      <geom mesh="clr_base_collision_26" rgba="0.9825729007562064 0.7327283677284058 0.23166687526558993 1" class="collision"/>
+      <geom mesh="clr_base_collision_27" rgba="0.997239984645191 0.6768580215043373 0.48599077704676874 1" class="collision"/>
+      <geom mesh="clr_base_collision_28" rgba="0.5794580875514976 0.6170911419947491 0.424002136475476 1" class="collision"/>
+      <geom mesh="clr_base_collision_29" rgba="0.8855388495910825 0.35184598579323545 0.2780369846945614 1" class="collision"/>
+      <geom mesh="clr_base_collision_30" rgba="0.26205696220746766 0.3585948902876315 0.3129817595585176 1" class="collision"/>
+      <geom mesh="clr_base_collision_31" rgba="0.7724626148587416 0.5590291859324179 0.4836498163967047 1" class="collision"/>
+      <geom mesh="clr_base_collision_32" rgba="0.7851235988832622 0.1215840400881617 0.29324477724950104 1" class="collision"/>
+      <geom mesh="clr_base_collision_33" rgba="0.8779483880159733 0.6799081099216789 0.6272338350855996 1" class="collision"/>
+      <geom mesh="clr_base_collision_34" rgba="0.07900162521233223 0.8597827269740761 0.4025365585863353 1" class="collision"/>
+      <geom mesh="clr_base_collision_35" rgba="0.7249719525470644 0.7368815122308319 0.6061158275039067 1" class="collision"/>
+      <geom mesh="clr_base_collision_36" rgba="0.3407386537905921 0.03756343527107886 0.199659619610983 1" class="collision"/>
+      <geom mesh="clr_base_collision_37" rgba="0.9001333939946667 0.1750110426441428 0.19572048089583893 1" class="collision"/>
+      <geom mesh="clr_base_collision_38" rgba="0.595152675533728 0.9987447183530025 0.9084060877680238 1" class="collision"/>
+      <geom mesh="clr_base_collision_39" rgba="0.9526497823350578 0.05951049420057297 0.6868230207103343 1" class="collision"/>
+      <geom mesh="clr_base_collision_40" rgba="0.9321831090468974 0.23171108075090419 0.050782917087392576 1" class="collision"/>
     </body>
   </worldbody>
 </mujoco>
