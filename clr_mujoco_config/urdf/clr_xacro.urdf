@@ -4,6 +4,7 @@
   <xacro:arg name="headless_mode" default="false" />
   <xacro:arg name="finger_xacro" default="fngr_v6"/>
   <xacro:arg name="add_grasp_push_frames" default="true"/>
+  <xacro:arg name="use_pregenerated_mjcf" default="false"/>
   <!-- Legacy argument to leave out the environment mockups, though for now we generally -->
   <!-- always want this to be true. -->
   <xacro:arg name="model_env" default="true"/>
@@ -246,7 +247,9 @@
   <ros2_control name="MujocoSystem" type="system">
     <hardware>
       <plugin>mujoco_ros2_control/MujocoSystemInterface</plugin>
-      <!-- <param name="mujoco_model">$(find clr_mujoco_config)/description/scene.xml</param> -->
+      <xacro:if value="$(arg use_pregenerated_mjcf)">
+        <param name="mujoco_model">$(find clr_mujoco_config)/description/scene.xml</param>
+      </xacro:if>
 
       <!-- Increase this parameter to run the sim faster than realtime. -->
       <param name="sim_speed_factor">1.0</param>

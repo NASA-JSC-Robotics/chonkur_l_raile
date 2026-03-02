@@ -19,30 +19,48 @@
 
 from launch import LaunchDescription
 from chonkur_deploy.launch_helpers import include_launch_file
+from launch.actions import DeclareLaunchArgument
 from launch_ros.actions import Node
-from launch.substitutions import PathJoinSubstitution
+from launch.substitutions import (
+    PathJoinSubstitution,
+    LaunchConfiguration,
+    Command,
+    FindExecutable,
+)
 from launch_ros.substitutions import (
     FindPackageShare,
 )
+from launch.conditions import IfCondition, UnlessCondition
 
 
 def generate_launch_description():
 
     declared_arguments = []
 
-    clr_mujoco_package_name = "clr_mujoco_config"
-    # clr_mujoco_description_file = "clr_xacro.urdf"
+    # this launch arg doesn't do anything right now because I don't want to enable passing
+    # it through to the main control.launch.py... Same would go for something like headless
+    # mode or for trying to increase running speed
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_pregenerated_mjcf",
+            default_value="false",
+            description="Use pre-generated mjcf instead of converting it on the fly.",
+        )
+    )
 
-    # mjcf_robot_description_content = Command(
-    #     [
-    #         PathJoinSubstitution([FindExecutable(name="xacro")]),
-    #         " ",
-    #         PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "urdf", clr_mujoco_description_file]),
-    #         # Grasp frames should not be converted to MJCF objects
-    #         " add_grasp_push_frames:=false",
-    #         " model_env:=true",
-    #     ]
-    # )
+    clr_mujoco_package_name = "clr_mujoco_config"
+    clr_mujoco_description_file = "clr_xacro.urdf"
+
+    mjcf_robot_description_content = Command(
+        [
+            PathJoinSubstitution([FindExecutable(name="xacro")]),
+            " ",
+            PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "urdf", clr_mujoco_description_file]),
+            # Grasp frames should not be converted to MJCF objects
+            " add_grasp_push_frames:=false",
+            " model_env:=true",
+        ]
+    )
 
     generate_mjcf = Node(
         package="mujoco_ros2_control",
@@ -53,12 +71,13 @@ def generate_launch_description():
             "--publish_topic",
             "/mujoco_robot_description",
             # TODO: What to do about this? Too long of shell script
-            # "--robot_description",
-            # mjcf_robot_description_content,
+            "--robot_description",
+            mjcf_robot_description_content,
             "--convert_stl_to_obj",
             "--asset_dir",
             PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "description", "assets"]),
         ],
+        condition=UnlessCondition(LaunchConfiguration("use_pregenerated_mjcf")),
     )
 
     clr_launch = include_launch_file(
