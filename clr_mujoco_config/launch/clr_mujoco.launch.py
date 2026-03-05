@@ -17,10 +17,14 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import os
+import tempfile
+
 from launch import LaunchDescription
 from chonkur_deploy.launch_helpers import include_launch_file
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, OpaqueFunction, RegisterEventHandler
 from launch_ros.actions import Node
+from launch.event_handlers import OnShutdown
 from launch.substitutions import (
     PathJoinSubstitution,
     LaunchConfiguration,
@@ -62,23 +66,39 @@ def generate_launch_description():
         ]
     )
 
-    generate_mjcf = Node(
-        package="mujoco_ros2_control",
-        executable="robot_description_to_mjcf.sh",
-        output="both",
-        emulate_tty=True,
-        arguments=[
-            "--publish_topic",
-            "/mujoco_robot_description",
-            # TODO: What to do about this? Too long of shell script
-            "--robot_description",
-            mjcf_robot_description_content,
-            "--convert_stl_to_obj",
-            "--asset_dir",
-            PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "description", "assets"]),
-        ],
-        condition=UnlessCondition(LaunchConfiguration("use_pregenerated_mjcf")),
-    )
+    # Using an inline opaque function to write the URDF for mujoco to a tempfile...
+    # This prevents it from being dumped into the console on conversion errors.
+    def launch_mjcf_node(context):
+        tmp = tempfile.NamedTemporaryFile(mode="w", suffix=".urdf", delete=False)
+        tmp.write(mjcf_robot_description_content.perform(context))
+        tmp.close()
+
+        # Ensure the file gets deleted
+        def cleanup(event, context):
+            if os.path.exists(tmp.name):
+                os.remove(tmp.name)
+
+        return [
+            Node(
+                package="mujoco_ros2_control",
+                executable="make_mjcf_from_robot_description.py",
+                output="both",
+                emulate_tty=True,
+                arguments=[
+                    "--publish_topic",
+                    "/mujoco_robot_description",
+                    "--urdf",
+                    tmp.name,
+                    "--convert_stl_to_obj",
+                    "--asset_dir",
+                    PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "description", "assets"]),
+                ],
+                condition=UnlessCondition(LaunchConfiguration("use_pregenerated_mjcf")),
+            ),
+            RegisterEventHandler(OnShutdown(on_shutdown=cleanup)),
+        ]
+
+    generate_mjcf = OpaqueFunction(function=launch_mjcf_node)
 
     clr_launch = include_launch_file(
         package_name="clr_deploy",
