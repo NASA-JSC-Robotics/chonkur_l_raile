@@ -8,7 +8,7 @@
     </default>
   </default>
   <asset>
-    <material name="mtl_m35" specular="0.20000000000000004" shininess="1.0" rgba="0.85098039 0.85098039 0.85098039 1.0"/>
+    <material name="mtl_simplified_hatch_4060_face" specular="0.20000000000000004" shininess="1.0" rgba="0.85098039 0.85098039 0.85098039 1.0"/>
     <mesh file="simplified_hatch_4060_face.obj"/>
     <mesh file="simplified_hatch_4060_face_collision_0.obj"/>
     <mesh file="simplified_hatch_4060_face_collision_1.obj"/>
@@ -30,24 +30,24 @@
   </asset>
   <worldbody>
     <body name="simplified_hatch_4060_face">
-      <geom material="mtl_m35" mesh="simplified_hatch_4060_face" class="visual"/>
-      <geom mesh="simplified_hatch_4060_face_collision_0" rgba="0.5692009713382457 0.3551824976599425 0.10868982425020413 1" class="collision"/>
-      <geom mesh="simplified_hatch_4060_face_collision_1" rgba="0.9644942025345199 0.27255325036042566 0.7812195243020383 1" class="collision"/>
-      <geom mesh="simplified_hatch_4060_face_collision_2" rgba="0.782100769803229 0.01714369320382325 0.5188726583561989 1" class="collision"/>
-      <geom mesh="simplified_hatch_4060_face_collision_3" rgba="0.31593672998601696 0.24634148433643965 0.14103369468222227 1" class="collision"/>
-      <geom mesh="simplified_hatch_4060_face_collision_4" rgba="0.3714465872905811 0.6960908025826678 0.04565936809715443 1" class="collision"/>
-      <geom mesh="simplified_hatch_4060_face_collision_5" rgba="0.44258890075293733 0.20125131704233468 0.47894784013010283 1" class="collision"/>
-      <geom mesh="simplified_hatch_4060_face_collision_6" rgba="0.2656079936260055 0.2582455096434578 0.7435313344793395 1" class="collision"/>
-      <geom mesh="simplified_hatch_4060_face_collision_7" rgba="0.8115695336735005 0.3592241108053459 0.9533616060504658 1" class="collision"/>
-      <geom mesh="simplified_hatch_4060_face_collision_8" rgba="0.8955021563775816 0.7904759515799537 0.29420197558940175 1" class="collision"/>
-      <geom mesh="simplified_hatch_4060_face_collision_9" rgba="0.6007899612972512 0.24872264657519927 0.3537471421349937 1" class="collision"/>
-      <geom mesh="simplified_hatch_4060_face_collision_10" rgba="0.2061449323937271 0.12884074390168443 0.7827135319119538 1" class="collision"/>
-      <geom mesh="simplified_hatch_4060_face_collision_11" rgba="0.49894321163825917 0.7123994249284873 0.9893799146097461 1" class="collision"/>
-      <geom mesh="simplified_hatch_4060_face_collision_12" rgba="0.4495260452074623 0.8490334568555142 0.2344437873602797 1" class="collision"/>
-      <geom mesh="simplified_hatch_4060_face_collision_13" rgba="0.6864978933212864 0.02483437910635622 0.4342253287565324 1" class="collision"/>
-      <geom mesh="simplified_hatch_4060_face_collision_14" rgba="0.5320549443976105 0.5709438403255963 0.5842963170273566 1" class="collision"/>
-      <geom mesh="simplified_hatch_4060_face_collision_15" rgba="0.7124660754440423 0.03431636068138144 0.08038262746920466 1" class="collision"/>
-      <geom mesh="simplified_hatch_4060_face_collision_16" rgba="0.8649527226064975 0.7865595936719196 0.5528962230383212 1" class="collision"/>
+      <geom material="mtl_simplified_hatch_4060_face" mesh="simplified_hatch_4060_face" class="visual"/>
+      <geom mesh="simplified_hatch_4060_face_collision_0" rgba="0.9657195375067728 0.809458100322842 0.7441080965051357 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_1" rgba="0.1042925683749425 0.3221302979855697 0.6107538592587982 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_2" rgba="0.7895725824455043 0.8045233280044451 0.9943986423332969 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_3" rgba="0.6942659352806299 0.48492939310249106 0.22877606102740422 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_4" rgba="0.5811474973341062 0.6601198808875443 0.6852684305138035 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_5" rgba="0.3932899333224581 0.420790327789039 0.06389273948775076 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_6" rgba="0.14305724601339098 0.7316190072645611 0.5404861503492207 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_7" rgba="0.48388573532770385 0.5701087953949291 0.6041083533109972 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_8" rgba="0.440963462519657 0.29388504558624495 0.7003448465573705 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_9" rgba="0.41039055399722957 0.8315919087647184 0.6635161823199609 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_10" rgba="0.5422072099869336 0.4949422263701312 0.06426250740749595 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_11" rgba="0.0003136278010943405 0.355912529867463 0.3068039114880359 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_12" rgba="0.02097921493402266 0.5134184429555213 0.3226642783008007 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_13" rgba="0.42762737139419527 0.2622332964164462 0.4372485019334126 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_14" rgba="0.08947673720252847 0.9468426308236597 0.38973536256595076 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_15" rgba="0.28456585614534646 0.27792553607453596 0.32341861746908007 1" class="collision"/>
+      <geom mesh="simplified_hatch_4060_face_collision_16" rgba="0.15427080378746705 0.050990782949487334 0.16568457056881947 1" class="collision"/>
     </body>
   </worldbody>
 </mujoco>

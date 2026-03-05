@@ -8,7 +8,7 @@
     </default>
   </default>
   <asset>
-    <material name="mtl_m24" specular="0.20000000000000004" shininess="1.0" rgba="0.20000000 0.20000000 0.20000000 1.0"/>
+    <material name="mtl_finger_v6" specular="0.20000000000000004" shininess="1.0" rgba="0.20000000 0.20000000 0.20000000 1.0"/>
     <mesh file="finger_v6.obj"/>
     <mesh file="finger_v6_collision_0.obj"/>
     <mesh file="finger_v6_collision_1.obj"/>
@@ -35,29 +35,29 @@
   </asset>
   <worldbody>
     <body name="finger_v6">
-      <geom material="mtl_m24" mesh="finger_v6" class="visual"/>
-      <geom mesh="finger_v6_collision_0" rgba="0.17740514199267376 0.42837459506095976 0.4434005980608151 1" class="collision"/>
-      <geom mesh="finger_v6_collision_1" rgba="0.36973723504192846 0.32525409400208405 0.30427403976924616 1" class="collision"/>
-      <geom mesh="finger_v6_collision_2" rgba="0.27465004498287016 0.5863416825230948 0.8064089044702731 1" class="collision"/>
-      <geom mesh="finger_v6_collision_3" rgba="0.7116046290225061 0.04304418276955535 0.9027579714820327 1" class="collision"/>
-      <geom mesh="finger_v6_collision_4" rgba="0.9938038540970995 0.13023995933274235 0.6886391432078323 1" class="collision"/>
-      <geom mesh="finger_v6_collision_5" rgba="0.7433335421204205 0.5372656578455066 0.04696859324764313 1" class="collision"/>
-      <geom mesh="finger_v6_collision_6" rgba="0.9210866685126236 0.27132612658205324 0.0621946776869593 1" class="collision"/>
-      <geom mesh="finger_v6_collision_7" rgba="0.9768308663988644 0.5686587542067261 0.8741736757350985 1" class="collision"/>
-      <geom mesh="finger_v6_collision_8" rgba="0.5369812946456809 0.610846025281386 0.29083664462854086 1" class="collision"/>
-      <geom mesh="finger_v6_collision_9" rgba="0.3816633737998356 0.0482814188867734 0.6397156540525073 1" class="collision"/>
-      <geom mesh="finger_v6_collision_10" rgba="0.8389132028705211 0.6772554578733837 0.6641699661678738 1" class="collision"/>
-      <geom mesh="finger_v6_collision_11" rgba="0.5531115735827058 0.5453764880426656 0.5558689934986154 1" class="collision"/>
-      <geom mesh="finger_v6_collision_12" rgba="0.2994369653082546 0.07488459900982725 0.7544537702927778 1" class="collision"/>
-      <geom mesh="finger_v6_collision_13" rgba="0.3097421283448475 0.7199651088872829 0.5317503696191982 1" class="collision"/>
-      <geom mesh="finger_v6_collision_14" rgba="0.46942798732856605 0.5213521943638401 0.07761916577213201 1" class="collision"/>
-      <geom mesh="finger_v6_collision_15" rgba="0.6355008313899961 0.26896104970936185 0.7177157773685521 1" class="collision"/>
-      <geom mesh="finger_v6_collision_16" rgba="0.17274183657345799 0.61446756156797 0.7410737166994872 1" class="collision"/>
-      <geom mesh="finger_v6_collision_17" rgba="0.6417048544197943 0.7870649266854606 0.2833019371828258 1" class="collision"/>
-      <geom mesh="finger_v6_collision_18" rgba="0.587154545506185 0.2463629687542519 0.07797379802509319 1" class="collision"/>
-      <geom mesh="finger_v6_collision_19" rgba="0.8933686720292944 0.10312891637018107 0.7730996130837505 1" class="collision"/>
-      <geom mesh="finger_v6_collision_20" rgba="0.8773409570272561 0.03415482443482565 0.11183047541773417 1" class="collision"/>
-      <geom mesh="finger_v6_collision_21" rgba="0.6515024363293467 0.36095849565242 0.16498888084141694 1" class="collision"/>
+      <geom material="mtl_finger_v6" mesh="finger_v6" class="visual"/>
+      <geom mesh="finger_v6_collision_0" rgba="0.29761008470827877 0.6176999552384602 0.9267292046225429 1" class="collision"/>
+      <geom mesh="finger_v6_collision_1" rgba="0.3021121628901462 0.6818128062207025 0.2610551866145201 1" class="collision"/>
+      <geom mesh="finger_v6_collision_2" rgba="0.4764954240148157 0.6299711835048258 0.1585385552035965 1" class="collision"/>
+      <geom mesh="finger_v6_collision_3" rgba="0.3071084903327307 0.25224067273638184 0.48958303094843325 1" class="collision"/>
+      <geom mesh="finger_v6_collision_4" rgba="0.6786661935641584 0.404876168425212 0.9119278752293373 1" class="collision"/>
+      <geom mesh="finger_v6_collision_5" rgba="0.3670616467895389 0.3320748399340706 0.25156498827870744 1" class="collision"/>
+      <geom mesh="finger_v6_collision_6" rgba="0.047247887794389265 0.4069803106969876 0.6225608790386323 1" class="collision"/>
+      <geom mesh="finger_v6_collision_7" rgba="0.7558599028150801 0.2784395760443288 0.45461317094609877 1" class="collision"/>
+      <geom mesh="finger_v6_collision_8" rgba="0.1527610707211886 0.915224183765467 0.38326829603021073 1" class="collision"/>
+      <geom mesh="finger_v6_collision_9" rgba="0.29330165318751944 0.4009953136045895 0.2974133635881371 1" class="collision"/>
+      <geom mesh="finger_v6_collision_10" rgba="0.6924278201981559 0.7895114411171005 0.45473937948240506 1" class="collision"/>
+      <geom mesh="finger_v6_collision_11" rgba="0.673690370610597 0.7161652177711618 0.8173770207924747 1" class="collision"/>
+      <geom mesh="finger_v6_collision_12" rgba="0.6299925639245165 0.6721054054764732 0.07155911387444602 1" class="collision"/>
+      <geom mesh="finger_v6_collision_13" rgba="0.4708174519806436 0.006324551543081314 0.9304249613742848 1" class="collision"/>
+      <geom mesh="finger_v6_collision_14" rgba="0.6070393257330403 0.6656744907450054 0.5598123124988528 1" class="collision"/>
+      <geom mesh="finger_v6_collision_15" rgba="0.6395646834887441 0.07239361044936643 0.494356239763278 1" class="collision"/>
+      <geom mesh="finger_v6_collision_16" rgba="0.005672364066523938 0.041552631327278045 0.08989546350605682 1" class="collision"/>
+      <geom mesh="finger_v6_collision_17" rgba="0.695104327265687 0.99249103234114 0.47887708167851306 1" class="collision"/>
+      <geom mesh="finger_v6_collision_18" rgba="0.3972786924741186 0.9590035351011776 0.031838556929961404 1" class="collision"/>
+      <geom mesh="finger_v6_collision_19" rgba="0.27219111321619327 0.8692657464702958 0.34006314587730635 1" class="collision"/>
+      <geom mesh="finger_v6_collision_20" rgba="0.9027737605265916 0.7265038542047646 0.16066385529177218 1" class="collision"/>
+      <geom mesh="finger_v6_collision_21" rgba="0.1748068478573328 0.8952354683008019 0.08894101206310079 1" class="collision"/>
     </body>
   </worldbody>
 </mujoco>

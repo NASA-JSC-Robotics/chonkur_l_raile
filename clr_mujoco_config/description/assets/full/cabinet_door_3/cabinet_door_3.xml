@@ -8,12 +8,12 @@
     </default>
   </default>
   <asset>
-    <material name="mtl_m53" specular="0.20000000000000004" shininess="1.0" rgba="0.00000000 0.00000000 1.00000000 1.0"/>
+    <material name="mtl_cabinet_door_3" specular="0.20000000000000004" shininess="1.0" rgba="0.00000000 0.00000000 1.00000000 1.0"/>
     <mesh file="cabinet_door_3.obj"/>
   </asset>
   <worldbody>
     <body name="cabinet_door_3">
-      <geom material="mtl_m53" mesh="cabinet_door_3" class="visual"/>
+      <geom material="mtl_cabinet_door_3" mesh="cabinet_door_3" class="visual"/>
       <geom mesh="cabinet_door_3" class="collision"/>
     </body>
   </worldbody>

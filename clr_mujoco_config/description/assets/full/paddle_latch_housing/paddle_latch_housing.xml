@@ -8,12 +8,12 @@
     </default>
   </default>
   <asset>
-    <material name="mtl_m57" specular="0.20000000000000004" shininess="1.0" rgba="0.85098039 0.85098039 0.85098039 1.0"/>
+    <material name="mtl_paddle_latch_housing" specular="0.20000000000000004" shininess="1.0" rgba="0.85098039 0.85098039 0.85098039 1.0"/>
     <mesh file="paddle_latch_housing.obj"/>
   </asset>
   <worldbody>
     <body name="paddle_latch_housing">
-      <geom material="mtl_m57" mesh="paddle_latch_housing" class="visual"/>
+      <geom material="mtl_paddle_latch_housing" mesh="paddle_latch_housing" class="visual"/>
       <geom mesh="paddle_latch_housing" class="collision"/>
     </body>
   </worldbody>

@@ -8,12 +8,12 @@
     </default>
   </default>
   <asset>
-    <material name="mtl_m38" specular="0.20000000000000004" shininess="1.0" rgba="0.00000000 0.00000000 1.00000000 1.0"/>
+    <material name="mtl_crank_handle" specular="0.20000000000000004" shininess="1.0" rgba="0.00000000 0.00000000 1.00000000 1.0"/>
     <mesh file="crank_handle.obj"/>
   </asset>
   <worldbody>
     <body name="crank_handle">
-      <geom material="mtl_m38" mesh="crank_handle" class="visual"/>
+      <geom material="mtl_crank_handle" mesh="crank_handle" class="visual"/>
       <geom mesh="crank_handle" class="collision"/>
     </body>
   </worldbody>
