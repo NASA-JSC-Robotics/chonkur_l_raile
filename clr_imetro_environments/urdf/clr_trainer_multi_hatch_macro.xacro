@@ -6,6 +6,7 @@
     headless_mode:=false
     finger_xacro:=fngr_v6
     add_grasp_push_frames:=true
+    use_camera_mesh:=true
     generate_ros2_control_tag:=false
     clr:=true
     shelf:=false
@@ -33,6 +34,7 @@
         headless_mode="${headless_mode}"
         add_grasp_push_frames="${add_grasp_push_frames}"
         finger_xacro="${finger_xacro}"
+        use_camera_mesh="${use_camera_mesh}"
         generate_ros2_control_tag="${generate_ros2_control_tag}"
       />
     </xacro:if>

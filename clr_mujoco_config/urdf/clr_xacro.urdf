@@ -24,6 +24,7 @@
       headless_mode="$(arg headless_mode)"
       add_grasp_push_frames="$(arg add_grasp_push_frames)"
       finger_xacro="$(arg finger_xacro)"
+      use_camera_mesh="false"
       generate_ros2_control_tag="false"
       clr="true"
       shelf="false"
@@ -41,6 +42,7 @@
       headless_mode="$(arg headless_mode)"
       finger_xacro="$(arg finger_xacro)"
       add_grasp_push_frames="$(arg add_grasp_push_frames)"
+      use_camera_mesh="false"
       generate_ros2_control_tag="false"/>
   </xacro:if>
 
