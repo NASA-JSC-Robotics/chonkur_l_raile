@@ -5,7 +5,7 @@ Mujoco configuration for launching CLR in a simulated Mujoco environment.
 ## Launching
 
 The program must be launched from inside a supported environment.
-Details are not included here, but can be found in the `ros2_mujoco_simulation` repo.
+Details are not included here, but can be found in the `mujoco_ros2_control` repo.
 
 To start the sim,
 

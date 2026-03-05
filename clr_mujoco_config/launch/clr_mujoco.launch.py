@@ -43,6 +43,11 @@ def generate_launch_description():
     point_cloud_proc = Node(
         package="depth_image_proc",
         executable="point_cloud_xyzrgb_node",
+        parameters=[
+            {
+                "use_sim_time": True,
+            }
+        ],
         remappings=[
             ("rgb/image_rect_color", "/wrist_mounted_camera/color/image_raw"),
             ("rgb/camera_info", "/wrist_mounted_camera/color/camera_info"),
