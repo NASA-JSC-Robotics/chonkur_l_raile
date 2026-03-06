@@ -5,7 +5,7 @@
   <version>1.0.0</version>
   <description>Mujoco sim resources for the CLR robot system.</description>
   <maintainer email="erik.holum@nasa.gov">Erik Holum</maintainer>
-  <license>Apache</license>
+  <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
@@ -16,7 +16,7 @@
   <exec_depend>rviz2</exec_depend>
   <exec_depend>urdf</exec_depend>
   <exec_depend>xacro</exec_depend>
-  <exec_depend>mujoco_ros2_simulation</exec_depend>
+  <exec_depend>mujoco_ros2_control</exec_depend>
   <exec_depend>depth_image_proc</exec_depend>
 
   <export>

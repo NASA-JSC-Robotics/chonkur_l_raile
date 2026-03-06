@@ -7,7 +7,7 @@
 
   <maintainer email="michael.e.tobia@nasa.gov">Mike Tobia</maintainer>
 
-  <license>Apache License, Version 2.0</license>
+  <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 

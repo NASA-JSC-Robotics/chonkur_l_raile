@@ -202,6 +202,9 @@
     <mesh file="decomposed/simplified_hatch_4060_face/simplified_hatch_4060_face/simplified_hatch_4060_face_collision_0.obj" scale="1.0 1.0 1.0"/>
     <mesh file="decomposed/simplified_hatch_4060_face/simplified_hatch_4060_face/simplified_hatch_4060_face_collision_1.obj" scale="1.0 1.0 1.0"/>
     <mesh file="decomposed/simplified_hatch_4060_face/simplified_hatch_4060_face/simplified_hatch_4060_face_collision_2.obj" scale="1.0 1.0 1.0"/>
+    <mesh name="apriltag" content_type="model/obj" file="full/apriltag/apriltag.obj"/>
+    <texture type="2d" name="material_m36_0" file="assets/full/apriltag/material_m36_0.png"/>
+    <material name="material_m36_0" texture="material_m36_0" specular="0.4000000000000001" shininess="0.001"/>
     <mesh file="decomposed/simplified_hatch_4060_face/simplified_hatch_4060_face/simplified_hatch_4060_face_collision_3.obj" scale="1.0 1.0 1.0"/>
     <mesh file="decomposed/simplified_hatch_4060_face/simplified_hatch_4060_face/simplified_hatch_4060_face_collision_4.obj" scale="1.0 1.0 1.0"/>
     <mesh file="decomposed/simplified_hatch_4060_face/simplified_hatch_4060_face/simplified_hatch_4060_face_collision_5.obj" scale="1.0 1.0 1.0"/>
@@ -559,6 +562,7 @@
         <site name="lorge/internal_rotary_wheel" pos="0 0 0" quat="1.0 0 0 0"/>
       </body>
       <geom material="new_mat_color.013" mesh="simplified_hatch_4060_face" class="visual" pos="" quat=""/>
+      <geom pos="-0.1 -1 1.1" type="mesh" material="material_m36_0" contype="0" conaffinity="0" group="1" density="0" mesh="apriltag"/>
       <geom mesh="simplified_hatch_4060_face_collision_0" rgba="0.23114486446067817 0.6443186093814433 0.8157719947585795 1" class="collision" pos="" quat=""/>
       <geom mesh="simplified_hatch_4060_face_collision_1" rgba="0.2852520794576222 0.46912330212483255 0.3072842247308417 1" class="collision" pos="" quat=""/>
       <geom mesh="simplified_hatch_4060_face_collision_2" rgba="0.8530487553194221 0.3179077121549385 0.23740639023622678 1" class="collision" pos="" quat=""/>
@@ -612,7 +616,10 @@
       <geom mesh="grab_handle_collision_5" rgba="0.7102210154635407 0.26526570669981253 0.9472556119532515 1" class="collision" pos="-0.058 -1.078 0.6957" quat="0.707107 0.707107 0 0"/>
       <geom mesh="grab_handle_collision_6" rgba="0.873602737080983 0.610283940837291 0.4222249640481468 1" class="collision" pos="-0.058 -1.078 0.6957" quat="0.707107 0.707107 0 0"/>
       <geom mesh="grab_handle_collision_7" rgba="0.1712850611561645 0.8602855438449819 0.9376714912658347 1" class="collision" pos="-0.058 -1.078 0.6957" quat="0.707107 0.707107 0 0"/>
+      <geom size="0.0127" pos="-0.0341587 -1.22925 0.666224" type="sphere" class="collision"/>
+      <geom size="0.0127" pos="-0.0341587 -1.22925 0.666224" rgba="1 1 1 0" type="sphere" class="visual"/>
       <site name="lorge/hatch_face" pos="0 0 0" quat="1.0 0 0 0"/>
+      <site name="lorge/hatch_latch" pos="-0.034158681999999996 -1.2292456999999999 0.6662242199999999" quat="1.0 0 0 0"/>
       <site name="lorge/right_cal_1_frame" pos="0.0167 0 0" quat="1.0 0 0 0"/>
       <site name="lorge/right_cal_2_frame" pos="0 0.0167 0" quat="1.0 0 0 0"/>
       <site name="lorge/external_1_grab_handle" pos="-0.07 -0.9016 0.8021" quat="0 0 1.0 0"/>
@@ -627,6 +634,13 @@
       <site name="lorge/internal_2_grab_handle" pos="-0.058 -1.078 0.6957" quat="0.7071067811865476 0.7071067811865475 0 0"/>
       <site name="lorge/internal_2_grab_center" pos="0.02269999999999999 -1.078 0.6068" quat="0.7071067811865476 0.7071067811865475 0 0"/>
       <site name="lorge/internal_2_grab_touch" pos="0.035399999999999994 -1.078 0.6068" quat="0.7071067811865476 0.7071067811865475 0 0"/>
+    </body>
+    <body name="lorge/hatch_latch_catch" pos="2.14892 -0.760758 1.46808">
+      <inertial pos="0 0 0" mass="0.0671" diaginertia="4.345e-06 4.345e-06 4.345e-06"/>
+      <joint name="lorge/latch_spring" pos="0 0 0" axis="0 0 -1" type="slide" range="0 0.035" actuatorfrcrange="-1000 1000" limited="true" springref="0.035" stiffness="10000" damping="2" armature="0.001"/>
+      <geom size="0.03" type="sphere" class="collision"/>
+      <geom size="0.03" rgba="1 1 1 0" type="sphere" class="visual"/>
+      <site name="lorge/hatch_latch_catch" pos="0 0 0" quat="1.0 0 0 0"/>
     </body>
     <body name="bench_lid" pos="-2.10085 1.0466 0.5244" quat="-0.706686 0 0 0.707527">
       <inertial pos="0.265226 0.46 0.0319033" quat="0.503331 0.503331 -0.496647 0.496647" mass="9.07185" diaginertia="0.857706 0.643129 0.2211"/>
@@ -932,6 +946,7 @@
     <site name="lorge/hatch_bench" pos="1.40208 -0.801983 -0.002" quat="1.0 0 0 0"/>
     <site name="lorge/hatch_inner_frame" pos="1.986409 0.4430170000000001 0.7093" quat="0 0 0 1.0"/>
     <site name="lorge/hatch_outer_frame" pos="2.08008 -0.744983 0.714" quat="1.0 0 0 0"/>
+    <site name="lorge/hatch_latch_spring_anchor" pos="2.1489176 -0.7607581999999999 1.4680752" quat="1.0 0 0 0"/>
     <site name="trainer_frame" pos="-2.0992 2.4346 0" quat="0.7066862882126158 0 0 -0.7075270242558058"/>
     <site name="trainer_box" pos="-2.0992 2.4346 0" quat="0.7066862882126158 0 0 -0.7075270242558058"/>
     <site name="trainer_top" pos="-2.0992 2.4346 1.52" quat="0.7066862882126158 0 0 -0.7075270242558058"/>

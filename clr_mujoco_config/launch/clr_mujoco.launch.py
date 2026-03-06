@@ -36,13 +36,18 @@ def generate_launch_description():
             "use_fake_hardware": "false",
             "use_sim_time": "true",
             "is_sim": "true",
-            "control_node_package": "mujoco_ros2_simulation",
+            "control_node_package": "mujoco_ros2_control",
         }.items(),
     )
 
     point_cloud_proc = Node(
         package="depth_image_proc",
         executable="point_cloud_xyzrgb_node",
+        parameters=[
+            {
+                "use_sim_time": True,
+            }
+        ],
         remappings=[
             ("rgb/image_rect_color", "/wrist_mounted_camera/color/image_raw"),
             ("rgb/camera_info", "/wrist_mounted_camera/color/camera_info"),

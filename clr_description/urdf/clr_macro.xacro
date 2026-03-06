@@ -10,7 +10,7 @@
     sim_gazebo:=false
     sim_ignition:=false
     chonkur_ip:=192.168.1.102
-    com_port_hande:=/dev/robotiq
+    com_port_hande:=/tmp/ttyUR
     finger_xacro:=fngr_v6
     add_grasp_push_frames:=true
     marker_opacity:=0.5
@@ -18,8 +18,8 @@
     rail_port:=9999
     rail_position_limit:=2.0
     rail_velocity_limit:=0.15
-    safety_com_port:=/dev/safety_com_port
-    ewellix_com_port:=/dev/ewellix
+    safety_com_port:=/dev/ttyACM0
+    ewellix_com_port:=/dev/ttyUSB0
     ewellix_height_limit:=0.7
     ewellix_omit_plates:=true
     generate_ros2_control_tag:=true

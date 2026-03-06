@@ -31,7 +31,7 @@
         <geom mesh="ctb_handle_collision_7" rgba="0.8368316613145566 0.32630359173646106 0.9754162782142649 1" class="collision" pos="0 0.08 0.264" quat="0.707388 0.706825 0 0"/>
         <geom mesh="ctb_handle_collision_8" rgba="0.578682443892342 0.0162173732305817 0.2524539690703289 1" class="collision" pos="0 0.08 0.264" quat="0.707388 0.706825 0 0"/>
         <geom mesh="ctb_handle_collision_9" rgba="0.2855312743239955 0.7140649605609088 0.27940610242451114 1" class="collision" pos="0 0.08 0.264" quat="0.707388 0.706825 0 0"/>
-        <freejoint/>
+        <freejoint name="ctb_world_joint" />
         <inertial mass="2.0" pos="0 0 -0.1" diaginertia="0.1 0.1 0.1"/>
     </body>
   </worldbody>
