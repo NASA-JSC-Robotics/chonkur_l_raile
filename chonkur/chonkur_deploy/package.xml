@@ -7,7 +7,7 @@
     Deploy package for chonkur
   </description>
   <maintainer email="emma.zemler@nasa.gov">Emma Zemler</maintainer>
-  <license>Apache License, Version 2.0</license>
+  <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
   <buildtool_depend>ament_cmake_python</buildtool_depend>
