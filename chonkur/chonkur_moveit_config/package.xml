@@ -7,7 +7,7 @@
      An automatically generated package with all the configuration and launch files for using the chonkur with the MoveIt Motion Planning Framework
   </description>
   <maintainer email="erik.holum@nasa.gov">Erik Holum</maintainer>
-  <license>Apache License, Version 2.0</license>
+  <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 

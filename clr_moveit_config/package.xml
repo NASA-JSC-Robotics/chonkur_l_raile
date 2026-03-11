@@ -7,7 +7,7 @@
      MoveIt config package for ChonkUR L. Rail-E
   </description>
   <maintainer email="emma.zemler@nasa.gov">Emma Zemler</maintainer>
-  <license>Apache License, Version 2.0</license>
+  <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
   <buildtool_depend>ament_cmake_python</buildtool_depend>
@@ -20,6 +20,7 @@
   <exec_depend>moveit_ros_visualization</exec_depend>
   <exec_depend>moveit_servo</exec_depend>
   <exec_depend>moveit_simple_controller_manager</exec_depend>
+  <!-- Pending https://github.com/RoboStack/ros-jazzy/pull/176 -->
   <exec_depend>moveit_ros_control_interface</exec_depend>
   <exec_depend>rviz2</exec_depend>
   <exec_depend>rviz_visual_tools</exec_depend>

@@ -110,6 +110,7 @@ def generate_launch_description():
             "use_fake_hardware": "false",
             "use_sim_time": "true",
             "is_sim": "true",
+            "control_node_package": "mujoco_ros2_control",
         }.items(),
     )
 
