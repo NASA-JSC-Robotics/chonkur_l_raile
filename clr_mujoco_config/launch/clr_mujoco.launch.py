@@ -53,7 +53,7 @@ def generate_launch_description():
     )
 
     clr_mujoco_package_name = "clr_mujoco_config"
-    clr_mujoco_description_file = "clr_xacro.urdf"
+    clr_mujoco_description_file = "clr_mujoco_xacro.urdf"
 
     mjcf_robot_description_content = Command(
         [
@@ -105,7 +105,7 @@ def generate_launch_description():
         launch_file="control.launch.py",
         launch_arguments={
             "robot_description_package": "clr_mujoco_config",
-            "robot_description_file": "clr_xacro.urdf",
+            "robot_description_file": "clr_mujoco_xacro.urdf",
             "model_env": "true",
             "use_fake_hardware": "false",
             "use_sim_time": "true",
