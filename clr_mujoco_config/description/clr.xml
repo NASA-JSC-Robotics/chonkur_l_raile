@@ -546,12 +546,12 @@
         <body name="lorge/external_rotary_handle" pos="0 0.053975 0.0155">
           <inertial pos="0 0 0.0338876" quat="0.657462 1.78889e-07 1.52512e-06 0.753488" mass="0.0328943" diaginertia="1.13339e-05 1.1332e-05 9.87199e-07"/>
           <joint name="lorge/external_rotary_handle_joint" pos="0 0 0" axis="1 0 0" range="0 1.57" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
-          <geom material="new_mat_color.015" mesh="crank_handle" class="visual" pos="0 0 0.00355" quat=""/>
+          <geom material="material_m38_0" mesh="crank_handle" class="visual" pos="0 0 0.00355" quat=""/>
           <geom mesh="crank_handle" class="collision" pos="0 0 0.00355" quat=""/>
           <site name="lorge/external_rotary_handle" pos="0 0 0" quat="1.0 0 0 0"/>
           <site name="lorge/external_rotary_handle_grasp" pos="0 0 0.04" quat="1.0 0 0 0"/>
         </body>
-        <geom material="new_mat_color.014" mesh="crank_wheel" class="visual" pos="" quat=""/>
+        <geom material="Black" mesh="crank_wheel" class="visual" pos="" quat=""/>
         <geom mesh="crank_wheel" class="collision" pos="" quat=""/>
         <site name="lorge/external_rotary_wheel" pos="0 0 0" quat="1.0 0 0 0"/>
       </body>
@@ -561,12 +561,12 @@
         <body name="lorge/internal_rotary_handle" pos="0 0.053975 0.0155">
           <inertial pos="0 0 0.0338876" quat="0.657462 1.78889e-07 1.52512e-06 0.753488" mass="0.0328943" diaginertia="1.13339e-05 1.1332e-05 9.87199e-07"/>
           <joint name="lorge/internal_rotary_handle_joint" pos="0 0 0" axis="1 0 0" range="0 1.57" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
-          <geom material="new_mat_color.015" mesh="crank_handle" class="visual" pos="0 0 0.00355" quat=""/>
+          <geom material="material_m38_0" mesh="crank_handle" class="visual" pos="0 0 0.00355" quat=""/>
           <geom mesh="crank_handle" class="collision" pos="0 0 0.00355" quat=""/>
           <site name="lorge/internal_rotary_handle" pos="0 0 0" quat="1.0 0 0 0"/>
           <site name="lorge/internal_rotary_handle_grasp" pos="0 0 0.04" quat="1.0 0 0 0"/>
         </body>
-        <geom material="new_mat_color.014" mesh="crank_wheel" class="visual" pos="" quat=""/>
+        <geom material="Black" mesh="crank_wheel" class="visual" pos="" quat=""/>
         <geom mesh="crank_wheel" class="collision" pos="" quat=""/>
         <site name="lorge/internal_rotary_wheel" pos="0 0 0" quat="1.0 0 0 0"/>
       </body>
