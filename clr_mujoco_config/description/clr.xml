@@ -244,6 +244,9 @@
     <mesh file="decomposed/bench_lid/bench_lid/bench_lid_collision_0.obj" scale="1.0 1.0 1.0"/>
     <mesh file="decomposed/bench_lid/bench_lid/bench_lid_collision_1.obj" scale="1.0 1.0 1.0"/>
     <material name="new_mat_color.018" specular="0.5" shininess="0.36" rgba="0.000000 0.000000 1.000000 1.000000"/>
+    <material name="material_m41_0" texture="material_m41_0" specular="0.4000000000000001" shininess="0.001"/>
+    <texture type="2d" name="material_m41_0" file="assets/decomposed/bench_lid/bench_lid/bench_lid_texture.png"/>
+
     <mesh file="full/front_left_face/front_left_face.obj" scale="1.0 1.0 1.0"/>
     <material name="new_mat_color.019" specular="0.5" shininess="0.36" rgba="0.850000 0.850000 0.850000 1.000000"/>
     <mesh file="full/cubby_1/cubby_1.obj" scale="1.0 1.0 1.0"/>
@@ -678,9 +681,9 @@
     <body name="bench_lid" pos="-2.10085 1.0466 0.5244" quat="-0.706686 0 0 0.707527">
       <inertial pos="0.265226 0.46 0.0319033" quat="0.503331 0.503331 -0.496647 0.496647" mass="9.07185" diaginertia="0.857706 0.643129 0.2211"/>
       <joint name="bench_lid_joint" pos="0 0 0" axis="0 -1 0" range="0 1.65806" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
-      <geom material="new_mat_color.018" mesh="bench_lid" class="visual" pos="" quat=""/>
-      <geom mesh="bench_lid_collision_0" rgba="0.6408841346898948 0.9624971502092844 0.8542106431875939 1" class="collision" pos="" quat=""/>
-      <geom mesh="bench_lid_collision_1" rgba="0.45440685128070946 0.14827356645042877 0.23688825093635257 1" class="collision" pos="" quat=""/>
+      <geom material="material_m41_0" mesh="bench_lid" class="visual" pos="" quat=""/>
+      <geom mesh="bench_lid_collision_0" rgba="0.7257909720108634 0.7169871398540723 0.5019627945180762 1" class="collision" pos="" quat=""/>
+      <geom mesh="bench_lid_collision_1" rgba="0.6495249294506051 0.9452225583314969 0.7990263081594043 1" class="collision" pos="" quat=""/>
       <site name="bench_lid" pos="0 0 0" quat="1.0 0 0 0"/>
     </body>
     <body name="cabinet_1" pos="-1.28991 1.16664 1.17" quat="-0.706686 0 0 0.707527">
