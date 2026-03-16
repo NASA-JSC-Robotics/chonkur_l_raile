@@ -51,6 +51,16 @@ def generate_launch_description():
             description="Use pre-generated mjcf instead of converting it on the fly.",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "sim_speed",
+            default_value="1.0",
+            description="Percentage speed to run the simulation at. 1.0 is 100 percent speed.",
+        )
+    )
+
+    use_pregenerated_mjcf = LaunchConfiguration("use_pregenerated_mjcf")
+    sim_speed = LaunchConfiguration("sim_speed")
 
     clr_mujoco_package_name = "clr_mujoco_config"
     clr_mujoco_description_file = "clr_xacro.urdf"
@@ -100,6 +110,13 @@ def generate_launch_description():
 
     generate_mjcf = OpaqueFunction(function=launch_mjcf_node)
 
+    extra_xacro_args = [
+        " use_pregenerated_mjcf:=",
+        use_pregenerated_mjcf,
+        " sim_speed:=",
+        sim_speed,
+    ]
+
     clr_launch = include_launch_file(
         package_name="clr_deploy",
         launch_file="control.launch.py",
@@ -111,6 +128,7 @@ def generate_launch_description():
             "use_sim_time": "true",
             "is_sim": "true",
             "control_node_package": "mujoco_ros2_control",
+            "extra_xacro_args": extra_xacro_args,
         }.items(),
     )
 
