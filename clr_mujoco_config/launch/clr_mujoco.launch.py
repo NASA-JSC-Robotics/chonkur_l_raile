@@ -103,7 +103,7 @@ def generate_launch_description():
                     "--asset_dir",
                     PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "description", "assets"]),
                 ],
-                condition=UnlessCondition(LaunchConfiguration("use_pregenerated_mjcf")),
+                condition=UnlessCondition(use_pregenerated_mjcf),
             ),
             RegisterEventHandler(OnShutdown(on_shutdown=cleanup)),
         ]
