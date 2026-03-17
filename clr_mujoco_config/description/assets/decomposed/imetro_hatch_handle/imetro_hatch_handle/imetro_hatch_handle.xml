@@ -1,0 +1,40 @@
+<mujoco model="imetro_hatch_handle">
+  <default>
+    <default class="visual">
+      <geom group="2" type="mesh" contype="0" conaffinity="0"/>
+    </default>
+    <default class="collision">
+      <geom group="3" type="mesh"/>
+    </default>
+  </default>
+  <asset>
+    <texture type="2d" name="material_m38_0" file="material_m38_0.png"/>
+    <material name="material_m38_0" texture="material_m38_0" specular="0.4000000000000001" shininess="0.001"/>
+    <mesh file="imetro_hatch_handle.obj"/>
+    <mesh file="imetro_hatch_handle_collision_0.obj"/>
+    <mesh file="imetro_hatch_handle_collision_1.obj"/>
+    <mesh file="imetro_hatch_handle_collision_2.obj"/>
+    <mesh file="imetro_hatch_handle_collision_3.obj"/>
+    <mesh file="imetro_hatch_handle_collision_4.obj"/>
+    <mesh file="imetro_hatch_handle_collision_5.obj"/>
+    <mesh file="imetro_hatch_handle_collision_6.obj"/>
+    <mesh file="imetro_hatch_handle_collision_7.obj"/>
+    <mesh file="imetro_hatch_handle_collision_8.obj"/>
+    <mesh file="imetro_hatch_handle_collision_9.obj"/>
+  </asset>
+  <worldbody>
+    <body name="imetro_hatch_handle">
+      <geom material="material_m38_0" mesh="imetro_hatch_handle" class="visual"/>
+      <geom mesh="imetro_hatch_handle_collision_0" rgba="0.6720117097981443 0.920106445166109 0.2141696759440065 1" class="collision"/>
+      <geom mesh="imetro_hatch_handle_collision_1" rgba="0.6515987254395588 0.6973671703673371 0.34596781402193877 1" class="collision"/>
+      <geom mesh="imetro_hatch_handle_collision_2" rgba="0.7463266510279093 0.011224055317226256 0.5488936165318861 1" class="collision"/>
+      <geom mesh="imetro_hatch_handle_collision_3" rgba="0.246703287074994 0.7981338298216809 0.9573951981834434 1" class="collision"/>
+      <geom mesh="imetro_hatch_handle_collision_4" rgba="0.04751139530203008 0.4852097266709111 0.1093496053401457 1" class="collision"/>
+      <geom mesh="imetro_hatch_handle_collision_5" rgba="0.9397733183504904 0.7821171891962847 0.8407892379713476 1" class="collision"/>
+      <geom mesh="imetro_hatch_handle_collision_6" rgba="0.7674368540698476 0.5005552430910184 0.37148510271313573 1" class="collision"/>
+      <geom mesh="imetro_hatch_handle_collision_7" rgba="0.11163933914936752 0.6474823724220907 0.9001567216074675 1" class="collision"/>
+      <geom mesh="imetro_hatch_handle_collision_8" rgba="0.3286542432282187 0.16478437826707426 0.683985818913348 1" class="collision"/>
+      <geom mesh="imetro_hatch_handle_collision_9" rgba="0.5258117921401386 0.1346766669403432 0.31817393439023955 1" class="collision"/>
+    </body>
+  </worldbody>
+</mujoco>

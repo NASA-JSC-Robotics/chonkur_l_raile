@@ -132,7 +132,7 @@
     <decompose_mesh mesh_name="clr_base" threshold="0.05"/>
 
     <!-- env stuff -->
-    <decompose_mesh mesh_name="grab_handle" threshold="0.05"/>
+    <decompose_mesh mesh_name="imetro_hatch_handle" threshold="0.05"/>
     <decompose_mesh mesh_name="simplified_hatch_4060_face" threshold="0.05"/>
     <decompose_mesh mesh_name="ivr_hatch_frame_no_left" threshold="0.05"/>
     <decompose_mesh mesh_name="hatch_4060_frame" threshold="0.05"/>
