@@ -29,6 +29,8 @@ From there, the contents can be simulated with,
 
 ```bash
 ${MUJOCO_DIR}/bin/simulate mjcf_data/scene.xml
+${MUJOCO_DIR}/bin/simulate mjcf_data/mujoco_description_formatted.xml
+
 ```
 
 Any contents can be copied and updated as needed.

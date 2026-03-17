@@ -8,16 +8,17 @@
     </default>
   </default>
   <asset>
-    <material name="new_mat_color.018" specular="0.5" shininess="0.36" rgba="0.000000 0.000000 1.000000 1.000000"/>
+    <texture type="2d" name="material_m41_0" file="material_m41_0.png"/>
+    <material name="material_m41_0" texture="material_m41_0" specular="0.4000000000000001" shininess="0.001"/>
     <mesh file="bench_lid.obj"/>
     <mesh file="bench_lid_collision_0.obj"/>
     <mesh file="bench_lid_collision_1.obj"/>
   </asset>
   <worldbody>
     <body name="bench_lid">
-      <geom material="new_mat_color.018" mesh="bench_lid" class="visual"/>
-      <geom mesh="bench_lid_collision_0" rgba="0.6408841346898948 0.9624971502092844 0.8542106431875939 1" class="collision"/>
-      <geom mesh="bench_lid_collision_1" rgba="0.45440685128070946 0.14827356645042877 0.23688825093635257 1" class="collision"/>
+      <geom material="material_m41_0" mesh="bench_lid" class="visual"/>
+      <geom mesh="bench_lid_collision_0" rgba="0.7257909720108634 0.7169871398540723 0.5019627945180762 1" class="collision"/>
+      <geom mesh="bench_lid_collision_1" rgba="0.6495249294506051 0.9452225583314969 0.7990263081594043 1" class="collision"/>
     </body>
   </worldbody>
 </mujoco>
