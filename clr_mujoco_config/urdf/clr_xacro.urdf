@@ -8,6 +8,7 @@
   <!-- Legacy argument to leave out the environment mockups, though for now we generally -->
   <!-- always want this to be true. -->
   <xacro:arg name="model_env" default="true"/>
+  <xacro:arg name="sim_speed" default="1.0"/>
 
   <xacro:property name="model_env" value="$(arg model_env)"/>
 
@@ -254,7 +255,7 @@
       </xacro:if>
 
       <!-- Increase this parameter to run the sim faster than realtime. -->
-      <param name="sim_speed_factor">1.0</param>
+      <param name="sim_speed_factor">$(arg sim_speed)</param>
 
       <!-- Publish camera images at 5 hz -->
       <param name="camera_publish_rate">5.0</param>
