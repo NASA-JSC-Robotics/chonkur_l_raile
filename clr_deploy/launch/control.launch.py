@@ -113,6 +113,14 @@ def generate_launch_description():
             description="Represent the iMETRO mockup environment in the robot description.",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "extra_xacro_args",
+            default_value="",
+            description="Extra args to add for making a robot description. "
+            "Should be in the format of 'arg1:=value1 arg2:=value2'",
+        )
+    )
 
     mapped_arguments = []
     mapped_arguments.append(
@@ -139,6 +147,7 @@ def generate_launch_description():
     model_env = LaunchConfiguration("model_env")
     use_sim_time = LaunchConfiguration("use_sim_time")
     is_sim = LaunchConfiguration("is_sim")
+    extra_xacro_args = LaunchConfiguration("extra_xacro_args")
 
     # Main robot description for CLR. Additional arguments are available in the xacro, but we only
     # override a subset of those that change regularly depending on deployment. Arguments here that
@@ -157,6 +166,8 @@ def generate_launch_description():
             " ",
             "model_env:=",
             model_env,
+            " ",
+            extra_xacro_args,
         ]
     )
 
@@ -182,12 +193,6 @@ def generate_launch_description():
         namespace=namespace,
         # allow_substs allows tf_prefix to be pulled in
         parameters=[
-            # TODO: Passing the robot description as a parameter is deprecated, but it is required for loading
-            # the admittance controller because it needs the robot description to launch the KDL IK solver.
-            # See https://tinyurl.com/3sf3u9ev.
-            # Unfortunately, the description is loaded from a topic, the parameter is not passed to the controller and
-            # it barfs on construction.
-            robot_description,
             # CLR specific controllers
             parameter_file("clr_deploy", "controllers_common.yaml", True),
             parameter_file("clr_deploy", "clr_controllers.yaml", True),
