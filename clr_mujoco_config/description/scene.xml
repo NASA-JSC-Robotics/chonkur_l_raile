@@ -2,13 +2,6 @@
 <mujoco model="scene">
     <include file="mujoco_description_formatted.xml"/>
     <statistic center="-0.5 1.0 1.0" extent="3.5"/>
-    <option gravity="0 0 -9.81">
-
-
-        <flag contact="enable"/>
-
-
-    </option>
     <visual>
 
 
