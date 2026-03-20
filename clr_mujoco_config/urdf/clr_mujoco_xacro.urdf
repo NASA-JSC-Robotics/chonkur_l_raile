@@ -8,6 +8,7 @@
   <!-- Legacy argument to leave out the environment mockups, though for now we generally -->
   <!-- always want this to be true. -->
   <xacro:arg name="model_env" default="true"/>
+  <xacro:arg name="include_scene_objects" default="false"/>
   <xacro:arg name="sim_speed" default="1.0"/>
 
   <xacro:property name="model_env" value="$(arg model_env)"/>
@@ -47,9 +48,11 @@
       generate_ros2_control_tag="false"/>
   </xacro:if>
 
-  <xacro:ctb prefix="" parent="world">
-    <origin xyz="0.8 0.8 0.25" rpy="0 0 ${radians(90)}"/>
-  </xacro:ctb>
+  <xacro:if value="$(arg include_scene_objects)">
+    <xacro:ctb prefix="" parent="world">
+      <origin xyz="0.8 0.8 0.25" rpy="0 0 ${radians(90)}"/>
+    </xacro:ctb>
+  </xacro:if>
 
   <!-- special inputs for mujoco processing-->
   <xacro:include filename="$(find clr_mujoco_config)/urdf/clr_mujoco_raw_inputs.xacro"/>

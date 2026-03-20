@@ -73,6 +73,7 @@ def generate_launch_description():
             # Grasp frames should not be converted to MJCF objects
             " add_grasp_push_frames:=false",
             " model_env:=true",
+            " include_scene_objects:=true",
         ]
     )
 
