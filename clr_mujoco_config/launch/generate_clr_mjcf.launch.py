@@ -44,23 +44,19 @@ def generate_launch_description():
         ]
     )
 
-    default_arguments = (
-        [
-            "--robot_description",
-            robot_description_content,
-            "--convert_stl_to_obj",
-            "--save_only",
-        ],
-    )
+    default_arguments = [
+        "--robot_description",
+        robot_description_content,
+        "--convert_stl_to_obj",
+        "--save_only",
+    ]
 
-    args_with_assets_dir = (
-        default_arguments
-        + [
-            "--asset_dir",
-            PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "description", "assets"]),
-        ],
-    )
+    args_with_assets_dir = default_arguments + [
+        "--asset_dir",
+        PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "description", "assets"]),
+    ]
 
+    # this version can be run for general
     make_mjcf_from_robot_description = Node(
         package="mujoco_ros2_control",
         executable="make_mjcf_from_robot_description.py",
@@ -78,7 +74,8 @@ def generate_launch_description():
     )
 
     return LaunchDescription(
-        [
+        declared_arguments
+        + [
             make_mjcf_from_robot_description,
             make_mjcf_from_robot_description_use_assets_dir,
         ]
