@@ -59,8 +59,6 @@
     <material name="material_lift_high_700mm_0" specular="0.20000000000000004" shininess="1.0" rgba="0.80000000 0.80000000 0.80000000 1.0"/>
     <mesh file="full/lift_camera_mount/lift_camera_mount.obj" scale="1.0 1.0 1.0"/>
     <material name="mtl_lift_camera_mount" specular="0.20000000000000004" shininess="1.0" rgba="0.80000000 0.80000000 0.80000000 1.0"/>
-    <mesh file="full/d435/d435.obj" scale="1.0 1.0 1.0"/>
-    <material name="material_d435_0" specular="0.20000000000000004" shininess="1.0" rgba="0.74901961 0.74901961 0.74901961 1.0"/>
     <mesh file="full/right_angle_mount/right_angle_mount.obj" scale="1.0 1.0 1.0"/>
     <material name="material_right_angle_mount_0" specular="0.20000000000000004" shininess="1.0" rgba="0.80000000 0.80000000 0.80000000 1.0"/>
     <mesh file="full/ur10e_plate/ur10e_plate.obj" scale="1.0 1.0 1.0"/>
@@ -226,16 +224,18 @@
     <material name="mtl_crank_wheel" specular="0.20000000000000004" shininess="1.0" rgba="0.00000000 0.00000000 1.00000000 1.0"/>
     <mesh file="full/crank_handle/crank_handle.obj" scale="1.0 1.0 1.0"/>
     <material name="mtl_crank_handle" specular="0.20000000000000004" shininess="1.0" rgba="0.00000000 0.00000000 1.00000000 1.0"/>
-    <mesh file="decomposed/grab_handle/grab_handle/grab_handle.obj" scale="1.0 1.0 1.0"/>
-    <mesh file="decomposed/grab_handle/grab_handle/grab_handle_collision_0.obj" scale="1.0 1.0 1.0"/>
-    <mesh file="decomposed/grab_handle/grab_handle/grab_handle_collision_1.obj" scale="1.0 1.0 1.0"/>
-    <mesh file="decomposed/grab_handle/grab_handle/grab_handle_collision_2.obj" scale="1.0 1.0 1.0"/>
-    <mesh file="decomposed/grab_handle/grab_handle/grab_handle_collision_3.obj" scale="1.0 1.0 1.0"/>
-    <mesh file="decomposed/grab_handle/grab_handle/grab_handle_collision_4.obj" scale="1.0 1.0 1.0"/>
-    <mesh file="decomposed/grab_handle/grab_handle/grab_handle_collision_5.obj" scale="1.0 1.0 1.0"/>
-    <mesh file="decomposed/grab_handle/grab_handle/grab_handle_collision_6.obj" scale="1.0 1.0 1.0"/>
-    <mesh file="decomposed/grab_handle/grab_handle/grab_handle_collision_7.obj" scale="1.0 1.0 1.0"/>
-    <material name="mtl_grab_handle" specular="0.20000000000000004" shininess="1.0" rgba="0.00000000 0.00000000 1.00000000 1.0"/>
+    <mesh file="decomposed/imetro_hatch_handle/imetro_hatch_handle/imetro_hatch_handle.obj" scale="1.0 1.0 1.0"/>
+    <mesh file="decomposed/imetro_hatch_handle/imetro_hatch_handle/imetro_hatch_handle_collision_0.obj" scale="1.0 1.0 1.0"/>
+    <mesh file="decomposed/imetro_hatch_handle/imetro_hatch_handle/imetro_hatch_handle_collision_1.obj" scale="1.0 1.0 1.0"/>
+    <mesh file="decomposed/imetro_hatch_handle/imetro_hatch_handle/imetro_hatch_handle_collision_2.obj" scale="1.0 1.0 1.0"/>
+    <mesh file="decomposed/imetro_hatch_handle/imetro_hatch_handle/imetro_hatch_handle_collision_3.obj" scale="1.0 1.0 1.0"/>
+    <mesh file="decomposed/imetro_hatch_handle/imetro_hatch_handle/imetro_hatch_handle_collision_4.obj" scale="1.0 1.0 1.0"/>
+    <mesh file="decomposed/imetro_hatch_handle/imetro_hatch_handle/imetro_hatch_handle_collision_5.obj" scale="1.0 1.0 1.0"/>
+    <mesh file="decomposed/imetro_hatch_handle/imetro_hatch_handle/imetro_hatch_handle_collision_6.obj" scale="1.0 1.0 1.0"/>
+    <mesh file="decomposed/imetro_hatch_handle/imetro_hatch_handle/imetro_hatch_handle_collision_7.obj" scale="1.0 1.0 1.0"/>
+    <mesh file="decomposed/imetro_hatch_handle/imetro_hatch_handle/imetro_hatch_handle_collision_8.obj" scale="1.0 1.0 1.0"/>
+    <material name="material_imetro_hatch_handle_0" texture="material_imetro_hatch_handle_0" specular="0.4000000000000001" shininess="0.001"/>
+    <texture type="2d" name="material_imetro_hatch_handle_0" file="decomposed/imetro_hatch_handle/imetro_hatch_handle/material_imetro_hatch_handle_0.png"/>
     <mesh file="full/ivr_tasktrainer_frame/ivr_tasktrainer_frame.obj" scale="1.0 1.0 1.0"/>
     <material name="mtl_ivr_tasktrainer_frame" specular="0.20000000000000004" shininess="1.0" rgba="0.85098039 0.85098039 0.85098039 1.0"/>
     <mesh file="decomposed/bench_lid/bench_lid/bench_lid.obj" scale="1.0 1.0 1.0"/>
@@ -387,8 +387,6 @@
                       <geom mesh="finger_v6_collision_21" rgba="0.1748068478573328 0.8952354683008019 0.08894101206310079 1" class="collision" pos="" quat=""/>
                       <site name="finger_2_link" pos="0 0 0" quat="1.0 0 0 0"/>
                     </body>
-                    <geom material="material_d435_0" mesh="d435" class="visual" pos="-0.00338466 0.0742879 0.0649477" quat="-0.99748 -0.0702225 0.00932359 -0.00398994"/>
-                    <geom mesh="d435" class="collision" pos="-0.00338466 0.0742879 0.0649477" quat="-0.99748 -0.0702225 0.00932359 -0.00398994"/>
                     <geom material="material_wrist3_0" mesh="wrist3" class="visual" pos="0 0 -0.1168" quat="0.707107 0.707107 0 0"/>
                     <geom mesh="wrist3" class="collision" pos="0 0 -0.1168" quat="0.707107 0.707107 0 0"/>
                     <geom material="material_mtc_robot_side_0" mesh="mtc_robot_side" class="visual" pos="" quat="0.707107 0 0 0.707107"/>
@@ -401,6 +399,8 @@
                     <geom mesh="robotiq_hande_cb_adapter" class="collision" pos="0 0 0.040447" quat="-1 0 0 0"/>
                     <geom mesh="hande" class="visual" pos="0 0 0.051447" quat="-1 0 0 0"/>
                     <geom mesh="hande" class="collision" pos="0 0 0.051447" quat="-1 0 0 0"/>
+                    <geom size="0.012525 0.045 0.0125" pos="-0.00330709 0.0748906 0.0606908" quat="-0.531184 0.456972 0.470285 0.536518" type="box" class="collision"/>
+                    <geom size="0.012525 0.045 0.0125" pos="-0.00330709 0.0748906 0.0606908" quat="-0.531184 0.456972 0.470285 0.536518" type="box" class="visual"/>
                     <site name="wrist_3_link" pos="0 0 0" quat="1.0 0 0 0"/>
                     <site name="ft_frame" pos="0 0 0" quat="0 1.0 0 0"/>
                     <site name="flange" pos="0 0 0" quat="-0.5000000000000001 0.5 0.5000000000000001 0.49999999999999994"/>
@@ -497,10 +497,10 @@
       <geom mesh="lift_low_700mm" class="collision" pos="-0.003624 -0.09 0.368025" quat="1 0 0 0"/>
       <geom material="mtl_lift_camera_mount" mesh="lift_camera_mount" class="visual" pos="-0.080824 0.005 0.631525" quat="1 0 0 0"/>
       <geom mesh="lift_camera_mount" class="collision" pos="-0.080824 0.005 0.631525" quat="1 0 0 0"/>
-      <geom material="material_d435_0" mesh="d435" class="visual" pos="-0.0126864 0.0321156 0.447592" quat="0.715752 -0.69682 0.0253716 0.0386869"/>
-      <geom mesh="d435" class="collision" pos="-0.0126864 0.0321156 0.447592" quat="0.715752 -0.69682 0.0253716 0.0386869"/>
       <geom size="0.155 0.155 0.009525" pos="-0.003624 -0.09 0.073025" type="box" class="collision"/>
       <geom size="0.155 0.155 0.009525" pos="-0.003624 -0.09 0.073025" type="box" rgba="0.8 0.8 0.8 1" class="visual"/>
+      <geom size="0.012525 0.045 0.0125" pos="-0.0126108 0.027818 0.447473" quat="0.0414955 -0.699629 -0.712944 0.022563" type="box" class="collision"/>
+      <geom size="0.012525 0.045 0.0125" pos="-0.0126108 0.027818 0.447473" quat="0.0414955 -0.699629 -0.712944 0.022563" type="box" class="visual"/>
       <site name="vention_rail_carriage" pos="0 0 0" quat="1.0 0 0 0"/>
       <site name="clr_carriage" pos="-0.003624 -0.09 0.0185" quat="1.0 0 0 0"/>
       <site name="lower_lift_plate" pos="-0.003624 -0.09 0.07302499999999999" quat="1.0 0 0 0"/>
@@ -605,42 +605,46 @@
       <geom mesh="simplified_hatch_4060_face_collision_16" rgba="0.15427080378746705 0.050990782949487334 0.16568457056881947 1" class="collision" pos="" quat=""/>
       <geom material="material_apriltag_0" mesh="apriltag" class="visual" pos="-0.07 -1 1.1" quat=""/>
       <geom mesh="apriltag" class="collision" pos="-0.07 -1 1.1" quat=""/>
-      <geom material="mtl_grab_handle" mesh="grab_handle" class="visual" pos="-0.07 -0.9016 0.8021" quat="0 0 1 0"/>
-      <geom mesh="grab_handle_collision_0" rgba="0.2840579093037472 0.0706523621158015 0.4930186233244842 1" class="collision" pos="-0.07 -0.9016 0.8021" quat="0 0 1 0"/>
-      <geom mesh="grab_handle_collision_1" rgba="0.6186786044969046 0.4956343228312904 0.15838555868401005 1" class="collision" pos="-0.07 -0.9016 0.8021" quat="0 0 1 0"/>
-      <geom mesh="grab_handle_collision_2" rgba="0.9320839326531726 0.7986107617031288 0.7134656300766423 1" class="collision" pos="-0.07 -0.9016 0.8021" quat="0 0 1 0"/>
-      <geom mesh="grab_handle_collision_3" rgba="0.5682260610551011 0.9758328557315088 0.496583305603698 1" class="collision" pos="-0.07 -0.9016 0.8021" quat="0 0 1 0"/>
-      <geom mesh="grab_handle_collision_4" rgba="0.3091963654965141 0.45924929916241164 0.2585362648218865 1" class="collision" pos="-0.07 -0.9016 0.8021" quat="0 0 1 0"/>
-      <geom mesh="grab_handle_collision_5" rgba="0.6671622656574671 0.8726097097420233 0.7582405130505894 1" class="collision" pos="-0.07 -0.9016 0.8021" quat="0 0 1 0"/>
-      <geom mesh="grab_handle_collision_6" rgba="0.18505400161358365 0.9513893520537382 0.8100266534653852 1" class="collision" pos="-0.07 -0.9016 0.8021" quat="0 0 1 0"/>
-      <geom mesh="grab_handle_collision_7" rgba="0.0946575607300899 0.530042680750807 0.16540498922489932 1" class="collision" pos="-0.07 -0.9016 0.8021" quat="0 0 1 0"/>
-      <geom material="mtl_grab_handle" mesh="grab_handle" class="visual" pos="-0.07 -1.0273 0.6887" quat="0 0 0.707107 0.707107"/>
-      <geom mesh="grab_handle_collision_0" rgba="0.2840579093037472 0.0706523621158015 0.4930186233244842 1" class="collision" pos="-0.07 -1.0273 0.6887" quat="0 0 0.707107 0.707107"/>
-      <geom mesh="grab_handle_collision_1" rgba="0.6186786044969046 0.4956343228312904 0.15838555868401005 1" class="collision" pos="-0.07 -1.0273 0.6887" quat="0 0 0.707107 0.707107"/>
-      <geom mesh="grab_handle_collision_2" rgba="0.9320839326531726 0.7986107617031288 0.7134656300766423 1" class="collision" pos="-0.07 -1.0273 0.6887" quat="0 0 0.707107 0.707107"/>
-      <geom mesh="grab_handle_collision_3" rgba="0.5682260610551011 0.9758328557315088 0.496583305603698 1" class="collision" pos="-0.07 -1.0273 0.6887" quat="0 0 0.707107 0.707107"/>
-      <geom mesh="grab_handle_collision_4" rgba="0.3091963654965141 0.45924929916241164 0.2585362648218865 1" class="collision" pos="-0.07 -1.0273 0.6887" quat="0 0 0.707107 0.707107"/>
-      <geom mesh="grab_handle_collision_5" rgba="0.6671622656574671 0.8726097097420233 0.7582405130505894 1" class="collision" pos="-0.07 -1.0273 0.6887" quat="0 0 0.707107 0.707107"/>
-      <geom mesh="grab_handle_collision_6" rgba="0.18505400161358365 0.9513893520537382 0.8100266534653852 1" class="collision" pos="-0.07 -1.0273 0.6887" quat="0 0 0.707107 0.707107"/>
-      <geom mesh="grab_handle_collision_7" rgba="0.0946575607300899 0.530042680750807 0.16540498922489932 1" class="collision" pos="-0.07 -1.0273 0.6887" quat="0 0 0.707107 0.707107"/>
-      <geom material="mtl_grab_handle" mesh="grab_handle" class="visual" pos="-0.07 -0.1295 0.6957" quat="0 0 0.707107 0.707107"/>
-      <geom mesh="grab_handle_collision_0" rgba="0.2840579093037472 0.0706523621158015 0.4930186233244842 1" class="collision" pos="-0.07 -0.1295 0.6957" quat="0 0 0.707107 0.707107"/>
-      <geom mesh="grab_handle_collision_1" rgba="0.6186786044969046 0.4956343228312904 0.15838555868401005 1" class="collision" pos="-0.07 -0.1295 0.6957" quat="0 0 0.707107 0.707107"/>
-      <geom mesh="grab_handle_collision_2" rgba="0.9320839326531726 0.7986107617031288 0.7134656300766423 1" class="collision" pos="-0.07 -0.1295 0.6957" quat="0 0 0.707107 0.707107"/>
-      <geom mesh="grab_handle_collision_3" rgba="0.5682260610551011 0.9758328557315088 0.496583305603698 1" class="collision" pos="-0.07 -0.1295 0.6957" quat="0 0 0.707107 0.707107"/>
-      <geom mesh="grab_handle_collision_4" rgba="0.3091963654965141 0.45924929916241164 0.2585362648218865 1" class="collision" pos="-0.07 -0.1295 0.6957" quat="0 0 0.707107 0.707107"/>
-      <geom mesh="grab_handle_collision_5" rgba="0.6671622656574671 0.8726097097420233 0.7582405130505894 1" class="collision" pos="-0.07 -0.1295 0.6957" quat="0 0 0.707107 0.707107"/>
-      <geom mesh="grab_handle_collision_6" rgba="0.18505400161358365 0.9513893520537382 0.8100266534653852 1" class="collision" pos="-0.07 -0.1295 0.6957" quat="0 0 0.707107 0.707107"/>
-      <geom mesh="grab_handle_collision_7" rgba="0.0946575607300899 0.530042680750807 0.16540498922489932 1" class="collision" pos="-0.07 -0.1295 0.6957" quat="0 0 0.707107 0.707107"/>
-      <geom material="mtl_grab_handle" mesh="grab_handle" class="visual" pos="-0.058 -1.078 0.6957" quat="0.707107 0.707107 0 0"/>
-      <geom mesh="grab_handle_collision_0" rgba="0.2840579093037472 0.0706523621158015 0.4930186233244842 1" class="collision" pos="-0.058 -1.078 0.6957" quat="0.707107 0.707107 0 0"/>
-      <geom mesh="grab_handle_collision_1" rgba="0.6186786044969046 0.4956343228312904 0.15838555868401005 1" class="collision" pos="-0.058 -1.078 0.6957" quat="0.707107 0.707107 0 0"/>
-      <geom mesh="grab_handle_collision_2" rgba="0.9320839326531726 0.7986107617031288 0.7134656300766423 1" class="collision" pos="-0.058 -1.078 0.6957" quat="0.707107 0.707107 0 0"/>
-      <geom mesh="grab_handle_collision_3" rgba="0.5682260610551011 0.9758328557315088 0.496583305603698 1" class="collision" pos="-0.058 -1.078 0.6957" quat="0.707107 0.707107 0 0"/>
-      <geom mesh="grab_handle_collision_4" rgba="0.3091963654965141 0.45924929916241164 0.2585362648218865 1" class="collision" pos="-0.058 -1.078 0.6957" quat="0.707107 0.707107 0 0"/>
-      <geom mesh="grab_handle_collision_5" rgba="0.6671622656574671 0.8726097097420233 0.7582405130505894 1" class="collision" pos="-0.058 -1.078 0.6957" quat="0.707107 0.707107 0 0"/>
-      <geom mesh="grab_handle_collision_6" rgba="0.18505400161358365 0.9513893520537382 0.8100266534653852 1" class="collision" pos="-0.058 -1.078 0.6957" quat="0.707107 0.707107 0 0"/>
-      <geom mesh="grab_handle_collision_7" rgba="0.0946575607300899 0.530042680750807 0.16540498922489932 1" class="collision" pos="-0.058 -1.078 0.6957" quat="0.707107 0.707107 0 0"/>
+      <geom material="material_imetro_hatch_handle_0" mesh="imetro_hatch_handle" class="visual" pos="-0.07 -0.9016 0.8021" quat="0 0 1 0"/>
+      <geom mesh="imetro_hatch_handle_collision_0" rgba="0.38859666792964287 0.9016760168858076 0.274963342985575 1" class="collision" pos="-0.07 -0.9016 0.8021" quat="0 0 1 0"/>
+      <geom mesh="imetro_hatch_handle_collision_1" rgba="0.12435771217053371 0.6119353333740855 0.2581080622761913 1" class="collision" pos="-0.07 -0.9016 0.8021" quat="0 0 1 0"/>
+      <geom mesh="imetro_hatch_handle_collision_2" rgba="0.7278014805197642 0.2173083359443937 0.43849163751293074 1" class="collision" pos="-0.07 -0.9016 0.8021" quat="0 0 1 0"/>
+      <geom mesh="imetro_hatch_handle_collision_3" rgba="0.1752257497960562 0.41765995918551 0.2355267778433927 1" class="collision" pos="-0.07 -0.9016 0.8021" quat="0 0 1 0"/>
+      <geom mesh="imetro_hatch_handle_collision_4" rgba="0.8115584310838968 0.6291413512392855 0.3436479510798881 1" class="collision" pos="-0.07 -0.9016 0.8021" quat="0 0 1 0"/>
+      <geom mesh="imetro_hatch_handle_collision_5" rgba="0.07827906647263971 0.4063498389660444 0.5383780383971504 1" class="collision" pos="-0.07 -0.9016 0.8021" quat="0 0 1 0"/>
+      <geom mesh="imetro_hatch_handle_collision_6" rgba="0.1171664588471183 0.4228382832409491 0.18740412608708323 1" class="collision" pos="-0.07 -0.9016 0.8021" quat="0 0 1 0"/>
+      <geom mesh="imetro_hatch_handle_collision_7" rgba="0.7982998343083979 0.21058298943219367 0.7615960658771506 1" class="collision" pos="-0.07 -0.9016 0.8021" quat="0 0 1 0"/>
+      <geom mesh="imetro_hatch_handle_collision_8" rgba="0.5308850338763978 0.5320274418634704 0.6469004282028774 1" class="collision" pos="-0.07 -0.9016 0.8021" quat="0 0 1 0"/>
+      <geom material="material_imetro_hatch_handle_0" mesh="imetro_hatch_handle" class="visual" pos="-0.07 -1.0273 0.6887" quat="0 0 0.707107 0.707107"/>
+      <geom mesh="imetro_hatch_handle_collision_0" rgba="0.38859666792964287 0.9016760168858076 0.274963342985575 1" class="collision" pos="-0.07 -1.0273 0.6887" quat="0 0 0.707107 0.707107"/>
+      <geom mesh="imetro_hatch_handle_collision_1" rgba="0.12435771217053371 0.6119353333740855 0.2581080622761913 1" class="collision" pos="-0.07 -1.0273 0.6887" quat="0 0 0.707107 0.707107"/>
+      <geom mesh="imetro_hatch_handle_collision_2" rgba="0.7278014805197642 0.2173083359443937 0.43849163751293074 1" class="collision" pos="-0.07 -1.0273 0.6887" quat="0 0 0.707107 0.707107"/>
+      <geom mesh="imetro_hatch_handle_collision_3" rgba="0.1752257497960562 0.41765995918551 0.2355267778433927 1" class="collision" pos="-0.07 -1.0273 0.6887" quat="0 0 0.707107 0.707107"/>
+      <geom mesh="imetro_hatch_handle_collision_4" rgba="0.8115584310838968 0.6291413512392855 0.3436479510798881 1" class="collision" pos="-0.07 -1.0273 0.6887" quat="0 0 0.707107 0.707107"/>
+      <geom mesh="imetro_hatch_handle_collision_5" rgba="0.07827906647263971 0.4063498389660444 0.5383780383971504 1" class="collision" pos="-0.07 -1.0273 0.6887" quat="0 0 0.707107 0.707107"/>
+      <geom mesh="imetro_hatch_handle_collision_6" rgba="0.1171664588471183 0.4228382832409491 0.18740412608708323 1" class="collision" pos="-0.07 -1.0273 0.6887" quat="0 0 0.707107 0.707107"/>
+      <geom mesh="imetro_hatch_handle_collision_7" rgba="0.7982998343083979 0.21058298943219367 0.7615960658771506 1" class="collision" pos="-0.07 -1.0273 0.6887" quat="0 0 0.707107 0.707107"/>
+      <geom mesh="imetro_hatch_handle_collision_8" rgba="0.5308850338763978 0.5320274418634704 0.6469004282028774 1" class="collision" pos="-0.07 -1.0273 0.6887" quat="0 0 0.707107 0.707107"/>
+      <geom material="material_imetro_hatch_handle_0" mesh="imetro_hatch_handle" class="visual" pos="-0.07 -0.1295 0.6957" quat="0 0 0.707107 0.707107"/>
+      <geom mesh="imetro_hatch_handle_collision_0" rgba="0.38859666792964287 0.9016760168858076 0.274963342985575 1" class="collision" pos="-0.07 -0.1295 0.6957" quat="0 0 0.707107 0.707107"/>
+      <geom mesh="imetro_hatch_handle_collision_1" rgba="0.12435771217053371 0.6119353333740855 0.2581080622761913 1" class="collision" pos="-0.07 -0.1295 0.6957" quat="0 0 0.707107 0.707107"/>
+      <geom mesh="imetro_hatch_handle_collision_2" rgba="0.7278014805197642 0.2173083359443937 0.43849163751293074 1" class="collision" pos="-0.07 -0.1295 0.6957" quat="0 0 0.707107 0.707107"/>
+      <geom mesh="imetro_hatch_handle_collision_3" rgba="0.1752257497960562 0.41765995918551 0.2355267778433927 1" class="collision" pos="-0.07 -0.1295 0.6957" quat="0 0 0.707107 0.707107"/>
+      <geom mesh="imetro_hatch_handle_collision_4" rgba="0.8115584310838968 0.6291413512392855 0.3436479510798881 1" class="collision" pos="-0.07 -0.1295 0.6957" quat="0 0 0.707107 0.707107"/>
+      <geom mesh="imetro_hatch_handle_collision_5" rgba="0.07827906647263971 0.4063498389660444 0.5383780383971504 1" class="collision" pos="-0.07 -0.1295 0.6957" quat="0 0 0.707107 0.707107"/>
+      <geom mesh="imetro_hatch_handle_collision_6" rgba="0.1171664588471183 0.4228382832409491 0.18740412608708323 1" class="collision" pos="-0.07 -0.1295 0.6957" quat="0 0 0.707107 0.707107"/>
+      <geom mesh="imetro_hatch_handle_collision_7" rgba="0.7982998343083979 0.21058298943219367 0.7615960658771506 1" class="collision" pos="-0.07 -0.1295 0.6957" quat="0 0 0.707107 0.707107"/>
+      <geom mesh="imetro_hatch_handle_collision_8" rgba="0.5308850338763978 0.5320274418634704 0.6469004282028774 1" class="collision" pos="-0.07 -0.1295 0.6957" quat="0 0 0.707107 0.707107"/>
+      <geom material="material_imetro_hatch_handle_0" mesh="imetro_hatch_handle" class="visual" pos="-0.058 -1.078 0.6957" quat="0.707107 0.707107 0 0"/>
+      <geom mesh="imetro_hatch_handle_collision_0" rgba="0.38859666792964287 0.9016760168858076 0.274963342985575 1" class="collision" pos="-0.058 -1.078 0.6957" quat="0.707107 0.707107 0 0"/>
+      <geom mesh="imetro_hatch_handle_collision_1" rgba="0.12435771217053371 0.6119353333740855 0.2581080622761913 1" class="collision" pos="-0.058 -1.078 0.6957" quat="0.707107 0.707107 0 0"/>
+      <geom mesh="imetro_hatch_handle_collision_2" rgba="0.7278014805197642 0.2173083359443937 0.43849163751293074 1" class="collision" pos="-0.058 -1.078 0.6957" quat="0.707107 0.707107 0 0"/>
+      <geom mesh="imetro_hatch_handle_collision_3" rgba="0.1752257497960562 0.41765995918551 0.2355267778433927 1" class="collision" pos="-0.058 -1.078 0.6957" quat="0.707107 0.707107 0 0"/>
+      <geom mesh="imetro_hatch_handle_collision_4" rgba="0.8115584310838968 0.6291413512392855 0.3436479510798881 1" class="collision" pos="-0.058 -1.078 0.6957" quat="0.707107 0.707107 0 0"/>
+      <geom mesh="imetro_hatch_handle_collision_5" rgba="0.07827906647263971 0.4063498389660444 0.5383780383971504 1" class="collision" pos="-0.058 -1.078 0.6957" quat="0.707107 0.707107 0 0"/>
+      <geom mesh="imetro_hatch_handle_collision_6" rgba="0.1171664588471183 0.4228382832409491 0.18740412608708323 1" class="collision" pos="-0.058 -1.078 0.6957" quat="0.707107 0.707107 0 0"/>
+      <geom mesh="imetro_hatch_handle_collision_7" rgba="0.7982998343083979 0.21058298943219367 0.7615960658771506 1" class="collision" pos="-0.058 -1.078 0.6957" quat="0.707107 0.707107 0 0"/>
+      <geom mesh="imetro_hatch_handle_collision_8" rgba="0.5308850338763978 0.5320274418634704 0.6469004282028774 1" class="collision" pos="-0.058 -1.078 0.6957" quat="0.707107 0.707107 0 0"/>
       <geom size="0.0127" pos="-0.0341587 -1.22925 0.666224" type="sphere" class="collision"/>
       <geom size="0.0127" pos="-0.0341587 -1.22925 0.666224" rgba="1 1 1 0" type="sphere" class="visual"/>
       <site name="lorge/hatch_face" pos="0 0 0" quat="1.0 0 0 0"/>
@@ -784,7 +788,7 @@
       <site name="drawer_2_bottom" pos="0 -0.305 -0.00435" quat="1.0 0 0 0"/>
     </body>
     <body name="ctb" pos="0.8 0.8 0.25" quat="0.707107 0 0 0.707107">
-      <inertial pos="0 0 0" mass="2" diaginertia="0.001 0.001 0.001"/>
+      <inertial pos="0 0 0" mass="1.8" diaginertia="0.001 0.001 0.001"/>
       <joint name="ctb_joint" type="free"/>
       <geom material="mtl_ctb_body" mesh="ctb_body" class="visual" pos="" quat="0.707388 -0.706825 0 0"/>
       <geom mesh="ctb_body" class="collision" pos="" quat="0.707388 -0.706825 0 0"/>
