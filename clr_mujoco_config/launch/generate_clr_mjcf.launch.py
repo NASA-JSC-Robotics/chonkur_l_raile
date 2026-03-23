@@ -41,6 +41,9 @@ def generate_launch_description():
             " ",
             "model_env:=",
             "true",
+            " ",
+            "include_scene_objects:=",
+            "true",
         ]
     )
 

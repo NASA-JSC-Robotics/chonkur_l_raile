@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
 
-  <xacro:macro name="clr_mujoco_processed_inputs">
+  <xacro:macro name="clr_mujoco_processed_inputs" params="
+    include_scene_objects:=false
+  ">
 
     <!-- Process arguments for the URDF -->
     <processed_inputs>
@@ -17,7 +19,9 @@
         <decompose_mesh mesh_name="ivr_hatch_frame_no_left" threshold="0.05"/>
         <decompose_mesh mesh_name="hatch_4060_frame" threshold="0.05"/>
         <decompose_mesh mesh_name="bench_lid" threshold="0.05"/>
-        <decompose_mesh mesh_name="ctb_handle" threshold="0.01"/>
+        <xacro:if value="${include_scene_objects}">
+          <decompose_mesh mesh_name="ctb_handle" threshold="0.01"/>
+        </xacro:if>
 
         <!-- The camera with the specified values will be added at the specified site name. -->
         <!-- The position and quaterinion will be filled in by the converter -->
