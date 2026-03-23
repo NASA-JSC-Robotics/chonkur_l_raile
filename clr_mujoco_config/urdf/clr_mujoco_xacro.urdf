@@ -61,7 +61,9 @@
 
   <mujoco_inputs>
     <xacro:clr_mujoco_raw_inputs/>
-    <xacro:clr_mujoco_processed_inputs/>
+    <xacro:clr_mujoco_processed_inputs
+      include_scene_objects="$(arg include_scene_objects)"
+    />
     <xacro:clr_mujoco_scene/>
   </mujoco_inputs>
 
