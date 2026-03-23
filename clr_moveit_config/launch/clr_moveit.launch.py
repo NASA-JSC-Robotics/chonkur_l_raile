@@ -56,6 +56,7 @@ def launch_setup(context, *args, **kwargs):
         .robot_description_semantic(file_path=moveit_config_file_path)
         .robot_description_kinematics(file_path="config/kinematics.yaml")
         .joint_limits(file_path="config/joint_limits.yaml")
+        .trajectory_execution(file_path="config/clr_moveit_controllers.yaml")
         .to_moveit_configs()
     )
 
