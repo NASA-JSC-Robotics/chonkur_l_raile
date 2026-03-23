@@ -8,12 +8,12 @@
     </default>
   </default>
   <asset>
-    <material name="new_mat_color.036" specular="0.5" shininess="0.36" rgba="0.000000 0.000000 1.000000 1.000000"/>
+    <material name="mtl_drawer_1_face" specular="0.20000000000000004" shininess="1.0" rgba="0.00000000 0.00000000 1.00000000 1.0"/>
     <mesh file="drawer_1_face.obj"/>
   </asset>
   <worldbody>
     <body name="drawer_1_face">
-      <geom material="new_mat_color.036" mesh="drawer_1_face" class="visual"/>
+      <geom material="mtl_drawer_1_face" mesh="drawer_1_face" class="visual"/>
       <geom mesh="drawer_1_face" class="collision"/>
     </body>
   </worldbody>

@@ -20,6 +20,7 @@
     marker_opacity:=0.5
     add_grasp_push_frames:=true
     finger_xacro:=fngr_v6
+    use_camera_mesh:=true
     generate_ros2_control_tag:=true">
 
     <!-- convert to property to use substitution in function -->
@@ -105,7 +106,8 @@
 
     <xacro:endeff_stack
       tf_prefix="${tf_prefix}"
-      parent="${tf_prefix}tool0">
+      parent="${tf_prefix}tool0"
+      use_camera_mesh="${use_camera_mesh}">
       <origin xyz="0 0 0" rpy="0 0 ${radians(90)}"/>
     </xacro:endeff_stack>
 

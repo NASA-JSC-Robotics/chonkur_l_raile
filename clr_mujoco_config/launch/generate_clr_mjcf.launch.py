@@ -1,25 +1,32 @@
 from launch import LaunchDescription
 from launch_ros.actions import Node
+from launch.actions import DeclareLaunchArgument
 from launch.substitutions import (
     Command,
     FindExecutable,
+    LaunchConfiguration,
     PathJoinSubstitution,
 )
 from launch_ros.substitutions import (
     FindPackageShare,
 )
+from launch.conditions import IfCondition, UnlessCondition
 
 
 def generate_launch_description():
 
-    clr_mujoco_package_name = "clr_mujoco_config"
-    clr_mujoco_description_file = "clr_xacro.urdf"
+    declared_arguments = []
 
-    mujoco_inputs = PathJoinSubstitution(
-        [FindPackageShare(clr_mujoco_package_name), "description", "mujoco_inputs.xml"]
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_pregenerated_assets_dir",
+            default_value="false",
+            description="Use pre-generated assets dir. This is useful if you are just modifying an existing structure",
+        )
     )
 
-    scene_xml = PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "description", "scene.xml"])
+    clr_mujoco_package_name = "clr_mujoco_config"
+    clr_mujoco_description_file = "clr_mujoco_xacro.urdf"
 
     # Main robot description for CLR
     robot_description_content = Command(
@@ -34,28 +41,45 @@ def generate_launch_description():
             " ",
             "model_env:=",
             "true",
+            " ",
+            "include_scene_objects:=",
+            "true",
         ]
     )
 
-    # TODO: Generate this on the fly?
+    default_arguments = [
+        "--robot_description",
+        robot_description_content,
+        "--convert_stl_to_obj",
+        "--save_only",
+    ]
+
+    args_with_assets_dir = default_arguments + [
+        "--asset_dir",
+        PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "description", "assets"]),
+    ]
+
+    # this version can be run for general
     make_mjcf_from_robot_description = Node(
         package="mujoco_ros2_control",
         executable="make_mjcf_from_robot_description.py",
         output="screen",
-        arguments=[
-            "-r",
-            robot_description_content,
-            "-m",
-            mujoco_inputs,
-            "--scene",
-            scene_xml,
-            "--convert_stl_to_obj",
-            "--save_only",
-        ],
+        arguments=default_arguments,
+        condition=UnlessCondition(LaunchConfiguration("use_pregenerated_assets_dir")),
+    )
+
+    make_mjcf_from_robot_description_use_assets_dir = Node(
+        package="mujoco_ros2_control",
+        executable="make_mjcf_from_robot_description.py",
+        output="screen",
+        arguments=args_with_assets_dir,
+        condition=IfCondition(LaunchConfiguration("use_pregenerated_assets_dir")),
     )
 
     return LaunchDescription(
-        [
+        declared_arguments
+        + [
             make_mjcf_from_robot_description,
+            make_mjcf_from_robot_description_use_assets_dir,
         ]
     )

@@ -8,12 +8,12 @@
     </default>
   </default>
   <asset>
-    <material name="new_mat_color.039" specular="0.5" shininess="0.36" rgba="0.000000 0.000000 1.000000 1.000000"/>
+    <material name="mtl_recessed_latch_handle" specular="0.20000000000000004" shininess="1.0" rgba="0.00000000 0.00000000 1.00000000 1.0"/>
     <mesh file="recessed_latch_handle.obj"/>
   </asset>
   <worldbody>
     <body name="recessed_latch_handle">
-      <geom material="new_mat_color.039" mesh="recessed_latch_handle" class="visual"/>
+      <geom material="mtl_recessed_latch_handle" mesh="recessed_latch_handle" class="visual"/>
       <geom mesh="recessed_latch_handle" class="collision"/>
     </body>
   </worldbody>

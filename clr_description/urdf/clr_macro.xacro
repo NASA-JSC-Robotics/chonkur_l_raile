@@ -22,6 +22,7 @@
     ewellix_com_port:=/dev/ttyUSB0
     ewellix_height_limit:=0.7
     ewellix_omit_plates:=true
+    use_camera_mesh:=true
     generate_ros2_control_tag:=true
   ">
 
@@ -187,6 +188,7 @@
     <xacro:lift_camera
       tf_prefix="${tf_prefix}"
       parent="${tf_prefix}ewellix_lift_lower_link"
+      use_camera_mesh="${use_camera_mesh}"
     >
       <origin xyz="-0.0772 0.095 0.2635" rpy="0 0 0"/>
     </xacro:lift_camera>
@@ -241,6 +243,7 @@
       finger_xacro="${finger_xacro}"
       add_grasp_push_frames="${add_grasp_push_frames}"
       marker_opacity="${marker_opacity}"
+      use_camera_mesh="${use_camera_mesh}"
       generate_ros2_control_tag="${generate_ros2_control_tag}"/>
 
   </xacro:macro>

@@ -8,12 +8,12 @@
     </default>
   </default>
   <asset>
-    <material name="DEFAULT_MTL.008" specular="0.0" shininess="0.25" rgba="0.800000 0.800000 0.800000 1.000000"/>
+    <material name="material_right_angle_mount_0" specular="0.20000000000000004" shininess="1.0" rgba="0.80000000 0.80000000 0.80000000 1.0"/>
     <mesh file="right_angle_mount.obj"/>
   </asset>
   <worldbody>
     <body name="right_angle_mount">
-      <geom material="DEFAULT_MTL.008" mesh="right_angle_mount" class="visual"/>
+      <geom material="material_right_angle_mount_0" mesh="right_angle_mount" class="visual"/>
       <geom mesh="right_angle_mount" class="collision"/>
     </body>
   </worldbody>
