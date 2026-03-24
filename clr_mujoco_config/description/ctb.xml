@@ -17,7 +17,7 @@
     <material name="ctb_red" specular="0.5" shininess="0.36" rgba="1.000000 0.000000 0.000000 1.000000"/>
   </asset>
   <worldbody>
-    <body name="ctb" pos="0.8 0.8 0.25" quat="0.7071068 0.0 0.0 0.7071068">
+    <body name="ctb" pos="-0.85 1.1 0.85" quat="0.0 0.0 0.0 1.0">
         <geom material="ctb_gray" mesh="ctb_body" class="visual" pos="" quat="0.707388 -0.706825 0 0"/>
         <geom mesh="ctb_body" class="collision" pos="" quat="0.707388 -0.706825 0 0"/>
         <geom material="ctb_red" mesh="ctb_handle" class="visual" pos="0 0.08 0.264" quat="0.707388 0.706825 0 0"/>
