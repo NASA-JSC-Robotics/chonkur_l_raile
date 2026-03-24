@@ -72,7 +72,7 @@
     <joint name="shoulder_pan_joint">
       <command_interface name="position"/>
       <state_interface name="position">
-        <param name="initial_value">${3.1927}</param>
+        <param name="initial_value">${1.189}</param>
       </state_interface>
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
@@ -80,7 +80,7 @@
     <joint name="shoulder_lift_joint">
       <command_interface name="position"/>
       <state_interface name="position">
-        <param name="initial_value">${-2.3913}</param>
+        <param name="initial_value">${0.238}</param>
       </state_interface>
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
@@ -88,7 +88,7 @@
     <joint name="elbow_joint">
       <command_interface name="position"/>
       <state_interface name="position">
-        <param name="initial_value">${-1.7760}</param>
+        <param name="initial_value">${-2.089}</param>
       </state_interface>
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
@@ -96,7 +96,7 @@
     <joint name="wrist_1_joint">
       <command_interface name="position"/>
       <state_interface name="position">
-        <param name="initial_value">${-0.4700}</param>
+        <param name="initial_value">${-0.985}</param>
       </state_interface>
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
@@ -104,7 +104,7 @@
     <joint name="wrist_2_joint">
       <command_interface name="position"/>
       <state_interface name="position">
-        <param name="initial_value">${-1.6177}</param>
+        <param name="initial_value">${1.936}</param>
       </state_interface>
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
