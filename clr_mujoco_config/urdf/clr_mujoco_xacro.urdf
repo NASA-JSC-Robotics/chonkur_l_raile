@@ -10,6 +10,7 @@
   <xacro:arg name="model_env" default="true"/>
   <xacro:arg name="include_scene_objects" default="false"/>
   <xacro:arg name="sim_speed" default="1.0"/>
+  <xacro:arg name="headless" default="false" />
 
   <xacro:property name="model_env" value="$(arg model_env)"/>
 
@@ -74,6 +75,9 @@
       <xacro:if value="$(arg use_pregenerated_mjcf)">
         <param name="mujoco_model">$(find clr_mujoco_config)/description/scene.xml</param>
       </xacro:if>
+
+      <!-- Optionally run headless -->
+      <param name="headless">$(arg headless)</param>
 
       <!-- Increase this parameter to run the sim faster than realtime. -->
       <param name="sim_speed_factor">$(arg sim_speed)</param>

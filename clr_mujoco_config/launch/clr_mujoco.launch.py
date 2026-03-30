@@ -58,9 +58,17 @@ def generate_launch_description():
             description="Percentage speed to run the simulation at. 1.0 is 100 percent speed.",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "headless",
+            default_value="false",
+            description="Optionally run headless, primarily for use in CI.",
+        )
+    )
 
     use_pregenerated_mjcf = LaunchConfiguration("use_pregenerated_mjcf")
     sim_speed = LaunchConfiguration("sim_speed")
+    headless = LaunchConfiguration("headless")
 
     clr_mujoco_package_name = "clr_mujoco_config"
     clr_mujoco_description_file = "clr_mujoco_xacro.urdf"
@@ -116,6 +124,8 @@ def generate_launch_description():
         use_pregenerated_mjcf,
         " sim_speed:=",
         sim_speed,
+        " headless:=",
+        headless,
     ]
 
     clr_launch = include_launch_file(
