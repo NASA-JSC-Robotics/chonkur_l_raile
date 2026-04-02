@@ -1065,8 +1065,8 @@
     <joint name="upper_mimic_lower" joint1="ewellix_lift_lower_to_higher" joint2="middle_mimic_higher" polycoef="0 2 0 0 0"/>
   </equality>
   <sensor>
-    <force name="tcp_fts_sensor_force" site="ft_frame"/>
-    <torque name="tcp_fts_sensor_torque" site="ft_frame"/>
+    <force name="tcp_fts_sensor_force" site="tool0"/>
+    <torque name="tcp_fts_sensor_torque" site="tool0"/>
   </sensor>
   <contact>
     <exclude body1="world" body2="vention_rail_carriage"/>

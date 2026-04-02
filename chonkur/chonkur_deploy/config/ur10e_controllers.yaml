@@ -202,7 +202,7 @@ admittance_controller:
       plugin_name: kinematics_interface_kdl/KinematicsInterfaceKDL
       plugin_package: kinematics_interface
       base: base_link # Assumed to be stationary
-      tip: grasp_frame
+      tip: grasp_link
       group_name: chonkur_grasp
       alpha: 0.0005
 
@@ -221,7 +221,7 @@ admittance_controller:
 
     control:
       frame:
-        id: grasp_frame # Admittance calcs (displacement etc) are done in this frame. Usually the tool or end-effector
+        id: grasp_link # Admittance calcs (displacement etc) are done in this frame. Usually the tool or end-effector
 
     fixed_world_frame:
       frame:   # Gravity points down (neg. Z) in this frame (Usually: world or base_link)
