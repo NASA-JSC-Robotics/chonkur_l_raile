@@ -153,6 +153,22 @@
       <param name="depth_topic">/lift_camera/aligned_depth_to_color/image_raw</param>
     </sensor>
 
+
+    <sensor name="left_scene_camera">
+      <param name="frame_name">left_scene_camera_color_optical_frame</param>
+      <param name="info_topic">/left_scene_camera/color/camera_info</param>
+      <param name="image_topic">/left_scene_camera/color/image_raw</param>
+      <param name="depth_topic">/left_scene_camera/aligned_depth_to_color/image_raw</param>
+    </sensor>
+
+    <sensor name="right_scene_camera">
+      <param name="frame_name">right_scene_camera_color_optical_frame</param>
+      <param name="info_topic">/right_scene_camera/color/camera_info</param>
+      <param name="image_topic">/right_scene_camera/color/image_raw</param>
+      <param name="depth_topic">/right_scene_camera/aligned_depth_to_color/image_raw</param>
+    </sensor>
+
+
     <xacro:if value="${model_env}">
       <!-- Mockups -->
       <joint name="door_to_frame_joint">
