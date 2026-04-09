@@ -8,12 +8,12 @@
     </default>
   </default>
   <asset>
-    <material name="ID10" specular="0.0" shininess="0.25" rgba="0.749020 0.749020 0.749020 1.000000"/>
+    <material name="material_d435_0" specular="0.20000000000000004" shininess="1.0" rgba="0.74901961 0.74901961 0.74901961 1.0"/>
     <mesh file="d435.obj"/>
   </asset>
   <worldbody>
     <body name="d435">
-      <geom material="ID10" mesh="d435" class="visual"/>
+      <geom material="material_d435_0" mesh="d435" class="visual"/>
       <geom mesh="d435" class="collision"/>
     </body>
   </worldbody>

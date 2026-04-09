@@ -1,8 +1,25 @@
-planning_plugin: ompl_interface/OMPLPlanner
-request_adapters: default_planner_request_adapters/AddTimeOptimalParameterization default_planner_request_adapters/FixWorkspaceBounds default_planner_request_adapters/FixStartStateBounds default_planner_request_adapters/FixStartStateCollision default_planner_request_adapters/FixStartStatePathConstraints
+planning_plugins:
+  - ompl_interface/OMPLPlanner
+request_adapters:
+  - default_planning_request_adapters/ResolveConstraintFrames
+  - default_planning_request_adapters/ValidateWorkspaceBounds
+  - default_planning_request_adapters/CheckStartStateBounds
+  - default_planning_request_adapters/CheckStartStateCollision
+response_adapters:
+  - default_planning_response_adapters/AddTimeOptimalParameterization
+  - default_planning_response_adapters/ValidateSolution
+  - default_planning_response_adapters/DisplayMotionPath
 start_state_max_bounds_error: 0.1
 default_workspace_bounds: 22.0
+
 planner_configs:
+  APSConfigDefault:
+    type: geometric::AnytimePathShortening
+    shortcut: 1  # Attempt to shortcut all new solution paths
+    hybridize: 1  # Compute hybrid solution trajectories
+    max_hybrid_paths: 16  # Number of hybrid paths generated per iteration
+    num_planners: 8  # The number of default planners to use for planning
+    planners: "RRTConnect,RRTConnect,RRTConnect,RRTConnect,RRTConnect,RRTConnect,RRTConnect,RRTConnect"
   SBLkConfigDefault:
     type: geometric::SBL
     range: 0.0  # Max motion added to tree. ==> maxDistance_ default: 0.0, if 0.0, set on setup()
@@ -57,6 +74,7 @@ planner_configs:
   PRMstarkConfigDefault:
     type: geometric::PRMstar
 ur_manipulator:
+  default_planner_config: RRTConnectkConfigDefault
   planner_configs:
     - SBLkConfigDefault
     - ESTkConfigDefault
@@ -73,6 +91,7 @@ ur_manipulator:
   enforce_constrained_state_space: true # ignored if no constraints specified
   longest_valid_segment_fraction: 0.01
 chonkur_grasp:
+  default_planner_config: RRTConnectkConfigDefault
   planner_configs:
     - SBLkConfigDefault
     - ESTkConfigDefault
@@ -89,6 +108,7 @@ chonkur_grasp:
   enforce_constrained_state_space: true # ignored if no constraints specified
   longest_valid_segment_fraction: 0.01
 chonkur_push1:
+  default_planner_config: RRTConnectkConfigDefault
   planner_configs:
     - SBLkConfigDefault
     - ESTkConfigDefault
@@ -105,6 +125,7 @@ chonkur_push1:
   enforce_constrained_state_space: true # ignored if no constraints specified
   longest_valid_segment_fraction: 0.01
 chonkur_push2:
+  default_planner_config: RRTConnectkConfigDefault
   planner_configs:
     - SBLkConfigDefault
     - ESTkConfigDefault
@@ -121,6 +142,7 @@ chonkur_push2:
   enforce_constrained_state_space: true # ignored if no constraints specified
   longest_valid_segment_fraction: 0.01
 clr:
+  default_planner_config: RRTConnectkConfigDefault
   planner_configs:
     - SBLkConfigDefault
     - ESTkConfigDefault

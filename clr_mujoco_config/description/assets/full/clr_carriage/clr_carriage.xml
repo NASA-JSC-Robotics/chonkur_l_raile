@@ -8,12 +8,12 @@
     </default>
   </default>
   <asset>
-    <material name="DEFAULT_MTL.005" specular="0.0" shininess="0.25" rgba="0.800000 0.800000 0.800000 1.000000"/>
+    <material name="material_clr_carriage_0" specular="0.20000000000000004" shininess="1.0" rgba="0.80000000 0.80000000 0.80000000 1.0"/>
     <mesh file="clr_carriage.obj"/>
   </asset>
   <worldbody>
     <body name="clr_carriage">
-      <geom material="DEFAULT_MTL.005" mesh="clr_carriage" class="visual"/>
+      <geom material="material_clr_carriage_0" mesh="clr_carriage" class="visual"/>
       <geom mesh="clr_carriage" class="collision"/>
     </body>
   </worldbody>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:macro name="clr_mujoco_processed_inputs" params="
+    include_scene_objects:=false
+  ">
+
+    <!-- Process arguments for the URDF -->
+    <processed_inputs>
+
+        <!-- Specifying decompose_mesh will set the `decompose` flag when using obj2mjcf -->
+        <decompose_mesh mesh_name="finger_v6" threshold="0.05"/>
+        <decompose_mesh mesh_name="clr_base" threshold="0.05"/>
+
+        <!-- env stuff -->
+        <decompose_mesh mesh_name="crank_wheel" threshold="0.05"/>
+        <decompose_mesh mesh_name="imetro_hatch_handle" threshold="0.05"/>
+        <decompose_mesh mesh_name="simplified_hatch_4060_face" threshold="0.05"/>
+        <decompose_mesh mesh_name="ivr_hatch_frame_no_left" threshold="0.05"/>
+        <decompose_mesh mesh_name="hatch_4060_frame" threshold="0.05"/>
+        <decompose_mesh mesh_name="bench_lid" threshold="0.05"/>
+        <xacro:if value="${include_scene_objects}">
+          <decompose_mesh mesh_name="ctb_handle" threshold="0.01"/>
+        </xacro:if>
+
+        <!-- The camera with the specified values will be added at the specified site name. -->
+        <!-- The position and quaterinion will be filled in by the converter -->
+        <camera site="wrist_mounted_camera_color_optical_frame" name="wrist_mounted_camera" fovy="58" mode="fixed" resolution="640 480"/>
+        <camera site="lift_camera_color_optical_frame" name="lift_camera" fovy="58" mode="fixed" resolution="640 480"/>
+
+        <!-- Don't let the merlin open -->
+        <modify_element type="joint" name="door_to_frame_joint" range="-0.01 0" />
+
+        <!-- Add gravity compensation for moveable CLR components to improve control -->
+        <modify_element type="body" name="vention_rail_carriage" gravcomp="1.0"/>
+        <modify_element type="body" name="ewellix_lift_higher_link" gravcomp="1.0"/>
+        <modify_element type="body" name="ewellix_lift_middle_link" gravcomp="1.0"/>
+        <modify_element type="body" name="shoulder_link" gravcomp="1.0"/>
+        <modify_element type="body" name="upper_arm_link" gravcomp="1.0"/>
+        <modify_element type="body" name="forearm_link" gravcomp="1.0"/>
+        <modify_element type="body" name="wrist_1_link" gravcomp="1.0"/>
+        <modify_element type="body" name="wrist_2_link" gravcomp="1.0"/>
+        <modify_element type="body" name="wrist_3_link" gravcomp="1.0"/>
+
+        <!-- Add frictionloss and armature to fingers to help with backdriving -->
+        <modify_element type="joint" name="finger_1_joint" armature="0.5" frictionloss="5.0" />
+        <modify_element type="joint" name="finger_2_joint" armature="0.5" frictionloss="5.0" />
+
+        <!-- Add joint properties to lorge hatch latch spring joint -->
+        <modify_element type="joint" name="lorge/latch_spring" limited="true" springref="0.035" stiffness="10000" damping="2" armature="0.001"/>
+
+    </processed_inputs>
+  </xacro:macro>
+</robot>

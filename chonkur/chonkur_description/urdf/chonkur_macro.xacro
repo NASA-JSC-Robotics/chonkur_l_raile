@@ -20,6 +20,7 @@
     marker_opacity:=0.5
     add_grasp_push_frames:=true
     finger_xacro:=fngr_v6
+    use_camera_mesh:=true
     generate_ros2_control_tag:=true">
 
     <!-- convert to property to use substitution in function -->
@@ -34,35 +35,45 @@
       kinematics_parameters_file="$(find chonkur_description)/config/calibrated_kinematics.yaml"
       physical_parameters_file="$(find ur_description)/config/ur10e/physical_parameters.yaml"
       visual_parameters_file="$(find ur_description)/config/ur10e/visual_parameters.yaml"
-      transmission_hw_interface="hardware_interface/PositionJointInterface"
       safety_limits="false"
       safety_pos_margin="0.15"
       safety_k_position="20"
-      use_fake_hardware="${use_fake_hardware}"
-      fake_sensor_commands="false"
-      sim_gazebo="${sim_gazebo}"
-      sim_ignition="${sim_ignition}"
-      generate_ros2_control_tag="${generate_ros2_control_tag}"
-      headless_mode="${headless_mode}"
-      initial_positions="${xacro.load_yaml(initial_positions_file)}"
-      use_tool_communication="false"
-      tool_voltage="0"
-      tool_parity="0"
-      tool_baud_rate="115200"
-      tool_stop_bits="1"
-      tool_rx_idle_chars="1.5"
-      tool_tx_idle_chars="3.5"
-      tool_device_name="/tmp/ttyUR"
-      tool_tcp_port="54321"
-      robot_ip="${chonkur_ip}"
-      script_filename="$(find ur_client_library)/resources/external_control.urscript"
-      output_recipe_filename="$(find ur_robot_driver)/resources/rtde_output_recipe.txt"
-      input_recipe_filename="$(find ur_robot_driver)/resources/rtde_input_recipe.txt"
-      reverse_ip="0.0.0.0"
-      script_command_port="50004"
       >
       <origin xyz="0 0 0" rpy="0 0 0" />          <!-- position robot in the world -->
     </xacro:ur_robot>
+
+    <xacro:if value="${generate_ros2_control_tag}">
+      <xacro:include filename="$(find ur_robot_driver)/urdf/ur.ros2_control.xacro" />
+      <xacro:include filename="$(find ur_description)/urdf/inc/ur_transmissions.xacro" />
+      <xacro:ur_ros2_control
+        name="${ros2_control_name}"
+        tf_prefix="${tf_prefix}"
+        kinematics_parameters_file="$(find chonkur_description)/config/calibrated_kinematics.yaml"
+        transmission_hw_interface="hardware_interface/PositionJointInterface"
+        use_mock_hardware="$(arg use_fake_hardware)"
+        mock_sensor_commands="$(arg use_fake_hardware)"
+        headless_mode="${headless_mode}"
+        initial_positions="${xacro.load_yaml(initial_positions_file)}"
+        use_tool_communication="false"
+        tool_voltage="0"
+        tool_parity="0"
+        tool_baud_rate="115200"
+        tool_stop_bits="1"
+        tool_rx_idle_chars="1.5"
+        tool_tx_idle_chars="3.5"
+        tool_device_name="/tmp/ttyUR"
+        tool_tcp_port="54321"
+        robot_ip="${chonkur_ip}"
+        script_filename="$(find ur_client_library)/resources/external_control.urscript"
+        output_recipe_filename="$(find ur_robot_driver)/resources/rtde_output_recipe.txt"
+        input_recipe_filename="$(find ur_robot_driver)/resources/rtde_input_recipe.txt"
+        reverse_ip="0.0.0.0"
+        script_command_port="50004"
+        reverse_port="50001"
+        script_sender_port="50002"
+        trajectory_port="50003"
+      />
+    </xacro:if>
 
     <xacro:if value="${sim_gazebo}">
       <!-- Gazebo plugins -->
@@ -87,13 +98,16 @@
       </gazebo>
     </xacro:if>
 
+
+
     <!-- END EFFECTOR STACK -->
 
     <xacro:include filename="$(find chonkur_description)/urdf/endeff_stack_macro.xacro"/>
 
     <xacro:endeff_stack
       tf_prefix="${tf_prefix}"
-      parent="${tf_prefix}tool0">
+      parent="${tf_prefix}tool0"
+      use_camera_mesh="${use_camera_mesh}">
       <origin xyz="0 0 0" rpy="0 0 ${radians(90)}"/>
     </xacro:endeff_stack>
 
