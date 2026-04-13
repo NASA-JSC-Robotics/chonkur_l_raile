@@ -12,6 +12,9 @@
   <xacro:arg name="sim_speed" default="1.0"/>
   <xacro:arg name="headless" default="false" />
   <xacro:arg name="ctb_orientation" default="90"/>
+  <xacro:arg name="ctb_position_x" default="0.8"/>
+  <xacro:arg name="ctb_position_y" default="0.8"/>
+
 
   <xacro:property name="model_env" value="$(arg model_env)"/>
 
@@ -52,7 +55,7 @@
 
   <xacro:if value="$(arg include_scene_objects)">
     <xacro:ctb prefix="" parent="world">
-      <origin xyz="0.8 0.8 0.25" rpy="0 0 ${radians($(arg ctb_orientation))}"/>
+      <origin xyz="$(arg ctb_position_x) $(arg ctb_position_y) 0.25" rpy="0 0 ${radians($(arg ctb_orientation))}"/>
     </xacro:ctb>
   </xacro:if>
 
