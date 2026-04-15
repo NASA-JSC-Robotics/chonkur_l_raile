@@ -11,7 +11,7 @@
   <xacro:arg name="include_scene_objects" default="false"/>
   <xacro:arg name="sim_speed" default="1.0"/>
   <xacro:arg name="headless" default="false" />
-  <xacro:arg name="ctb_orientation" default="90"/>
+  <xacro:arg name="ctb_orientation_deg" default="90"/>
   <xacro:arg name="ctb_position_x" default="0.8"/>
   <xacro:arg name="ctb_position_y" default="0.8"/>
 
