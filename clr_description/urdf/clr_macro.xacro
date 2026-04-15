@@ -195,20 +195,20 @@
 
     <!-- UPPER_LIFT_PLATE -->
     <xacro:upper_lift_plate
-      tf_prefix="$(arg tf_prefix)"
-      parent="$(arg tf_prefix)ewellix_lift_higher_link"
+      tf_prefix="${tf_prefix}"
+      parent="${tf_prefix}ewellix_lift_higher_link"
     >
       <origin xyz="0 0 0.253525" rpy="0 0 0"/>
     </xacro:upper_lift_plate>
 
     <!-- RIGHT_ANGLE_MOUNT -->
     <xacro:include filename="$(find clr_description)/urdf/right_angle_mount.macro.xacro"/>
-    <xacro:right_angle_mount tf_prefix="$(arg tf_prefix)"/>
+    <xacro:right_angle_mount tf_prefix="${tf_prefix}"/>
 
     <!-- UPPER_LIFT_PLATE_TO_RIGHT_ANGLE_MOUNT -->
     <joint name="upper_lift_plate_to_right_angle_mount" type="fixed">
-      <parent link="$(arg tf_prefix)upper_lift_plate"/>
-      <child link="$(arg tf_prefix)right_angle_mount"/>
+      <parent link="${tf_prefix}upper_lift_plate"/>
+      <child link="${tf_prefix}right_angle_mount"/>
       <origin xyz="0 0 0.009525" rpy="0 0 0"/>
     </joint>
 
