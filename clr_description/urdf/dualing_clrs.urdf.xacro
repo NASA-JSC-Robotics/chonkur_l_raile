@@ -18,6 +18,7 @@
     tf_prefix="left/"
     parent="world_to_left_link"
     use_fake_hardware="true"
+    ros2_control_name="left_clr"
   />
 
   <link name="world_to_right_link"/>
@@ -30,6 +31,7 @@
     tf_prefix="right/"
     parent="world_to_right_link"
     use_fake_hardware="true"
+    ros2_control_name="right_clr"
   />
 
 </robot>
