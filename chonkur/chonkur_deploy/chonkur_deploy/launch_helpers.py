@@ -61,9 +61,7 @@ def spawn_controller(
     )
 
 
-def include_launch_file(
-    package_name, launch_file, launch_arguments=None, condition=None
-):
+def include_launch_file(package_name, launch_file, launch_arguments=None, condition=None):
     """
     Returns a launch description for the specified package name and launch file. The target file
     must be in the package's `launch/` directory.
@@ -72,9 +70,7 @@ def include_launch_file(
     """
     return IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(
-                get_package_share_directory(package_name), "launch", launch_file
-            ),
+            os.path.join(get_package_share_directory(package_name), "launch", launch_file),
         ),
         launch_arguments=launch_arguments,
         condition=condition,

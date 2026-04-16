@@ -35,17 +35,11 @@ def generate_launch_description():
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
-            PathJoinSubstitution(
-                [FindPackageShare("clr_description"), "urdf", "dualing_clrs.urdf.xacro"]
-            ),
+            PathJoinSubstitution([FindPackageShare("clr_description"), "urdf", "dualing_clrs.urdf.xacro"]),
         ]
     )
 
-    combined_description = {
-        "robot_description": ParameterValue(
-            value=combined_description_content, value_type=str
-        )
-    }
+    combined_description = {"robot_description": ParameterValue(value=combined_description_content, value_type=str)}
 
     robot_state_publisher_node = Node(
         package="robot_state_publisher",
