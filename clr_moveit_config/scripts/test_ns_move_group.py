@@ -30,8 +30,8 @@ from rclpy.action import ActionClient
 
 def main():
     parser = argparse.ArgumentParser(description="Test MoveIt planning and execution")
-    parser.add_argument("--namespace", default="left", help="MoveGroup namespace (e.g. 'left')")
-    parser.add_argument("--tf-prefix", default="left_", help="Joint name prefix (e.g. 'left_')")
+    parser.add_argument("--namespace", default="", help="MoveGroup namespace (e.g. 'left')")
+    parser.add_argument("--tf-prefix", default="", help="Joint name prefix (e.g. 'left_')")
     parser.add_argument("--execute", action="store_true", help="Execute the planned trajectory")
     args = parser.parse_args()
 
