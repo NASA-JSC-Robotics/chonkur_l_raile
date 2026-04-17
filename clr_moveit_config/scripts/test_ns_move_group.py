@@ -27,6 +27,7 @@ from rclpy.action import ActionClient
 # This is a simple test script for executing a hard-coded plan and execute for namespaced CLR.
 # Exists just to confirm that it works.
 
+
 def main():
     parser = argparse.ArgumentParser(description="Test MoveIt planning and execution")
     parser.add_argument("--namespace", default="left", help="MoveGroup namespace (e.g. 'left')")

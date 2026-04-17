@@ -134,8 +134,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "namespace",
             default_value="",
-            description="Namespace for the robot to control. "
-            "For dual-robot setups, use 'left' or 'right'.",
+            description="Namespace for the robot to control. " "For dual-robot setups, use 'left' or 'right'.",
         )
     )
     declared_arguments.append(
