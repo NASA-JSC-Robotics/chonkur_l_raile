@@ -12,10 +12,10 @@
   <joint name="world_to_left" type="fixed">
       <parent link="world"/>
       <child link="world_to_left_link"/>
-    <origin xyz="0 0.75 0" rpy="0 0 0"/>
+    <origin xyz="0 1.0 0" rpy="0 0 3.14159"/>
   </joint>
   <xacro:clr
-    tf_prefix="left/"
+    tf_prefix="left_"
     parent="world_to_left_link"
     use_fake_hardware="true"
     ros2_control_name="left_clr"
@@ -25,10 +25,10 @@
   <joint name="world_to_right" type="fixed">
     <parent link="world"/>
     <child link="world_to_right_link"/>
-    <origin xyz="0 -0.75 0" rpy="0 0 0"/>
+    <origin xyz="0 -1.0 0" rpy="0 0 0"/>
   </joint>
   <xacro:clr
-    tf_prefix="right/"
+    tf_prefix="right_"
     parent="world_to_right_link"
     use_fake_hardware="true"
     ros2_control_name="right_clr"

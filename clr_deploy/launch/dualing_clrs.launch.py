@@ -53,7 +53,7 @@ def generate_launch_description():
         launch_file="control.launch.py",
         launch_arguments={
             "namespace": "left",
-            "tf_prefix": "left/",
+            "tf_prefix": "left_",
             "use_fake_hardware": "true",
             "is_sim": "true",
             "use_sim_time": "false",
@@ -65,7 +65,7 @@ def generate_launch_description():
         launch_file="control.launch.py",
         launch_arguments={
             "namespace": "right",
-            "tf_prefix": "right/",
+            "tf_prefix": "right_",
             "use_fake_hardware": "true",
             "is_sim": "true",
             "use_sim_time": "false",
