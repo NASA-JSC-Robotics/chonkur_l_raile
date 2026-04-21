@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://wiki.ros.org/xacro" name="dualing_clrs">
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="dual_clrs">
 
   <xacro:arg name="use_fake_hardware" default="true"/>
 
