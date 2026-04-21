@@ -1,256 +1,257 @@
-controller_manager:
-  ros__parameters:
+/**:
+  controller_manager:
+    ros__parameters:
 
-    clr_joint_trajectory_controller:
-      type: joint_trajectory_controller/JointTrajectoryController
+      clr_joint_trajectory_controller:
+        type: joint_trajectory_controller/JointTrajectoryController
 
-    lift_rail_joint_trajectory_controller:
-      type: joint_trajectory_controller/JointTrajectoryController
+      lift_rail_joint_trajectory_controller:
+        type: joint_trajectory_controller/JointTrajectoryController
 
-    streaming_controller:
-      type: position_controllers/JointGroupPositionController
+      streaming_controller:
+        type: position_controllers/JointGroupPositionController
 
-    # These controllers are specifically added for MoveIt Servo and to support support
-    # teleoperation in MoveIt Pro.
-    servo_controller:
-      type: joint_trajectory_controller/JointTrajectoryController
+      # These controllers are specifically added for MoveIt Servo and to support support
+      # teleoperation in MoveIt Pro.
+      servo_controller:
+        type: joint_trajectory_controller/JointTrajectoryController
 
-    chonkur_velocity_force_controller:
-      type: velocity_force_controller/VelocityForceController
+      chonkur_velocity_force_controller:
+        type: velocity_force_controller/VelocityForceController
 
-    clr_velocity_force_controller:
-      type: velocity_force_controller/VelocityForceController
+      clr_velocity_force_controller:
+        type: velocity_force_controller/VelocityForceController
 
-clr_joint_trajectory_controller:
-  ros__parameters:
-    joints:
-      - vention_rail_base_to_carriage
-      - ewellix_lift_lower_to_higher
-      - shoulder_pan_joint
-      - shoulder_lift_joint
-      - elbow_joint
-      - wrist_1_joint
-      - wrist_2_joint
-      - wrist_3_joint
-    command_interfaces:
-      - position
-    state_interfaces:
-      - position
-      - velocity
-    state_publish_rate: 100.0
-    action_monitor_rate: 20.0
-    allow_partial_joints_goal: true
-    constraints:
-      stopped_velocity_tolerance: 0.2
-      goal_time: 0.0
-      vention_rail_base_to_carriage: { trajectory: 0.2, goal: 0.1 }
-      ewellix_lift_lower_to_higher: { trajectory: 0.2, goal: 0.1 }
-      shoulder_pan_joint: { trajectory: 0.2, goal: 0.1 }
-      shoulder_lift_joint: { trajectory: 0.2, goal: 0.1 }
-      elbow_joint: { trajectory: 0.2, goal: 0.1 }
-      wrist_1_joint: { trajectory: 0.2, goal: 0.1 }
-      wrist_2_joint: { trajectory: 0.2, goal: 0.1 }
-      wrist_3_joint: { trajectory: 0.2, goal: 0.1 }
+  clr_joint_trajectory_controller:
+    ros__parameters:
+      joints:
+        - $(var tf_prefix)vention_rail_base_to_carriage
+        - $(var tf_prefix)ewellix_lift_lower_to_higher
+        - $(var tf_prefix)shoulder_pan_joint
+        - $(var tf_prefix)shoulder_lift_joint
+        - $(var tf_prefix)elbow_joint
+        - $(var tf_prefix)wrist_1_joint
+        - $(var tf_prefix)wrist_2_joint
+        - $(var tf_prefix)wrist_3_joint
+      command_interfaces:
+        - position
+      state_interfaces:
+        - position
+        - velocity
+      state_publish_rate: 100.0
+      action_monitor_rate: 20.0
+      allow_partial_joints_goal: true
+      constraints:
+        stopped_velocity_tolerance: 0.2
+        goal_time: 0.0
+        $(var tf_prefix)vention_rail_base_to_carriage: { trajectory: 0.2, goal: 0.1 }
+        $(var tf_prefix)ewellix_lift_lower_to_higher: { trajectory: 0.2, goal: 0.1 }
+        $(var tf_prefix)shoulder_pan_joint: { trajectory: 0.2, goal: 0.1 }
+        $(var tf_prefix)shoulder_lift_joint: { trajectory: 0.2, goal: 0.1 }
+        $(var tf_prefix)elbow_joint: { trajectory: 0.2, goal: 0.1 }
+        $(var tf_prefix)wrist_1_joint: { trajectory: 0.2, goal: 0.1 }
+        $(var tf_prefix)wrist_2_joint: { trajectory: 0.2, goal: 0.1 }
+        $(var tf_prefix)wrist_3_joint: { trajectory: 0.2, goal: 0.1 }
 
-lift_rail_joint_trajectory_controller:
-  ros__parameters:
-    joints:
-      - ewellix_lift_lower_to_higher
-      - vention_rail_base_to_carriage
-    command_interfaces:
-      - position
-    state_interfaces:
-      - position
-      - velocity
-    state_publish_rate: 100.0
-    action_monitor_rate: 20.0
-    allow_partial_joints_goal: false
-    constraints:
-      stopped_velocity_tolerance: 0.2
-      goal_time: 0.0
-      ewellix_lift_lower_to_higher: { trajectory: 0.2, goal: 0.1 }
-      vention_rail_base_to_carriage: { trajectory: 0.2, goal: 0.1 }
+  lift_rail_joint_trajectory_controller:
+    ros__parameters:
+      joints:
+        - $(var tf_prefix)ewellix_lift_lower_to_higher
+        - $(var tf_prefix)vention_rail_base_to_carriage
+      command_interfaces:
+        - position
+      state_interfaces:
+        - position
+        - velocity
+      state_publish_rate: 100.0
+      action_monitor_rate: 20.0
+      allow_partial_joints_goal: false
+      constraints:
+        stopped_velocity_tolerance: 0.2
+        goal_time: 0.0
+        $(var tf_prefix)ewellix_lift_lower_to_higher: { trajectory: 0.2, goal: 0.1 }
+        $(var tf_prefix)vention_rail_base_to_carriage: { trajectory: 0.2, goal: 0.1 }
 
-streaming_controller:
-  ros__parameters:
-    joints:
-      - shoulder_pan_joint
-      - shoulder_lift_joint
-      - elbow_joint
-      - wrist_1_joint
-      - wrist_2_joint
-      - wrist_3_joint
-    command_interfaces:
-      - position
-    state_interfaces:
-      - position
+  streaming_controller:
+    ros__parameters:
+      joints:
+        - $(var tf_prefix)shoulder_pan_joint
+        - $(var tf_prefix)shoulder_lift_joint
+        - $(var tf_prefix)elbow_joint
+        - $(var tf_prefix)wrist_1_joint
+        - $(var tf_prefix)wrist_2_joint
+        - $(var tf_prefix)wrist_3_joint
+      command_interfaces:
+        - position
+      state_interfaces:
+        - position
 
-servo_controller:
-  ros__parameters:
-    joints:
-      - vention_rail_base_to_carriage
-      - ewellix_lift_lower_to_higher
-      - shoulder_pan_joint
-      - shoulder_lift_joint
-      - elbow_joint
-      - wrist_1_joint
-      - wrist_2_joint
-      - wrist_3_joint
-    command_interfaces:
-      - position
-    state_interfaces:
-      - position
-      - velocity
-    state_publish_rate: 100.0
-    action_monitor_rate: 20.0
-    allow_partial_joints_goal: true
-    constraints:
-      stopped_velocity_tolerance: 0.2
-      goal_time: 0.0
-      vention_rail_base_to_carriage: { trajectory: 0.2, goal: 0.1 }
-      ewellix_lift_lower_to_higher: { trajectory: 0.2, goal: 0.1 }
-      shoulder_pan_joint: { trajectory: 0.2, goal: 0.1 }
-      shoulder_lift_joint: { trajectory: 0.2, goal: 0.1 }
-      elbow_joint: { trajectory: 0.2, goal: 0.1 }
-      wrist_1_joint: { trajectory: 0.2, goal: 0.1 }
-      wrist_2_joint: { trajectory: 0.2, goal: 0.1 }
-      wrist_3_joint: { trajectory: 0.2, goal: 0.1 }
+  servo_controller:
+    ros__parameters:
+      joints:
+        - $(var tf_prefix)vention_rail_base_to_carriage
+        - $(var tf_prefix)ewellix_lift_lower_to_higher
+        - $(var tf_prefix)shoulder_pan_joint
+        - $(var tf_prefix)shoulder_lift_joint
+        - $(var tf_prefix)elbow_joint
+        - $(var tf_prefix)wrist_1_joint
+        - $(var tf_prefix)wrist_2_joint
+        - $(var tf_prefix)wrist_3_joint
+      command_interfaces:
+        - position
+      state_interfaces:
+        - position
+        - velocity
+      state_publish_rate: 100.0
+      action_monitor_rate: 20.0
+      allow_partial_joints_goal: true
+      constraints:
+        stopped_velocity_tolerance: 0.2
+        goal_time: 0.0
+        $(var tf_prefix)vention_rail_base_to_carriage: { trajectory: 0.2, goal: 0.1 }
+        $(var tf_prefix)ewellix_lift_lower_to_higher: { trajectory: 0.2, goal: 0.1 }
+        $(var tf_prefix)shoulder_pan_joint: { trajectory: 0.2, goal: 0.1 }
+        $(var tf_prefix)shoulder_lift_joint: { trajectory: 0.2, goal: 0.1 }
+        $(var tf_prefix)elbow_joint: { trajectory: 0.2, goal: 0.1 }
+        $(var tf_prefix)wrist_1_joint: { trajectory: 0.2, goal: 0.1 }
+        $(var tf_prefix)wrist_2_joint: { trajectory: 0.2, goal: 0.1 }
+        $(var tf_prefix)wrist_3_joint: { trajectory: 0.2, goal: 0.1 }
 
-chonkur_velocity_force_controller:
-  ros__parameters:
-    # Joints that the controller will claim.
-    planning_group_name: chonkur_grasp
-    # Base frame of the kinematic chain, for computation of arm kinematics.
-    base_frame: base_link
-    # The tip link of the kinematic chain, i.e. the frame that will be controlled.
-    ee_frame: grasp_frame
-    # The frame where the force / torque sensor reading is given.
-    # (Needs to exist in the kinematic chain).
-    sensor_frame: tool0
-    # The force/torque ros2_control hardware interface name.
-    ft_sensor_name: tcp_fts_sensor
-    # An optional deadband to apply to the force/torque signal. Set to 0.0 to disable.
-    ft_force_deadband: 2.0
-    ft_torque_deadband: 1.0
-    # Maximum joint-space velocities.
-    max_joint_velocity:
-      - 1.0
-      - 1.0
-      - 1.0
-      - 1.0
-      - 1.0
-      - 1.0
-    # Maximum joint-space accelerations.
-    max_joint_acceleration:
-      - 2.0
-      - 2.0
-      - 2.0
-      - 2.0
-      - 2.0
-      - 2.0
-    # Maximum Cartesian-space velocities.
-    max_cartesian_velocity:
-      - 0.25
-      - 0.25
-      - 0.25
-      - 1.0
-      - 1.0
-      - 1.0
-    # Maximum Cartesian-space accelerations.
-    max_cartesian_acceleration:
-      - 2.0
-      - 2.0
-      - 2.0
-      - 4.0
-      - 4.0
-      - 4.0
-    # Additional optional parameters for reference (set to defaults):
-    # Cutoff frequency ratio for the FTS filter. Valid values range from 0 to 1, where 1 is the sampling frequency.
-    ft_cutoff_frequency_ratio: 1.0
-    # Rate in Hz at which the controller will publish the state.
-    state_publish_rate: 10
-    # Damping coefficient for the Jacobian damped least-squares inverse.
-    jacobian_damping: 0.002
-    # Timeout in seconds after which the controller will stop motion if no new commands are received.
-    command_timeout: 0.2
-    # Padding (in radians) to add to joint position limits as a safety margin.
-    joint_limit_position_tolerance: 0.02
-    # Joints that the controller will command. If not specified, if takes the same value as `joints`.
-    # This can be useful to implement layered control, where some joints may be controlled by a different controller
-    # downstream.
-    # command_joints: []
-    # The type of command interface to use. Supported values are "position" and "velocity".
-    command_interfaces: ["position"]
+  chonkur_velocity_force_controller:
+    ros__parameters:
+      # Joints that the controller will claim.
+      planning_group_name: chonkur_grasp
+      # Base frame of the kinematic chain, for computation of arm kinematics.
+      base_frame: base_link
+      # The tip link of the kinematic chain, i.e. the frame that will be controlled.
+      ee_frame: grasp_frame
+      # The frame where the force / torque sensor reading is given.
+      # (Needs to exist in the kinematic chain).
+      sensor_frame: tool0
+      # The force/torque ros2_control hardware interface name.
+      ft_sensor_name: tcp_fts_sensor
+      # An optional deadband to apply to the force/torque signal. Set to 0.0 to disable.
+      ft_force_deadband: 2.0
+      ft_torque_deadband: 1.0
+      # Maximum joint-space velocities.
+      max_joint_velocity:
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+      # Maximum joint-space accelerations.
+      max_joint_acceleration:
+        - 2.0
+        - 2.0
+        - 2.0
+        - 2.0
+        - 2.0
+        - 2.0
+      # Maximum Cartesian-space velocities.
+      max_cartesian_velocity:
+        - 0.25
+        - 0.25
+        - 0.25
+        - 1.0
+        - 1.0
+        - 1.0
+      # Maximum Cartesian-space accelerations.
+      max_cartesian_acceleration:
+        - 2.0
+        - 2.0
+        - 2.0
+        - 4.0
+        - 4.0
+        - 4.0
+      # Additional optional parameters for reference (set to defaults):
+      # Cutoff frequency ratio for the FTS filter. Valid values range from 0 to 1, where 1 is the sampling frequency.
+      ft_cutoff_frequency_ratio: 1.0
+      # Rate in Hz at which the controller will publish the state.
+      state_publish_rate: 10
+      # Damping coefficient for the Jacobian damped least-squares inverse.
+      jacobian_damping: 0.002
+      # Timeout in seconds after which the controller will stop motion if no new commands are received.
+      command_timeout: 0.2
+      # Padding (in radians) to add to joint position limits as a safety margin.
+      joint_limit_position_tolerance: 0.02
+      # Joints that the controller will command. If not specified, if takes the same value as `joints`.
+      # This can be useful to implement layered control, where some joints may be controlled by a different controller
+      # downstream.
+      # command_joints: []
+      # The type of command interface to use. Supported values are "position" and "velocity".
+      command_interfaces: ["position"]
 
-# We shouldn't _really_ be using this for true Cartesian control, but it is included to prevent issues
-# in the moveit pro agent. The lift and rail's joints are slowed down to a point that movement should
-# almost be imperceptible.
-clr_velocity_force_controller:
-  ros__parameters:
-    # Joints that the controller will claim.
-    planning_group_name: clr
-    # Base frame of the kinematic chain, for computation of arm kinematics.
-    base_frame: vention_rail_base_link
-    # The tip link of the kinematic chain, i.e. the frame that will be controlled.
-    ee_frame: grasp_frame
-    # The frame where the force / torque sensor reading is given.
-    # (Needs to exist in the kinematic chain).
-    sensor_frame: tool0
-    # The force/torque ros2_control hardware interface name.
-    ft_sensor_name: tcp_fts_sensor
-    # An optional deadband to apply to the force/torque signal. Set to 0.0 to disable.
-    ft_force_deadband: 2.0
-    ft_torque_deadband: 1.0
-    # Maximum joint-space velocities.
-    max_joint_velocity:
-      - 0.001
-      - 0.001
-      - 0.001
-      - 0.001
-      - 0.001
-      - 0.001
-      - 0.001
-      - 0.001
-    # Maximum joint-space accelerations.
-    max_joint_acceleration:
-      - 2.0
-      - 2.0
-      - 2.0
-      - 2.0
-      - 2.0
-      - 2.0
-      - 2.0
-      - 2.0
-    # Maximum Cartesian-space velocities.
-    max_cartesian_velocity:
-      - 0.25
-      - 0.25
-      - 0.25
-      - 1.0
-      - 1.0
-      - 1.0
-    # Maximum Cartesian-space accelerations.
-    max_cartesian_acceleration:
-      - 2.0
-      - 2.0
-      - 2.0
-      - 4.0
-      - 4.0
-      - 4.0
-    # Additional optional parameters for reference (set to defaults):
-    # Cutoff frequency ratio for the FTS filter. Valid values range from 0 to 1, where 1 is the sampling frequency.
-    ft_cutoff_frequency_ratio: 1.0
-    # Rate in Hz at which the controller will publish the state.
-    state_publish_rate: 10
-    # Damping coefficient for the Jacobian damped least-squares inverse.
-    jacobian_damping: 0.002
-    # Timeout in seconds after which the controller will stop motion if no new commands are received.
-    command_timeout: 0.2
-    # Padding (in radians) to add to joint position limits as a safety margin.
-    joint_limit_position_tolerance: 0.02
-    # Joints that the controller will command. If not specified, if takes the same value as `joints`.
-    # This can be useful to implement layered control, where some joints may be controlled by a different controller
-    # downstream.
-    # command_joints: []
-    # The type of command interface to use. Supported values are "position" and "velocity".
-    command_interfaces: ["position"]
+  # We shouldn't _really_ be using this for true Cartesian control, but it is included to prevent issues
+  # in the moveit pro agent. The lift and rail's joints are slowed down to a point that movement should
+  # almost be imperceptible.
+  clr_velocity_force_controller:
+    ros__parameters:
+      # Joints that the controller will claim.
+      planning_group_name: clr
+      # Base frame of the kinematic chain, for computation of arm kinematics.
+      base_frame: vention_rail_base_link
+      # The tip link of the kinematic chain, i.e. the frame that will be controlled.
+      ee_frame: grasp_frame
+      # The frame where the force / torque sensor reading is given.
+      # (Needs to exist in the kinematic chain).
+      sensor_frame: tool0
+      # The force/torque ros2_control hardware interface name.
+      ft_sensor_name: tcp_fts_sensor
+      # An optional deadband to apply to the force/torque signal. Set to 0.0 to disable.
+      ft_force_deadband: 2.0
+      ft_torque_deadband: 1.0
+      # Maximum joint-space velocities.
+      max_joint_velocity:
+        - 0.001
+        - 0.001
+        - 0.001
+        - 0.001
+        - 0.001
+        - 0.001
+        - 0.001
+        - 0.001
+      # Maximum joint-space accelerations.
+      max_joint_acceleration:
+        - 2.0
+        - 2.0
+        - 2.0
+        - 2.0
+        - 2.0
+        - 2.0
+        - 2.0
+        - 2.0
+      # Maximum Cartesian-space velocities.
+      max_cartesian_velocity:
+        - 0.25
+        - 0.25
+        - 0.25
+        - 1.0
+        - 1.0
+        - 1.0
+      # Maximum Cartesian-space accelerations.
+      max_cartesian_acceleration:
+        - 2.0
+        - 2.0
+        - 2.0
+        - 4.0
+        - 4.0
+        - 4.0
+      # Additional optional parameters for reference (set to defaults):
+      # Cutoff frequency ratio for the FTS filter. Valid values range from 0 to 1, where 1 is the sampling frequency.
+      ft_cutoff_frequency_ratio: 1.0
+      # Rate in Hz at which the controller will publish the state.
+      state_publish_rate: 10
+      # Damping coefficient for the Jacobian damped least-squares inverse.
+      jacobian_damping: 0.002
+      # Timeout in seconds after which the controller will stop motion if no new commands are received.
+      command_timeout: 0.2
+      # Padding (in radians) to add to joint position limits as a safety margin.
+      joint_limit_position_tolerance: 0.02
+      # Joints that the controller will command. If not specified, if takes the same value as `joints`.
+      # This can be useful to implement layered control, where some joints may be controlled by a different controller
+      # downstream.
+      # command_joints: []
+      # The type of command interface to use. Supported values are "position" and "velocity".
+      command_interfaces: ["position"]

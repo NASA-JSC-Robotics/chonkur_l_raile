@@ -18,6 +18,8 @@
 # under the License.
 
 import os
+
+from ament_index_python.packages import get_package_share_directory
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import (
@@ -26,7 +28,6 @@ from launch.substitutions import (
 )
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterFile
-from ament_index_python.packages import get_package_share_directory
 
 
 def spawn_controller(
@@ -42,14 +43,11 @@ def spawn_controller(
     """
     inactive_flags = ["--inactive"] if inactive else []
 
-    namespace_args = []
-    if namespace:
-        namespace_args = ["--namespace", namespace]
-
     return Node(
         package="controller_manager",
         executable="spawner",
         name=controller_name,
+        namespace=namespace,
         arguments=[
             controller_name,
             "--controller-manager",
@@ -57,8 +55,7 @@ def spawn_controller(
             "--controller-manager-timeout",
             str(timeout),
         ]
-        + inactive_flags
-        + namespace_args,
+        + inactive_flags,
         output="both",
         condition=condition,
     )

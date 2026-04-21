@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro" name="clr">
+  <xacro:arg name="tf_prefix" default=""/>
 
   <xacro:include filename="$(find clr_moveit_config)/srdf/clr_macro.srdf.xacro"/>
 
-  <xacro:clr/>
-
+  <xacro:clr tf_prefix="$(arg tf_prefix)"/>
 </robot>

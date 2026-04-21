@@ -7,6 +7,7 @@
   <xacro:arg name="finger_xacro" default="fngr_v6" />
   <xacro:arg name="generate_ros2_control_tag" default="true" />
 
+  <xacro:include filename="$(find ewellix_liftkit_description)/urdf/properties.xacro"/>
   <xacro:include filename="$(find clr_description)/urdf/clr_macro.xacro"/>
 
   <link name="world" />

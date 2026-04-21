@@ -117,7 +117,7 @@
     </xacro:clr_carriage>
 
     <!-- SAFETY_LIGHTS -->
-    <material name="safety_light_blue">
+    <material name="${tf_prefix}safety_light_blue">
       <color rgba="0 0 0.5 0.8"/>
     </material>
     <link name="${tf_prefix}motor_side_estop_light">
@@ -125,7 +125,7 @@
         <geometry>
           <box size="0.05 0.05 0.381"/>
         </geometry>
-        <material name="safety_light_blue" />
+        <material name="${tf_prefix}safety_light_blue" />
       </visual>
       <collision>
         <geometry>
@@ -143,7 +143,7 @@
         <geometry>
           <box size="0.05 0.05 0.381"/>
         </geometry>
-        <material name="safety_light_blue" />
+        <material name="${tf_prefix}safety_light_blue" />
       </visual>
       <collision>
         <geometry>
@@ -206,7 +206,7 @@
     <xacro:right_angle_mount tf_prefix="${tf_prefix}"/>
 
     <!-- UPPER_LIFT_PLATE_TO_RIGHT_ANGLE_MOUNT -->
-    <joint name="upper_lift_plate_to_right_angle_mount" type="fixed">
+    <joint name="${tf_prefix}upper_lift_plate_to_right_angle_mount" type="fixed">
       <parent link="${tf_prefix}upper_lift_plate"/>
       <child link="${tf_prefix}right_angle_mount"/>
       <origin xyz="0 0 0.009525" rpy="0 0 0"/>
@@ -222,7 +222,7 @@
 
     <link name="${tf_prefix}ur10e_mount_link"/>
 
-    <joint name="chonkur_mount_joint" type="fixed">
+    <joint name="${tf_prefix}chonkur_mount_joint" type="fixed">
       <parent link="${tf_prefix}ur10e_mount_plate"/>
       <child link="${tf_prefix}ur10e_mount_link"/>
       <origin xyz="0 0.0225 0" rpy="${radians(-90)} ${radians(180)} 0"/>

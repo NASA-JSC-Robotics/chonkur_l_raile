@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="dual_clrs">
+
+  <xacro:arg name="use_fake_hardware" default="true"/>
+
+  <xacro:include filename="$(find ewellix_liftkit_description)/urdf/properties.xacro"/>
+  <xacro:include filename="$(find clr_description)/urdf/clr_macro.xacro"/>
+
+  <link name="world" />
+
+  <link name="world_to_left_link"/>
+  <joint name="world_to_left" type="fixed">
+      <parent link="world"/>
+      <child link="world_to_left_link"/>
+    <origin xyz="0 1.0 0" rpy="0 0 3.14159"/>
+  </joint>
+  <xacro:clr
+    tf_prefix="left_"
+    parent="world_to_left_link"
+    use_fake_hardware="true"
+    ros2_control_name="left_clr"
+  />
+
+  <link name="world_to_right_link"/>
+  <joint name="world_to_right" type="fixed">
+    <parent link="world"/>
+    <child link="world_to_right_link"/>
+    <origin xyz="0 -1.0 0" rpy="0 0 0"/>
+  </joint>
+  <xacro:clr
+    tf_prefix="right_"
+    parent="world_to_right_link"
+    use_fake_hardware="true"
+    ros2_control_name="right_clr"
+  />
+
+</robot>

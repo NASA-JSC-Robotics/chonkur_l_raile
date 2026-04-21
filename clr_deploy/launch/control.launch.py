@@ -17,6 +17,11 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+from chonkur_deploy.launch_helpers import (
+    include_launch_file,
+    parameter_file,
+    spawn_controller,
+)
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, SetLaunchConfiguration
 from launch.conditions import IfCondition, UnlessCondition
@@ -30,11 +35,6 @@ from launch.substitutions import (
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
 from launch_ros.substitutions import FindPackageShare
-from chonkur_deploy.launch_helpers import (
-    include_launch_file,
-    parameter_file,
-    spawn_controller,
-)
 
 
 def generate_launch_description():
@@ -186,13 +186,14 @@ def generate_launch_description():
         ],
     )
 
-    # # start the controller manager node with all of the controller config files
+    # Start the controller manager node with all of the controller config files
     control_node = Node(
         package=control_node_package,
         executable="ros2_control_node",
         namespace=namespace,
         # allow_substs allows tf_prefix to be pulled in
         parameters=[
+            {"use_sim_time": use_sim_time},
             # CLR specific controllers
             parameter_file("clr_deploy", "controllers_common.yaml", True),
             parameter_file("clr_deploy", "clr_controllers.yaml", True),
@@ -201,7 +202,6 @@ def generate_launch_description():
             parameter_file("chonkur_deploy", "hande_controllers.yaml", True),
             parameter_file("ewellix_liftkit_deploy", "liftkit_controllers.yaml", True),
             parameter_file("vention_rail_deploy", "rail_controllers.yaml", True),
-            {"use_sim_time": use_sim_time},
         ],
         output="both",
     )

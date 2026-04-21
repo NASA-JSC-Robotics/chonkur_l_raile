@@ -12,6 +12,7 @@ install(DIRECTORY config launch rviz srdf
 install(PROGRAMS
   scripts/enable_collision_checking.py
   scripts/disable_collision_checking.py
+  scripts/test_ns_move_group.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
