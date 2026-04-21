@@ -193,7 +193,6 @@ def generate_launch_description():
         namespace=namespace,
         # allow_substs allows tf_prefix to be pulled in
         parameters=[
-            {"tf_prefix": tf_prefix},
             {"use_sim_time": use_sim_time},
             # CLR specific controllers
             parameter_file("clr_deploy", "controllers_common.yaml", True),
