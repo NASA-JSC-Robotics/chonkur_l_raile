@@ -66,11 +66,15 @@
   <xacro:include filename="$(find clr_mujoco_config)/urdf/clr_mujoco_scene.xacro"/>
 
   <mujoco_inputs>
-    <xacro:clr_mujoco_raw_inputs tf_prefix="${tf_prefix}"/>
-    <xacro:clr_mujoco_processed_inputs
-      include_scene_objects="$(arg include_scene_objects)"
-      tf_prefix="${tf_prefix}"
-    />
+    <raw_inputs>
+      <xacro:clr_mujoco_raw_inputs tf_prefix="${tf_prefix}"/>
+    </raw_inputs>
+    <processed_inputs>
+      <xacro:clr_mujoco_processed_inputs
+        include_scene_objects="$(arg include_scene_objects)"
+        tf_prefix="${tf_prefix}"
+      />
+    </processed_inputs>
     <xacro:clr_mujoco_scene/>
   </mujoco_inputs>
 

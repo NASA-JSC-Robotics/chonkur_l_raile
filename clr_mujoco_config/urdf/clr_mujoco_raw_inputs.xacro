@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
 
-  <xacro:macro name="clr_mujoco_raw_inputs_content" params="
+  <xacro:macro name="clr_mujoco_raw_inputs" params="
     model_env:=true
     tf_prefix:=''
     defaults_prefix:=''
@@ -130,30 +130,5 @@
             <exclude body1="drawer_2_face" body2="recessed_latch_handle"/>
         </contact>
       </xacro:if>
-  </xacro:macro>
-
-  <!-- Can use `skip_tags` to include the macro in other files without duplicating inputs -->
-  <xacro:macro name="clr_mujoco_raw_inputs" params="
-    model_env:=true
-    tf_prefix:=''
-    defaults_prefix:=''
-    skip_tags:=false
-  ">
-    <xacro:unless value="${skip_tags}">
-      <raw_inputs>
-        <xacro:clr_mujoco_raw_inputs_content
-          model_env="${model_env}"
-          tf_prefix="${tf_prefix}"
-          defaults_prefix="${defaults_prefix}"
-        />
-      </raw_inputs>
-    </xacro:unless>
-    <xacro:if value="${skip_tags}">
-      <xacro:clr_mujoco_raw_inputs_content
-        model_env="${model_env}"
-        tf_prefix="${tf_prefix}"
-        defaults_prefix="${defaults_prefix}"
-      />
-    </xacro:if>
   </xacro:macro>
 </robot>

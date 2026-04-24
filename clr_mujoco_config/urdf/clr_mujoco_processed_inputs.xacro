@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
 
-  <xacro:macro name="clr_mujoco_processed_inputs_content" params="
+  <xacro:macro name="clr_mujoco_processed_inputs" params="
     model_env:=true
     include_scene_objects:=false
     tf_prefix:=''
@@ -52,30 +52,4 @@
       <modify_element type="joint" name="lorge/latch_spring" limited="true" springref="0.035" stiffness="10000" damping="2" armature="0.001"/>
 
   </xacro:macro>
-
-  <!-- Can use `skip_tags` to include the macro in other files without duplicating inputs -->
-  <xacro:macro name="clr_mujoco_processed_inputs" params="
-    model_env:=true
-    include_scene_objects:=false
-    tf_prefix:=''
-    skip_tags:=false
-  ">
-    <xacro:unless value="${skip_tags}">
-      <processed_inputs>
-        <xacro:clr_mujoco_processed_inputs_content
-          model_env="${model_env}"
-          include_scene_objects="${include_scene_objects}"
-          tf_prefix="${tf_prefix}"
-        />
-      </processed_inputs>
-    </xacro:unless>
-    <xacro:if value="${skip_tags}">
-      <xacro:clr_mujoco_processed_inputs_content
-        model_env="${model_env}"
-        include_scene_objects="${include_scene_objects}"
-        tf_prefix="${tf_prefix}"
-      />
-    </xacro:if>
-  </xacro:macro>
-
 </robot>
