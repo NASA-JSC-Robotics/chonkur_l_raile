@@ -58,10 +58,10 @@
           setting coef=0.5
       -->
       <tendon>
-          <fixed name="${tf_prefix}split">
+        <fixed name="${tf_prefix}split">
           <joint joint="${tf_prefix}finger_1_joint" coef="0.5"/>
           <joint joint="${tf_prefix}finger_2_joint" coef="0.5"/>
-          </fixed>
+        </fixed>
       </tendon>
 
       <equality>
@@ -71,8 +71,8 @@
       <!-- Same logic as above... -->
       <tendon>
           <fixed name="${tf_prefix}lift_middle_mimic_higher">
-          <joint joint="${tf_prefix}ewellix_lift_lower_to_higher" coef="0.5"/>
-          <joint joint="${tf_prefix}middle_mimic_higher" coef="0.5"/>
+            <joint joint="${tf_prefix}ewellix_lift_lower_to_higher" coef="0.5"/>
+            <joint joint="${tf_prefix}middle_mimic_higher" coef="0.5"/>
           </fixed>
       </tendon>
 
