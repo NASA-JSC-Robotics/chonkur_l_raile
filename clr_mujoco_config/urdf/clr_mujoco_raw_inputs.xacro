@@ -1,95 +1,101 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro">
 
-  <xacro:macro name="clr_mujoco_raw_inputs">
+  <xacro:macro name="clr_mujoco_raw_inputs" params="
+    model_env:=true
+    tf_prefix:=''
+    defaults_prefix:=''
+  ">
 
-    <raw_inputs>
-        <option integrator="implicitfast"/>
-        <default>
+      <option integrator="implicitfast"/>
+      <default>
+        <default class="clr">
             <material specular="0.5" shininess="0.25"/>
             <joint axis="0 1 0" range="-6.28319 6.28319" armature="0.1"/>
             <position ctrlrange="-6.2831 6.2831"/>
             <general biastype="affine" ctrlrange="-6.2831 6.2831" />
-            <default class="size4">
+            <default class="clr_size4">
             <joint damping="10"/>
             <general forcerange="-330 330" gainprm="100000" biasprm="0 -100000 -10000" />
             </default>
-            <default class="size3">
+            <default class="clr_size3">
             <joint damping="5"/>
             <general forcerange="-150 150" gainprm="40000" biasprm="0 -40000 -4000" />
-            <default class="size3_limited">
+            <default class="clr_size3_limited">
                 <joint range="-3.1415 3.1415"/>
                 <general ctrlrange="-3.1415 3.1415" />
             </default>
             </default>
-            <default class="size2">
+            <default class="clr_size2">
             <joint damping="2"/>
             <general forcerange="-56 56" gainprm="10000" biasprm="0 -10000 -1000" />
             </default>
-            <default class="visual">
+            <default class="${defaults_prefix}visual">
             <geom group="2" type="mesh" contype="0" conaffinity="0"/>
             </default>
-            <default class="collision">
+            <default class="${defaults_prefix}collision">
             <geom group="3" type="mesh"/>
-            </default>
+          </default>
         </default>
+      </default>
 
-        <actuator>
-            <position joint="vention_rail_base_to_carriage" name="vention_rail_base_to_carriage" kp="25000" dampratio="1.0" ctrlrange="0.0 2.0" />
-            <position joint="ewellix_lift_lower_to_higher" name="ewellix_lift_lower_to_higher" kp="75000" dampratio="1.0" ctrlrange="0.0 0.7" />
-            <position class="size4" name="shoulder_pan_joint" joint="shoulder_pan_joint"/>
-            <position class="size4" name="shoulder_lift_joint" joint="shoulder_lift_joint"/>
-            <position class="size3_limited" name="elbow_joint" joint="elbow_joint"/>
-            <position class="size2" name="wrist_1_joint" joint="wrist_1_joint"/>
-            <position class="size2" name="wrist_2_joint" joint="wrist_2_joint"/>
-            <position class="size2" name="wrist_3_joint" joint="wrist_3_joint"/>
-            <position tendon="split" name="finger_1_joint" kp="10000" dampratio="3.0" ctrlrange="0.0 0.025" forcerange="-100 100"/>
-        </actuator>
+      <actuator>
+          <position joint="${tf_prefix}vention_rail_base_to_carriage" name="${tf_prefix}vention_rail_base_to_carriage" kp="25000" dampratio="1.0" ctrlrange="0.0 2.0" />
+          <position joint="${tf_prefix}ewellix_lift_lower_to_higher" name="${tf_prefix}ewellix_lift_lower_to_higher" kp="75000" dampratio="1.0" ctrlrange="0.0 0.7" />
+          <position class="clr_size4" name="${tf_prefix}shoulder_pan_joint" joint="${tf_prefix}shoulder_pan_joint"/>
+          <position class="clr_size4" name="${tf_prefix}shoulder_lift_joint" joint="${tf_prefix}shoulder_lift_joint"/>
+          <position class="clr_size3_limited" name="${tf_prefix}elbow_joint" joint="${tf_prefix}elbow_joint"/>
+          <position class="clr_size2" name="${tf_prefix}wrist_1_joint" joint="${tf_prefix}wrist_1_joint"/>
+          <position class="clr_size2" name="${tf_prefix}wrist_2_joint" joint="${tf_prefix}wrist_2_joint"/>
+          <position class="clr_size2" name="${tf_prefix}wrist_3_joint" joint="${tf_prefix}wrist_3_joint"/>
+          <position tendon="${tf_prefix}split" name="${tf_prefix}finger_1_joint" kp="10000" dampratio="3.0" ctrlrange="0.0 0.025" forcerange="-100 100"/>
+      </actuator>
 
-        <!--
-            This adds stability to the model by having a tendon that distributes the forces between both
-            joints, such that the equality constraint doesn't have to do that much work in order to equalize
-            both joints. Since both joints share the same sign, we split the force between both equally by
-            setting coef=0.5
-        -->
-        <tendon>
-            <fixed name="split">
-            <joint joint="finger_1_joint" coef="0.5"/>
-            <joint joint="finger_2_joint" coef="0.5"/>
-            </fixed>
-        </tendon>
+      <!--
+          This adds stability to the model by having a tendon that distributes the forces between both
+          joints, such that the equality constraint doesn't have to do that much work in order to equalize
+          both joints. Since both joints share the same sign, we split the force between both equally by
+          setting coef=0.5
+      -->
+      <tendon>
+        <fixed name="${tf_prefix}split">
+          <joint joint="${tf_prefix}finger_1_joint" coef="0.5"/>
+          <joint joint="${tf_prefix}finger_2_joint" coef="0.5"/>
+        </fixed>
+      </tendon>
 
-        <equality>
-            <joint joint1="finger_1_joint" joint2="finger_2_joint" polycoef="0 1 0 0 0" solimp="0.95 0.99 0.001" solref="0.005 1"/>
-        </equality>
+      <equality>
+          <joint joint1="${tf_prefix}finger_1_joint" joint2="${tf_prefix}finger_2_joint" polycoef="0 1 0 0 0" solimp="0.95 0.99 0.001" solref="0.005 1"/>
+      </equality>
 
-        <!-- Same logic as above... -->
-        <tendon>
-            <fixed name="lift_middle_mimic_higher">
-            <joint joint="ewellix_lift_lower_to_higher" coef="0.5"/>
-            <joint joint="middle_mimic_higher" coef="0.5"/>
-            </fixed>
-        </tendon>
+      <!-- Same logic as above... -->
+      <tendon>
+          <fixed name="${tf_prefix}lift_middle_mimic_higher">
+            <joint joint="${tf_prefix}ewellix_lift_lower_to_higher" coef="0.5"/>
+            <joint joint="${tf_prefix}middle_mimic_higher" coef="0.5"/>
+          </fixed>
+      </tendon>
 
-        <!-- The mimic joint is scaled by 50% in the URDF -->
-        <equality>
-            <joint name="upper_mimic_lower" joint1="ewellix_lift_lower_to_higher" joint2="middle_mimic_higher" polycoef="0 2 0 0 0"/>
-        </equality>
+      <!-- The mimic joint is scaled by 50% in the URDF -->
+      <equality>
+          <joint name="${tf_prefix}upper_mimic_lower" joint1="${tf_prefix}ewellix_lift_lower_to_higher" joint2="${tf_prefix}middle_mimic_higher" polycoef="0 2 0 0 0"/>
+      </equality>
 
-        <sensor>
-            <force name="tcp_fts_sensor_force" site="ft_frame"/>
-            <torque name="tcp_fts_sensor_torque" site="ft_frame"/>
-        </sensor>
+      <sensor>
+          <force name="${tf_prefix}tcp_fts_sensor_force" site="${tf_prefix}ft_frame"/>
+          <torque name="${tf_prefix}tcp_fts_sensor_torque" site="${tf_prefix}ft_frame"/>
+      </sensor>
 
-        <!-- clr contacts -->
-        <contact>
-            <exclude body1="world" body2="vention_rail_carriage"/>
-            <exclude body1="world" body2="ewellix_lift_higher_link"/>
-            <exclude body1="world" body2="ewellix_lift_middle_link"/>
-            <exclude body1="vention_rail_carriage" body2="ewellix_lift_middle_link"/>
-        </contact>
+      <!-- clr contacts -->
+      <contact>
+          <exclude body1="world" body2="${tf_prefix}vention_rail_carriage"/>
+          <exclude body1="world" body2="${tf_prefix}ewellix_lift_higher_link"/>
+          <exclude body1="world" body2="${tf_prefix}ewellix_lift_middle_link"/>
+          <exclude body1="${tf_prefix}vention_rail_carriage" body2="${tf_prefix}ewellix_lift_middle_link"/>
+      </contact>
 
-        <!-- environment contacts -->
+      <!-- environment contacts -->
+      <xacro:if value="${model_env}">
         <contact>
             <exclude body1="world" body2="lorge/hatch_face"/>
             <exclude body1="world" body2="bench_lid"/>
@@ -123,6 +129,6 @@
             <exclude body1="world" body2="recessed_latch_handle"/>
             <exclude body1="drawer_2_face" body2="recessed_latch_handle"/>
         </contact>
-    </raw_inputs>
+      </xacro:if>
   </xacro:macro>
 </robot>
