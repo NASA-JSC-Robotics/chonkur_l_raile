@@ -64,6 +64,7 @@
   <xacro:include filename="$(find clr_mujoco_config)/urdf/clr_mujoco_raw_inputs.xacro"/>
   <xacro:include filename="$(find clr_mujoco_config)/urdf/clr_mujoco_processed_inputs.xacro"/>
   <xacro:include filename="$(find clr_mujoco_config)/urdf/clr_mujoco_scene.xacro"/>
+  <xacro:include filename="$(find clr_mujoco_config)/urdf/clr_mujoco_ros2_control_macros.xacro"/>
 
   <mujoco_inputs>
     <raw_inputs>
@@ -95,177 +96,12 @@
       <!-- Publish camera images at 5 hz -->
       <param name="camera_publish_rate">5.0</param>
     </hardware>
-    <joint name="${tf_prefix}vention_rail_base_to_carriage">
-      <command_interface name="position"/>
-      <state_interface name="position">
-        <param name="initial_value">0.0</param>
-      </state_interface>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="${tf_prefix}ewellix_lift_lower_to_higher">
-      <command_interface name="position"/>
-      <state_interface name="position">
-        <!-- There's an issue where this can drop below 0 due to gravity so starting it a little higher for now... -->
-        <param name="initial_value">0.01</param>
-      </state_interface>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="${tf_prefix}shoulder_pan_joint">
-      <command_interface name="position"/>
-      <state_interface name="position">
-        <param name="initial_value">${3.1927}</param>
-      </state_interface>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="${tf_prefix}shoulder_lift_joint">
-      <command_interface name="position"/>
-      <state_interface name="position">
-        <param name="initial_value">${-2.3913}</param>
-      </state_interface>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="${tf_prefix}elbow_joint">
-      <command_interface name="position"/>
-      <state_interface name="position">
-        <param name="initial_value">${-1.7760}</param>
-      </state_interface>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="${tf_prefix}wrist_1_joint">
-      <command_interface name="position"/>
-      <state_interface name="position">
-        <param name="initial_value">${-0.4700}</param>
-      </state_interface>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="${tf_prefix}wrist_2_joint">
-      <command_interface name="position"/>
-      <state_interface name="position">
-        <param name="initial_value">${-1.6177}</param>
-      </state_interface>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="${tf_prefix}wrist_3_joint">
-      <command_interface name="position"/>
-      <state_interface name="position">
-        <param name="initial_value">${-1.6177}</param>
-      </state_interface>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
 
-    <!-- Robotiq gripper -->
-    <joint name="${tf_prefix}finger_1_joint">
-      <command_interface name="position"/>
-      <state_interface name="position">
-        <param name="initial_value">0.025</param>
-      </state_interface>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <sensor name="${tf_prefix}tcp_fts_sensor">
-      <param name="mujoco_type">fts</param>
-      <param name="mujoco_sensor_name">${tf_prefix}tcp_fts_sensor</param>
-      <state_interface name="force.x"/>
-      <state_interface name="force.y"/>
-      <state_interface name="force.z"/>
-      <state_interface name="torque.x"/>
-      <state_interface name="torque.y"/>
-      <state_interface name="torque.z"/>
-    </sensor>
-
-    <!-- Cameras -->
-    <!-- For cameras, the sensor name _must_ match the camera name in the MJCF -->
-    <sensor name="${tf_prefix}wrist_mounted_camera">
-      <param name="frame_name">${tf_prefix}wrist_mounted_camera_color_optical_frame</param>
-      <param name="info_topic">/wrist_mounted_camera/color/camera_info</param>
-      <param name="image_topic">/wrist_mounted_camera/color/image_raw</param>
-      <param name="depth_topic">/wrist_mounted_camera/aligned_depth_to_color/image_raw</param>
-    </sensor>
-    <sensor name="${tf_prefix}lift_camera">
-      <param name="frame_name">${tf_prefix}lift_camera_color_optical_frame</param>
-      <param name="info_topic">/lift_camera/color/camera_info</param>
-      <param name="image_topic">/lift_camera/color/image_raw</param>
-      <param name="depth_topic">/lift_camera/aligned_depth_to_color/image_raw</param>
-    </sensor>
+    <xacro:clr_mujoco_ros2_control_sensors tf_prefix="${tf_prefix}"/>
+    <xacro:clr_mujoco_ros2_control_joints tf_prefix="${tf_prefix}"/>
 
     <xacro:if value="${model_env}">
-      <!-- Mockups -->
-      <joint name="door_to_frame_joint">
-        <state_interface name="position"/>
-      </joint>
-      <joint name="housing_to_latch_lock">
-        <state_interface name="position"/>
-      </joint>
-      <joint name="housing_to_left_latch_pull">
-        <state_interface name="position"/>
-      </joint>
-      <joint name="housing_to_right_latch_pull">
-        <state_interface name="position"/>
-      </joint>
-      <joint name="lorge/hatch_outer_frame_face_joint">
-        <state_interface name="position"/>
-      </joint>
-
-      <joint name="lorge/latch_spring">
-        <state_interface name="position"/>
-      </joint>
-
-      <joint name="lorge/external_rotary_joint">
-        <state_interface name="position"/>
-      </joint>
-      <joint name="lorge/external_rotary_handle_joint">
-        <state_interface name="position"/>
-      </joint>
-      <joint name="lorge/internal_rotary_joint">
-        <state_interface name="position"/>
-      </joint>
-      <joint name="lorge/internal_rotary_handle_joint">
-        <state_interface name="position"/>
-      </joint>
-      <joint name="bench_lid_joint">
-        <state_interface name="position"/>
-      </joint>
-      <joint name="cabinet_1_joint">
-        <state_interface name="position"/>
-      </joint>
-      <joint name="cabinet_2_joint">
-        <state_interface name="position"/>
-      </joint>
-      <joint name="round_latch_joint">
-        <state_interface name="position"/>
-      </joint>
-      <joint name="push_latch_button_joint">
-        <state_interface name="position"/>
-      </joint>
-      <joint name="push_latch_handle_joint">
-        <state_interface name="position"/>
-      </joint>
-      <joint name="cabinet_3_joint">
-        <state_interface name="position"/>
-      </joint>
-      <joint name="cabinet_4_joint">
-        <state_interface name="position"/>
-      </joint>
-      <joint name="paddle_latch_handle_joint">
-        <state_interface name="position"/>
-      </joint>
-      <joint name="drawer_1_joint">
-        <state_interface name="position"/>
-      </joint>
-      <joint name="drawer_2_joint">
-        <state_interface name="position"/>
-      </joint>
-      <joint name="recessed_latch_handle_joint">
-        <state_interface name="position"/>
-      </joint>
+      <xacro:clr_mujoco_ros2_control_sensors/>
     </xacro:if>
 
   </ros2_control>
