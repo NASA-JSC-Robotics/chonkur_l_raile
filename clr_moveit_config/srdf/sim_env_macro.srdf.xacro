@@ -2438,5 +2438,6 @@
         <disable_collisions link1="trainer_top" link2="velcro" reason="Never"/>
         <disable_collisions link1="trainer_top" link2="wood_frame" reason="Never"/>
         <disable_collisions link1="velcro" link2="wood_frame" reason="Adjacent"/>
+        <disable_collisions link1="lorge/hatch_latch" link2="lorge/hatch_latch_catch" reason="Adjacent"/>
     </xacro:macro>
 </robot>
