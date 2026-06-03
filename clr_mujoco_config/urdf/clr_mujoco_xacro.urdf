@@ -101,7 +101,7 @@
     <xacro:clr_mujoco_ros2_control_joints tf_prefix="${tf_prefix}"/>
 
     <xacro:if value="${model_env}">
-      <xacro:clr_mujoco_ros2_control_env/>  
+      <xacro:clr_mujoco_ros2_control_env/>
       <xacro:clr_mujoco_ros2_control_sensors/>
     </xacro:if>
 
