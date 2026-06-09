@@ -128,6 +128,10 @@ def generate_launch_description():
         headless,
     ]
 
+    extra_controller_params_file = PathJoinSubstitution(
+        [FindPackageShare(clr_mujoco_package_name), "config", "mujoco_plugins.yaml"]
+    )
+
     clr_launch = include_launch_file(
         package_name="clr_deploy",
         launch_file="control.launch.py",
@@ -140,6 +144,7 @@ def generate_launch_description():
             "is_sim": "true",
             "control_node_package": "mujoco_ros2_control",
             "extra_xacro_args": extra_xacro_args,
+            "extra_controller_params_file": extra_controller_params_file,
         }.items(),
     )
 

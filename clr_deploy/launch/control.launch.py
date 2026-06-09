@@ -33,7 +33,7 @@ from launch.substitutions import (
     PathJoinSubstitution,
 )
 from launch_ros.actions import Node
-from launch_ros.parameter_descriptions import ParameterValue
+from launch_ros.parameter_descriptions import ParameterFile, ParameterValue
 from launch_ros.substitutions import FindPackageShare
 
 
@@ -121,6 +121,13 @@ def generate_launch_description():
             "Should be in the format of 'arg1:=value1 arg2:=value2'",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "extra_controller_params_file",
+            default_value=PathJoinSubstitution([FindPackageShare("clr_deploy"), "config", "empty_config.yaml"]),
+            description="Path to additional parameter file to be loaded into the control node.",
+        )
+    )
 
     mapped_arguments = []
     mapped_arguments.append(
@@ -148,6 +155,7 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration("use_sim_time")
     is_sim = LaunchConfiguration("is_sim")
     extra_xacro_args = LaunchConfiguration("extra_xacro_args")
+    extra_controller_params_file = LaunchConfiguration("extra_controller_params_file")
 
     # Main robot description for CLR. Additional arguments are available in the xacro, but we only
     # override a subset of those that change regularly depending on deployment. Arguments here that
@@ -202,6 +210,8 @@ def generate_launch_description():
             parameter_file("chonkur_deploy", "hande_controllers.yaml", True),
             parameter_file("ewellix_liftkit_deploy", "liftkit_controllers.yaml", True),
             parameter_file("vention_rail_deploy", "rail_controllers.yaml", True),
+            # Enables users to bring their own controller params file, if required
+            ParameterFile(extra_controller_params_file, allow_substs=True),
         ],
         output="both",
     )
