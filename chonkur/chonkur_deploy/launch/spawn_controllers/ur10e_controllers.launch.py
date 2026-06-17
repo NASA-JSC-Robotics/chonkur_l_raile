@@ -67,6 +67,7 @@ def generate_launch_description():
     nodes.append(
         spawn_controller("faked_forces_controller", inactive=True, namespace=namespace, condition=IfCondition(is_sim))
     )
+    nodes.append(spawn_controller("effort_controller", inactive=True, namespace=namespace))
 
     # We always load the admittance controllers in an inactive state
     admittance_controller_spawner = spawn_controller(

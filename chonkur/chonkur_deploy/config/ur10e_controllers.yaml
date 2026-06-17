@@ -25,6 +25,9 @@
 
       freedrive_mode_controller:
         type: ur_controllers/FreedriveModeController
+      
+      effort_controller:
+        type: effort_controllers/JointGroupEffortController
 
       # controllers for admittance
       admittance_controller:
@@ -137,6 +140,16 @@
   freedrive_mode_controller:
     ros__parameters:
       tf_prefix: "$(var tf_prefix)"
+  
+  effort_controller:
+    ros__parameters:
+      joints:
+        - $(var tf_prefix)shoulder_pan_joint
+        - $(var tf_prefix)shoulder_lift_joint
+        - $(var tf_prefix)elbow_joint
+        - $(var tf_prefix)wrist_1_joint
+        - $(var tf_prefix)wrist_2_joint
+        - $(var tf_prefix)wrist_3_joint
 
   # admittance version of JTC
   admittance_joint_trajectory_controller:
