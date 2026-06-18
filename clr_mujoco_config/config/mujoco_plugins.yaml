@@ -5,12 +5,16 @@
         type: "mujoco_ros2_control_plugins/CameraPlugin"
         camera_publish_rate: 2.0
         $(var tf_prefix)wrist_mounted_camera:
+          camera_type: "polled"
           frame_name: $(var tf_prefix)wrist_mounted_camera_color_optical_frame
           info_topic: /$(var tf_prefix)wrist_mounted_camera/color/camera_info
           image_topic: /$(var tf_prefix)wrist_mounted_camera/color/image_raw
           depth_topic: /$(var tf_prefix)wrist_mounted_camera/aligned_depth_to_color/image_raw
+          trigger_service_name: /$(var tf_prefix)wrist_mounted_camera/trigger
         $(var tf_prefix)lift_camera:
+          camera_type: "streaming"
           frame_name: $(var tf_prefix)lift_camera_color_optical_frame
           info_topic: /$(var tf_prefix)lift_camera/color/camera_info
           image_topic: /$(var tf_prefix)lift_camera/color/image_raw
           depth_topic: /$(var tf_prefix)lift_camera/aligned_depth_to_color/image_raw
+          trigger_service_name: /$(var tf_prefix)lift_camera/trigger
