@@ -364,7 +364,7 @@
                   <body name="wrist_3_link" pos="-1.70102e-05 0.115301 5.28358e-05" quat="0.707269 -0.706945 7.83453e-08 -7.83812e-08" gravcomp="1.0">
                     <inertial pos="0.000533945 -0.00281502 0.0474457" quat="0.999675 0.0240902 0.00138057 0.00821278" mass="1.56087" diaginertia="0.0111381 0.00752139 0.00500004"/>
                     <joint name="wrist_3_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-56 56"/>
-                    <body name="finger_1_link" pos="0.00201401 -0.00325 0.151947" quat="-1 0 0 0">
+                    <body name="finger_1_link" pos="0.00201401 -0.00325 0.151947" quat="-1 0 0 0" gravcomp="1.0">
                       <inertial pos="0 0 0" quat="0.501643 0.0653163 0.068404 0.859889" mass="0.0500198" diaginertia="6.28755e-05 6.17965e-05 5.99521e-06"/>
                       <joint name="finger_1_joint" pos="0 0 0" axis="1 0 0" type="slide" range="0 0.025" actuatorfrcrange="-130 130" armature="0.5" frictionloss="5.0"/>
                       <geom material="mtl_finger_v6" mesh="finger_v6" class="visual" pos="" quat=""/>
@@ -392,7 +392,7 @@
                       <geom mesh="finger_v6_collision_21" rgba="0.1748068478573328 0.8952354683008019 0.08894101206310079 1" class="collision" pos="" quat=""/>
                       <site name="finger_1_link" pos="0 0 0" quat="1.0 0 0 0"/>
                     </body>
-                    <body name="finger_2_link" pos="-0.00201401 0.00325 0.151947" quat="0 0 0 -1">
+                    <body name="finger_2_link" pos="-0.00201401 0.00325 0.151947" quat="0 0 0 -1" gravcomp="1.0">
                       <inertial pos="0 0 0" quat="0.501643 0.0653163 0.068404 0.859889" mass="0.0500198" diaginertia="6.28755e-05 6.17965e-05 5.99521e-06"/>
                       <joint name="finger_2_joint" pos="0 0 0" axis="1 0 0" type="slide" range="0 0.025" actuatorfrcrange="-130 130" armature="0.5" frictionloss="5.0"/>
                       <geom material="mtl_finger_v6" mesh="finger_v6" class="visual" pos="" quat=""/>
@@ -1114,22 +1114,21 @@
     <material shininess="0.25" specular="0.5"/>
     <joint armature="0.1" axis="0 1 0" range="-6.28319 6.28319"/>
     <position ctrlrange="-6.2831 6.2831"/>
-    <general biastype="affine" ctrlrange="-6.2831 6.2831"/>
+    <general ctrlrange="-6.2831 6.2831"/>
     <default class="size4">
       <joint damping="10"/>
-      <general biasprm="0 -100000 -10000" forcerange="-330 330" gainprm="100000"/>
+      <general ctrlrange="-330 330" forcerange="-330 330"/>
     </default>
     <default class="size3">
       <joint damping="5"/>
-      <general biasprm="0 -40000 -4000" forcerange="-150 150" gainprm="40000"/>
+      <general ctrlrange="-150 150" forcerange="-150 150"/>
       <default class="size3_limited">
         <joint range="-3.1415 3.1415"/>
-        <general ctrlrange="-3.1415 3.1415"/>
       </default>
     </default>
     <default class="size2">
       <joint damping="2"/>
-      <general biasprm="0 -10000 -1000" forcerange="-56 56" gainprm="10000"/>
+      <general ctrlrange="-56 56" forcerange="-56 56"/>
     </default>
     <default class="visual">
       <geom conaffinity="0" contype="0" group="2" type="mesh"/>
@@ -1141,12 +1140,12 @@
   <actuator>
     <position ctrlrange="0.0 2.0" dampratio="1.0" joint="vention_rail_base_to_carriage" kp="25000" name="vention_rail_base_to_carriage"/>
     <position ctrlrange="0.0 0.7" dampratio="1.0" joint="ewellix_lift_lower_to_higher" kp="75000" name="ewellix_lift_lower_to_higher"/>
-    <position class="size4" joint="shoulder_pan_joint" name="shoulder_pan_joint"/>
-    <position class="size4" joint="shoulder_lift_joint" name="shoulder_lift_joint"/>
-    <position class="size3_limited" joint="elbow_joint" name="elbow_joint"/>
-    <position class="size2" joint="wrist_1_joint" name="wrist_1_joint"/>
-    <position class="size2" joint="wrist_2_joint" name="wrist_2_joint"/>
-    <position class="size2" joint="wrist_3_joint" name="wrist_3_joint"/>
+    <motor class="size4" joint="shoulder_pan_joint" name="shoulder_pan_joint"/>
+    <motor class="size4" joint="shoulder_lift_joint" name="shoulder_lift_joint"/>
+    <motor class="size3_limited" joint="elbow_joint" name="elbow_joint"/>
+    <motor class="size2" joint="wrist_1_joint" name="wrist_1_joint"/>
+    <motor class="size2" joint="wrist_2_joint" name="wrist_2_joint"/>
+    <motor class="size2" joint="wrist_3_joint" name="wrist_3_joint"/>
     <position ctrlrange="0.0 0.025" dampratio="3.0" forcerange="-100 100" kp="10000" name="finger_1_joint" tendon="split"/>
   </actuator>
   <tendon>
