@@ -3,49 +3,49 @@
     pid_gains:
       position:
         shoulder_pan_joint:
-          p: 100000.0
+          p: 2000.0
           i: 0.0
-          d: 0.0 # 10000.0
+          d: 200.0
           u_clamp_max: 330.0
           u_clamp_min: -330.0
           i_clamp_max: 1000.0
           i_clamp_min: -1000.0
         shoulder_lift_joint:
-          p: 100000.0
+          p: 2000.0
           i: 0.0
-          d: 0.0 # 10000.0
+          d: 200.0
           u_clamp_max: 330.0
           u_clamp_min: -330.0
           i_clamp_max: 1000.0
           i_clamp_min: -1000.0
         elbow_joint:
-          p: 40000.0
+          p: 4000.0
           i: 0.0
-          d: 0.0 # 4000.0
+          d: 400.0
           u_clamp_max: 150.0
           u_clamp_min: -150.0
           i_clamp_max: 10.0
           i_clamp_min: -10.0
         wrist_1_joint:
-          p: 10000.0
+          p: 1000.0
           i: 0.0
-          d: 0.0 # 1000.0
+          d: 100.0
           u_clamp_max: 56.0
           u_clamp_min: -56.0
           i_clamp_max: 1000.0
           i_clamp_min: -1000.0
         wrist_2_joint:
-          p: 10000.0
+          p: 1000.0
           i: 0.0
-          d: 0.0 # 1000.0
+          d: 100.0
           u_clamp_max: 56.0
           u_clamp_min: -56.0
           i_clamp_max: 1000.0
           i_clamp_min: -1000.0
         wrist_3_joint:
-          p: 10000.0
+          p: 1000.0
           i: 0.0
-          d: 0.0 # 1000.0
+          d: 100.0
           u_clamp_max: 56.0
           u_clamp_min: -56.0
           i_clamp_max: 1000.0
