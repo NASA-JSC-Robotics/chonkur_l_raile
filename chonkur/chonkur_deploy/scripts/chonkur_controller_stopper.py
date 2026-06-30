@@ -47,17 +47,17 @@ class ChonkurControllerStopper(ControllerStopperBase):
 
         # Given the relative time it takes for chonkur to come up, we wait for a specific controller to be loaded
         # to be reasonably confident that the relevant controllers are loaded into the CM.
-        self.declare_parameter(
+        self.node.declare_parameter(
             "target_controller",
             "admittance_joint_trajectory_controller",
             ParameterDescriptor(
                 type=ParameterType.PARAMETER_STRING, description="controllers that will always remain active"
             ),
         )
-        self.target_controller = self.get_parameter("target_controller").value
+        self.target_controller = self.node.get_parameter("target_controller").value
 
         self.get_state_cb_group = ReentrantCallbackGroup()
-        self.get_program_state_srv = self.create_client(
+        self.get_program_state_srv = self.node.create_client(
             GetProgramState, "/dashboard_client/program_state", callback_group=self.get_state_cb_group
         )
 
@@ -72,25 +72,25 @@ class ChonkurControllerStopper(ControllerStopperBase):
 
         # timer at 0.5 second loop to check controller status and cancel
         self.timer_cb_group = ReentrantCallbackGroup()
-        self.timer = self.create_timer(0.5, self.timer_callback, callback_group=self.timer_cb_group)
-        self.get_logger().info(f"{bcolors.OKBLUE}Chonkur Controller Stopper is running!{bcolors.OKBLUE}")
+        self.timer = self.node.create_timer(0.5, self.timer_callback, callback_group=self.timer_cb_group)
+        self.node.get_logger().info(f"{bcolors.OKBLUE}Chonkur Controller Stopper is running!{bcolors.OKBLUE}")
 
     def wait_for_controller(self, target_controller, retries=-1):
         attempts = 0
-        rate = self.create_rate(1)
+        rate = self.node.create_rate(1)
         while rclpy.ok():
-            self.get_logger().info(f"Waiting for controller: {target_controller}...")
+            self.node.get_logger().info(f"Waiting for controller: {target_controller}...")
             list_controllers_response = self.call_list_controllers()
             for controller in list_controllers_response.controller:
                 if target_controller == controller.name:
-                    self.get_logger().info(f"{target_controller} loaded!")
+                    self.node.get_logger().info(f"{target_controller} loaded!")
                     return
 
             attempts += 1
             if retries > 0 and attempts > retries:
                 raise RuntimeError(f"Timed out waiting for the controller: {target_controller}")
 
-            self.get_logger().info(f"{bcolors.WARNING}Waiting for controller: {target_controller}...{bcolors.ENDC}")
+            self.node.get_logger().info(f"{bcolors.WARNING}Waiting for controller: {target_controller}...{bcolors.ENDC}")
             rate.sleep()
 
     def timer_callback(self):
@@ -98,7 +98,7 @@ class ChonkurControllerStopper(ControllerStopperBase):
         result = self.call_async(self.get_program_state_srv, request)
 
         if result is None or not result.success:
-            self.get_logger().error("was not able to get the state of the program")
+            self.node.get_logger().error("was not able to get the state of the program")
             return  # dashboard client publishes its own failure message
 
         # if we are either paused or stopped ,we treat that as not running
@@ -107,14 +107,14 @@ class ChonkurControllerStopper(ControllerStopperBase):
         # if we just transitioned to a running state, and the controllers weren't active,
         # start the controllers
         if self.robot_running and not self.controllers_active:
-            self.get_logger().info(f"{bcolors.WARNING}Transitioning to running, restarting controllers{bcolors.ENDC}")
+            self.node.get_logger().info(f"{bcolors.WARNING}Transitioning to running, restarting controllers{bcolors.ENDC}")
             # stop controllers first to get rid of anything that may have happened recently
             self.stop_controllers()
             # start controllers
             self.start_controllers()
         # if robot is either paused or stopped, consistently stop controllers to cancel anything that may have started
         elif not self.robot_running:
-            self.get_logger().debug("Robot not running, stopping controllers")
+            self.node.get_logger().debug("Robot not running, stopping controllers")
             self.stop_controllers()
 
 
@@ -122,7 +122,7 @@ def main(args=None):
     rclpy.init(args=args)
     chonkur_controller_stopper = ChonkurControllerStopper()
     executor = MultiThreadedExecutor(num_threads=4)
-    executor.add_node(chonkur_controller_stopper)
+    executor.add_node(chonkur_controller_stopper.node)
 
     # Start the initialization process in the background, this should terminate on its own if all services
     # and controllers are available
