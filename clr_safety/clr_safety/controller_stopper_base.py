@@ -141,7 +141,6 @@ class ControllerStopperBase:
 
         start_time = self.node.get_clock().now()
         while not future.done():
-            # rclpy.spin_once(self.node, timeout_sec=0.1)
             elapsed_time = (self.node.get_clock().now() - start_time).nanoseconds / 1e9
             if elapsed_time > timeout:
                 self.node.get_logger().warn(f"Service call to {client.srv_name} timed out after {timeout}s")
