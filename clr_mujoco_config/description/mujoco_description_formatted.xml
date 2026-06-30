@@ -1,5 +1,5 @@
 <mujoco model="clr">
-  <compiler angle="radian" meshdir="assets/" texturedir="assets/"/>
+  <compiler angle="radian" meshdir="/home/er4-user/ws/mjcf_data/assets/" texturedir="/home/er4-user/ws/mjcf_data/assets/"/>
   <asset>
     <mesh file="decomposed/clr_base/clr_base/clr_base.obj" scale="1.0 1.0 1.0"/>
     <mesh file="decomposed/clr_base/clr_base/clr_base_collision_0.obj" scale="1.0 1.0 1.0"/>
@@ -333,7 +333,7 @@
     <material name="mtl_ctb_handle" specular="0.20000000000000004" shininess="1.0" rgba="1.00000000 0.00000000 0.00000000 1.0"/>
   </asset>
   <worldbody>
-    <body childclass="clr" name="vention_rail_carriage" pos="-0.882296 0.114017 0.396" gravcomp="1.0">
+    <body name="vention_rail_carriage" pos="-0.882296 0.114017 0.396" childclass="clr">
       <inertial pos="-0.00312461 -0.0766458 0.319626" quat="0.998435 0.0549353 -0.00216721 -0.0102813" mass="22.5301" diaginertia="0.864881 0.855248 0.201122"/>
       <joint name="vention_rail_base_to_carriage" pos="0 0 0" axis="1 0 0" type="slide" range="0 2" actuatorfrcrange="-1000 1000"/>
       <body name="ewellix_lift_higher_link" pos="-0.003624 -0.09 0.459525" gravcomp="1.0">
@@ -348,22 +348,22 @@
         </body>
         <body name="shoulder_link" pos="0 0.315664 0.375559" quat="-0.707107 0.707107 9.6581e-08 9.6581e-08" gravcomp="1.0">
           <inertial pos="0.021 -0.027 0" quat="0.988634 -0.000680926 0.148578 -0.0229591" mass="7.369" diaginertia="0.0353866 0.0352903 0.0202532"/>
-          <joint name="shoulder_pan_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-330 330"/>
+          <joint name="shoulder_pan_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-330 330" class="clr_size4"/>
           <body name="upper_arm_link" pos="-2.63519e-05 0 0" quat="0.707253 0.70696 -7.78715e-07 -7.79038e-07" gravcomp="1.0">
             <inertial pos="-0.2327 0 0.158" quat="0.500033 0.499784 0.489585 0.510381" mass="13.051" diaginertia="0.77068 0.769758 0.0278114"/>
-            <joint name="shoulder_lift_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-330 330"/>
+            <joint name="shoulder_lift_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-330 330" class="clr_size4"/>
             <body name="forearm_link" pos="-0.612203 0 0" quat="1 5.21405e-05 9.27643e-05 -1.65066e-06" gravcomp="1.0">
               <inertial pos="-0.33155 0 0.068" quat="0.492051 0.507971 0.507346 0.492394" mass="3.989" diaginertia="0.30928 0.306743 0.00985709"/>
-              <joint name="elbow_joint" pos="0 0 0" axis="0 0 1" range="-3.14159 3.14159" actuatorfrcrange="-150 150"/>
+              <joint name="elbow_joint" pos="0 0 0" axis="0 0 1" range="-3.14159 3.14159" actuatorfrcrange="-150 150" class="clr_size3_limited"/>
               <body name="wrist_1_link" pos="-0.571235 0.00158033 0.173704" quat="-0.99999 0.00454876 0.000242286 1.85622e-06" gravcomp="1.0">
                 <inertial pos="0 -0.018 0.007" quat="0.525776 0.850564 -0.0100431 9.45801e-05" mass="2.1" diaginertia="0.00296017 0.00269992 0.00209991"/>
-                <joint name="wrist_1_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-56 56"/>
+                <joint name="wrist_1_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-56 56" class="clr_size2"/>
                 <body name="wrist_2_link" pos="8.87723e-06 -0.119763 0.000123158" quat="0.70747 0.706743 -1.86691e-08 -1.86883e-08" gravcomp="1.0">
                   <inertial pos="0 0.018 -0.007" quat="0.525776 0.850564 -0.0100431 9.45801e-05" mass="1.98" diaginertia="0.00296017 0.00269992 0.00209991"/>
-                  <joint name="wrist_2_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-56 56"/>
+                  <joint name="wrist_2_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-56 56" class="clr_size2"/>
                   <body name="wrist_3_link" pos="-1.70102e-05 0.115301 5.28358e-05" quat="0.707269 -0.706945 7.83453e-08 -7.83812e-08" gravcomp="1.0">
                     <inertial pos="0.000533945 -0.00281502 0.0474457" quat="0.999675 0.0240902 0.00138057 0.00821278" mass="1.56087" diaginertia="0.0111381 0.00752139 0.00500004"/>
-                    <joint name="wrist_3_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-56 56"/>
+                    <joint name="wrist_3_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-56 56" class="clr_size2"/>
                     <body name="finger_1_link" pos="0.00201401 -0.00325 0.151947" quat="-1 0 0 0" gravcomp="1.0">
                       <inertial pos="0 0 0" quat="0.501643 0.0653163 0.068404 0.859889" mass="0.0500198" diaginertia="6.28755e-05 6.17965e-05 5.99521e-06"/>
                       <joint name="finger_1_joint" pos="0 0 0" axis="1 0 0" type="slide" range="0 0.025" actuatorfrcrange="-130 130" armature="0.5" frictionloss="5.0"/>
@@ -881,7 +881,7 @@
       <site name="drawer_2_bottom" pos="0 -0.305 -0.00435" quat="1.0 0 0 0"/>
     </body>
     <body name="ctb" pos="0.8 0.8 0.25" quat="0.707107 0 0 0.707107">
-      <inertial pos="0 0 0" mass="1.8" diaginertia="0.001 0.001 0.001"/>
+      <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="1.8" diaginertia="0.0675 0.0505 0.0326"/>
       <joint name="ctb_joint" type="free"/>
       <geom material="mtl_ctb_body" mesh="ctb_body" class="visual" pos="" quat="0.707388 -0.706825 0 0"/>
       <geom mesh="ctb_body" class="collision" pos="" quat="0.707388 -0.706825 0 0"/>
@@ -1116,18 +1116,18 @@
       <joint armature="0.1" axis="0 1 0" range="-6.28319 6.28319"/>
       <position ctrlrange="-6.2831 6.2831"/>
       <general ctrlrange="-6.2831 6.2831"/>
-      <default class="size4">
+      <default class="clr_size4">
         <joint damping="10"/>
         <general ctrlrange="-330 330" forcerange="-330 330"/>
       </default>
-      <default class="size3">
+      <default class="clr_size3">
         <joint damping="5"/>
         <general ctrlrange="-150 150" forcerange="-150 150"/>
-        <default class="size3_limited">
+        <default class="clr_size3_limited">
           <joint range="-3.1415 3.1415"/>
         </default>
       </default>
-      <default class="size2">
+      <default class="clr_size2">
         <joint damping="2"/>
         <general ctrlrange="-56 56" forcerange="-56 56"/>
       </default>
@@ -1142,12 +1142,12 @@
   <actuator>
     <position ctrlrange="0.0 2.0" dampratio="1.0" joint="vention_rail_base_to_carriage" kp="25000" name="vention_rail_base_to_carriage"/>
     <position ctrlrange="0.0 0.7" dampratio="1.0" joint="ewellix_lift_lower_to_higher" kp="75000" name="ewellix_lift_lower_to_higher"/>
-    <motor class="size4" joint="shoulder_pan_joint" name="shoulder_pan_joint"/>
-    <motor class="size4" joint="shoulder_lift_joint" name="shoulder_lift_joint"/>
-    <motor class="size3_limited" joint="elbow_joint" name="elbow_joint"/>
-    <motor class="size2" joint="wrist_1_joint" name="wrist_1_joint"/>
-    <motor class="size2" joint="wrist_2_joint" name="wrist_2_joint"/>
-    <motor class="size2" joint="wrist_3_joint" name="wrist_3_joint"/>
+    <motor class="clr_size4" joint="shoulder_pan_joint" name="shoulder_pan_joint"/>
+    <motor class="clr_size4" joint="shoulder_lift_joint" name="shoulder_lift_joint"/>
+    <motor class="clr_size3_limited" joint="elbow_joint" name="elbow_joint"/>
+    <motor class="clr_size2" joint="wrist_1_joint" name="wrist_1_joint"/>
+    <motor class="clr_size2" joint="wrist_2_joint" name="wrist_2_joint"/>
+    <motor class="clr_size2" joint="wrist_3_joint" name="wrist_3_joint"/>
     <position ctrlrange="0.0 0.025" dampratio="3.0" forcerange="-100 100" kp="10000" name="finger_1_joint" tendon="split"/>
   </actuator>
   <tendon>
