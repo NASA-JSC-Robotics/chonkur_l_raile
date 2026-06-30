@@ -57,6 +57,19 @@ ros2 launch clr_mujoco_config clr_mujoco.launch.py
 ros2 launch clr_moveit_config clr_moveit.launch.py include_mockups_in_description:=true use_sim_time:=true
 ```
 
+While position control is enabled by default, torque control can also be used with the UR10e in the MuJoCo simulation and on hardware. First, enable the effort controller, then send a command:
+
+```bash
+# Deactivate the default controller and activate the effort controller
+ros2 control switch_controllers --deactivate joint_trajectory_controller --activate effort_controller
+
+# Example: set the UR's shoulder_pan_joint torque to 1.0
+ros2 topic pub --once /effort_controller/commands std_msgs/msg/Float64MultiArray "{data: [1.0, 0.0, 0.0, 0.0, 0.0.0, 0.0]}"
+
+# Stop the previous command
+ros2 topic pub --once /effort_controller/commands std_msgs/msg/Float64MultiArray "{data: [0.0, 0.0, 0.0, 0.0, 0.0.0, 0.0]}"
+```
+
 ## Citation
 
 This project falls under the purview of the iMETRO project.
