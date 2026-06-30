@@ -90,7 +90,9 @@ class ChonkurControllerStopper(ControllerStopperBase):
             if retries > 0 and attempts > retries:
                 raise RuntimeError(f"Timed out waiting for the controller: {target_controller}")
 
-            self.node.get_logger().info(f"{bcolors.WARNING}Waiting for controller: {target_controller}...{bcolors.ENDC}")
+            self.node.get_logger().info(
+                f"{bcolors.WARNING}Waiting for controller: {target_controller}...{bcolors.ENDC}"
+            )
             rate.sleep()
 
     def timer_callback(self):
@@ -107,7 +109,9 @@ class ChonkurControllerStopper(ControllerStopperBase):
         # if we just transitioned to a running state, and the controllers weren't active,
         # start the controllers
         if self.robot_running and not self.controllers_active:
-            self.node.get_logger().info(f"{bcolors.WARNING}Transitioning to running, restarting controllers{bcolors.ENDC}")
+            self.node.get_logger().info(
+                f"{bcolors.WARNING}Transitioning to running, restarting controllers{bcolors.ENDC}"
+            )
             # stop controllers first to get rid of anything that may have happened recently
             self.stop_controllers()
             # start controllers

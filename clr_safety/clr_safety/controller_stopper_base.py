@@ -55,7 +55,7 @@ class ControllerStopperBase:
             node_name (str, optional): the name of the node that will be created if node is not provided.
             defaults to 'controller_stopper'
             controller_manager_name (str, optional): the name of the controller manager node (with namespace) to
-            use for service call prefixes. defaults to '/controller_manager' 
+            use for service call prefixes. defaults to '/controller_manager'
             servo_node_name (str, optional): the name of servo node (leave blank if there is none). defaults to ''
             node (Node, optional): an existing node to use. If not provided, a new node is created.
         """
