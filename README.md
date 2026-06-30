@@ -64,10 +64,10 @@ While position control is enabled by default, torque control can also be used wi
 ros2 control switch_controllers --deactivate joint_trajectory_controller --activate effort_controller
 
 # Example: set the UR's shoulder_pan_joint torque to 1.0
-ros2 topic pub --once /effort_controller/commands std_msgs/msg/Float64MultiArray "{data: [1.0, 0.0, 0.0, 0.0, 0.0.0, 0.0]}"
+ros2 topic pub --once /effort_controller/commands std_msgs/msg/Float64MultiArray "{data: [1.0, 0.0, 0.0, 0.0, 0.0, 0.0]}"
 
 # Stop the previous command
-ros2 topic pub --once /effort_controller/commands std_msgs/msg/Float64MultiArray "{data: [0.0, 0.0, 0.0, 0.0, 0.0.0, 0.0]}"
+ros2 topic pub --once /effort_controller/commands std_msgs/msg/Float64MultiArray "{data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}"
 ```
 
 ## Citation
