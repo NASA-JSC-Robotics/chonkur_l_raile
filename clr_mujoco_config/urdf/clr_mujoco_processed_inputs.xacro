@@ -45,7 +45,17 @@
       <modify_element type="body" name="${tf_prefix}wrist_3_link" gravcomp="1.0"/>
       <modify_element type="body" name="${tf_prefix}finger_1_link" gravcomp="1.0"/>
       <modify_element type="body" name="${tf_prefix}finger_2_link" gravcomp="1.0"/>
+
+      <!-- Add CLR default parameters to entire CLR kinematic tree -->
       <modify_element type="body" name="${tf_prefix}vention_rail_carriage" childclass="clr"/>
+
+      <!-- Apply default classes to CLR joints -->
+      <modify_element type="joint" name="${tf_prefix}shoulder_pan_joint" class="clr_size4"/>
+      <modify_element type="joint" name="${tf_prefix}shoulder_lift_joint" class="clr_size4"/>
+      <modify_element type="joint" name="${tf_prefix}elbow_joint" class="clr_size3_limited"/>
+      <modify_element type="joint" name="${tf_prefix}wrist_1_joint" class="clr_size2"/>
+      <modify_element type="joint" name="${tf_prefix}wrist_2_joint" class="clr_size2"/>
+      <modify_element type="joint" name="${tf_prefix}wrist_3_joint" class="clr_size2"/>
 
       <!-- Add frictionloss and armature to fingers to help with backdriving -->
       <modify_element type="joint" name="${tf_prefix}finger_1_joint" armature="0.5" frictionloss="5.0" />
