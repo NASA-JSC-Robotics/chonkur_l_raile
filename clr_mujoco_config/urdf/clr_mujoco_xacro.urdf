@@ -74,7 +74,7 @@
       <xacro:clr_mujoco_processed_inputs
         include_scene_objects="$(arg include_scene_objects)"
         tf_prefix="${tf_prefix}"
-        finger_xacro="${finger_xacro}"
+        finger_xacro="$(arg finger_xacro)"
       />
     </processed_inputs>
     <xacro:clr_mujoco_scene/>
