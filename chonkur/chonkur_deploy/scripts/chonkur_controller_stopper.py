@@ -75,7 +75,7 @@ class ChonkurControllerStopper(ControllerStopperBase):
         self.timer = self.node.create_timer(0.5, self.timer_callback, callback_group=self.timer_cb_group)
         self.node.get_logger().info(f"{bcolors.OKBLUE}Chonkur Controller Stopper is running!{bcolors.OKBLUE}")
 
-    def wait_for_controllers_done_loading(self, timeout_s=2.0):
+    def wait_for_controllers_done_loading(self, timeout_s=3.0):
         """
         Wait until a new controller has not been seen for the last <timeout_s> seconds. This is used as a proxy for
         understanding when the controller manager has loaded. Setting this value too low will mean that you might start
@@ -85,7 +85,7 @@ class ChonkurControllerStopper(ControllerStopperBase):
 
         Args:
             timeout_s (float, optional): Time in seconds since last controller was loaded to be considered done loading
-            controllers. Defaults to 2.0.
+            controllers. Defaults to 3.0.
         """
         check_controllers_rate = self.node.create_rate(2)  # check every 0.5 s
         seen_controllers = []  # keep track of the controllers we have seen so far on bringup
