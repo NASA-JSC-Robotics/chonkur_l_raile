@@ -64,8 +64,6 @@ class ChonkurControllerStopper(ControllerStopperBase):
     def initialize(self):
         super().initialize()
 
-        self.first_time = True
-
         # Wait for the target_controller to be available
         self.wait_for_controller(self.target_controller)
 
@@ -110,21 +108,16 @@ class ChonkurControllerStopper(ControllerStopperBase):
 
         # if we just transitioned to a running state, and the controllers weren't active,
         # start the controllers
-        if self.robot_running:
-            # if this was the first time, we don't need to do anything, just return
-            if self.first_time:
-                self.first_time = False
-                return
-            if not self.controllers_active:
-                self.node.get_logger().info(
-                    f"{bcolors.WARNING}Transitioning to running, restarting controllers{bcolors.ENDC}"
-                )
-                # stop controllers first to get rid of anything that may have happened recently
-                self.stop_controllers()
-                # start controllers
-                self.start_controllers()
+        if self.robot_running and not self.controllers_active:
+            self.node.get_logger().info(
+                f"{bcolors.WARNING}Transitioning to running, restarting controllers{bcolors.ENDC}"
+            )
+            # stop controllers first to get rid of anything that may have happened recently
+            self.stop_controllers()
+            # start controllers
+            self.start_controllers()
         # if robot is either paused or stopped, consistently stop controllers to cancel anything that may have started
-        elif not self.robot_running and not self.first_time:
+        elif not self.robot_running:
             self.node.get_logger().debug("Robot not running, stopping controllers")
             self.stop_controllers()
 
