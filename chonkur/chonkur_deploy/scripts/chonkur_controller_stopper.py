@@ -64,8 +64,8 @@ class ChonkurControllerStopper(ControllerStopperBase):
     def initialize(self):
         super().initialize()
 
-        # Wait for the target_controller to be available
-        self.wait_for_controller(self.target_controller)
+        # Wait until the controller manager has finished spawning all controllers
+        self.wait_for_controllers_done_loading()
 
         # Wait for the dashboard client to be available
         self.wait_for_service(self.get_program_state_srv)
@@ -75,25 +75,44 @@ class ChonkurControllerStopper(ControllerStopperBase):
         self.timer = self.node.create_timer(0.5, self.timer_callback, callback_group=self.timer_cb_group)
         self.node.get_logger().info(f"{bcolors.OKBLUE}Chonkur Controller Stopper is running!{bcolors.OKBLUE}")
 
-    def wait_for_controller(self, target_controller, retries=-1):
-        attempts = 0
-        rate = self.node.create_rate(1)
+    def wait_for_controllers_done_loading(self, timeout_s=2.0):
+        """
+        Wait until a new controller has not been seen for the last <timeout_s> seconds. This is used as a proxy for
+        understanding when the controller manager has loaded. Setting this value too low will mean that you might start
+        the controller stopper too early, and therefore accidentally disable any controllers that come up afterwards.
+        Setting this value too high will mean that the you have to wait a while after the controllers are done loading
+        before the controller stopper starts, therefore potentially causing unsafe situations if you
+
+        Args:
+            timeout_s (float, optional): Time in seconds since last controller was loaded to be considered done loading
+            controllers. Defaults to 2.0.
+        """
+        check_controllers_rate = self.node.create_rate(2)  # check every 0.5 s
+        seen_controllers = []  # keep track of the controllers we have seen so far on bringup
+        last_new_controller_time = None
+        timeout_duration = rclpy.duration.Duration(seconds=timeout_s)
+
         while rclpy.ok():
-            self.node.get_logger().info(f"Waiting for controller: {target_controller}...")
+            # get current controllers loaded, and see if there is anything new
             list_controllers_response = self.call_list_controllers()
-            for controller in list_controllers_response.controller:
-                if target_controller == controller.name:
-                    self.node.get_logger().info(f"{target_controller} loaded!")
+            current_controllers = [c.name for c in list_controllers_response.controller]
+            new_controllers_loaded = current_controllers != seen_controllers
+
+            # if there are new controllers, record the time
+            if new_controllers_loaded:
+                seen_controllers = current_controllers
+                last_new_controller_time = self.node.get_clock().now()
+
+            # if we have waited longer than <timeout_s>, stop blocking
+            if last_new_controller_time is not None:
+                elapsed = self.node.get_clock().now() - last_new_controller_time
+                if elapsed >= timeout_duration:
+                    self.node.get_logger().info(
+                        f"No new controllers for {elapsed.nanoseconds / 1e9:.1f}s. Controller manager done loading."
+                    )
                     return
 
-            attempts += 1
-            if retries > 0 and attempts > retries:
-                raise RuntimeError(f"Timed out waiting for the controller: {target_controller}")
-
-            self.node.get_logger().info(
-                f"{bcolors.WARNING}Waiting for controller: {target_controller}...{bcolors.ENDC}"
-            )
-            rate.sleep()
+            check_controllers_rate.sleep()
 
     def timer_callback(self):
         request = GetProgramState.Request()
