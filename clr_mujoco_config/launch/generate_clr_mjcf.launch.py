@@ -14,7 +14,6 @@ from launch.substitutions import (
 from launch_ros.substitutions import (
     FindPackageShare,
 )
-from launch.conditions import IfCondition, UnlessCondition
 
 
 def generate_launch_description():
@@ -97,7 +96,11 @@ def generate_launch_description():
             if os.path.exists(tmp.name):
                 os.remove(tmp.name)
 
-        args = ["--urdf", tmp.name, "--convert_stl_to_obj",]
+        args = [
+            "--urdf",
+            tmp.name,
+            "--convert_stl_to_obj",
+        ]
 
         if LaunchConfiguration("mujoco_launch").perform(context) == "true":
             args += mujoco_launch_arguments
@@ -105,7 +108,7 @@ def generate_launch_description():
             args += generate_arguments
         if LaunchConfiguration("use_pregenerated_assets_dir").perform(context) == "true":
             args += assets_dir
-        
+
         return [
             Node(
                 package="mujoco_ros2_control",
@@ -119,7 +122,4 @@ def generate_launch_description():
 
     generate_mjcf = OpaqueFunction(function=launch_mjcf_node)
 
-    return LaunchDescription(
-        declared_arguments
-        + [generate_mjcf]
-    )
+    return LaunchDescription(declared_arguments + [generate_mjcf])

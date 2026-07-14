@@ -17,9 +17,6 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-import os
-import tempfile
-
 from launch import LaunchDescription
 from chonkur_deploy.launch_helpers import include_launch_file
 from launch.actions import DeclareLaunchArgument
@@ -31,6 +28,7 @@ from launch.substitutions import (
 from launch_ros.substitutions import (
     FindPackageShare,
 )
+from launch.conditions import UnlessCondition
 
 
 def generate_launch_description():
@@ -73,7 +71,9 @@ def generate_launch_description():
         launch_file="generate_clr_mjcf.launch.py",
         launch_arguments={
             "mujoco_launch": "true",
+            "use_pregenerated_assets_dir": "true",
         }.items(),
+        condition=UnlessCondition(use_pregenerated_mjcf),
     )
 
     extra_xacro_args = [
