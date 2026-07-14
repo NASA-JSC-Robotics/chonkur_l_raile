@@ -65,10 +65,26 @@ def generate_launch_description():
             description="Optionally run headless, primarily for use in CI.",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "include_scene_objects",
+            default_value="true",
+            description="Whether to include scene objects.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "model_env",
+            default_value="true",
+            description="Whether to model the iMETRO environment.",
+        )
+    )
 
     use_pregenerated_mjcf = LaunchConfiguration("use_pregenerated_mjcf")
     sim_speed = LaunchConfiguration("sim_speed")
     headless = LaunchConfiguration("headless")
+    include_scene_objects = LaunchConfiguration("include_scene_objects")
+    model_env = LaunchConfiguration("model_env")
 
     clr_mujoco_package_name = "clr_mujoco_config"
     clr_mujoco_description_file = "clr_mujoco_xacro.urdf"
@@ -80,8 +96,10 @@ def generate_launch_description():
             PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "urdf", clr_mujoco_description_file]),
             # Grasp frames should not be converted to MJCF objects
             " add_grasp_push_frames:=false",
-            " model_env:=true",
-            " include_scene_objects:=true",
+            " model_env:=",
+            model_env,
+            " include_scene_objects:=",
+            include_scene_objects,
         ]
     )
 
