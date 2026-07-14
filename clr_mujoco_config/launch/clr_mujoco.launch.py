@@ -73,12 +73,12 @@ def generate_launch_description():
         )
     )
     declared_arguments.append(
-            DeclareLaunchArgument(
-                "model_env",
-                default_value="true",
-                description="Whether to model the iMETRO environment.",
-            )
+        DeclareLaunchArgument(
+            "model_env",
+            default_value="true",
+            description="Whether to model the iMETRO environment.",
         )
+    )
 
     use_pregenerated_mjcf = LaunchConfiguration("use_pregenerated_mjcf")
     sim_speed = LaunchConfiguration("sim_speed")
