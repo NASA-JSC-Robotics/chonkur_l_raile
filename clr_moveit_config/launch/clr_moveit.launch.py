@@ -71,9 +71,8 @@ def launch_setup(context, *args, **kwargs):
 
     launch_moveit = LaunchConfiguration("launch_moveit")
     launch_rviz = LaunchConfiguration("launch_rviz")
+    rviz_config_file = LaunchConfiguration("rviz_config_file")
     use_sim_time = {"use_sim_time": LaunchConfiguration("use_sim_time")}
-
-    moveit_config_package = "clr_moveit_config"
 
     # Pull robot description from the topic
     moveit_config = (
@@ -106,7 +105,6 @@ def launch_setup(context, *args, **kwargs):
     )
 
     # rviz with moveit configuration
-    rviz_config_file = PathJoinSubstitution([FindPackageShare(moveit_config_package), "rviz", "view_robot.rviz"])
     rviz_node = Node(
         package="rviz2",
         executable="rviz2",
@@ -157,6 +155,13 @@ def generate_launch_description():
             "launch_rviz",
             default_value="true",
             description="Launch rviz?",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "rviz_config_file",
+            default_value=PathJoinSubstitution([FindPackageShare("clr_moveit_config"), "rviz", "view_robot.rviz"]),
+            description="Provide an alternative RViz config file, if required.",
         )
     )
     declared_arguments.append(

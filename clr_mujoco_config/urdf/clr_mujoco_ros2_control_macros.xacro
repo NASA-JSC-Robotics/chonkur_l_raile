@@ -19,21 +19,6 @@
       <state_interface name="torque.z"/>
     </sensor>
 
-    <!-- Cameras -->
-    <!-- For cameras, the sensor name _must_ match the camera name in the MJCF -->
-    <sensor name="${tf_prefix}wrist_mounted_camera">
-      <param name="frame_name">${tf_prefix}wrist_mounted_camera_color_optical_frame</param>
-      <param name="info_topic">/wrist_mounted_camera/color/camera_info</param>
-      <param name="image_topic">/wrist_mounted_camera/color/image_raw</param>
-      <param name="depth_topic">/wrist_mounted_camera/aligned_depth_to_color/image_raw</param>
-    </sensor>
-    <sensor name="${tf_prefix}lift_camera">
-      <param name="frame_name">${tf_prefix}lift_camera_color_optical_frame</param>
-      <param name="info_topic">/lift_camera/color/camera_info</param>
-      <param name="image_topic">/lift_camera/color/image_raw</param>
-      <param name="depth_topic">/lift_camera/aligned_depth_to_color/image_raw</param>
-    </sensor>
-
   </xacro:macro>
 
   <xacro:macro name="clr_mujoco_ros2_control_joints" params="

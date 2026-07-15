@@ -38,38 +38,40 @@ class bcolors:
     UNDERLINE = "\033[4m"
 
 
-class ControllerStopperBase(Node):
-    """This class cancels the stopping and starting controllers based on some event (implemented by a derived class).
-
-    Args:
-        Node (Node): inherits the Node class
-    """
+class ControllerStopperBase:
+    """This class provides helpers for the stopping and starting of controllers based on some event."""
 
     def __init__(
-        self, node_name="controller_stopper", controller_manager_name="/controller_manager", servo_node_name=""
+        self,
+        node_name="controller_stopper",
+        controller_manager_name="/controller_manager",
+        servo_node_name="",
+        node=None,
     ):
-        """the constructor for the ControllerStopperBase Class, which creates can handle stopping and starting
+        """the constructor for the ControllerStopperBase Class, which can handle stopping and starting
         controllers.
 
         Args:
-            node_name (str, optional): the name of the node that will be created. Defaults to 'controller_stopper'
+            node_name (str, optional): the name of the node that will be created if node is not provided.
+            defaults to 'controller_stopper'
             controller_manager_name (str, optional): the name of the controller manager node (with namespace) to
-            use for service call prefixes. defaults to '/controller_manager' servo_node_name (str, optional): the
-            name of servo node (leave blank if there is none). defaults to ''
+            use for service call prefixes. defaults to '/controller_manager'
+            servo_node_name (str, optional): the name of servo node (leave blank if there is none). defaults to ''
+            node (Node, optional): an existing node to use. If not provided, a new node is created.
         """
-        # initialize parent node name as
-        super().__init__(node_name)
+        self.node = node if node is not None else Node(node_name)
 
         # use the same callback group for controller manager services because we don't want to be listing controllers
         # as we are switching them
-        self.cm_cb_group = MutuallyExclusiveCallbackGroup()
+        self.cm_cb_group1 = MutuallyExclusiveCallbackGroup()
+        self.cm_cb_group2 = MutuallyExclusiveCallbackGroup()
 
         # setup services for switch and list controllers
-        self.switch_controllers_srv = self.create_client(
-            SwitchController, controller_manager_name + "/switch_controller", callback_group=self.cm_cb_group
+        self.switch_controllers_srv = self.node.create_client(
+            SwitchController, controller_manager_name + "/switch_controller", callback_group=self.cm_cb_group1
         )
-        self.list_controllers_srv = self.create_client(
-            ListControllers, controller_manager_name + "/list_controllers", callback_group=self.cm_cb_group
+        self.list_controllers_srv = self.node.create_client(
+            ListControllers, controller_manager_name + "/list_controllers", callback_group=self.cm_cb_group2
         )
 
         # if the user doesn't provide the name of the servo node, assume we don't care
@@ -81,19 +83,19 @@ class ControllerStopperBase(Node):
         if self.manage_servo:
             # use a different callback group for servo pausing/unpausing so that can run in parallel
             self.servo_cb_group = MutuallyExclusiveCallbackGroup()
-            self.pause_servo_srv = self.create_client(
+            self.pause_servo_srv = self.node.create_client(
                 SetBool, self.servo_node_name + "/pause_servo", callback_group=self.servo_cb_group
             )
 
         # get parameter of list of strings for consistent_controllers (default to nothing)
-        self.declare_parameter(
+        self.node.declare_parameter(
             "consistent_controllers",
             [""],
             ParameterDescriptor(
                 type=ParameterType.PARAMETER_STRING_ARRAY, description="controllers that will always remain active"
             ),
         )
-        self.consistent_controllers = self.get_parameter("consistent_controllers").value
+        self.consistent_controllers = self.node.get_parameter("consistent_controllers").value
         if self.consistent_controllers == [""]:
             self.consistent_controllers = []
 
@@ -107,7 +109,7 @@ class ControllerStopperBase(Node):
         """Waits for the relevant states to be ready before starting."""
 
         # wait until all required services are available from controller_manager
-        self.get_logger().info(
+        self.node.get_logger().info(
             "Waiting for switch controller service to come up on controller_manager/switch_controller"
         )
         self.wait_for_service(self.switch_controllers_srv)
@@ -121,12 +123,12 @@ class ControllerStopperBase(Node):
         attempts = 0
         while rclpy.ok():
             if client.wait_for_service(timeout):
-                self.get_logger().info(f"{client.srv_name} found!")
+                self.node.get_logger().info(f"{client.srv_name} found!")
                 return
             attempts += 1
             if retries > 0 and attempts > retries:
                 raise RuntimeError(f"Timed out waiting for service to be available: {client.srv_name}")
-            self.get_logger().info(
+            self.node.get_logger().info(
                 f"{bcolors.WARNING}Waiting for service {client.srv_name} to be available...{bcolors.ENDC}"
             )
 
@@ -137,11 +139,11 @@ class ControllerStopperBase(Node):
         """
         future = client.call_async(request)
 
-        start_time = self.get_clock().now()
+        start_time = self.node.get_clock().now()
         while not future.done():
-            elapsed_time = (self.get_clock().now() - start_time).nanoseconds / 1e9
+            elapsed_time = (self.node.get_clock().now() - start_time).nanoseconds / 1e9
             if elapsed_time > timeout:
-                self.get_logger().warn(f"Service call to {client.srv_name} timed out after {timeout}s")
+                self.node.get_logger().warn(f"Service call to {client.srv_name} timed out after {timeout}s")
                 future.cancel()
                 return None
 
@@ -152,12 +154,12 @@ class ControllerStopperBase(Node):
         changes from one to another.
         """
         # list available nodes and look for the servo node in it
-        node_names_and_namespaces = self.get_node_names_and_namespaces()
+        node_names_and_namespaces = self.node.get_node_names_and_namespaces()
         for node, _ in node_names_and_namespaces:
             if node == self.servo_node_name:
                 # if we found the node, but we didn't have it previously, let the user know we are now tracking it
                 if not self.servo_node_found:
-                    self.get_logger().info(f'Servo node "{self.servo_node_name}" is now being handled.')
+                    self.node.get_logger().info(f'Servo node "{self.servo_node_name}" is now being handled.')
                 self.servo_node_found = True
                 # exit early
                 return True
@@ -165,7 +167,7 @@ class ControllerStopperBase(Node):
         # if last cycle we found the node, but now we can't find it, let the user know that we are no longer tracking
         name = self.servo_node_name  # shorter name to not break pre-commit
         if self.servo_node_found:
-            self.get_logger().info(
+            self.node.get_logger().info(
                 f'{bcolors.WARNING}Was asked to monitor the servo node "{name}" but it was not found{bcolors.ENDC}'
             )
         self.servo_node_found = False
@@ -199,7 +201,7 @@ class ControllerStopperBase(Node):
         pause_servo_response = self.call_async(self.pause_servo_srv, pause_servo_request)
 
         if pause_servo_response is None or not pause_servo_response.success:
-            self.get_logger().error("Could not pause servo node")
+            self.node.get_logger().error("Could not pause servo node")
 
     def stop_controllers(self):
         """Deactivates all of the controllers that are not listed as consistent.
@@ -227,7 +229,7 @@ class ControllerStopperBase(Node):
         # if there are any to stop, call switch_controllers to stop them
         if controllers_to_stop:
             if not self.call_switch_controllers(controllers_to_stop=controllers_to_stop):
-                self.get_logger().error("Could not deactivate requested controllers")
+                self.node.get_logger().error("Could not deactivate requested controllers")
             else:
                 self.controllers_active = False
 
@@ -246,7 +248,7 @@ class ControllerStopperBase(Node):
         # only run this if we have logged that some controllers have been stopped
         if self.stopped_controllers:
             if not self.call_switch_controllers(controllers_to_start=self.stopped_controllers):
-                self.get_logger().error("Could not activate requested controllers")
+                self.node.get_logger().error("Could not activate requested controllers")
             else:
                 self.controllers_active = True
 

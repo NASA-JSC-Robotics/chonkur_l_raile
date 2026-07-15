@@ -68,12 +68,14 @@
 
   <mujoco_inputs>
     <raw_inputs>
-      <xacro:clr_mujoco_raw_inputs tf_prefix="${tf_prefix}"/>
+      <xacro:clr_mujoco_raw_inputs tf_prefix="${tf_prefix}" model_env="${model_env}"/>
     </raw_inputs>
     <processed_inputs>
       <xacro:clr_mujoco_processed_inputs
         include_scene_objects="$(arg include_scene_objects)"
         tf_prefix="${tf_prefix}"
+        finger_xacro="$(arg finger_xacro)"
+        model_env="${model_env}"
       />
     </processed_inputs>
     <xacro:clr_mujoco_scene/>
