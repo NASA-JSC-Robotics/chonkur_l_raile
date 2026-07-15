@@ -70,7 +70,7 @@ def generate_launch_description():
         package_name="clr_mujoco_config",
         launch_file="generate_clr_mjcf.launch.py",
         launch_arguments={
-            "mujoco_launch": "true",
+            "save_only": "false",
             "use_pregenerated_assets_dir": "true",
         }.items(),
         condition=UnlessCondition(use_pregenerated_mjcf),

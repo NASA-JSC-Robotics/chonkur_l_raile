@@ -29,9 +29,9 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "mujoco_launch",
-            default_value="false",
-            description="True if this launch file is included in clr_mujoco.launch.py.",
+            "save_only",
+            default_value="true",
+            description="Whether to save the mjcf (true) or to publish it to a topic (false).",
         )
     )
     declared_arguments.append(
@@ -102,10 +102,10 @@ def generate_launch_description():
             "--convert_stl_to_obj",
         ]
 
-        if LaunchConfiguration("mujoco_launch").perform(context) == "true":
-            args += mujoco_launch_arguments
-        else:
+        if LaunchConfiguration("save_only").perform(context) == "true":
             args += generate_arguments
+        else:
+            args += mujoco_launch_arguments
         if LaunchConfiguration("use_pregenerated_assets_dir").perform(context) == "true":
             args += assets_dir
 
