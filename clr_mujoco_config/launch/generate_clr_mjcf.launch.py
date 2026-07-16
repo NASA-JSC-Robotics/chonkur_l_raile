@@ -45,7 +45,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "model_env",
             default_value="true",
-            description="Whether to model the iMETRO environment.",
+            description="Whether to model the iMETRO environment in the MJCF.",
         )
     )
 

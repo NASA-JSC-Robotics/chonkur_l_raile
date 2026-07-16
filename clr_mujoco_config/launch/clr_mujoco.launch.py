@@ -63,6 +63,7 @@ def generate_launch_description():
     use_pregenerated_mjcf = LaunchConfiguration("use_pregenerated_mjcf")
     sim_speed = LaunchConfiguration("sim_speed")
     headless = LaunchConfiguration("headless")
+    model_env = LaunchConfiguration("model_env")
 
     clr_mujoco_package_name = "clr_mujoco_config"
 
@@ -83,6 +84,8 @@ def generate_launch_description():
         sim_speed,
         " headless:=",
         headless,
+        " model_env:=",
+        model_env,
     ]
 
     extra_controller_params_file = PathJoinSubstitution(
@@ -95,7 +98,6 @@ def generate_launch_description():
         launch_arguments={
             "robot_description_package": "clr_mujoco_config",
             "robot_description_file": "clr_mujoco_xacro.urdf",
-            "model_env": "true",
             "use_fake_hardware": "false",
             "use_sim_time": "true",
             "is_sim": "true",
