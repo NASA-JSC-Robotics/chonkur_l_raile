@@ -157,7 +157,7 @@
 
   friction_model_controller:
     ros__parameters:
-      tf_prefix: $(var tf_prefix)
+      tf_prefix: "$(var tf_prefix)"
 
   # admittance version of JTC
   admittance_joint_trajectory_controller:
