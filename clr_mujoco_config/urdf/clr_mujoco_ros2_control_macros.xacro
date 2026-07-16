@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <robot name="clr_mujoco_ros2_control_macros" xmlns:xacro="http://ros.org/wiki/xacro">
 
+  <xacro:include filename="$(find ur_description)/urdf/inc/ur_joint_control.xacro"/>
+
   <xacro:macro name="clr_mujoco_ros2_control_sensors" params="
     tf_prefix:=''
   ">
@@ -15,21 +17,6 @@
       <state_interface name="torque.x"/>
       <state_interface name="torque.y"/>
       <state_interface name="torque.z"/>
-    </sensor>
-
-    <!-- Cameras -->
-    <!-- For cameras, the sensor name _must_ match the camera name in the MJCF -->
-    <sensor name="${tf_prefix}wrist_mounted_camera">
-      <param name="frame_name">${tf_prefix}wrist_mounted_camera_color_optical_frame</param>
-      <param name="info_topic">/wrist_mounted_camera/color/camera_info</param>
-      <param name="image_topic">/wrist_mounted_camera/color/image_raw</param>
-      <param name="depth_topic">/wrist_mounted_camera/aligned_depth_to_color/image_raw</param>
-    </sensor>
-    <sensor name="${tf_prefix}lift_camera">
-      <param name="frame_name">${tf_prefix}lift_camera_color_optical_frame</param>
-      <param name="info_topic">/lift_camera/color/camera_info</param>
-      <param name="image_topic">/lift_camera/color/image_raw</param>
-      <param name="depth_topic">/lift_camera/aligned_depth_to_color/image_raw</param>
     </sensor>
 
   </xacro:macro>
@@ -55,54 +42,12 @@
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
     </joint>
-    <joint name="${tf_prefix}shoulder_pan_joint">
-      <command_interface name="position"/>
-      <state_interface name="position">
-        <param name="initial_value">${3.1927}</param>
-      </state_interface>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="${tf_prefix}shoulder_lift_joint">
-      <command_interface name="position"/>
-      <state_interface name="position">
-        <param name="initial_value">${-2.3913}</param>
-      </state_interface>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="${tf_prefix}elbow_joint">
-      <command_interface name="position"/>
-      <state_interface name="position">
-        <param name="initial_value">${-1.7760}</param>
-      </state_interface>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="${tf_prefix}wrist_1_joint">
-      <command_interface name="position"/>
-      <state_interface name="position">
-        <param name="initial_value">${-0.4700}</param>
-      </state_interface>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="${tf_prefix}wrist_2_joint">
-      <command_interface name="position"/>
-      <state_interface name="position">
-        <param name="initial_value">${-1.6177}</param>
-      </state_interface>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
-    <joint name="${tf_prefix}wrist_3_joint">
-      <command_interface name="position"/>
-      <state_interface name="position">
-        <param name="initial_value">${-1.6177}</param>
-      </state_interface>
-      <state_interface name="velocity"/>
-      <state_interface name="effort"/>
-    </joint>
+
+    <!-- UR joints -->
+    <xacro:ur_joint_control_description
+        tf_prefix="${tf_prefix}"
+        initial_positions="${dict(shoulder_pan_joint=3.1927,shoulder_lift_joint=-2.3913,elbow_joint=-1.7760,wrist_1_joint=-0.4700,wrist_2_joint=-1.6177,wrist_3_joint=-1.6177)}"
+      />
 
     <!-- Robotiq gripper -->
     <joint name="${tf_prefix}finger_1_joint">

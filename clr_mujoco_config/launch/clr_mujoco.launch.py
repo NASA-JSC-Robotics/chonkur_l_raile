@@ -17,19 +17,13 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-import os
-import tempfile
-
 from launch import LaunchDescription
 from chonkur_deploy.launch_helpers import include_launch_file
-from launch.actions import DeclareLaunchArgument, OpaqueFunction, RegisterEventHandler
+from launch.actions import DeclareLaunchArgument
 from launch_ros.actions import Node
-from launch.event_handlers import OnShutdown
 from launch.substitutions import (
     PathJoinSubstitution,
     LaunchConfiguration,
-    Command,
-    FindExecutable,
 )
 from launch_ros.substitutions import (
     FindPackageShare,
@@ -71,53 +65,16 @@ def generate_launch_description():
     headless = LaunchConfiguration("headless")
 
     clr_mujoco_package_name = "clr_mujoco_config"
-    clr_mujoco_description_file = "clr_mujoco_xacro.urdf"
 
-    mjcf_robot_description_content = Command(
-        [
-            PathJoinSubstitution([FindExecutable(name="xacro")]),
-            " ",
-            PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "urdf", clr_mujoco_description_file]),
-            # Grasp frames should not be converted to MJCF objects
-            " add_grasp_push_frames:=false",
-            " model_env:=true",
-            " include_scene_objects:=true",
-        ]
+    generate_mjcf = include_launch_file(
+        package_name="clr_mujoco_config",
+        launch_file="generate_clr_mjcf.launch.py",
+        launch_arguments={
+            "save_only": "false",
+            "use_pregenerated_assets_dir": "true",
+        }.items(),
+        condition=UnlessCondition(use_pregenerated_mjcf),
     )
-
-    # Using an inline opaque function to write the URDF for mujoco to a tempfile...
-    # This prevents it from being dumped into the console on conversion errors.
-    def launch_mjcf_node(context):
-        tmp = tempfile.NamedTemporaryFile(mode="w", suffix=".urdf", delete=False)
-        tmp.write(mjcf_robot_description_content.perform(context))
-        tmp.close()
-
-        # Ensure the file gets deleted
-        def cleanup(event, context):
-            if os.path.exists(tmp.name):
-                os.remove(tmp.name)
-
-        return [
-            Node(
-                package="mujoco_ros2_control",
-                executable="make_mjcf_from_robot_description.py",
-                output="both",
-                emulate_tty=True,
-                arguments=[
-                    "--publish_topic",
-                    "/mujoco_robot_description",
-                    "--urdf",
-                    tmp.name,
-                    "--convert_stl_to_obj",
-                    "--asset_dir",
-                    PathJoinSubstitution([FindPackageShare(clr_mujoco_package_name), "description", "assets"]),
-                ],
-                condition=UnlessCondition(use_pregenerated_mjcf),
-            ),
-            RegisterEventHandler(OnShutdown(on_shutdown=cleanup)),
-        ]
-
-    generate_mjcf = OpaqueFunction(function=launch_mjcf_node)
 
     extra_xacro_args = [
         " use_pregenerated_mjcf:=",
@@ -127,6 +84,10 @@ def generate_launch_description():
         " headless:=",
         headless,
     ]
+
+    extra_controller_params_file = PathJoinSubstitution(
+        [FindPackageShare(clr_mujoco_package_name), "config", "mujoco_plugins.yaml"]
+    )
 
     clr_launch = include_launch_file(
         package_name="clr_deploy",
@@ -140,6 +101,7 @@ def generate_launch_description():
             "is_sim": "true",
             "control_node_package": "mujoco_ros2_control",
             "extra_xacro_args": extra_xacro_args,
+            "extra_controller_params_file": extra_controller_params_file,
         }.items(),
     )
 

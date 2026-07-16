@@ -68,12 +68,14 @@
 
   <mujoco_inputs>
     <raw_inputs>
-      <xacro:clr_mujoco_raw_inputs tf_prefix="${tf_prefix}"/>
+      <xacro:clr_mujoco_raw_inputs tf_prefix="${tf_prefix}" model_env="${model_env}"/>
     </raw_inputs>
     <processed_inputs>
       <xacro:clr_mujoco_processed_inputs
         include_scene_objects="$(arg include_scene_objects)"
         tf_prefix="${tf_prefix}"
+        finger_xacro="$(arg finger_xacro)"
+        model_env="${model_env}"
       />
     </processed_inputs>
     <xacro:clr_mujoco_scene/>
@@ -86,6 +88,8 @@
       <xacro:if value="$(arg use_pregenerated_mjcf)">
         <param name="mujoco_model">$(find clr_mujoco_config)/description/scene.xml</param>
       </xacro:if>
+
+      <param name="pids_config_file">$(find clr_mujoco_config)/config/mujoco_pid.yaml</param>
 
       <!-- Optionally run headless -->
       <param name="headless">$(arg headless)</param>
