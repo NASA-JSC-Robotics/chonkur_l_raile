@@ -73,6 +73,14 @@ def generate_launch_description():
     nodes.append(
         spawn_controller("faked_forces_controller", inactive=True, namespace=namespace, condition=IfCondition(is_sim))
     )
+    nodes.append(
+        spawn_controller(
+            "crisp_broadcasters_spawner", inactive=True, namespace=namespace, condition=IfCondition(is_sim)
+        )
+    )
+    nodes.append(
+        spawn_controller("crisp_controllers_spawner", inactive=True, namespace=namespace, condition=IfCondition(is_sim))
+    )
 
     # We always load the admittance controllers in an inactive state
     admittance_controller_spawner = spawn_controller(
