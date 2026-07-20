@@ -75,27 +75,13 @@ def generate_launch_description():
     )
 
     # Crisp broadcasters spawner
-    nodes.append(
-        spawn_controller(
-            "twist_broadcaster", inactive=True, namespace=namespace, condition=IfCondition(is_sim)
-        )
-    )
-    nodes.append(
-        spawn_controller(
-            "pose_broadcaster", inactive=True, namespace=namespace, condition=IfCondition(is_sim)
-        )
-    )
+    nodes.append(spawn_controller("twist_broadcaster", inactive=True, namespace=namespace))
+    nodes.append(spawn_controller("pose_broadcaster", inactive=True, namespace=namespace))
 
     # Crisp controllers spawner
-    nodes.append(
-        spawn_controller("gravity_compensation", inactive=True, namespace=namespace, condition=IfCondition(is_sim))
-    )
-    nodes.append(
-        spawn_controller("cartesian_impedance_controller", inactive=True, namespace=namespace, condition=IfCondition(is_sim))
-    )
-    nodes.append(
-        spawn_controller("joint_impedance_controller", inactive=True, namespace=namespace, condition=IfCondition(is_sim))
-    )
+    nodes.append(spawn_controller("gravity_compensation", inactive=True, namespace=namespace))
+    nodes.append(spawn_controller("cartesian_impedance_controller", inactive=True, namespace=namespace))
+    nodes.append(spawn_controller("joint_impedance_controller", inactive=True, namespace=namespace))
 
     # We always load the admittance controllers in an inactive state
     admittance_controller_spawner = spawn_controller(
