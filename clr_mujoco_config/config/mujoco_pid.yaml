@@ -43,9 +43,9 @@
           i_clamp_max: 1000.0
           i_clamp_min: -1000.0
         wrist_3_joint:
-          p: 1000.0
+          p: 100.0
           i: 0.0
-          d: 100.0
+          d: 0.0
           u_clamp_max: 56.0
           u_clamp_min: -56.0
           i_clamp_max: 1000.0
