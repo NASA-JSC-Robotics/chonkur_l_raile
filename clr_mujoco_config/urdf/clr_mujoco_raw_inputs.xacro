@@ -48,7 +48,7 @@
           <position class="clr_size2" name="${tf_prefix}wrist_1_joint" joint="${tf_prefix}wrist_1_joint"/>
           <position class="clr_size2" name="${tf_prefix}wrist_2_joint" joint="${tf_prefix}wrist_2_joint"/>
           <position class="clr_size2" name="${tf_prefix}wrist_3_joint" joint="${tf_prefix}wrist_3_joint"/>
-          <position tendon="${tf_prefix}split" name="${tf_prefix}finger_1_joint" kp="100000" dampratio="3.0" ctrlrange="0.0 0.025" forcerange="-185 185"/>
+          <position tendon="${tf_prefix}split" name="${tf_prefix}finger_1_joint" kp="10000" dampratio="3.0" ctrlrange="0.0 0.025" forcerange="-185 185"/>
       </actuator>
 
       <!--
