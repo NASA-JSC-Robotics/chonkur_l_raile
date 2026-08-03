@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <robot name="clr_mujoco_ros2_control_macros" xmlns:xacro="http://ros.org/wiki/xacro">
 
+  <xacro:include filename="$(find ur_description)/urdf/inc/ur_joint_control.xacro"/>
+
   <xacro:macro name="clr_mujoco_ros2_control_sensors" params="
     tf_prefix:=''
   ">
