@@ -65,7 +65,9 @@ def generate_launch_description():
     nodes.append(spawn_controller("forward_position_controller", inactive=True, namespace=namespace))
     nodes.append(spawn_controller("freedrive_mode_controller", inactive=True, namespace=namespace))
     nodes.append(
-        spawn_controller("friction_model_controller", inactive=True, namespace=namespace, condition=IfCondition(is_sim))
+        spawn_controller(
+            "friction_model_controller", inactive=True, namespace=namespace, condition=UnlessCondition(is_sim)
+        )
     )
     nodes.append(
         spawn_controller("forward_effort_controller", inactive=True, namespace=namespace, condition=IfCondition(is_sim))
