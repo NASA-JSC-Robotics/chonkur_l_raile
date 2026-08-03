@@ -43,14 +43,6 @@
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
     </joint>
-<<<<<<< HEAD
-
-    <!-- UR joints -->
-    <xacro:ur_joint_control_description
-        tf_prefix="${tf_prefix}"
-        initial_positions="${dict(shoulder_pan_joint=3.1927,shoulder_lift_joint=-2.3913,elbow_joint=-1.7760,wrist_1_joint=-0.4700,wrist_2_joint=-1.6177,wrist_3_joint=-1.6177)}"
-      />
-=======
     <joint name="${tf_prefix}shoulder_pan_joint">
       <command_interface name="position"/>
       <state_interface name="position">
@@ -99,7 +91,6 @@
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
     </joint>
->>>>>>> jazzy-devel
 
     <!-- Robotiq gripper -->
     <joint name="${tf_prefix}finger_1_joint">
