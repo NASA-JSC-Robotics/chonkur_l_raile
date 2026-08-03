@@ -23,12 +23,13 @@
 
   <xacro:macro name="clr_mujoco_ros2_control_joints" params="
     tf_prefix:=''
+    initial_positions:=${dict()}
   ">
 
     <joint name="${tf_prefix}vention_rail_base_to_carriage">
       <command_interface name="position"/>
       <state_interface name="position">
-        <param name="initial_value">0.0</param>
+        <param name="initial_value">${initial_positions.get('vention_rail_base_to_carriage', 0.0)}</param>
       </state_interface>
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
@@ -36,24 +37,75 @@
     <joint name="${tf_prefix}ewellix_lift_lower_to_higher">
       <command_interface name="position"/>
       <state_interface name="position">
-        <!-- There's an issue where this can drop below 0 due to gravity so starting it a little higher for now... -->
-        <param name="initial_value">0.01</param>
+        <!-- There's an issue where this can drop below 0 due to gravity so the default values starts it a little higher for now... -->
+        <param name="initial_value">${initial_positions.get('ewellix_lift_lower_to_higher', 0.01)}</param>
       </state_interface>
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
     </joint>
+<<<<<<< HEAD
 
     <!-- UR joints -->
     <xacro:ur_joint_control_description
         tf_prefix="${tf_prefix}"
         initial_positions="${dict(shoulder_pan_joint=3.1927,shoulder_lift_joint=-2.3913,elbow_joint=-1.7760,wrist_1_joint=-0.4700,wrist_2_joint=-1.6177,wrist_3_joint=-1.6177)}"
       />
+=======
+    <joint name="${tf_prefix}shoulder_pan_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">${initial_positions.get('shoulder_pan_joint', 3.1927)}</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="${tf_prefix}shoulder_lift_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">${initial_positions.get('shoulder_lift_joint', -2.3913)}</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="${tf_prefix}elbow_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">${initial_positions.get('elbow_joint', -1.7760)}</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="${tf_prefix}wrist_1_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">${initial_positions.get('wrist_1_joint', -0.4700)}</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="${tf_prefix}wrist_2_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">${initial_positions.get('wrist_2_joint', -1.6177)}</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="${tf_prefix}wrist_3_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">${initial_positions.get('wrist_3_joint', -1.6177)}</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+>>>>>>> jazzy-devel
 
     <!-- Robotiq gripper -->
     <joint name="${tf_prefix}finger_1_joint">
       <command_interface name="position"/>
       <state_interface name="position">
-        <param name="initial_value">0.025</param>
+        <param name="initial_value">${initial_positions.get('finger_1_joint', 0.025)}</param>
       </state_interface>
       <state_interface name="velocity"/>
       <state_interface name="effort"/>
