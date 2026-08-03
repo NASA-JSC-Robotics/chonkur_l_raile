@@ -15,22 +15,22 @@
             <position ctrlrange="-6.2831 6.2831"/>
             <general ctrlrange="-6.2831 6.2831" />
             <default class="clr_size4">
-            <joint damping="10"/>
-            <general ctrlrange="-330 330" forcerange="-330 330"/>
+              <joint damping="10"/>
+              <general ctrlrange="-330 330" forcerange="-330 330"/>
             </default>
             <default class="clr_size3">
-            <joint damping="5"/>
-            <general ctrlrange="-150 150" forcerange="-150 150"/>
-            <default class="clr_size3_limited">
+              <joint damping="5"/>
+              <general ctrlrange="-150 150" forcerange="-150 150"/>
+              <default class="clr_size3_limited">
                 <joint range="-3.1415 3.1415"/>
-            </default>
+              </default>
             </default>
             <default class="clr_size2">
-            <joint damping="2"/>
-            <general ctrlrange="-56 56" forcerange="-56 56"/>
+              <joint damping="2"/>
+              <general ctrlrange="-54 54" forcerange="-54 54"/>
             </default>
             <default class="${defaults_prefix}visual">
-            <geom group="2" type="mesh" contype="0" conaffinity="0"/>
+              <geom group="2" type="mesh" contype="0" conaffinity="0"/>
             </default>
             <default class="${defaults_prefix}collision">
             <geom group="3" type="mesh"/>
