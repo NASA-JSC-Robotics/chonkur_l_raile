@@ -50,3 +50,14 @@
           u_clamp_min: -56.0
           i_clamp_max: 1000.0
           i_clamp_min: -1000.0
+
+# Methodology for tuning these gains:
+# - Using plotjuggler,
+#   - plot velocities for each of the joints
+#   - plot references against actual positions for each of the joints
+# - command trajectories in free space that use all of the joints
+#   - if velocity is incredibly noisy, lower d gain
+#   - if motion is very oscillatory, increase d gain, or decrease p gain
+#   - if tracking lags behind reference, increase p gain, or decrease d gain
+# - test against a full demo that includes object interaction to make sure it is 
+#   aggressive enough to maintain position in these scenarios.
