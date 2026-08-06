@@ -133,5 +133,20 @@ joint_limits:
     # Increased to support rounding errors in planning.
     max_position: 0.029
     max_velocity: 0.15
-    min_position: 0.0
+    # Also pad on the negative end due to MuJoCo's soft contact model.
+    min_position: -0.001
+    max_acceleration: 1.0
+  finger_2_joint:
+    # acceleration limits are not publicly available
+    has_acceleration_limits: true
+    has_effort_limits: true
+    has_position_limits: true
+    has_velocity_limits: true
+    max_effort: 130.0
+    # This is greater than the limits in the URDF but within hardware limits.
+    # Increased to support rounding errors in planning.
+    max_position: 0.029
+    max_velocity: 0.15
+     # Also pad on the negative end due to MuJoCo's soft contact model.
+    min_position: -0.001
     max_acceleration: 1.0

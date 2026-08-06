@@ -11,27 +11,26 @@
       <default>
         <default class="clr">
             <material specular="0.5" shininess="0.25"/>
-            <joint axis="0 1 0" range="-6.28319 6.28319" armature="0.1"/>
+            <joint axis="0 1 0" range="-6.28319 6.28319" armature="0.1" actuatorgravcomp="true"/>
             <position ctrlrange="-6.2831 6.2831"/>
-            <general biastype="affine" ctrlrange="-6.2831 6.2831" />
+            <general ctrlrange="-6.2831 6.2831" />
             <default class="clr_size4">
-            <joint damping="10"/>
-            <general forcerange="-330 330" gainprm="100000" biasprm="0 -100000 -10000" />
+              <joint damping="10"/>
+              <general ctrlrange="-330 330" forcerange="-330 330"/>
             </default>
             <default class="clr_size3">
-            <joint damping="5"/>
-            <general forcerange="-150 150" gainprm="40000" biasprm="0 -40000 -4000" />
-            <default class="clr_size3_limited">
+              <joint damping="5"/>
+              <general ctrlrange="-150 150" forcerange="-150 150"/>
+              <default class="clr_size3_limited">
                 <joint range="-3.1415 3.1415"/>
-                <general ctrlrange="-3.1415 3.1415" />
-            </default>
+              </default>
             </default>
             <default class="clr_size2">
-            <joint damping="2"/>
-            <general forcerange="-56 56" gainprm="10000" biasprm="0 -10000 -1000" />
+              <joint damping="2"/>
+              <general ctrlrange="-54 54" forcerange="-54 54"/>
             </default>
             <default class="${defaults_prefix}visual">
-            <geom group="2" type="mesh" contype="0" conaffinity="0"/>
+              <geom group="2" type="mesh" contype="0" conaffinity="0"/>
             </default>
             <default class="${defaults_prefix}collision">
             <geom group="3" type="mesh"/>
@@ -42,13 +41,13 @@
       <actuator>
           <position joint="${tf_prefix}vention_rail_base_to_carriage" name="${tf_prefix}vention_rail_base_to_carriage" kp="25000" dampratio="1.0" ctrlrange="0.0 2.0" />
           <position joint="${tf_prefix}ewellix_lift_lower_to_higher" name="${tf_prefix}ewellix_lift_lower_to_higher" kp="75000" dampratio="1.0" ctrlrange="0.0 0.7" />
-          <position class="clr_size4" name="${tf_prefix}shoulder_pan_joint" joint="${tf_prefix}shoulder_pan_joint"/>
-          <position class="clr_size4" name="${tf_prefix}shoulder_lift_joint" joint="${tf_prefix}shoulder_lift_joint"/>
-          <position class="clr_size3_limited" name="${tf_prefix}elbow_joint" joint="${tf_prefix}elbow_joint"/>
-          <position class="clr_size2" name="${tf_prefix}wrist_1_joint" joint="${tf_prefix}wrist_1_joint"/>
-          <position class="clr_size2" name="${tf_prefix}wrist_2_joint" joint="${tf_prefix}wrist_2_joint"/>
-          <position class="clr_size2" name="${tf_prefix}wrist_3_joint" joint="${tf_prefix}wrist_3_joint"/>
-          <position tendon="${tf_prefix}split" name="${tf_prefix}finger_1_joint" kp="10000" dampratio="3.0" ctrlrange="0.0 0.025" forcerange="-100 100"/>
+          <motor class="clr_size4" name="${tf_prefix}shoulder_pan_joint" joint="${tf_prefix}shoulder_pan_joint"/>
+          <motor class="clr_size4" name="${tf_prefix}shoulder_lift_joint" joint="${tf_prefix}shoulder_lift_joint"/>
+          <motor class="clr_size3_limited" name="${tf_prefix}elbow_joint" joint="${tf_prefix}elbow_joint"/>
+          <motor class="clr_size2" name="${tf_prefix}wrist_1_joint" joint="${tf_prefix}wrist_1_joint"/>
+          <motor class="clr_size2" name="${tf_prefix}wrist_2_joint" joint="${tf_prefix}wrist_2_joint"/>
+          <motor class="clr_size2" name="${tf_prefix}wrist_3_joint" joint="${tf_prefix}wrist_3_joint"/>
+          <position tendon="${tf_prefix}split" name="${tf_prefix}finger_1_joint" kp="100000" dampratio="10.0" ctrlrange="0.0 0.025" forcerange="-185 185"/>
       </actuator>
 
       <!--
