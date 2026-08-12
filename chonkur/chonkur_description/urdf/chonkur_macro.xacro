@@ -45,11 +45,13 @@
     <xacro:if value="${generate_ros2_control_tag}">
       <xacro:include filename="$(find ur_robot_driver)/urdf/ur.ros2_control.xacro" />
       <xacro:include filename="$(find ur_description)/urdf/inc/ur_transmissions.xacro" />
+      <!-- TODO: Add ur_type when the next version of the UR drivers is released -->
+      <!-- https://github.com/UniversalRobots/Universal_Robots_ROS2_Driver/pull/1771 -->
+      <!-- ur_type="ur10e" -->
       <xacro:ur_ros2_control
         name="${ros2_control_name}"
         tf_prefix="${tf_prefix}"
         kinematics_parameters_file="$(find chonkur_description)/config/calibrated_kinematics.yaml"
-        ur_type="ur10e"
         transmission_hw_interface="hardware_interface/PositionJointInterface"
         use_mock_hardware="$(arg use_fake_hardware)"
         mock_sensor_commands="$(arg use_fake_hardware)"

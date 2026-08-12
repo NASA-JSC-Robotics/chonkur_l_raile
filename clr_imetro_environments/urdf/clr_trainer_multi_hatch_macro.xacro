@@ -14,6 +14,7 @@
     hatch_4040:=false
     express_rack:=true
     hatch_4060:=true
+    hatch_4060_latch:=false
     second_trainer:=false
     add_localization_joints:=false
   ">
@@ -110,11 +111,10 @@
       <xacro:property name="external_handle_3" default="true"/>
       <xacro:property name="internal_handle_1" default="false"/>
       <xacro:property name="internal_handle_2" default="true"/>
-      <xacro:property name="latch" default="true"/>
       <xacro:include filename="$(find hatch_4060)/urdf/hatch_4060.xacro"/>
       <xacro:hatch_4060 prefix="lorge/" parent="lorge/hatch_frame"
         external_handle_1="${external_handle_1}" external_handle_2="${external_handle_2}" external_handle_3="${external_handle_3}"
-        internal_handle_1="${internal_handle_1}" internal_handle_2="${internal_handle_2}" latch="${latch}">
+        internal_handle_1="${internal_handle_1}" internal_handle_2="${internal_handle_2}" latch="${hatch_4060_latch}">
         <!-- <origin xyz="${0.678 + 0.012} 0.057 ${0.716 - 0.013}" rpy="0 0 0"/> -->
         <origin xyz="0.678 0.057 0.716" rpy="0 0 0"/>
       </xacro:hatch_4060>
