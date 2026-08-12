@@ -132,6 +132,16 @@
         <joint name="${tf_prefix}wrist_2_joint" value="-1.6177" />
         <joint name="${tf_prefix}wrist_3_joint" value="-1.6177" />
       </group_state>
+      <group_state name="sys_id_4" group="clr">
+        <joint name="${tf_prefix}ewellix_lift_lower_to_higher" value="0.01" />
+        <joint name="${tf_prefix}vention_rail_base_to_carriage" value="0.743"/>
+        <joint name="${tf_prefix}elbow_joint" value="-2.51327" />
+        <joint name="${tf_prefix}shoulder_lift_joint" value="-1.813" />
+        <joint name="${tf_prefix}shoulder_pan_joint" value="4.840" />
+        <joint name="${tf_prefix}wrist_1_joint" value="-0.4700" />
+        <joint name="${tf_prefix}wrist_2_joint" value="-1.6177" />
+        <joint name="${tf_prefix}wrist_3_joint" value="-1.6177" />
+      </group_state>
 
       <end_effector group="hand" name="hand" parent_group="ur_manipulator" parent_link="${tf_prefix}tool0"/>
       <!--VIRTUAL JOINT - Purpose - this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
