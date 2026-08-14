@@ -62,12 +62,12 @@
       <modify_element type="body" name="${tf_prefix}vention_rail_carriage" childclass="clr"/>
 
       <!-- Apply default classes to CLR joints -->
-      <modify_element type="joint" name="${tf_prefix}shoulder_pan_joint" class="clr_size4"/>
-      <modify_element type="joint" name="${tf_prefix}shoulder_lift_joint" class="clr_size4"/>
-      <modify_element type="joint" name="${tf_prefix}elbow_joint" class="clr_size3_limited"/>
-      <modify_element type="joint" name="${tf_prefix}wrist_1_joint" class="clr_size2"/>
-      <modify_element type="joint" name="${tf_prefix}wrist_2_joint" class="clr_size2"/>
-      <modify_element type="joint" name="${tf_prefix}wrist_3_joint" class="clr_size2"/>
+      <modify_element type="joint" name="${tf_prefix}shoulder_pan_joint" class="clr_size4" damping="23.7" frictionloss="14.14" armature="6.23"/>
+      <modify_element type="joint" name="${tf_prefix}shoulder_lift_joint" class="clr_size4" damping="29.1" frictionloss="3.73" armature="6.1"/>
+      <modify_element type="joint" name="${tf_prefix}elbow_joint" class="clr_size3_limited" damping="12.25" frictionloss="3.14" armature="1.71"/>
+      <modify_element type="joint" name="${tf_prefix}wrist_1_joint" class="clr_size2" damping="5.38" frictionloss="3.86" armature="0.438"/>
+      <modify_element type="joint" name="${tf_prefix}wrist_2_joint" class="clr_size2" damping="4.37" frictionloss="3.43" armature="0.401"/>
+      <modify_element type="joint" name="${tf_prefix}wrist_3_joint" class="clr_size2" damping="4.38" frictionloss="3.99" armature="0.338"/>
 
       <!-- Add frictionloss and armature to fingers to help with backdriving -->
       <modify_element type="joint" name="${tf_prefix}finger_1_joint" armature="0.5" frictionloss="5.0" />
