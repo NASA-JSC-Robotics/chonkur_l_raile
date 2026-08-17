@@ -32,7 +32,7 @@ def generate_launch_description():
     )
     nodes_to_start = [
         Node(
-            package="hatch_4040",
+            package="mockups_launch_common",
             executable="mockup_state_manager.py",
             name="mockup_manager",
             output="both",
