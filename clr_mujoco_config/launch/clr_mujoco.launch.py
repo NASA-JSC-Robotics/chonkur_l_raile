@@ -90,8 +90,13 @@ def generate_launch_description():
         headless,
         " model_env:=",
         model_env,
+<<<<<<< Updated upstream
         " include_mockup_state_interfaces:=",
         include_mockup_state_interfaces,
+=======
+        " hatch_4060_latch:=",
+        "true",
+>>>>>>> Stashed changes
     ]
 
     extra_controller_params_file = PathJoinSubstitution(

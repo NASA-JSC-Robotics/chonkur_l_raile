@@ -15,6 +15,7 @@
   <xacro:arg name="ctb_orientation_deg" default="90"/>
   <xacro:arg name="ctb_position_x" default="0.8"/>
   <xacro:arg name="ctb_position_y" default="0.8"/>
+  <xacro:arg name="hatch_4060_latch" default="true"/>
 
 
   <xacro:property name="model_env" value="$(arg model_env)"/>
@@ -42,7 +43,7 @@
       hatch_4040="false"
       express_rack="true"
       hatch_4060="true"
-      hatch_4060_latch="true"
+      hatch_4060_latch="$(arg hatch_4060_latch)"
       second_trainer="false"
     />
   </xacro:if>
