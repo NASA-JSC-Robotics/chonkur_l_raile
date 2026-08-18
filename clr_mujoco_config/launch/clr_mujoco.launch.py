@@ -17,9 +17,14 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import os
+
+from ament_index_python.packages import get_package_share_directory
+
 from launch import LaunchDescription
 from chonkur_deploy.launch_helpers import include_launch_file
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from launch.substitutions import (
     PathJoinSubstitution,
@@ -64,6 +69,7 @@ def generate_launch_description():
     sim_speed = LaunchConfiguration("sim_speed")
     headless = LaunchConfiguration("headless")
     model_env = LaunchConfiguration("model_env")
+    include_mockup_state_interfaces = LaunchConfiguration("include_mockup_state_interfaces")
 
     clr_mujoco_package_name = "clr_mujoco_config"
 
@@ -86,6 +92,10 @@ def generate_launch_description():
         headless,
         " model_env:=",
         model_env,
+        " include_mockup_state_interfaces:=",
+        include_mockup_state_interfaces,
+        " hatch_4060_latch:=",
+        "false",
     ]
 
     extra_controller_params_file = PathJoinSubstitution(
@@ -123,4 +133,16 @@ def generate_launch_description():
         ],
     )
 
-    return LaunchDescription(declared_arguments + [generate_mjcf, clr_launch, point_cloud_proc])
+    # Launch mockups manager unless mockup state interfaces are included.
+    mockups_launch = [
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                os.path.join(
+                    get_package_share_directory("clr_imetro_environments"), "launch", "mockups_managers.launch.py"
+                )
+            ),
+            condition=UnlessCondition(include_mockup_state_interfaces),
+        ),
+    ]
+
+    return LaunchDescription(declared_arguments + [generate_mjcf, clr_launch, point_cloud_proc] + mockups_launch)

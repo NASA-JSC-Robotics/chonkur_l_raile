@@ -8,15 +8,18 @@
   <!-- Legacy argument to leave out the environment mockups, though for now we generally -->
   <!-- always want this to be true. -->
   <xacro:arg name="model_env" default="true"/>
+  <xacro:arg name="include_mockup_state_interfaces" default="false"/>
   <xacro:arg name="include_scene_objects" default="false"/>
   <xacro:arg name="sim_speed" default="1.0"/>
   <xacro:arg name="headless" default="false" />
   <xacro:arg name="ctb_orientation_deg" default="90"/>
   <xacro:arg name="ctb_position_x" default="0.8"/>
   <xacro:arg name="ctb_position_y" default="0.8"/>
+  <xacro:arg name="hatch_4060_latch" default="true"/>
 
 
   <xacro:property name="model_env" value="$(arg model_env)"/>
+  <xacro:property name="include_mockup_state_interfaces" value="$(arg include_mockup_state_interfaces)"/>
   <xacro:property name="tf_prefix" value="$(arg tf_prefix)"/>
 
   <xacro:include filename="$(find clr_imetro_environments)/urdf/clr_trainer_multi_hatch_macro.xacro"/>
@@ -40,7 +43,7 @@
       hatch_4040="false"
       express_rack="true"
       hatch_4060="true"
-      hatch_4060_latch="true"
+      hatch_4060_latch="$(arg hatch_4060_latch)"
       second_trainer="false"
     />
   </xacro:if>
@@ -105,9 +108,8 @@
     <xacro:clr_mujoco_ros2_control_sensors tf_prefix="${tf_prefix}"/>
     <xacro:clr_mujoco_ros2_control_joints tf_prefix="${tf_prefix}"/>
 
-    <xacro:if value="${model_env}">
+    <xacro:if value="${include_mockup_state_interfaces}">
       <xacro:clr_mujoco_ros2_control_env/>
-      <xacro:clr_mujoco_ros2_control_sensors/>
     </xacro:if>
 
   </ros2_control>

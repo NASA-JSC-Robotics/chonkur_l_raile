@@ -19,7 +19,7 @@ To launch the kinematic simulation:
 ros2 launch clr_deploy clr_sim.launch.py
 
 # Or to include the environment mockups
-ros2 launch clr_deploy clr_sim.launch.py model_env:=true
+ros2 launch clr_deploy clr_sim.launch.py include_mockups_in_description:=true
 ```
 
 For hardware we run the UR pendantless, which is a two part launch process:
@@ -43,18 +43,26 @@ A MoveIt RViz widget can then be launched with:
 ros2 launch clr_moveit_config clr_moveit.launch.py
 
 # Or to include the environment mockups
-ros2 launch clr_moveit_config clr_moveit.launch.py model_env:=true
+ros2 launch clr_moveit_config clr_moveit.launch.py include_mockups_in_description:=true
 ```
 
 A MuJoCo simulation including the environment is available in [clr_mujoco_config](./clr_mujoco_config/README.md).
 Note that it requires the [MuJoCo ROS 2 simulation hardware interface](https://github.com/ros-controls/mujoco_ros2_control) to run.
 
 ```bash
-# Start the mujoco ros2 control-based simulation
+# Start the mujoco_ros2_control-based simulation
 ros2 launch clr_mujoco_config clr_mujoco.launch.py
 
 # In another shell launch the moveit interface with sim parameters set
 ros2 launch clr_moveit_config clr_moveit.launch.py include_mockups_in_description:=true use_sim_time:=true
+```
+
+For convenience, we also provide the option of running the MuJoCo simulation with state interfaces for the mockups.
+This keeps the mockup joint states up to date on the ROS 2 side for applications such as MoveIt, though there is no analog on hardware.
+
+```bash
+# Start the mujoco_ros2_control-based simulation with mockup state interfaces
+ros2 launch clr_mujoco_config clr_mujoco.launch.py include_mockup_state_interfaces:=true
 ```
 
 While position control is enabled by default, torque control can also be used with the UR10e in the MuJoCo simulation and on hardware. First, enable the effort controller, then send a command:

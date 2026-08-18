@@ -2,9 +2,11 @@ import os
 import tempfile
 
 from launch import LaunchDescription
+from launch.actions import SetLaunchConfiguration
 from launch_ros.actions import Node
 from launch.actions import DeclareLaunchArgument, OpaqueFunction, RegisterEventHandler
 from launch.event_handlers import OnShutdown
+from launch.conditions import UnlessCondition
 from launch.substitutions import (
     Command,
     FindExecutable,
@@ -48,9 +50,27 @@ def generate_launch_description():
             description="Whether to model the iMETRO environment in the MJCF.",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "include_mockup_state_interfaces",
+            default_value="false",
+            description="Whether to publish mockup joint states to ROS.",
+        )
+    )
+
+    # If model env is false, include_mockup_state_interfaces should not be true.
+    mapped_arguments = []
+    mapped_arguments.append(
+        SetLaunchConfiguration(
+            "include_mockup_state_interfaces",
+            "false",
+            condition=UnlessCondition(LaunchConfiguration("model_env")),
+        )
+    )
 
     include_scene_objects = LaunchConfiguration("include_scene_objects")
     model_env = LaunchConfiguration("model_env")
+    include_mockup_state_interfaces = LaunchConfiguration("include_mockup_state_interfaces")
 
     clr_mujoco_package_name = "clr_mujoco_config"
     clr_mujoco_description_file = "clr_mujoco_xacro.urdf"
@@ -79,6 +99,8 @@ def generate_launch_description():
             " add_grasp_push_frames:=false",
             " model_env:=",
             model_env,
+            " include_mockup_state_interfaces:=",
+            include_mockup_state_interfaces,
             " include_scene_objects:=",
             include_scene_objects,
         ]
@@ -122,4 +144,4 @@ def generate_launch_description():
 
     generate_mjcf = OpaqueFunction(function=launch_mjcf_node)
 
-    return LaunchDescription(declared_arguments + [generate_mjcf])
+    return LaunchDescription(declared_arguments + [generate_mjcf] + mapped_arguments)
