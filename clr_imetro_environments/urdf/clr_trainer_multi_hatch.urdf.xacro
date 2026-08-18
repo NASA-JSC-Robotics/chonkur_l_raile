@@ -12,6 +12,7 @@
   <xacro:arg name="hatch_4040" default="false"/>
   <xacro:arg name="express_rack" default="true"/>
   <xacro:arg name="hatch_4060" default="true"/>
+  <xacro:arg name="hatch_4060_latch" default="false"/>
   <xacro:arg name="second_trainer" default="false"/>
   <xacro:arg name="add_localization_joints" default="false"/>
 
@@ -29,6 +30,7 @@
     shelf="$(arg shelf)"
     ceiling_prop="$(arg ceiling_prop)"
     hatch_4040="$(arg hatch_4040)"
+    hatch_4060_latch="$(arg hatch_4060_latch)"
     express_rack="$(arg express_rack)"
     hatch_4060="$(arg hatch_4060)"
     second_trainer="$(arg second_trainer)"

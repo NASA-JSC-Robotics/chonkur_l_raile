@@ -95,8 +95,11 @@ class ChonkurControllerStopper(ControllerStopperBase):
         while rclpy.ok():
             # get current controllers loaded, and see if there is anything new
             list_controllers_response = self.call_list_controllers()
-            current_controllers = [c.name for c in list_controllers_response.controller]
-            new_controllers_loaded = current_controllers != seen_controllers
+            if list_controllers_response is not None:
+                current_controllers = [c.name for c in list_controllers_response.controller]
+                new_controllers_loaded = current_controllers != seen_controllers
+            else:
+                new_controllers_loaded = False
 
             # if there are new controllers, record the time
             if new_controllers_loaded:
