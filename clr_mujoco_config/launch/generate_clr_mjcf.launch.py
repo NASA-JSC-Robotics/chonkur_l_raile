@@ -2,9 +2,11 @@ import os
 import tempfile
 
 from launch import LaunchDescription
+from launch.actions import SetLaunchConfiguration
 from launch_ros.actions import Node
 from launch.actions import DeclareLaunchArgument, OpaqueFunction, RegisterEventHandler
 from launch.event_handlers import OnShutdown
+from launch.conditions import UnlessCondition
 from launch.substitutions import (
     Command,
     FindExecutable,
@@ -58,13 +60,13 @@ def generate_launch_description():
 
     # If model env is false, include_mockup_state_interfaces should not be true.
     mapped_arguments = []
-    # mapped_arguments.append(
-    #     SetLaunchConfiguration(
-    #         "include_mockup_state_interfaces",
-    #         "false",
-    #         condition=UnlessCondition(LaunchConfiguration("model_env")),
-    #     )
-    # )
+    mapped_arguments.append(
+        SetLaunchConfiguration(
+            "include_mockup_state_interfaces",
+            "false",
+            condition=UnlessCondition(LaunchConfiguration("model_env")),
+        )
+    )
 
     include_scene_objects = LaunchConfiguration("include_scene_objects")
     model_env = LaunchConfiguration("model_env")
