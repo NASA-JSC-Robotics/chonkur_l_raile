@@ -132,21 +132,15 @@ def generate_launch_description():
     )
 
     # Launch mockups manager unless mockup state interfaces are included.
-    hw_launch = [
+    mockups_launch = [
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 os.path.join(
                     get_package_share_directory("clr_imetro_environments"), "launch", "mockups_managers.launch.py"
                 )
             ),
-            launch_arguments={
-                "hatch_4040": "true",
-                "trainer": "true",
-                "second_trainer": "false",
-                "tf_prefix": "",
-            }.items(),
             condition=UnlessCondition(include_mockup_state_interfaces),
         ),
     ]
 
-    return LaunchDescription(declared_arguments + [generate_mjcf, clr_launch, point_cloud_proc] + hw_launch)
+    return LaunchDescription(declared_arguments + [generate_mjcf, clr_launch, point_cloud_proc] + mockups_launch)
