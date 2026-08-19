@@ -62,6 +62,7 @@
       <modify_element type="body" name="${tf_prefix}vention_rail_carriage" childclass="clr"/>
 
       <!-- Apply default classes to CLR joints -->
+      <!-- Apply joint params from system identification to CLR joints -->
       <modify_element type="joint" name="${tf_prefix}shoulder_pan_joint" class="clr_size4" damping="24.2" frictionloss="13.8" armature="6.33"/>
       <modify_element type="joint" name="${tf_prefix}shoulder_lift_joint" class="clr_size4" damping="29.75" frictionloss="2.96" armature="6.1"/>
       <modify_element type="joint" name="${tf_prefix}elbow_joint" class="clr_size3_limited" damping="10.6" frictionloss="4.67" armature="1.44"/>
