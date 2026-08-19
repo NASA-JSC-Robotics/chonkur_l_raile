@@ -37,3 +37,12 @@ simulate mjcf_data/scene.xml
 ```
 
 Any contents can be copied and updated as needed.
+
+## Notes on the Sim-to-Real Gap
+We used [MuJoCo's system identification toolbox](https://github.com/google-deepmind/mujoco/blob/main/python/mujoco/sysid/README.md) to identify joint parameters for CLR's UR10e.
+We then evaluated the sim-to-real gap by running a free-space trajectory in simulation and on hardware, the results of which are shown below:
+
+![alt text](sys-id.png)
+
+In the above experiment, the average joint torque RMSE as a percentage of each joint's maximum effort was 10.1%.
+Evaluating the sim-to-real gap for our CLR simulation is an ongoing area of work, and we plan to provide data in object interaction scenarios as well as from the force-torque sensor in the near future.

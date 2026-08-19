@@ -92,6 +92,56 @@
         <joint name="${tf_prefix}wrist_2_joint" value="-1.468212906514303" />
         <joint name="${tf_prefix}wrist_3_joint" value="0.03171319141983986" />
       </group_state>
+      <group_state name="demo_home" group="clr">
+        <joint name="${tf_prefix}ewellix_lift_lower_to_higher" value="0.01" />
+        <joint name="${tf_prefix}vention_rail_base_to_carriage" value="0.0"/>
+        <joint name="${tf_prefix}elbow_joint" value="-1.7760" />
+        <joint name="${tf_prefix}shoulder_lift_joint" value="-2.3913" />
+        <joint name="${tf_prefix}shoulder_pan_joint" value="3.1927" />
+        <joint name="${tf_prefix}wrist_1_joint" value="-0.4700" />
+        <joint name="${tf_prefix}wrist_2_joint" value="-1.6177" />
+        <joint name="${tf_prefix}wrist_3_joint" value="-1.6177" />
+      </group_state>
+      <group_state name="sys_id_1" group="clr">
+        <joint name="${tf_prefix}ewellix_lift_lower_to_higher" value="0.01" />
+        <joint name="${tf_prefix}vention_rail_base_to_carriage" value="0.743"/>
+        <joint name="${tf_prefix}elbow_joint" value="-1.7760" />
+        <joint name="${tf_prefix}shoulder_lift_joint" value="-2.3913" />
+        <joint name="${tf_prefix}shoulder_pan_joint" value="3.1927" />
+        <joint name="${tf_prefix}wrist_1_joint" value="-0.4700" />
+        <joint name="${tf_prefix}wrist_2_joint" value="-1.6177" />
+        <joint name="${tf_prefix}wrist_3_joint" value="-1.6177" />
+      </group_state>
+      <group_state name="sys_id_2" group="clr">
+        <joint name="${tf_prefix}ewellix_lift_lower_to_higher" value="0.00" />
+        <joint name="${tf_prefix}vention_rail_base_to_carriage" value="0.314"/>
+        <joint name="${tf_prefix}elbow_joint" value="2.443" />
+        <joint name="${tf_prefix}shoulder_lift_joint" value="-2.653" />
+        <joint name="${tf_prefix}shoulder_pan_joint" value="-1.531" />
+        <joint name="${tf_prefix}wrist_1_joint" value="0.000" />
+        <joint name="${tf_prefix}wrist_2_joint" value="1.531" />
+        <joint name="${tf_prefix}wrist_3_joint" value="3.264" />
+      </group_state>
+      <group_state name="sys_id_3" group="clr">
+        <joint name="${tf_prefix}ewellix_lift_lower_to_higher" value="0.01" />
+        <joint name="${tf_prefix}vention_rail_base_to_carriage" value="0.743"/>
+        <joint name="${tf_prefix}elbow_joint" value="-2.51327" />
+        <joint name="${tf_prefix}shoulder_lift_joint" value="-2.3913" />
+        <joint name="${tf_prefix}shoulder_pan_joint" value="3.1927" />
+        <joint name="${tf_prefix}wrist_1_joint" value="-0.4700" />
+        <joint name="${tf_prefix}wrist_2_joint" value="-1.6177" />
+        <joint name="${tf_prefix}wrist_3_joint" value="-1.6177" />
+      </group_state>
+      <group_state name="sys_id_4" group="clr">
+        <joint name="${tf_prefix}ewellix_lift_lower_to_higher" value="0.01" />
+        <joint name="${tf_prefix}vention_rail_base_to_carriage" value="0.743"/>
+        <joint name="${tf_prefix}elbow_joint" value="-2.51327" />
+        <joint name="${tf_prefix}shoulder_lift_joint" value="-1.813" />
+        <joint name="${tf_prefix}shoulder_pan_joint" value="4.840" />
+        <joint name="${tf_prefix}wrist_1_joint" value="-0.4700" />
+        <joint name="${tf_prefix}wrist_2_joint" value="-1.6177" />
+        <joint name="${tf_prefix}wrist_3_joint" value="-1.6177" />
+      </group_state>
 
       <end_effector group="hand" name="hand" parent_group="ur_manipulator" parent_link="${tf_prefix}tool0"/>
       <!--VIRTUAL JOINT - Purpose - this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->

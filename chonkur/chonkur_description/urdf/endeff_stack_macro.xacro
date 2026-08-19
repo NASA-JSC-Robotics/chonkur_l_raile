@@ -26,6 +26,12 @@
             </geometry>
             <origin xyz="0 0 0.0092" rpy="0 0 0" />
         </collision>
+        <!-- Measured mass -->
+        <inertial>
+            <origin rpy="-2.3020013e-03 -3.3700999e-03  7.3028674e-03" xyz="0.0 0.0 0.0"/>
+            <mass value="0.234"/>
+            <inertia ixx="0.00012689626" ixy="0.0000022170518" ixz="0.0000023900060" iyy="0.000090492203" iyz="0.00000093596408" izz="0.00020810513" />
+      </inertial>
     </link>
 
     <joint name="${tf_prefix}mtc_robot_to_effector_side_joint" type="fixed">
@@ -46,6 +52,12 @@
             </geometry>
             <origin xyz="0 0 0.01185" rpy="0 0 0" />
         </collision>
+        <!-- Measured mass -->
+        <inertial>
+            <origin rpy="2.7996999e-03  3.0073601e-04  1.2016667e-02" xyz="0.0 0.0 0.0"/>
+            <mass value="0.173"/>
+            <inertia ixx="0.000046537307" ixy="0.000000049279921" ixz="0.0000031354081" iyy="0.000068895878" iyz="0.00000054211975" izz="0.000097074288" />
+        </inertial>
     </link>
 
     <joint name="${tf_prefix}mtc_effector_side_to_realsense_mount" type="fixed">
@@ -68,6 +80,12 @@
                 <mesh filename= "package://chonkur_description/meshes/visual/ur_realsense_short_mount_tube.stl"/>
             </geometry>
         </collision>
+        <!-- Mass is estimated. Combined mass of ur_realsense_mount and robotiq_hande_adapter is 269.5 g -->
+        <inertial>
+            <origin rpy="-2.5671055e-02 -2.9268392e-02 -2.7874570e-04" xyz="0.0 0.0 0.0"/>
+            <mass value="0.0521"/>
+            <inertia ixx="1.6417524e-04" ixy="4.7936307e-05" ixz="4.1938251e-06" iyy="1.0429851e-04" iyz="-2.1690756e-06" izz="2.6710819e-04" />
+        </inertial>
     </link>
 
     <!-- Realsense camera -->
