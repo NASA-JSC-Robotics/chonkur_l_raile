@@ -29,11 +29,13 @@ from launch_ros.actions import Node
 from launch.substitutions import (
     PathJoinSubstitution,
     LaunchConfiguration,
+    AndSubstitution,
+    EqualsSubstitution
 )
 from launch_ros.substitutions import (
     FindPackageShare,
 )
-from launch.conditions import UnlessCondition
+from launch.conditions import UnlessCondition, IfCondition
 
 
 def generate_launch_description():
@@ -141,7 +143,12 @@ def generate_launch_description():
                     get_package_share_directory("clr_imetro_environments"), "launch", "mockups_managers.launch.py"
                 )
             ),
-            condition=UnlessCondition(include_mockup_state_interfaces),
+            condition=IfCondition(
+                AndSubstitution(
+                    EqualsSubstitution(include_mockup_state_interfaces, 'false'), 
+                    model_env
+                )
+            )
         ),
     ]
 
