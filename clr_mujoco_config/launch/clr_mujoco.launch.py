@@ -26,12 +26,7 @@ from chonkur_deploy.launch_helpers import include_launch_file
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
-from launch.substitutions import (
-    PathJoinSubstitution,
-    LaunchConfiguration,
-    AndSubstitution,
-    EqualsSubstitution
-)
+from launch.substitutions import PathJoinSubstitution, LaunchConfiguration, AndSubstitution, EqualsSubstitution
 from launch_ros.substitutions import (
     FindPackageShare,
 )
@@ -144,11 +139,8 @@ def generate_launch_description():
                 )
             ),
             condition=IfCondition(
-                AndSubstitution(
-                    EqualsSubstitution(include_mockup_state_interfaces, 'false'), 
-                    model_env
-                )
-            )
+                AndSubstitution(EqualsSubstitution(include_mockup_state_interfaces, "false"), model_env)
+            ),
         ),
     ]
 
