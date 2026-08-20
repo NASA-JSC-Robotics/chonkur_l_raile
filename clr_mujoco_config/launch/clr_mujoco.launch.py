@@ -26,14 +26,11 @@ from chonkur_deploy.launch_helpers import include_launch_file
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
-from launch.substitutions import (
-    PathJoinSubstitution,
-    LaunchConfiguration,
-)
+from launch.substitutions import PathJoinSubstitution, LaunchConfiguration, AndSubstitution, NotSubstitution
 from launch_ros.substitutions import (
     FindPackageShare,
 )
-from launch.conditions import UnlessCondition
+from launch.conditions import UnlessCondition, IfCondition
 
 
 def generate_launch_description():
@@ -141,7 +138,7 @@ def generate_launch_description():
                     get_package_share_directory("clr_imetro_environments"), "launch", "mockups_managers.launch.py"
                 )
             ),
-            condition=UnlessCondition(include_mockup_state_interfaces),
+            condition=IfCondition(AndSubstitution(NotSubstitution(include_mockup_state_interfaces), model_env)),
         ),
     ]
 
