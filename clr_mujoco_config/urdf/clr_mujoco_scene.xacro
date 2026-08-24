@@ -23,6 +23,8 @@
         <worldbody>
             <light pos="0 0 1.5" dir="0 0 -1" directional="true"/>
             <geom name="floor" pos="0 0 0.001" size="0 0 0.05" type="plane" material="groundplane"/>
+            <geom name="wall1" type="box" size="5.0 5.0 0.01" pos="0 3.0 0" quat="0.707 0.707 0 0" rgba="0.2 0.2 0.2 1.0"/>
+            <geom name="wall2" type="box" size="5.0 5.0 0.01" pos="4 0 0" quat="0.707 0 0.707 0" rgba="0.2 0.2 0.2 1.0"/>
         </worldbody>
     </scene>
 
