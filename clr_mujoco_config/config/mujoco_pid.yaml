@@ -1,6 +1,16 @@
 /**:
   ros__parameters:
     pid_gains:
+      # Methodology for tuning position gains:
+      # - Using plotjuggler,
+      #   - plot velocities for each of the joints
+      #   - plot references against actual positions for each of the joints
+      # - command trajectories in free space that use all of the joints
+      #   - if velocity is incredibly noisy, lower d gain
+      #   - if motion is very oscillatory, increase d gain, or decrease p gain
+      #   - if tracking lags behind reference, increase p gain, or decrease d gain
+      # - test against a full demo that includes object interaction to make sure it is
+      #   aggressive enough to maintain position in these scenarios.
       position:
         shoulder_pan_joint:
           p: 8000.0
@@ -51,13 +61,54 @@
           i_clamp_max: 1000.0
           i_clamp_min: -1000.0
 
-# Methodology for tuning these gains:
-# - Using plotjuggler,
-#   - plot velocities for each of the joints
-#   - plot references against actual positions for each of the joints
-# - command trajectories in free space that use all of the joints
-#   - if velocity is incredibly noisy, lower d gain
-#   - if motion is very oscillatory, increase d gain, or decrease p gain
-#   - if tracking lags behind reference, increase p gain, or decrease d gain
-# - test against a full demo that includes object interaction to make sure it is
-#   aggressive enough to maintain position in these scenarios.
+      # WARNING: These gains are significantly less tested that the position gains,
+      # and will likely need tuning.
+      velocity:
+        shoulder_pan_joint:
+          p: 4000.0
+          i: 0.0
+          d: 2.0
+          u_clamp_max: 330.0
+          u_clamp_min: -330.0
+          i_clamp_max: 200.0
+          i_clamp_min: -200.0
+        shoulder_lift_joint:
+          p: 3000.0
+          i: 0.0
+          d: 1.0
+          u_clamp_max: 330.0
+          u_clamp_min: -330.0
+          i_clamp_max: 200.0
+          i_clamp_min: -200.0
+        elbow_joint:
+          p: 2000.0
+          i: 0.0
+          d: 0.15
+          u_clamp_max: 150.0
+          u_clamp_min: -150.0
+          i_clamp_max: 100.0
+          i_clamp_min: -100.0
+        wrist_1_joint:
+          p: 125.0
+          i: 0.0
+          d: 0.01
+          u_clamp_max: 56.0
+          u_clamp_min: -56.0
+          i_clamp_max: 40.0
+          i_clamp_min: -40.0
+        wrist_2_joint:
+          p: 40.0
+          i: 0.0
+          d: 0.01
+          u_clamp_max: 56.0
+          u_clamp_min: -56.0
+          i_clamp_max: 40.0
+          i_clamp_min: -40.0
+        wrist_3_joint:
+          p: 40.0
+          i: 0.0
+          d: 0.01
+          u_clamp_max: 56.0
+          u_clamp_min: -56.0
+          i_clamp_max: 40.0
+          i_clamp_min: -40.0

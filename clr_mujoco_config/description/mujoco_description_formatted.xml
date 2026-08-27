@@ -334,39 +334,39 @@
   </asset>
   <worldbody>
     <body name="vention_rail_carriage" pos="-0.882296 0.114017 0.396" childclass="clr">
-      <inertial pos="-0.00312461 -0.0766458 0.319626" quat="0.998435 0.0549353 -0.00216721 -0.0102813" mass="22.5301" diaginertia="0.864881 0.855248 0.201122"/>
-      <joint name="vention_rail_base_to_carriage" pos="0 0 0" axis="1 0 0" type="slide" range="0 2" actuatorfrcrange="-1000 1000"/>
+      <inertial pos="-0.00312461 -0.07789 0.320298" quat="0.679614 0.0398738 -0.0470656 0.730971" mass="22.5301" diaginertia="0.854403 0.847455 0.191328"/>
+      <joint name="vention_rail_base_to_carriage" type="slide" range="0 2" actuatorfrcrange="-1000 1000" axis="1 0 0"/>
       <body name="ewellix_lift_higher_link" pos="-0.003624 -0.09 0.459525" gravcomp="1.0">
-        <inertial pos="-0.0281756 -0.0783771 0" quat="0.6967 0.696514 -0.121392 -0.121417" mass="19.1668" diaginertia="0.865753 0.585307 0.36164"/>
-        <joint name="ewellix_lift_lower_to_higher" pos="0 0 0" axis="0 0 1" type="slide" range="0 0.7" actuatorfrcrange="-1000 1000"/>
+        <inertial pos="0 0.0281756 0.0783771" quat="0.993924 -0.110071 -1.1785e-06 0.000133687" mass="19.1668" diaginertia="0.865759 0.849191 0.0977505"/>
+        <joint name="ewellix_lift_lower_to_higher" type="slide" range="0 0.7" actuatorfrcrange="-1000 1000"/>
         <body name="ewellix_lift_middle_link" pos="0 0 -0.03397" gravcomp="1.0">
           <inertial pos="0 0 0" mass="15.5933" diaginertia="0.349306 0.349306 0.0953935"/>
-          <joint name="middle_mimic_higher" pos="0 0 0" axis="0 0 -1" type="slide" range="0 0.35" actuatorfrcrange="-1000 1000"/>
+          <joint name="middle_mimic_higher" type="slide" range="0 0.35" actuatorfrcrange="-1000 1000" axis="0 0 -1"/>
           <geom material="material_lift_mid_700mm_0" mesh="lift_mid_700mm" class="visual" pos="" quat=""/>
           <geom mesh="lift_mid_700mm" class="collision" pos="" quat=""/>
           <site name="ewellix_lift_middle_link" pos="0 0 0" quat="1.0 0 0 0"/>
         </body>
         <body name="shoulder_link" pos="0 0.315664 0.375559" quat="-0.707107 0.707107 9.6581e-08 9.6581e-08" gravcomp="1.0">
           <inertial pos="0.021 -0.027 0" quat="0.988634 -0.000680926 0.148578 -0.0229591" mass="7.369" diaginertia="0.0353866 0.0352903 0.0202532"/>
-          <joint name="shoulder_pan_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-330 330" class="clr_size4"/>
+          <joint name="shoulder_pan_joint" range="-6.28319 6.28319" actuatorfrcrange="-330 330" armature="6.33" class="clr_size4" damping="24.2" frictionloss="13.8"/>
           <body name="upper_arm_link" pos="-2.63519e-05 0 0" quat="0.707253 0.70696 -7.78715e-07 -7.79038e-07" gravcomp="1.0">
             <inertial pos="-0.2327 0 0.158" quat="0.500033 0.499784 0.489585 0.510381" mass="13.051" diaginertia="0.77068 0.769758 0.0278114"/>
-            <joint name="shoulder_lift_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-330 330" class="clr_size4"/>
+            <joint name="shoulder_lift_joint" range="-6.28319 6.28319" actuatorfrcrange="-330 330" armature="6.1" class="clr_size4" damping="29.75" frictionloss="2.96"/>
             <body name="forearm_link" pos="-0.612203 0 0" quat="1 5.21405e-05 9.27643e-05 -1.65066e-06" gravcomp="1.0">
               <inertial pos="-0.33155 0 0.068" quat="0.492051 0.507971 0.507346 0.492394" mass="3.989" diaginertia="0.30928 0.306743 0.00985709"/>
-              <joint name="elbow_joint" pos="0 0 0" axis="0 0 1" range="-3.14159 3.14159" actuatorfrcrange="-150 150" class="clr_size3_limited"/>
+              <joint name="elbow_joint" range="-3.14159 3.14159" actuatorfrcrange="-150 150" armature="1.44" class="clr_size3_limited" damping="10.6" frictionloss="4.67"/>
               <body name="wrist_1_link" pos="-0.571235 0.00158033 0.173704" quat="-0.99999 0.00454876 0.000242286 1.85622e-06" gravcomp="1.0">
                 <inertial pos="0 -0.018 0.007" quat="0.525776 0.850564 -0.0100431 9.45801e-05" mass="2.1" diaginertia="0.00296017 0.00269992 0.00209991"/>
-                <joint name="wrist_1_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-56 56" class="clr_size2"/>
+                <joint name="wrist_1_joint" range="-6.28319 6.28319" actuatorfrcrange="-56 56" armature="0.416" class="clr_size2" damping="5.49" frictionloss="3.80"/>
                 <body name="wrist_2_link" pos="8.87723e-06 -0.119763 0.000123158" quat="0.70747 0.706743 -1.86691e-08 -1.86883e-08" gravcomp="1.0">
                   <inertial pos="0 0.018 -0.007" quat="0.525776 0.850564 -0.0100431 9.45801e-05" mass="1.98" diaginertia="0.00296017 0.00269992 0.00209991"/>
-                  <joint name="wrist_2_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-56 56" class="clr_size2"/>
+                  <joint name="wrist_2_joint" range="-6.28319 6.28319" actuatorfrcrange="-56 56" armature="0.389" class="clr_size2" damping="4.19" frictionloss="3.69"/>
                   <body name="wrist_3_link" pos="-1.70102e-05 0.115301 5.28358e-05" quat="0.707269 -0.706945 7.83453e-08 -7.83812e-08" gravcomp="1.0">
-                    <inertial pos="0.000533945 -0.00281502 0.0474457" quat="0.999675 0.0240902 0.00138057 0.00821278" mass="1.56087" diaginertia="0.0111381 0.00752139 0.00500004"/>
-                    <joint name="wrist_3_joint" pos="0 0 0" axis="0 0 1" range="-6.28319 6.28319" actuatorfrcrange="-56 56" class="clr_size2"/>
+                    <inertial pos="0.000505765 0.00267355 0.0377515" quat="0.690347 0.00383096 0.0183534 0.723235" mass="2.01997" diaginertia="0.0118097 0.0087169 0.00570823"/>
+                    <joint name="wrist_3_joint" range="-6.28319 6.28319" actuatorfrcrange="-56 56" armature="0.341" class="clr_size2" damping="4.24" frictionloss="4.04"/>
                     <body name="finger_1_link" pos="0.00201401 -0.00325 0.151947" quat="-1 0 0 0" gravcomp="1.0">
                       <inertial pos="0 0 0" quat="0.501643 0.0653163 0.068404 0.859889" mass="0.0500198" diaginertia="6.28755e-05 6.17965e-05 5.99521e-06"/>
-                      <joint name="finger_1_joint" pos="0 0 0" axis="1 0 0" type="slide" range="0 0.025" actuatorfrcrange="-130 130" armature="0.5" frictionloss="5.0"/>
+                      <joint name="finger_1_joint" type="slide" range="0 0.025" actuatorfrcrange="-130 130" axis="1 0 0" armature="0.5" frictionloss="5.0"/>
                       <geom material="mtl_finger_v6" mesh="finger_v6" class="visual" pos="" quat=""/>
                       <geom mesh="finger_v6_collision_0" rgba="0.29761008470827877 0.6176999552384602 0.9267292046225429 1" class="collision" pos="" quat=""/>
                       <geom mesh="finger_v6_collision_1" rgba="0.3021121628901462 0.6818128062207025 0.2610551866145201 1" class="collision" pos="" quat=""/>
@@ -394,7 +394,7 @@
                     </body>
                     <body name="finger_2_link" pos="-0.00201401 0.00325 0.151947" quat="0 0 0 -1" gravcomp="1.0">
                       <inertial pos="0 0 0" quat="0.501643 0.0653163 0.068404 0.859889" mass="0.0500198" diaginertia="6.28755e-05 6.17965e-05 5.99521e-06"/>
-                      <joint name="finger_2_joint" pos="0 0 0" axis="1 0 0" type="slide" range="0 0.025" actuatorfrcrange="-130 130" armature="0.5" frictionloss="5.0"/>
+                      <joint name="finger_2_joint" type="slide" range="0 0.025" actuatorfrcrange="-130 130" axis="1 0 0" armature="0.5" frictionloss="5.0"/>
                       <geom material="mtl_finger_v6" mesh="finger_v6" class="visual" pos="" quat=""/>
                       <geom mesh="finger_v6_collision_0" rgba="0.29761008470827877 0.6176999552384602 0.9267292046225429 1" class="collision" pos="" quat=""/>
                       <geom mesh="finger_v6_collision_1" rgba="0.3021121628901462 0.6818128062207025 0.2610551866145201 1" class="collision" pos="" quat=""/>
@@ -420,8 +420,8 @@
                       <geom mesh="finger_v6_collision_21" rgba="0.1748068478573328 0.8952354683008019 0.08894101206310079 1" class="collision" pos="" quat=""/>
                       <site name="finger_2_link" pos="0 0 0" quat="1.0 0 0 0"/>
                     </body>
-                    <geom material="material_wrist3_0" mesh="wrist3" class="visual" pos="0 0 -0.1168" quat="0.707107 0.707107 0 0"/>
-                    <geom mesh="wrist3" class="collision" pos="0 0 -0.1168" quat="0.707107 0.707107 0 0"/>
+                    <geom material="material_wrist3_0" mesh="wrist3" class="visual" pos="0 -0.0005 -0.1168" quat="0.707107 0.707107 0 0"/>
+                    <geom mesh="wrist3" class="collision" pos="0 -0.0005 -0.1168" quat="0.707107 0.707107 0 0"/>
                     <geom material="material_mtc_robot_side_0" mesh="mtc_robot_side" class="visual" pos="" quat="0.707107 0 0 0.707107"/>
                     <geom mesh="mtc_robot_side" class="collision" pos="" quat="0.707107 0 0 0.707107"/>
                     <geom material="material_mtc_effector_side_0" mesh="mtc_effector_side" class="visual" pos="0 0 0.008763" quat="0.707107 0 0 0.707107"/>
@@ -441,20 +441,20 @@
                     <site name="mtc_robot_side" pos="0 0 0" quat="0.7071067811865476 0 0 0.7071067811865475"/>
                     <site name="mtc_effector_side" pos="0 0 0.008763" quat="0.7071067811865476 0 0 0.7071067811865475"/>
                     <site name="ur_realsense_mount" pos="0 0 0.032447000000000004" quat="0.7071067811865475 0 0 -0.7071067811865476"/>
-                    <site name="wrist_mounted_camera_bottom_screw_frame" pos="-0.0029999999999999953 0.064 0.048447" quat="0.5311843403952277 -0.4569718690205999 -0.4702853979799279 -0.5365179884119146"/>
-                    <site name="wrist_mounted_camera_link" pos="0.014189312974867837 0.07500694804168148 0.06102613408227151" quat="0.5311843403952277 -0.4569718690205999 -0.4702853979799279 -0.5365179884119146"/>
-                    <site name="wrist_mounted_camera_depth_frame" pos="0.014189312974867837 0.07500694804168148 0.06102613408227151" quat="0.5311843403952277 -0.4569718690205999 -0.4702853979799279 -0.5365179884119146"/>
-                    <site name="wrist_mounted_camera_depth_optical_frame" pos="0.014189312974867837 0.07500694804168148 0.06102613408227151" quat="-0.003989940471320503 -0.0093235884880074 -0.07022253090330707 0.997479797903835"/>
-                    <site name="wrist_mounted_camera_infra1_frame" pos="0.014189312974867837 0.07500694804168148 0.06102613408227151" quat="0.5311843403952277 -0.4569718690205999 -0.4702853979799279 -0.5365179884119146"/>
-                    <site name="wrist_mounted_camera_infra1_optical_frame" pos="0.014189312974867837 0.07500694804168148 0.06102613408227151" quat="-0.003989940471320503 -0.0093235884880074 -0.07022253090330707 0.997479797903835"/>
-                    <site name="wrist_mounted_camera_infra2_frame" pos="-0.03580040213240633 0.07467443213825625 0.06006810659439093" quat="0.5311843403952277 -0.4569718690205999 -0.4702853979799279 -0.5365179884119146"/>
-                    <site name="wrist_mounted_camera_infra2_optical_frame" pos="-0.03580040213240633 0.07467443213825625 0.06006810659439093" quat="-0.003989940471320503 -0.0093235884880074 -0.07022253090330707 0.997479797903835"/>
-                    <site name="wrist_mounted_camera_color_frame" pos="0.029186227507050088 0.07510670281270905 0.06131354232863569" quat="0.5311843403952277 -0.4569718690205999 -0.4702853979799279 -0.5365179884119146"/>
-                    <site name="wrist_mounted_camera_color_optical_frame" pos="0.029186227507050088 0.07510670281270905 0.06131354232863569" quat="-0.003989940471320503 -0.0093235884880074 -0.07022253090330707 0.997479797903835"/>
+                    <site name="wrist_mounted_camera_bottom_screw_frame" pos="-0.0029999999999999953 0.064 0.048447" quat="0.5311843403952277 -0.4569718690206 -0.4702853979799279 -0.5365179884119146"/>
+                    <site name="wrist_mounted_camera_link" pos="0.014189312974867837 0.07500694804168148 0.06102613408227151" quat="0.5311843403952277 -0.4569718690206 -0.4702853979799279 -0.5365179884119146"/>
+                    <site name="wrist_mounted_camera_depth_frame" pos="0.014189312974867837 0.07500694804168148 0.06102613408227151" quat="0.5311843403952277 -0.4569718690206 -0.4702853979799279 -0.5365179884119146"/>
+                    <site name="wrist_mounted_camera_depth_optical_frame" pos="0.014189312974867837 0.07500694804168148 0.06102613408227151" quat="-0.003989940471320504 -0.0093235884880074 -0.07022253090330707 0.997479797903835"/>
+                    <site name="wrist_mounted_camera_infra1_frame" pos="0.014189312974867837 0.07500694804168148 0.06102613408227151" quat="0.5311843403952277 -0.4569718690206 -0.4702853979799279 -0.5365179884119146"/>
+                    <site name="wrist_mounted_camera_infra1_optical_frame" pos="0.014189312974867837 0.07500694804168148 0.06102613408227151" quat="-0.003989940471320504 -0.0093235884880074 -0.07022253090330707 0.997479797903835"/>
+                    <site name="wrist_mounted_camera_infra2_frame" pos="-0.03580040213240633 0.07467443213825625 0.06006810659439093" quat="0.5311843403952277 -0.4569718690206 -0.4702853979799279 -0.5365179884119146"/>
+                    <site name="wrist_mounted_camera_infra2_optical_frame" pos="-0.03580040213240633 0.07467443213825625 0.06006810659439093" quat="-0.003989940471320504 -0.0093235884880074 -0.07022253090330707 0.997479797903835"/>
+                    <site name="wrist_mounted_camera_color_frame" pos="0.029186227507050088 0.07510670281270905 0.06131354232863569" quat="0.5311843403952277 -0.4569718690206 -0.4702853979799279 -0.5365179884119146"/>
+                    <site name="wrist_mounted_camera_color_optical_frame" pos="0.029186227507050088 0.07510670281270905 0.06131354232863569" quat="-0.003989940471320504 -0.0093235884880074 -0.07022253090330707 0.997479797903835"/>
                     <site name="robotiq_hande_cb_adapter" pos="0 0 0.040447000000000004" quat="1.0 0 0 0"/>
                     <site name="gripper_base_link" pos="0 0 0.051447" quat="1.0 0 0 0"/>
                     <site name="gripper_palm_link" pos="0 0 0.150247" quat="1.0 0 0 0"/>
-                    <camera fovy="58" mode="fixed" name="wrist_mounted_camera" resolution="640 480" pos="0.029186227507050088 0.07510670281270905 0.06131354232863569" quat="0.0093235884880074 -0.003989940471320503 0.997479797903835 0.07022253090330707"/>
+                    <camera fovy="58" mode="fixed" name="wrist_mounted_camera" resolution="640 480" pos="0.029186227507050088 0.07510670281270905 0.06131354232863569" quat="0.0093235884880074 -0.003989940471320504 0.997479797903835 0.07022253090330707"/>
                   </body>
                   <geom mesh="wrist2_0" material="material_wrist2_2" class="visual" pos="0 0 -0.12" quat="1 0 0 0"/>
                   <geom mesh="wrist2_1" material="material_wrist2_1" class="visual" pos="0 0 -0.12" quat="1 0 0 0"/>
@@ -553,24 +553,24 @@
     </body>
     <body name="door" pos="0.2794 1.1423 0.95425" quat="0 -2.32051e-08 0 1">
       <inertial pos="0 0.004 0.155333" quat="0.999917 -0.012898 0 0" mass="0.3" diaginertia="0.0336289 0.0336217 0.0300072"/>
-      <joint name="door_to_frame_joint" pos="0 0 0" axis="1 0 0" range="-0.01 0" actuatorfrcrange="-10 10"/>
+      <joint name="door_to_frame_joint" range="-0.01 0" actuatorfrcrange="-10 10" axis="1 0 0"/>
       <body name="right_latch_pull" pos="0.0258 0.01 0.229">
         <inertial pos="0 0 0" mass="0.1" diaginertia="0.01 0.01 0.01"/>
-        <joint name="housing_to_right_latch_pull" pos="0 0 0" axis="1 0 0" type="slide" range="-0.0084 0" actuatorfrcrange="-10 10"/>
+        <joint name="housing_to_right_latch_pull" type="slide" range="-0.0084 0" actuatorfrcrange="-10 10" axis="1 0 0"/>
         <geom material="mtl_csm_latch_pull" mesh="csm_latch_pull" class="visual" pos="" quat="0.5 0.5 -0.5 0.5"/>
         <geom mesh="csm_latch_pull" class="collision" pos="" quat="0.5 0.5 -0.5 0.5"/>
         <site name="right_latch_pull" pos="0 0 0" quat="1.0 0 0 0"/>
       </body>
       <body name="left_latch_pull" pos="-0.0258 0.01 0.229">
         <inertial pos="0 0 0" mass="0.1" diaginertia="0.01 0.01 0.01"/>
-        <joint name="housing_to_left_latch_pull" pos="0 0 0" axis="1 0 0" type="slide" range="0 0.0084" actuatorfrcrange="-10 10"/>
+        <joint name="housing_to_left_latch_pull" type="slide" range="0 0.0084" actuatorfrcrange="-10 10" axis="1 0 0"/>
         <geom material="mtl_csm_latch_pull" mesh="csm_latch_pull" class="visual" pos="" quat="0.5 0.5 0.5 -0.5"/>
         <geom mesh="csm_latch_pull" class="collision" pos="" quat="0.5 0.5 0.5 -0.5"/>
         <site name="left_latch_pull" pos="0 0 0" quat="1.0 0 0 0"/>
       </body>
       <body name="latch_lock" pos="0 0.019 0.24">
         <inertial pos="0 0 0" mass="0.1" diaginertia="0.01 0.01 0.01"/>
-        <joint name="housing_to_latch_lock" pos="0 0 0" axis="1 0 0" range="0 1.5708" actuatorfrcrange="-10 10"/>
+        <joint name="housing_to_latch_lock" range="0 1.5708" actuatorfrcrange="-10 10" axis="1 0 0"/>
         <geom material="mtl_csm_latch_lock" mesh="csm_latch_lock" class="visual" pos="0 0.0012 -0.0084" quat="1 0 0 0"/>
         <geom mesh="csm_latch_lock" class="collision" pos="0 0.0012 -0.0084" quat="1 0 0 0"/>
         <site name="latch_lock" pos="0 0 0" quat="1.0 0 0 0"/>
@@ -586,14 +586,14 @@
       <site name="latch_cover" pos="0 0.012 0.233" quat="1.0 0 0 0"/>
     </body>
     <body name="lorge/hatch_face" pos="2.16278 0.468807 0.7597">
-      <inertial pos="-0.0271034 -0.626781 0.503828" quat="0.998067 -0.0358608 -0.0464364 0.0205011" mass="19.3438" diaginertia="6.25224 4.62674 2.75053"/>
-      <joint name="lorge/hatch_outer_frame_face_joint" pos="0 0 0" axis="0 0 1" range="0 1.65806" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
+      <inertial pos="-0.057665 -0.62668 0.527066" quat="0.999923 -0.0116106 -0.000753506 -0.00436516" mass="19.3438" diaginertia="6.11778 3.84648 2.29774"/>
+      <joint name="lorge/hatch_outer_frame_face_joint" range="0 1.65806" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
       <body name="lorge/external_rotary_wheel" pos="-0.17161 -0.9474 0.4325" quat="0.707107 0 -0.707107 0">
         <inertial pos="-2.01683e-06 2.60404e-06 0.0124263" quat="0.505378 0.494571 -0.505379 0.494555" mass="0.413099" diaginertia="0.00101609 0.000575278 0.000547485"/>
-        <joint name="lorge/external_rotary_joint" pos="0 0 0" axis="0 0 1" range="0 6.28" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
+        <joint name="lorge/external_rotary_joint" range="0 6.28" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
         <body name="lorge/external_rotary_handle" pos="0 0.053975 0.0155">
           <inertial pos="0 0 0.0338876" quat="0.657462 1.78889e-07 1.52512e-06 0.753488" mass="0.0328943" diaginertia="1.13339e-05 1.1332e-05 9.87199e-07"/>
-          <joint name="lorge/external_rotary_handle_joint" pos="0 0 0" axis="1 0 0" range="0 1.57" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
+          <joint name="lorge/external_rotary_handle_joint" range="0 1.57" actuatorfrcrange="-10 10" damping="3" frictionloss="3" axis="1 0 0"/>
           <geom material="material_crank_handle_0" mesh="crank_handle" class="visual" pos="0 0 0.00355" quat=""/>
           <geom mesh="crank_handle" class="collision" pos="0 0 0.00355" quat=""/>
           <site name="lorge/external_rotary_handle" pos="0 0 0" quat="1.0 0 0 0"/>
@@ -635,10 +635,10 @@
       </body>
       <body name="lorge/internal_rotary_wheel" pos="0.04431 -0.9474 0.4265" quat="0.707107 0 0.707107 0">
         <inertial pos="-2.01683e-06 2.60404e-06 0.0124263" quat="0.505378 0.494571 -0.505379 0.494555" mass="0.413099" diaginertia="0.00101609 0.000575278 0.000547485"/>
-        <joint name="lorge/internal_rotary_joint" pos="0 0 0" axis="0 0 1" range="0 6.28" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
+        <joint name="lorge/internal_rotary_joint" range="0 6.28" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
         <body name="lorge/internal_rotary_handle" pos="0 0.053975 0.0155">
           <inertial pos="0 0 0.0338876" quat="0.657462 1.78889e-07 1.52512e-06 0.753488" mass="0.0328943" diaginertia="1.13339e-05 1.1332e-05 9.87199e-07"/>
-          <joint name="lorge/internal_rotary_handle_joint" pos="0 0 0" axis="1 0 0" range="0 1.57" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
+          <joint name="lorge/internal_rotary_handle_joint" range="0 1.57" actuatorfrcrange="-10 10" damping="3" frictionloss="3" axis="1 0 0"/>
           <geom material="material_crank_handle_0" mesh="crank_handle" class="visual" pos="0 0 0.00355" quat=""/>
           <geom mesh="crank_handle" class="collision" pos="0 0 0.00355" quat=""/>
           <site name="lorge/internal_rotary_handle" pos="0 0 0" quat="1.0 0 0 0"/>
@@ -760,14 +760,14 @@
     </body>
     <body name="lorge/hatch_latch_catch" pos="2.14892 -0.760758 1.46808">
       <inertial pos="0 0 0" mass="0.0671" diaginertia="4.345e-06 4.345e-06 4.345e-06"/>
-      <joint name="lorge/latch_spring" pos="0 0 0" axis="0 0 -1" type="slide" range="0 0.035" actuatorfrcrange="-1000 1000" armature="0.001" damping="2" limited="true" springref="0.035" stiffness="10000"/>
+      <joint name="lorge/latch_spring" type="slide" range="0 0.035" actuatorfrcrange="-1000 1000" axis="0 0 -1" armature="0.001" damping="2" limited="true" springref="0.035" stiffness="10000"/>
       <geom size="0.03" type="sphere" class="collision"/>
       <geom size="0.03" rgba="1 1 1 0" type="sphere" class="visual"/>
       <site name="lorge/hatch_latch_catch" pos="0 0 0" quat="1.0 0 0 0"/>
     </body>
     <body name="bench_lid" pos="-2.10085 1.0466 0.5244" quat="-0.706686 0 0 0.707527">
       <inertial pos="0.265226 0.46 0.0319033" quat="0.503331 0.503331 -0.496647 0.496647" mass="9.07185" diaginertia="0.857706 0.643129 0.2211"/>
-      <joint name="bench_lid_joint" pos="0 0 0" axis="0 -1 0" range="0 1.65806" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
+      <joint name="bench_lid_joint" range="0 1.65806" actuatorfrcrange="-10 10" damping="3" frictionloss="3" axis="0 -1 0"/>
       <geom material="material_bench_lid_0" mesh="bench_lid" class="visual" pos="" quat=""/>
       <geom mesh="bench_lid_collision_0" rgba="0.04622794838213906 0.813305054990769 0.208409483139547 1" class="collision" pos="" quat=""/>
       <geom mesh="bench_lid_collision_1" rgba="0.6508883777110669 0.46762824725584273 0.6188302202776396 1" class="collision" pos="" quat=""/>
@@ -775,10 +775,10 @@
     </body>
     <body name="cabinet_1" pos="-1.28991 1.16664 1.17" quat="-0.706686 0 0 0.707527">
       <inertial pos="-0.002735 -0.144275 0.08311" quat="0.865753 0.500405 -0.00711009 -0.00410963" mass="0.2" diaginertia="0.205546 0.205546 0.2"/>
-      <joint name="cabinet_1_joint" pos="0 0 0" axis="0 0 1" range="0 3.14" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
+      <joint name="cabinet_1_joint" range="0 3.14" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
       <body name="round_latch_handle" pos="-0.00547 -0.26735 0.16972" quat="0 1 0 0">
         <inertial pos="0 0 0" mass="0.1" diaginertia="0.1 0.1 0.1"/>
-        <joint name="round_latch_joint" pos="0 0 0" axis="0 0 -1" range="0 3.14" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
+        <joint name="round_latch_joint" range="0 3.14" actuatorfrcrange="-10 10" damping="3" frictionloss="3" axis="0 0 -1"/>
         <geom material="mtl_round_latch_handle" mesh="round_latch_handle" class="visual" pos="" quat=""/>
         <geom mesh="round_latch_handle" class="collision" pos="" quat=""/>
         <site name="round_latch_handle" pos="0 0 0" quat="1.0 0 0 0"/>
@@ -792,17 +792,17 @@
     </body>
     <body name="cabinet_2" pos="-1.63751 1.16705 0.836" quat="-0.706686 0 0 0.707527">
       <inertial pos="-0.00375 0.10925 0.067" quat="0.488419 0.872486 0.00714421 0.012762" mass="0.2" diaginertia="0.203288 0.203288 0.2"/>
-      <joint name="cabinet_2_joint" pos="0 0 0" axis="0 0 -1" range="0 3.14" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
+      <joint name="cabinet_2_joint" range="0 3.14" actuatorfrcrange="-10 10" damping="3" frictionloss="3" axis="0 0 -1"/>
       <body name="push_latch_button" pos="-0.02 0.247 0.1385" quat="0.980785 0 0 0.19509">
         <inertial pos="0 0 0" mass="0.1" diaginertia="0.1 0.1 0.1"/>
-        <joint name="push_latch_button_joint" pos="0 0 0" axis="-1 0 0" type="slide" range="0 0.005" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
+        <joint name="push_latch_button_joint" type="slide" range="0 0.005" actuatorfrcrange="-10 10" damping="3" frictionloss="3" axis="-1 0 0"/>
         <geom material="mtl_push_latch_button" mesh="push_latch_button" class="visual" pos="" quat=""/>
         <geom mesh="push_latch_button" class="collision" pos="" quat=""/>
         <site name="push_latch_button" pos="0 0 0" quat="1.0 0 0 0"/>
       </body>
       <body name="push_latch_handle" pos="-0.0105 0.2975 0.1385">
         <inertial pos="0 0 0" mass="0.1" diaginertia="0.1 0.1 0.1"/>
-        <joint name="push_latch_handle_joint" pos="0 0 0" axis="0 0 1" range="0 1.0472" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
+        <joint name="push_latch_handle_joint" range="0 1.0472" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
         <geom material="mtl_push_latch_handle" mesh="push_latch_handle" class="visual" pos="" quat=""/>
         <geom mesh="push_latch_handle" class="collision" pos="" quat=""/>
         <site name="push_latch_handle" pos="0 0 0" quat="1.0 0 0 0"/>
@@ -816,17 +816,17 @@
     </body>
     <body name="cabinet_3" pos="-1.28991 1.16664 0.464" quat="-0.706686 0 0 0.707527">
       <inertial pos="0 0 0" mass="0.1" diaginertia="0.1 0.1 0.1"/>
-      <joint name="cabinet_3_joint" pos="0 0 0" axis="0 0 1" range="0 3.14159" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
+      <joint name="cabinet_3_joint" range="0 3.14159" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
       <geom material="mtl_cabinet_door_3" mesh="cabinet_door_3" class="visual" pos="-0.010675 -0.00366 0" quat=""/>
       <geom mesh="cabinet_door_3" class="collision" pos="-0.010675 -0.00366 0" quat=""/>
       <site name="cabinet_3" pos="0 0 0" quat="1.0 0 0 0"/>
     </body>
     <body name="cabinet_4" pos="-1.19616 1.62333 1.03242" quat="-0.706686 0 0 0.707527">
       <inertial pos="0.10215 -0.0035 0.06565" quat="0.625433 0.347782 0.329899 0.615669" mass="0.2" diaginertia="0.202951 0.202951 0.2"/>
-      <joint name="cabinet_4_joint" pos="0 0 0" axis="0 0 1" range="0 3.14" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
+      <joint name="cabinet_4_joint" range="0 3.14" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
       <body name="paddle_latch_handle" pos="0.27123 -0.010531 0.142">
         <inertial pos="0 0 0" mass="0.1" diaginertia="0.1 0.1 0.1"/>
-        <joint name="paddle_latch_handle_joint" pos="0 0 0" axis="0 0 -1" range="0 0.785375" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
+        <joint name="paddle_latch_handle_joint" range="0 0.785375" actuatorfrcrange="-10 10" damping="3" frictionloss="3" axis="0 0 -1"/>
         <geom material="mtl_paddle_latch_handle" mesh="paddle_latch_handle" class="visual" pos="" quat=""/>
         <geom mesh="paddle_latch_handle" class="collision" pos="" quat=""/>
         <site name="paddle_latch_handle" pos="0 0 0" quat="1.0 0 0 0"/>
@@ -840,7 +840,7 @@
     </body>
     <body name="drawer_1_face" pos="-1.21018 1.61054 0.831419" quat="-0.706686 0 0 0.707527">
       <inertial pos="0.07 -0.22875 -0.0032625" quat="0.306612 0.637173 -0.315668 0.632735" mass="0.4" diaginertia="0.412858 0.408634 0.404224"/>
-      <joint name="drawer_1_joint" pos="0 0 0" axis="0 1 0" type="slide" range="0 0.305" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
+      <joint name="drawer_1_joint" type="slide" range="0 0.305" actuatorfrcrange="-10 10" damping="3" frictionloss="3" axis="0 1 0"/>
       <geom material="mtl_drawer_1_face" mesh="drawer_1_face" class="visual" pos="" quat=""/>
       <geom mesh="drawer_1_face" class="collision" pos="" quat=""/>
       <geom size="0.0065 0.1525 0.048" pos="0.2865 -0.1525 0.04365" type="box" class="collision"/>
@@ -856,10 +856,10 @@
     </body>
     <body name="drawer_2_face" pos="-1.21018 1.61054 0.634419" quat="-0.706686 0 0 0.707527">
       <inertial pos="0.07896 -0.182365 0.00069" quat="0.423873 0.558853 -0.454847 0.548752" mass="0.5" diaginertia="0.517341 0.511615 0.50575"/>
-      <joint name="drawer_2_joint" pos="0 0 0" axis="0 1 0" type="slide" range="0 0.2921" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
+      <joint name="drawer_2_joint" type="slide" range="0 0.2921" actuatorfrcrange="-10 10" damping="3" frictionloss="3" axis="0 1 0"/>
       <body name="recessed_latch_handle" pos="0.1656 0.001397 0.022977">
         <inertial pos="0 0 0" mass="0.1" diaginertia="0.1 0.1 0.1"/>
-        <joint name="recessed_latch_handle_joint" pos="0 0 0" axis="-1 0 0" range="0 1.5708" actuatorfrcrange="-10 10" damping="3" frictionloss="3"/>
+        <joint name="recessed_latch_handle_joint" range="0 1.5708" actuatorfrcrange="-10 10" damping="3" frictionloss="3" axis="-1 0 0"/>
         <geom material="mtl_recessed_latch_handle" mesh="recessed_latch_handle" class="visual" pos="" quat=""/>
         <geom mesh="recessed_latch_handle" class="collision" pos="" quat=""/>
         <site name="recessed_latch_handle" pos="0 0 0" quat="1.0 0 0 0"/>
@@ -881,7 +881,7 @@
       <site name="drawer_2_bottom" pos="0 -0.305 -0.00435" quat="1.0 0 0 0"/>
     </body>
     <body name="ctb" pos="0.8 0.8 0.25" quat="0.707107 0 0 0.707107">
-      <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="1.8" diaginertia="0.0675 0.0505 0.0326"/>
+      <inertial pos="0 0 0" quat="0.707107 0 0 0.707107" mass="1.8" diaginertia="0.0675 0.0505 0.0326"/>
       <joint name="ctb_joint" type="free"/>
       <geom material="mtl_ctb_body" mesh="ctb_body" class="visual" pos="" quat="0.707388 -0.706825 0 0"/>
       <geom mesh="ctb_body" class="collision" pos="" quat="0.707388 -0.706825 0 0"/>
@@ -1068,10 +1068,10 @@
     <site name="csm_faceplate_cover" pos="0.27940000000000004 1.1548000022239764 1.06725" quat="0.7071067811865474 0.7071067811865472 -1.6408485528633675e-08 1.6408486321365435e-08"/>
     <site name="door_face" pos="0.2794000000000001 1.1167000022239764 1.06725" quat="0.7071067811865474 0.7071067811865472 -1.6408485528633675e-08 1.6408486321365435e-08"/>
     <site name="seal" pos="0.27840000006961535 1.1548000022239764 1.0657499999535898" quat="0.7071067811865474 0.7071067811865472 -1.6408485528633675e-08 1.6408486321365435e-08"/>
-    <site name="seal_corner_1" pos="0.12299999494128766 1.1498000022239763 1.1762499927414436" quat="0.7073882131011524 0.00028163970717456585 0.0002814154930582554 0.706825125083959"/>
-    <site name="seal_corner_2" pos="0.4437999949412873 1.1498000022239765 1.176250007629838" quat="0.7073882131011524 0.00028163970717456585 0.0002814154930582554 0.706825125083959"/>
-    <site name="seal_corner_3" pos="0.4438000047338409 1.1498000022239765 0.965250007629838" quat="0.7073882131011524 0.00028163970717456585 0.0002814154930582554 0.706825125083959"/>
-    <site name="seal_corner_4" pos="0.12300000473384126 1.1498000022239763 0.9652499927414437" quat="0.7073882131011524 0.00028163970717456585 0.0002814154930582554 0.706825125083959"/>
+    <site name="seal_corner_1" pos="0.12299999494128766 1.1498000022239763 1.1762499927414436" quat="0.7073882131011524 0.0002816397071745659 0.0002814154930582554 0.706825125083959"/>
+    <site name="seal_corner_2" pos="0.4437999949412873 1.1498000022239765 1.176250007629838" quat="0.7073882131011524 0.0002816397071745659 0.0002814154930582554 0.706825125083959"/>
+    <site name="seal_corner_3" pos="0.4438000047338409 1.1498000022239765 0.965250007629838" quat="0.7073882131011524 0.0002816397071745659 0.0002814154930582554 0.706825125083959"/>
+    <site name="seal_corner_4" pos="0.12300000473384126 1.1498000022239763 0.9652499927414437" quat="0.7073882131011524 0.0002816397071745659 0.0002814154930582554 0.706825125083959"/>
     <site name="velcro" pos="0.4547499891168064 1.1528000022239766 1.3017500081380293" quat="0 -2.320510333314241e-08 0 0.9999999999999997"/>
     <site name="lorge/hatch_frame" pos="1.40208 -0.801983 -0.002" quat="1.0 0 0 0"/>
     <site name="lorge/hatch_bottom" pos="1.40208 -0.801983 -0.002" quat="1.0 0 0 0"/>
@@ -1092,7 +1092,7 @@
     <site name="trainer_plane_left" pos="-2.0992 2.4346 0" quat="0.7066862882126158 0 0 -0.7075270242558058"/>
     <site name="trainer_plane_middle" pos="-1.6792002968715798 2.4341006283560884 0" quat="0.7066862882126158 0 0 -0.7075270242558058"/>
     <site name="trainer_plane_right_1" pos="-1.2992005654696754 2.4336488159163587 0" quat="0.7066862882126158 0 0 -0.7075270242558058"/>
-    <site name="trainer_plane_right_2" pos="-1.2905369861755625 1.3096377206002074 0" quat="0.7066862882126158 0 0 -0.7075270242558058"/>
+    <site name="trainer_plane_right_2" pos="-1.2905369861755625 1.3096377206002072 0" quat="0.7066862882126158 0 0 -0.7075270242558058"/>
     <site name="bench_back" pos="-2.10069930391184 1.173600891321576 0.4769" quat="0.7066862882126158 0 0 -0.7075270242558058"/>
     <site name="bench_left" pos="-2.10069930391184 1.173600891321576 0.4769" quat="0.7066862882126158 0 0 -0.7075270242558058"/>
     <site name="bench_right" pos="-1.2553499014365772 1.1725957869901935 0.4769" quat="0.7066862882126158 0 0 -0.7075270242558058"/>
@@ -1113,7 +1113,7 @@
   <default>
     <default class="clr">
       <material shininess="0.25" specular="0.5"/>
-      <joint armature="0.1" axis="0 1 0" range="-6.28319 6.28319"/>
+      <joint actuatorgravcomp="true" armature="0.1" range="-6.28319 6.28319"/>
       <position ctrlrange="-6.2831 6.2831"/>
       <general ctrlrange="-6.2831 6.2831"/>
       <default class="clr_size4">
@@ -1129,7 +1129,7 @@
       </default>
       <default class="clr_size2">
         <joint damping="2"/>
-        <general ctrlrange="-56 56" forcerange="-56 56"/>
+        <general ctrlrange="-54 54" forcerange="-54 54"/>
       </default>
       <default class="visual">
         <geom conaffinity="0" contype="0" group="2" type="mesh"/>
@@ -1148,7 +1148,7 @@
     <motor class="clr_size2" joint="wrist_1_joint" name="wrist_1_joint"/>
     <motor class="clr_size2" joint="wrist_2_joint" name="wrist_2_joint"/>
     <motor class="clr_size2" joint="wrist_3_joint" name="wrist_3_joint"/>
-    <position ctrlrange="0.0 0.025" dampratio="3.0" forcerange="-100 100" kp="10000" name="finger_1_joint" tendon="split"/>
+    <position ctrlrange="0.0 0.025" dampratio="10.0" forcerange="-185 185" kp="100000" name="finger_1_joint" tendon="split"/>
   </actuator>
   <tendon>
     <fixed name="split">

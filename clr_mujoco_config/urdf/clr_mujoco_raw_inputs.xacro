@@ -11,7 +11,7 @@
       <default>
         <default class="clr">
             <material specular="0.5" shininess="0.25"/>
-            <joint axis="0 1 0" range="-6.28319 6.28319" armature="0.1" actuatorgravcomp="true"/>
+            <joint range="-6.28319 6.28319" armature="0.1" actuatorgravcomp="true"/>
             <position ctrlrange="-6.2831 6.2831"/>
             <general ctrlrange="-6.2831 6.2831" />
             <default class="clr_size4">
