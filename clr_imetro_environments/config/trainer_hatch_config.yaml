@@ -1,111 +1,89 @@
 /**:
   ros__parameters:
-    topics:
-    # trainer
-      bench_lid:
-        joint_name: bench_lid_joint
+    joints:
+      bench_lid_joint:
         min_position: 0.0
         max_position: 1.658
         initial_position: 0.0
-      cabinet_1:
-        joint_name: cabinet_1_joint
+      cabinet_1_joint:
         min_position: 0.0
         max_position: 3.14159
         initial_position: 0.0
-      round_latch:
-        joint_name: round_latch_joint
+      round_latch_joint:
         min_position: 0.0
         max_position: 3.14159
         initial_position: 0.0
-      cabinet_2:
-        joint_name: cabinet_2_joint
+      cabinet_2_joint:
         min_position: 0.0
         max_position: 3.14159
         initial_position: 0.0
-      push_latch_button:
-        joint_name: push_latch_button_joint
+      push_latch_button_joint:
         min_position: 0.0
         max_position: 0.005
         initial_position: 0.0
-      push_latch_handle:
-        joint_name: push_latch_handle_joint
+      push_latch_handle_joint:
         min_position: 0.0
         max_position: 1.047
         initial_position: 0.0
-      cabinet_3:
-        joint_name: cabinet_3_joint
+      cabinet_3_joint:
         min_position: 0.0
         max_position: 3.14159
         initial_position: 0.0
-      cabinet_4:
-        joint_name: cabinet_4_joint
+      cabinet_4_joint:
         min_position: 0.0
         max_position: 3.14159
         initial_position: 0.0
-      paddle_latch_handle:
-        joint_name: paddle_latch_handle_joint
+      paddle_latch_handle_joint:
         min_position: 0.0
         max_position: 0.785
         initial_position: 0.0
-      drawer_1:
-        joint_name: drawer_1_joint
+      drawer_1_joint:
         min_position: 0.0
         max_position: 0.305
         initial_position: 0.0
-      drawer_2:
-        joint_name: drawer_2_joint
+      drawer_2_joint:
         min_position: 0.0
         max_position: 0.2921
         initial_position: 0.0
-      recessed_latch_handle:
-        joint_name: recessed_latch_handle_joint
+      recessed_latch_handle_joint:
         min_position: 0.0
         max_position: 1.570
         initial_position: 0.0
     # hatch
-      lorge/hatch_outer_frame_face:
-        joint_name: lorge/hatch_outer_frame_face_joint
+      lorge/hatch_outer_frame_face_joint:
         min_position: 0.0
         max_position: 1.658
         initial_position: 0.0
-      lorge/external_rotary:
-        joint_name: lorge/external_rotary_joint
+      lorge/external_rotary_joint:
         min_position: 0.0
         max_position: 6.283
         initial_position: 0.0
-      lorge/external_rotary_handle:
-        joint_name: lorge/external_rotary_handle_joint
+      lorge/external_rotary_handle_joint:
         min_position: 0.0
         max_position: 1.570
         initial_position: 0.0
-      lorge/internal_rotary:
-        joint_name: lorge/internal_rotary_joint
+      lorge/internal_rotary_joint:
         min_position: 0.0
         max_position: 6.283
         initial_position: 0.0
-      lorge/internal_rotary_handle:
-        joint_name: lorge/internal_rotary_handle_joint
+      lorge/internal_rotary_handle_joint:
         min_position: 0.0
         max_position: 1.570
         initial_position: 0.0
     # merlin
       door_to_frame_joint:
-        joint_name: door_to_frame_joint
         min_position: 0.0
         max_position: 0.0
         initial_position: 0.0
       housing_to_latch_lock:
-        joint_name: housing_to_latch_lock
         min_position: 0.0
         max_position: 0.0
         initial_position: 0.0
       housing_to_left_latch_pull:
-        joint_name: housing_to_left_latch_pull
         min_position: 0.0
         max_position: 0.0
         initial_position: 0.0
       housing_to_right_latch_pull:
-        joint_name: housing_to_right_latch_pull
         min_position: 0.0
         max_position: 0.0
         initial_position: 0.0
