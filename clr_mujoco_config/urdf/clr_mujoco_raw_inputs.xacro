@@ -81,8 +81,8 @@
       </equality>
 
       <sensor>
-          <force name="${tf_prefix}tcp_fts_sensor_force" site="${tf_prefix}ft_frame"/>
-          <torque name="${tf_prefix}tcp_fts_sensor_torque" site="${tf_prefix}ft_frame"/>
+          <force name="${tf_prefix}tcp_fts_sensor_force" site="${tf_prefix}tool0"/>
+          <torque name="${tf_prefix}tcp_fts_sensor_torque" site="${tf_prefix}tool0"/>
       </sensor>
 
       <!-- clr contacts -->
