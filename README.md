@@ -1,6 +1,6 @@
 # ChonkUR L Rail-E
 
-Descriptions, deployments, tooling, and MoveIt configuration for the ChonkUR L Rail-E robot system,
+Descriptions, deployments, and tooling for the ChonkUR L Rail-E robot system,
 part of the [iMETRO Facility](https://ntrs.nasa.gov/citations/20240013956) at NASA's Johnson Space Center.
 This project is intended for use in one of ER4's managed workspaces (such as the in the [clr_ws](https://github.com/NASA-JSC-Robotics/clr_ws)).
 
@@ -37,24 +37,12 @@ ros2 launch chonkur_deploy chonkur_gui.launch.py
 ros2 launch clr_deploy clr_hw.launch.py
 ```
 
-A MoveIt RViz widget can then be launched with:
-
-```bash
-ros2 launch clr_moveit_config clr_moveit.launch.py
-
-# Or to include the environment mockups
-ros2 launch clr_moveit_config clr_moveit.launch.py include_mockups_in_description:=true
-```
-
 A MuJoCo simulation including the environment is available in [clr_mujoco_config](./clr_mujoco_config/README.md).
 Note that it requires the [MuJoCo ROS 2 simulation hardware interface](https://github.com/ros-controls/mujoco_ros2_control) to run.
 
 ```bash
 # Start the mujoco_ros2_control-based simulation
 ros2 launch clr_mujoco_config clr_mujoco.launch.py
-
-# In another shell launch the moveit interface with sim parameters set
-ros2 launch clr_moveit_config clr_moveit.launch.py include_mockups_in_description:=true use_sim_time:=true
 ```
 
 For convenience, we also provide the option of running the MuJoCo simulation with state interfaces for the mockups.
