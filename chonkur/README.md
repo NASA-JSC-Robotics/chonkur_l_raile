@@ -1,6 +1,6 @@
 # ChonkUR
 
-Descriptions, deployments, and MoveIt configuration for the ChonkUR robot,
+Descriptions, deployments, and tooling for the ChonkUR robot,
 part of the [iMETRO Facility](https://ntrs.nasa.gov/citations/20240013956) at NASA's Johnson Space Center.
 This project is intended for use in one of ER4's managed workspaces (such as the `clr_ws`).
 
@@ -32,10 +32,4 @@ ros2 launch chonkur_deploy chonkur_comm.launch.py
 
 # Then start the hardware interface.
 ros2 launch chonkur_deploy chonkur_hw.launch.py
-```
-
-A MoveIt RViz widget can then be launched with:
-
-```bash
-ros2 launch chonkur_moveit_config chonkur_moveit.launch.py
 ```
