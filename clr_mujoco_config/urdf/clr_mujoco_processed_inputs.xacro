@@ -22,6 +22,9 @@
       <xacro:if value="${finger_xacro == 'fngr_v6'}">
         <decompose_mesh mesh_name="finger_v6" threshold="0.05"/>
       </xacro:if>
+      <xacro:if value="${finger_xacro == 'fngr_v7'}">
+        <decompose_mesh mesh_name="v7_finger" threshold="0.05"/>
+      </xacro:if>
 
       <!-- env stuff -->
       <xacro:if value="${model_env}">
