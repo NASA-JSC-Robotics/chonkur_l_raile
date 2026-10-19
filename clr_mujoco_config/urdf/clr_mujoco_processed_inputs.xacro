@@ -22,6 +22,10 @@
       <xacro:if value="${finger_xacro == 'fngr_v6'}">
         <decompose_mesh mesh_name="finger_v6" threshold="0.05"/>
       </xacro:if>
+      <xacro:if value="${finger_xacro == 'fngr_v7'}">
+        <xacro:include filename="$(find dextivr_hande_description)/urdf/hande_fingers_v7.xacro"/>
+        <xacro:hande_fingers_mujoco_processed_inputs tf_prefix="${tf_prefix}"/>
+      </xacro:if>
 
       <!-- env stuff -->
       <xacro:if value="${model_env}">
