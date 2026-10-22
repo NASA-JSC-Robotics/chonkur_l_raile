@@ -120,24 +120,6 @@
     <material name="${tf_prefix}safety_light_blue">
       <color rgba="0 0 0.5 0.8"/>
     </material>
-    <link name="${tf_prefix}motor_side_estop_light">
-      <visual>
-        <geometry>
-          <box size="0.05 0.05 0.381"/>
-        </geometry>
-        <material name="${tf_prefix}safety_light_blue" />
-      </visual>
-      <collision>
-        <geometry>
-          <box size="0.05 0.05 0.381"/>
-        </geometry>
-      </collision>
-    </link>
-    <joint name="${tf_prefix}motor_side_estop_light_joint" type="fixed">
-      <parent link="${tf_prefix}clr_base"/>
-      <child link="${tf_prefix}motor_side_estop_light"/>
-      <origin xyz="-0.925 -0.272 0.914" rpy="0 0 0"/>
-    </joint>
     <link name="${tf_prefix}end_estop_light">
       <visual>
         <geometry>
