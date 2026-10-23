@@ -81,5 +81,9 @@
       <!-- Add joint properties to lorge hatch latch spring joint -->
       <modify_element type="joint" name="lorge/latch_spring" limited="true" springref="0.035" stiffness="10000" damping="2" armature="0.001"/>
 
+      <xacro:include filename="$(find dextivr_hande_description)/urdf/dextivr_hande.xacro"/>
+
+      <xacro:hande_gripper_base_link_mujoco_collision_mesh tf_prefix="${tf_prefix}"/>
+
   </xacro:macro>
 </robot>
