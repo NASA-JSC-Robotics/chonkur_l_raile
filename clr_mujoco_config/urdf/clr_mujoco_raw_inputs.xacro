@@ -38,7 +38,7 @@
         </default>
       </default>
 
-      <!-- Use PID plugin for gripper fingers for improved control and less back-driveability. -->
+      <!-- Use PID plugin for gripper fingers to better match hardware. -->
       <!-- https://github.com/google-deepmind/mujoco/blob/main/plugin/actuator/README.md -->
       <extension>
         <plugin plugin="mujoco.pid">
