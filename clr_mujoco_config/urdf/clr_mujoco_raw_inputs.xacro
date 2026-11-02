@@ -43,7 +43,7 @@
       <extension>
         <plugin plugin="mujoco.pid">
           <instance name="${tf_prefix}finger_pid">
-            <config key="kp" value="30000"/>
+            <config key="kp" value="100000"/>
             <config key="ki" value="0"/>
             <config key="kd" value="200"/>
             <config key="imax" value="185"/>
@@ -105,6 +105,9 @@
           <exclude body1="world" body2="${tf_prefix}ewellix_lift_higher_link"/>
           <exclude body1="world" body2="${tf_prefix}ewellix_lift_middle_link"/>
           <exclude body1="${tf_prefix}vention_rail_carriage" body2="${tf_prefix}ewellix_lift_middle_link"/>
+
+          <!-- Fingers will touch when fully closed, but we don't want them to drive into each other -->
+          <exclude body1="${tf_prefix}finger_1_link" body2="${tf_prefix}finger_2_link"/>
       </contact>
 
       <!-- environment contacts -->
