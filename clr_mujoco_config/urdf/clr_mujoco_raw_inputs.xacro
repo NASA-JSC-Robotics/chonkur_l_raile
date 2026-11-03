@@ -45,7 +45,7 @@
           <instance name="${tf_prefix}finger_pid">
             <config key="kp" value="100000"/>
             <config key="ki" value="0"/>
-            <config key="kd" value="1000"/>
+            <config key="kd" value="500"/>
             <config key="imax" value="185"/>
             <config key="slewmax" value="0.1"/>
           </instance>
