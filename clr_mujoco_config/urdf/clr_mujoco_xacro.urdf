@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://wiki.ros.org/xacro" name="clr">
   <xacro:arg name="tf_prefix" default="" />
   <xacro:arg name="headless_mode" default="false" />
-  <xacro:arg name="finger_xacro" default="fngr_v6"/>
+  <xacro:arg name="finger_xacro" default="fngr_v7"/>
   <xacro:arg name="add_grasp_push_frames" default="true"/>
   <xacro:arg name="use_pregenerated_mjcf" default="false"/>
   <!-- Legacy argument to leave out the environment mockups, though for now we generally -->
