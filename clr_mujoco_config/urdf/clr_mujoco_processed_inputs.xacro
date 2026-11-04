@@ -43,8 +43,7 @@
 
       <!-- The camera with the specified values will be added at the specified site name. -->
       <!-- The position and quaterinion will be filled in by the converter -->
-      <camera site="${tf_prefix}wrist_mounted_camera_color_optical_frame" name="${tf_prefix}wrist_mounted_camera" fovy="58" mode="fixed" resolution="640 480"/>
-      <camera site="${tf_prefix}lift_camera_color_optical_frame" name="${tf_prefix}lift_camera" fovy="58" mode="fixed" resolution="640 480"/>
+      <camera site="${tf_prefix}wrist_mounted_camera_color_optical_frame" name="${tf_prefix}wrist_mounted_camera" fovy="42" mode="fixed" resolution="1920 1080"/>
 
       <!-- Don't let the merlin open -->
       <modify_element type="joint" name="door_to_frame_joint" range="-0.01 0" />
