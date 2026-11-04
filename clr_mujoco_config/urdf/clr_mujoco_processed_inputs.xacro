@@ -5,7 +5,7 @@
     model_env:=true
     include_scene_objects:=false
     tf_prefix:=''
-    finger_xacro:='fngr_v6'
+    finger_xacro:='fngr_v7'
   ">
 
       <!-- Specifying decompose_mesh will set the `decompose` flag when using obj2mjcf -->
