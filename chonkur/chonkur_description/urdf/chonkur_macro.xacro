@@ -75,6 +75,7 @@
         reverse_port="50001"
         script_sender_port="50002"
         trajectory_port="50003"
+        ur_type="ur10e"
       />
     </xacro:if>
 
